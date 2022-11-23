@@ -5,6 +5,9 @@ import { AuthProvider } from './context/AuthContext'
 
 import HomePage from './pages/HomePage'
 import LoginPage from './pages/LoginPage'
+import SignupPage from './pages/SignupPage';
+import Dashboard from './pages/Dashboard';
+import RegisterFreelancer from './pages/RegisterFreelancer';
 
 
 function App() {
@@ -18,6 +21,9 @@ function App() {
 
           {/* <PrivateRoute element={<HomePage/>} path="/" exact/> */}
           <Route element={<LoginPage/>} path="/login"/> 
+          <Route element={<RegisterFreelancer/>} path="/seller_register"/> 
+          <Route element={<SignupPage/>} path="/signup"/> 
+          <Route element={<Dashboard/>} path="/dashboard"/> 
         </Routes>
         </AuthProvider>
       </Router>

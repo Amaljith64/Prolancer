@@ -1,6 +1,7 @@
 import { createContext, useState, useEffect } from 'react'
 import jwt_decode from "jwt-decode";
 import { useNavigate } from 'react-router-dom'
+import axios from 'axios';
 
 const AuthContext = createContext()
 
@@ -43,6 +44,26 @@ export const AuthProvider = ({children}) => {
         Navigate('/login')
     }
 
+    let userSignup = async (e)=>{
+    
+        let response = await axios.post("http://127.0.0.1:8000/api/signup/",
+        {'username':e.name, 'email':e.email, 'password':e.password})
+        
+      
+    
+        if (response.status === 200){
+            
+          Navigate("/login");
+             
+             console.log("register Successful");
+            }
+            else{
+              
+              
+              console.log("SOmething problem in register");
+        }
+    }
+
 
     // let updateToken = async ()=> {
 
@@ -76,6 +97,7 @@ export const AuthProvider = ({children}) => {
         setUser:setUser,
         loginUser:loginUser,
         logoutUser:logoutUser,
+        userSignup:userSignup,
     }
 
 

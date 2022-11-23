@@ -6,10 +6,13 @@ from rest_framework.permissions import IsAuthenticated
 
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
-
+from accounts.models import *
 
 from .serializers import NoteSerializer
 from accounts.models import Note
+
+from rest_framework.views import APIView
+import json
 
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
@@ -45,3 +48,19 @@ def getNotes(request):
     notes = user.note_set.all()
     serializer = NoteSerializer(notes, many=True)
     return Response(serializer.data)
+
+
+class Usersignup(APIView):
+    def post(self,request):
+
+        body = request.body.decode('utf-8')
+        body = json.loads(body)
+        username = body['username']
+        email = body['email']
+        password=body['password']
+        user=NewUser.objects.create(username=username, email=email
+        )
+        user.set_password(password)
+        user.save()
+        return Response(200)
+
