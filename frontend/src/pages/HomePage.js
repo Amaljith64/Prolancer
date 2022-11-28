@@ -1,33 +1,32 @@
 import React, {useState, useEffect, useContext} from 'react'
 import AuthContext from '../context/AuthContext'
 import useAxios from '../utils/useAxios'
+import axios from 'axios';
 import Header from '../components/Header'
-import background from '../assets/images/home-background.jpg'
+import background from '../assets/images/image.jpg'
 
 const HomePage = () => {
-    let [notes, setNotes] = useState([])
+
+    const [category,setCategory] = useState([])
     let {authTokens, logoutUser} = useContext(AuthContext)
 
     let api = useAxios()
 
-    useEffect(()=> {
-        getNotes()
-    }, [])
+    useEffect(() => {
+        axios
+          .get("http://127.0.0.1:8000/")
+          .then((response) => setCategory(response.data));
+      }, []);
 
-
-    let getNotes = async() =>{
-        let response = await api.get('/api/notes/')
-
-        if(response.status === 200){
-            setNotes(response.data)
-        }
-        
-    }
+   
+    console.log(category)
 
     return (
         <div>
             <Header />
-            <div className="intro-banner dark-overlay" style={{backgroundImage: `url(${background})`}}>
+            <div className="intro-banner dark-overlay" style={{
+    
+                backgroundImage: `url(${background})`}}>
 
 <div className="transparent-header-spacer"></div>
 
@@ -49,24 +48,14 @@ const HomePage = () => {
     <div className="row">
         <div className="col-md-12">
             <div className="intro-banner-search-form margin-top-95">
-
-                
-                <div className="intro-search-field with-autocomplete">
-                    <label htmlFor="autocomplete-input" className="field-title ripple-effect">Where?</label>
-                    <div className="input-with-icon">
-                        <input id="autocomplete-input" type="text" placeholder="Online Job"/>
-                        <i className="icon-material-outline-location-on"></i>
-                    </div>
-                </div>
-
                 
                 <div className="intro-search-field">
-                    <label htmlFor ="intro-keywords" className="field-title ripple-effect">What you need done?</label>
+                    <label htmlFor ="intro-keywords" className="field-title ripple-effect">What service are you looking for today?</label>
                     <input id="intro-keywords" type="text" placeholder="e.g. build me a website"/>
                 </div>
 
                 
-                <div className="intro-search-field">
+                {/* <div className="intro-search-field">
                     <select className="selectpicker default" multiple data-selected-text-format="count" data-size="7" title="All Categories" >
                         <option>Admin Support</option>
                         <option>Customer Service</option>
@@ -79,7 +68,7 @@ const HomePage = () => {
                         <option>Translation</option>
                         <option>Sales & Marketing</option>
                     </select>
-                </div>
+                </div> */}
 
                 
                 <div className="intro-search-button">
@@ -123,86 +112,20 @@ const HomePage = () => {
                 <h3>Popular Categories</h3>
             </div>
         </div>
+        {category.map((data, id) => {
+            return(
 
         <div className="col-xl-3 col-md-6">
             
-            <a href="jobs-list-layout-1.html" className="photo-box small" data-background-image="images/job-category-01.jpg">
+            <a href="jobs-list-layout-1.html" className="photo-box small" style={{backgroundImage: `url(http://localhost:8000${data.category_image})`}}>
                 <div className="photo-box-content">
-                    <h3>Web / Software Dev</h3>
+                    <h3>{data.category_name}</h3>
                     <span>612</span>
                 </div>
             </a>
         </div>
+            )})}
         
-        <div className="col-xl-3 col-md-6">
-            
-            <a href="jobs-list-layout-full-page-map.html" className="photo-box small" data-background-image="images/job-category-02.jpg">
-                <div className="photo-box-content">
-                    <h3>Data Science / Analitycs</h3>
-                    <span>113</span>
-                </div>
-            </a>
-        </div>
-        
-        <div className="col-xl-3 col-md-6">
-            
-            <a href="jobs-grid-layout-full-page.html" className="photo-box small" data-background-image="images/job-category-03.jpg">
-                <div className="photo-box-content">
-                    <h3>Accounting / Consulting</h3>
-                    <span>186</span>
-                </div>
-            </a>
-        </div>
-
-        <div className="col-xl-3 col-md-6">
-            
-            <a href="jobs-list-layout-2.html" className="photo-box small" data-background-image="images/job-category-04.jpg">
-                <div className="photo-box-content">
-                    <h3>Writing & Translations</h3>
-                    <span>298</span>
-                </div>
-            </a>
-        </div>
-
-        <div className="col-xl-3 col-md-6">
-            
-            <a href="jobs-list-layout-1.html" className="photo-box small" data-background-image="images/job-category-05.jpg">
-                <div className="photo-box-content">
-                    <h3>Sales & Marketing</h3>
-                    <span>549</span>
-                </div>
-            </a>
-        </div>
-        
-        <div className="col-xl-3 col-md-6">
-            
-            <a href="jobs-list-layout-full-page-map.html" className="photo-box small" data-background-image="images/job-category-06.jpg">
-                <div className="photo-box-content">
-                    <h3>Graphics & Design</h3>
-                    <span>873</span>
-                </div>
-            </a>
-        </div>
-        
-        <div className="col-xl-3 col-md-6">
-            
-            <a href="jobs-grid-layout-full-page.html" className="photo-box small" data-background-image="images/job-category-07.jpg">
-                <div className="photo-box-content">
-                    <h3>Digital Marketing</h3>
-                    <span>125</span>
-                </div>
-            </a>
-        </div>
-
-        <div className="col-xl-3 col-md-6">
-            
-            <a href="jobs-list-layout-2.html" className="photo-box small" data-background-image="images/job-category-08.jpg">
-                <div className="photo-box-content">
-                    <h3>Education & Training</h3>
-                    <span>445</span>
-                </div>
-            </a>
-        </div>
 
     </div>
 </div>
@@ -259,135 +182,6 @@ const HomePage = () => {
                         </div>
                     </div>
                 </a>
-
-                
-                <a href="single-task-page.html" className="task-listing">
-
-                    
-                    <div className="task-listing-details">
-
-                        
-                        <div className="task-listing-description">
-                            <h3 className="task-listing-title">2000 Words English to German</h3>
-                            <ul className="task-icons">
-                                <li><i className="icon-material-outline-location-off"></i> Online Job</li>
-                                <li><i className="icon-material-outline-access-time"></i> 5 minutes ago</li>
-                            </ul>
-                            <div className="task-tags margin-top-15">
-                                <span>copywriting</span>
-                                <span>translating</span>
-                                <span>editing</span>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div className="task-listing-bid">
-                        <div className="task-listing-bid-inner">
-                            <div className="task-offers">
-                                <strong>$75</strong>
-                                <span>Fixed Price</span>
-                            </div>
-                            <span className="button button-sliding-icon ripple-effect">Bid Now <i className="icon-material-outline-arrow-right-alt"></i></span>
-                        </div>
-                    </div>
-                </a>
-
-                
-                <a href="single-task-page.html" className="task-listing">
-
-                    
-                    <div className="task-listing-details">
-
-                        
-                        <div className="task-listing-description">
-                            <h3 className="task-listing-title">Fix Python Selenium Code</h3>
-                            <ul className="task-icons">
-                                <li><i className="icon-material-outline-location-off"></i> Online Job</li>
-                                <li><i className="icon-material-outline-access-time"></i> 30 minutes ago</li>
-                            </ul>
-                            <div className="task-tags margin-top-15">
-                                <span>Python</span>
-                                <span>Flask</span>
-                                <span>API Development</span>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div className="task-listing-bid">
-                        <div className="task-listing-bid-inner">
-                            <div className="task-offers">
-                                <strong>$100 - $150</strong>
-                                <span>Hourly Rate</span>
-                            </div>
-                            <span className="button button-sliding-icon ripple-effect">Bid Now <i className="icon-material-outline-arrow-right-alt"></i></span>
-                        </div>
-                    </div>
-                </a>
-
-                
-                <a href="single-task-page.html" className="task-listing">
-
-                    
-                    <div className="task-listing-details">
-
-                        
-                        <div className="task-listing-description">
-                            <h3 className="task-listing-title">WordPress Theme Installation</h3>
-                            <ul className="task-icons">
-                                <li><i className="icon-material-outline-location-off"></i> Online Job</li>
-                                <li><i className="icon-material-outline-access-time"></i> 1 hour ago</li>
-                            </ul>
-                            <div className="task-tags margin-top-15">
-                                <span>WordPress</span>
-                                <span>Theme Installation</span>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div className="task-listing-bid">
-                        <div className="task-listing-bid-inner">
-                            <div className="task-offers">
-                                <strong>$100</strong>
-                                <span>Fixed Price</span>
-                            </div>
-                            <span className="button button-sliding-icon ripple-effect">Bid Now <i className="icon-material-outline-arrow-right-alt"></i></span>
-                        </div>
-                    </div>
-                </a>
-
-                <a href="single-task-page.html" className="task-listing">
-
-                    <div className="task-listing-details">
-
-                        <div className="task-listing-description">
-                            <h3 className="task-listing-title">PHP Core Website Fixes</h3>
-                            <ul className="task-icons">
-                                <li><i className="icon-material-outline-location-off"></i> Online Job</li>
-                                <li><i className="icon-material-outline-access-time"></i> 1 hour ago</li>
-                            </ul>
-                            <div className="task-tags margin-top-15">
-                                <span>PHP</span>
-                                <span>MySQL Administration</span>
-                                <span>API Development</span>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div className="task-listing-bid">
-                        <div className="task-listing-bid-inner">
-                            <div className="task-offers">
-                                <strong>$50 - $80</strong>
-                                <span>Hourly Rate</span>
-                            </div>
-                            <span className="button button-sliding-icon ripple-effect">Bid Now <i className="icon-material-outline-arrow-right-alt"></i></span>
-                        </div>
-                    </div>
-                </a>		
-
 
             </div>
 
@@ -449,94 +243,7 @@ const HomePage = () => {
 </div>
 </div>
 
-
-<div className="section gray padding-top-65 padding-bottom-55">
-
-<div className="container">
-    <div className="row">
-        <div className="col-xl-12">
-            <div className="section-headline centered margin-top-0 margin-bottom-5">
-                <h3>Testimonials</h3>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div className="fullwidth-carousel-container margin-top-20">
-    <div className="testimonial-carousel testimonials">
-
-        <div className="fw-carousel-review">
-            <div className="testimonial-box">
-                <div className="testimonial-avatar">
-                    <img src="images/user-avatar-small-02.jpg" alt="" />
-                </div>
-                <div className="testimonial-author">
-                    <h4>Sindy Forest</h4>
-                     <span>Freelancer</span>
-                </div>
-                <div className="testimonial">Efficiently unleash cross-media information without cross-media value. Quickly maximize timely deliverables for real-time schemas. Dramatically maintain clicks-and-mortar solutions without functional solutions.</div>
-            </div>
-        </div>
-
-        <div className="fw-carousel-review">
-            <div className="testimonial-box">
-                <div className="testimonial-avatar">
-                    <img src="images/user-avatar-small-01.jpg" alt="" />
-                </div>
-                <div className="testimonial-author">
-                    <h4>Tom Smith</h4>
-                     <span>Freelancer</span>
-                </div>
-                <div className="testimonial">Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate one-to-one customer service with robust ideas. Dynamically innovate resource-leveling customer service for state of the art.</div>
-            </div>
-        </div>
-
-        <div className="fw-carousel-review">
-            <div className="testimonial-box">
-                <div className="testimonial-avatar">
-                    <img src="images/user-avatar-placeholder.png" alt="" />
-                </div>
-                <div className="testimonial-author">
-                    <h4>Sebastiano Piccio</h4>
-                     <span>Employer</span>
-                </div>
-                <div className="testimonial">Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate one-to-one customer service with robust ideas. Dynamically innovate resource-leveling customer service for state of the art.</div>
-            </div>
-        </div>
-
-        <div className="fw-carousel-review">
-            <div className="testimonial-box">
-                <div className="testimonial-avatar">
-                    <img src="images/user-avatar-small-03.jpg" alt="" />
-                </div>
-                <div className="testimonial-author">
-                    <h4>David Peterson</h4>
-                     <span>Freelancer</span>
-                </div>
-                <div className="testimonial">Collaboratively administrate turnkey channels whereas virtual e-tailers. Objectively seize scalable metrics whereas proactive e-services. Seamlessly empower fully researched growth strategies and interoperable sources.</div>
-            </div>
-        </div>
-
-       <div className="fw-carousel-review">
-            <div className="testimonial-box">
-                <div className="testimonial-avatar">
-                    <img src="images/user-avatar-placeholder.png" alt="" />
-                </div>
-                <div className="testimonial-author">
-                    <h4>Marcin Kowalski</h4>
-                     <span>Freelancer</span>
-                </div>
-                <div className="testimonial">Efficiently unleash cross-media information without cross-media value. Quickly maximize timely deliverables for real-time schemas. Dramatically maintain clicks-and-mortar solutions without functional solutions.</div>
-            </div>
-        </div>
-
-    </div>
-</div>
-
-</div>
-
-
-<div className="section padding-top-70 padding-bottom-75">
+<div className="section gray padding-top-70 padding-bottom-75">
 <div className="container">
     <div className="row">
 
@@ -581,14 +288,6 @@ const HomePage = () => {
 </div>
 </div>
 
-            <p>You are logged to the home page!</p>
-
-
-            <ul>
-                {notes.map(note => (
-                    <li key={note.id} >{note.body}</li>
-                ))}
-            </ul>
         </div>
     )
 }

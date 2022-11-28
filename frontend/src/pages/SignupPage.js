@@ -1,4 +1,4 @@
-import React,{useState, useContext} from 'react'
+import React,{ useContext} from 'react'
 import { Link } from 'react-router-dom'
 import AuthContext from '../context/AuthContext'
 import Header from '../components/Header'
@@ -41,7 +41,7 @@ function SignupPage() {
 				
 				<nav id="breadcrumbs" className="dark">
 					<ul>
-						<li><a href="#">Home</a></li>
+						<li>Home</li>
 						<li>Register</li>
 					</ul>
 				</nav>

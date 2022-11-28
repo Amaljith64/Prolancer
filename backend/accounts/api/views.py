@@ -8,7 +8,7 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 from accounts.models import *
 
-from .serializers import NoteSerializer
+from .serializers import *
 from accounts.models import Note
 
 from rest_framework.views import APIView
@@ -22,6 +22,8 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 
         # Add custom claims
         token['username'] = user.username
+        token['is_superuser'] = user.is_superuser
+        token['user_id'] = user.id
         # ...
 
         return token
@@ -58,9 +60,7 @@ class Usersignup(APIView):
         username = body['username']
         email = body['email']
         password=body['password']
-        user=NewUser.objects.create(username=username, email=email
+        NewUser.objects.create_user(username=username, email=email,password=password
         )
-        user.set_password(password)
-        user.save()
         return Response(200)
 

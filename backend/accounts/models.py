@@ -56,3 +56,42 @@ class NewUser(AbstractBaseUser, PermissionsMixin):
 class Note(models.Model):
     user = models.ForeignKey(NewUser, on_delete=models.CASCADE, null=True)
     body = models.TextField()
+
+
+class Userprofile(models.Model):
+
+    user = models.ForeignKey(NewUser,on_delete=models.CASCADE,related_name='pro_user_set')
+    first_name = models.CharField(max_length=225,null=True)
+    last_name = models.CharField(max_length=225,blank=True)
+    date_of_birth = models.DateField()
+    profile_photo = models.ImageField(upload_to='images/user') 
+    cv = models.FileField(upload_to='cv/user')
+    about = models.TextField()
+
+    def __str__(self) :
+
+        return self.user.email
+
+class Education(models.Model):
+
+    user = models.ForeignKey(NewUser,on_delete=models.CASCADE,related_name='educations')
+    university = models.CharField(max_length=225,null=True)
+    department = models.CharField(max_length=250,null=True)
+    remark = models.CharField(max_length=225,null=True)
+    start_date = models.DateField()
+    end_date = models.DateField()
+
+    def __str__(self):
+
+        return self.user.email
+class Experience(models.Model):
+    user = models.ForeignKey(NewUser,on_delete=models.CASCADE,related_name='experiences')
+    company = models.CharField(max_length=225,null=True)
+    position = models.CharField(max_length=250,null=True)
+    description = models.CharField(max_length=225,null=True)
+    start_date_e = models.DateField()
+    end_date_e = models.DateField()
+    def __str__(self):
+
+        return self.user.email
+
