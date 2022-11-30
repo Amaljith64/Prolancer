@@ -45,11 +45,11 @@ const Header = () => {
                         
                     </li>
 
-                    <li><a href="#">Services</a>
+                    <li><Link to="#">Services</Link>
                         
                     </li>
 
-                    <li><a href="#">Blog</a>
+                    <li><Link to="#">Blog</Link>
                         
                     </li>
                     {user?.is_freelancer ? 
@@ -68,7 +68,7 @@ const Header = () => {
                     )
                     :
                     (
-                    <li><a href="#">Contact </a></li>
+                    <li><Link to="#">Contact </Link></li>
                     )
                     }
 
@@ -89,7 +89,7 @@ const Header = () => {
 
                     
                     <div className="header-notifications-trigger">
-                        <a href="#"><i className="icon-feather-bell"></i><span>4</span></a>
+                        <Link to="#"><i className="icon-feather-bell"></i><span>4</span></Link>
                     </div>
 
                     
@@ -107,42 +107,42 @@ const Header = () => {
                                 <ul>
                                     
                                     <li className="notifications-not-read">
-                                        <a href="dashboard-manage-candidates.html">
+                                        <Link to="dashboard-manage-candidates.html">
                                             <span className="notification-icon"><i className="icon-material-outline-group"></i></span>
                                             <span className="notification-text">
                                                 <strong>Michael Shannah</strong> applied for a job <span className="color">Full Stack Software Engineer</span>
                                             </span>
-                                        </a>
+                                        </Link>
                                     </li>
 
                                     
                                     <li>
-                                        <a href="dashboard-manage-bidders.html">
+                                        <Link to="dashboard-manage-bidders.html">
                                             <span className="notification-icon"><i className=" icon-material-outline-gavel"></i></span>
                                             <span className="notification-text">
                                                 <strong>Gilbert Allanis</strong> placed a bid on your <span className="color">iOS App Development</span> project
                                             </span>
-                                        </a>
+                                        </Link>
                                     </li>
 
                                     
                                     <li>
-                                        <a href="dashboard-manage-jobs.html">
+                                        <Link to="dashboard-manage-jobs.html">
                                             <span className="notification-icon"><i className="icon-material-outline-autorenew"></i></span>
                                             <span className="notification-text">
                                                 Your job listing <span className="color">Full Stack PHP Developer</span> is expiring.
                                             </span>
-                                        </a>
+                                        </Link>
                                     </li>
 
                                     
                                     <li>
-                                        <a href="dashboard-manage-candidates.html">
+                                        <Link to="dashboard-manage-candidates.html">
                                             <span className="notification-icon"><i className="icon-material-outline-group"></i></span>
                                             <span className="notification-text">
                                                 <strong>Sindy Forrest</strong> applied for a job <span className="color">Full Stack Software Engineer</span>
                                             </span>
-                                        </a>
+                                        </Link>
                                     </li>
                                 </ul>
                             </div>
@@ -155,7 +155,7 @@ const Header = () => {
                 
                 <div className="header-notifications">
                     <div className="header-notifications-trigger">
-                        <a href="#"><i className="icon-feather-mail"></i><span>3</span></a>
+                        <Link to="#"><i className="icon-feather-mail"></i><span>3</span></Link>
                     </div>
 
                     
@@ -173,44 +173,44 @@ const Header = () => {
                                 <ul>
                                     
                                     <li className="notifications-not-read">
-                                        <a href="dashboard-messages.html">
+                                        <Link to="dashboard-messages.html">
                                             <span className="notification-avatar status-online"><img src="images/user-avatar-small-03.jpg" alt="" /></span>
                                             <div className="notification-text">
                                                 <strong>David Peterson</strong>
                                                 <p className="notification-msg-text">Thanks for reaching out. I'm quite busy right now on many...</p>
                                                 <span className="color">4 hours ago</span>
                                             </div>
-                                        </a>
+                                        </Link>
                                     </li>
 
                                     
                                     <li className="notifications-not-read">
-                                        <a href="dashboard-messages.html">
+                                        <Link to="dashboard-messages.html">
                                             <span className="notification-avatar status-offline"><img src="images/user-avatar-small-02.jpg" alt="" /></span>
                                             <div className="notification-text">
                                                 <strong>Sindy Forest</strong>
                                                 <p className="notification-msg-text">Hi Tom! Hate to break it to you, but I'm actually on vacation until...</p>
                                                 <span className="color">Yesterday</span>
                                             </div>
-                                        </a>
+                                        </Link>
                                     </li>
 
                                     
                                     <li className="notifications-not-read">
-                                        <a href="dashboard-messages.html">
+                                        <Link to="dashboard-messages.html">
                                             <span className="notification-avatar status-online"><img src="images/user-avatar-placeholder.png" alt="" /></span>
                                             <div className="notification-text">
                                                 <strong>Marcin Kowalski</strong>
                                                 <p className="notification-msg-text">I received payment. Thanks for cooperation!</p>
                                                 <span className="color">Yesterday</span>
                                             </div>
-                                        </a>
+                                        </Link>
                                     </li>
                                 </ul>
                             </div>
                         </div>
 
-                        <a href="dashboard-messages.html" className="header-notifications-button ripple-effect button-sliding-icon">View All Messages<i className="icon-material-outline-arrow-right-alt"></i></a>
+                        <Link to="dashboard-messages.html" className="header-notifications-button ripple-effect button-sliding-icon">View All Messages<i className="icon-material-outline-arrow-right-alt"></i></Link>
                     </div>
                 </div>
 
@@ -223,7 +223,7 @@ const Header = () => {
                 
                 <div className= {isActive ? 'header-notifications user-menu active': "header-notifications user-menu"}>
                     <div className="header-notifications-trigger">
-                        <a href="#"><div className="user-avatar status-online"><img src="images/user-avatar-small-01.jpg" alt="" /></div></a>
+                        <Link to="#"><div className="user-avatar status-online"><img src="images/user-avatar-small-01.jpg" alt="" /></div></Link>
                     </div>
 
                     
@@ -251,8 +251,8 @@ const Header = () => {
                     </div>
                     
                     <ul className="user-menu-small-nav">
-                        <li><a href="dashboard.html"><i className="icon-material-outline-dashboard"></i> Dashboard</a></li>
-                        <li><a href="dashboard-settings.html"><i className="icon-material-outline-settings"></i> Settings</a></li>
+                        <li><Link to="dashboard.html"><i className="icon-material-outline-dashboard"></i> Dashboard</Link></li>
+                        <li><Link to="dashboard-settings.html"><i className="icon-material-outline-settings"></i> Settings</Link></li>
                         {user ? (
                             
                         

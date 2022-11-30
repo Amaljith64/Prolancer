@@ -42,17 +42,48 @@ export const ClientProvider = ({ children }) => {
     );
 
     if (response.status === 200) {
-      Navigate("/login");
+      Navigate("/");
 
-      console.log("register Successful");
+      console.log("Job Posted");
     } else {
-      console.log("Something problem in register");
+      console.log("Something problem in Posting");
+    }
+  };
+  let serviceSubmit = async (e) => {
+    const config = {
+      headers: {
+        "Content-type": "multipart/form-data",
+      },
+    };
+    let response = await axios.post(
+      "freelancer/postservice/",
+      {
+        user: user.user_id,
+        service_title: e.service_title,
+        category: e.category,
+        Price: e.Price,
+        response_time: e.response_time,
+        skills: e.skills,
+        language: e.language,
+        service_description: e.service_description,
+        img: e.img[0],
+      },
+      config
+    );
+
+    if (response.status === 200) {
+      Navigate("/freelancer");
+
+      console.log("Service Posted");
+    } else {
+      console.log("Something problem in Posting");
     }
   };
 
 
   let contextData = {
     jobSubmit: jobSubmit,
+    serviceSubmit: serviceSubmit,
   };
   return (
     <ClientContext.Provider value={contextData}>

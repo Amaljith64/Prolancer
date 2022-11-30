@@ -86,14 +86,14 @@ const HomePage = () => {
 							
 				<div className="section-headline margin-top-0 margin-bottom-35">
 					<h3>Recent Tasks</h3>
-					<a href="tasks-list-layout-1.html" className="headline-link">Browse All Tasks</a>
+					<Link to="tasks-list-layout-1.html" className="headline-link">Browse All Tasks</Link>
 				</div>
                 {job.map((data, id) => {
                 return(
 								
 				<div key={id} className="tasks-list-container compact-list margin-top-35">
 					
-					<a href="single-task-page.html" className="task-listing">
+					<Link to="single-task-page.html" className="task-listing">
 
 						
 						<div className="task-listing-details">
@@ -122,7 +122,7 @@ const HomePage = () => {
 								<span className="button button-sliding-icon ripple-effect">Bid Now <i className="icon-material-outline-arrow-right-alt"></i></span>
 							</div>
 						</div>
-					</a>	
+					</Link>	
 				</div>	
                 )})}
 			</div>      

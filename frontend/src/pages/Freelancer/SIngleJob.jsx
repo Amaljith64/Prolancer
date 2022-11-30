@@ -2,6 +2,7 @@ import React,{useState} from 'react'
 import Header from '../../components/Header'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
+import { Link } from "react-router-dom";
 
 
 const SIngleJob = () => {
@@ -21,12 +22,12 @@ const SIngleJob = () => {
 			<div className="col-md-12">
 				<div className="single-page-header-inner">
 					<div className="left-side">
-						<div className="header-image"><a href="single-company-profile.html"><img src="images/company-logo-03a.png" alt=""/></a></div>
+						<div className="header-image"><Link to="single-company-profile.html"><img src="images/company-logo-03a.png" alt=""/></Link></div>
 						<div className="header-details">
 							<h3>Restaurant General Manager</h3>
 							<h5>About the Employer</h5>
 							<ul>
-								<li><a href="single-company-profile.html"><i className="icon-material-outline-business"></i> King</a></li>
+								<li><Link to="single-company-profile.html"><i className="icon-material-outline-business"></i> King</Link></li>
 								<li><div className="star-rating" data-rating="4.9"></div></li>
 								<li><img className="flag" src="images/flags/gb.svg" alt=""/> United Kingdom</li>
 								<li><div className="verified-badge-with-title">Verified</div></li>
@@ -66,7 +67,7 @@ const SIngleJob = () => {
 				<h3 className="margin-bottom-30">Location</h3>
 				<div id="single-job-map-container">
 					<div id="singleListingMap" data-latitude="51.507717" data-longitude="-0.131095" data-map-icon="im im-icon-Hamburger"></div>
-					<a href="#" id="streetView">Street View</a>
+					<Link to="#" id="streetView">Street View</Link>
 				</div>
 			</div>
 
@@ -77,7 +78,7 @@ const SIngleJob = () => {
 				<div className="listings-container grid-layout">
 
 						
-						<a href="#" className="job-listing">
+						<Link to="#" className="job-listing">
 
 							
 							<div className="job-listing-details">
@@ -102,10 +103,10 @@ const SIngleJob = () => {
 									<li><i className="icon-material-outline-access-time"></i> 2 days ago</li>
 								</ul>
 							</div>
-						</a>
+						</Link>
 
 						
-						<a href="#" className="job-listing">
+						<Link to="#" className="job-listing">
 
 							
 							<div className="job-listing-details">
@@ -130,7 +131,7 @@ const SIngleJob = () => {
 									<li><i className="icon-material-outline-access-time"></i> 2 days ago</li>
 								</ul>
 							</div>
-						</a>
+						</Link>
 					</div>
 					
 
@@ -229,10 +230,10 @@ const SIngleJob = () => {
 						<div className="share-buttons-content">
 							<span>Interesting? <strong>Share It!</strong></span>
 							<ul className="share-buttons-icons">
-								<li><a href="#" data-button-color="#3b5998" title="Share on Facebook" data-tippy-placement="top"><i className="icon-brand-facebook-f"></i></a></li>
-								<li><a href="#" data-button-color="#1da1f2" title="Share on Twitter" data-tippy-placement="top"><i className="icon-brand-twitter"></i></a></li>
-								<li><a href="#" data-button-color="#dd4b39" title="Share on Google Plus" data-tippy-placement="top"><i className="icon-brand-google-plus-g"></i></a></li>
-								<li><a href="#" data-button-color="#0077b5" title="Share on LinkedIn" data-tippy-placement="top"><i className="icon-brand-linkedin-in"></i></a></li>
+								<li><Link to="#" data-button-color="#3b5998" title="Share on Facebook" data-tippy-placement="top"><i className="icon-brand-facebook-f"></i></Link></li>
+								<li><Link to="#" data-button-color="#1da1f2" title="Share on Twitter" data-tippy-placement="top"><i className="icon-brand-twitter"></i></Link></li>
+								<li><Link to="#" data-button-color="#dd4b39" title="Share on Google Plus" data-tippy-placement="top"><i className="icon-brand-google-plus-g"></i></Link></li>
+								<li><Link to="#" data-button-color="#0077b5" title="Share on LinkedIn" data-tippy-placement="top"><i className="icon-brand-linkedin-in"></i></Link></li>
 							</ul>
 						</div>
 					</div>

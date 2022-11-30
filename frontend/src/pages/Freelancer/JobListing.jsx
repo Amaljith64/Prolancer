@@ -1,5 +1,6 @@
 import React from 'react'
 import Header from '../../components/Header'
+import { Link } from "react-router-dom";
 
 
 const JobListing = () => {
@@ -167,7 +168,7 @@ const JobListing = () => {
 
         <div className="listings-container grid-layout margin-top-35">
             
-				<a href="pages-blog-post.html" className="blog-post">
+				<Link to="pages-blog-post.html" className="blog-post">
 					
 					<div className="blog-post-thumbnail">
 						<div className="blog-post-thumbnail-inner">
@@ -183,7 +184,7 @@ const JobListing = () => {
 					</div>
 					
 					<div className="entry-icon"></div>
-				</a>
+				</Link>
 
             
             
@@ -195,12 +196,12 @@ const JobListing = () => {
         <div className="pagination-container margin-top-20 margin-bottom-20">
             <nav className="pagination">
                 <ul>
-                    <li className="pagination-arrow"><a href="#" className="ripple-effect"><i className="icon-material-outline-keyboard-arrow-left"></i></a></li>
-                    <li><a href="#" className="ripple-effect">1</a></li>
-                    <li><a href="#" className="ripple-effect current-page">2</a></li>
-                    <li><a href="#" className="ripple-effect">3</a></li>
-                    <li><a href="#" className="ripple-effect">4</a></li>
-                    <li className="pagination-arrow"><a href="#" className="ripple-effect"><i className="icon-material-outline-keyboard-arrow-right"></i></a></li>
+                    <li className="pagination-arrow"><Link to="#" className="ripple-effect"><i className="icon-material-outline-keyboard-arrow-left"></i></Link></li>
+                    <li><Link to="#" className="ripple-effect">1</Link></li>
+                    <li><Link to="#" className="ripple-effect current-page">2</Link></li>
+                    <li><Link to="#" className="ripple-effect">3</Link></li>
+                    <li><Link to="#" className="ripple-effect">4</Link></li>
+                    <li className="pagination-arrow"><Link to="#" className="ripple-effect"><i className="icon-material-outline-keyboard-arrow-right"></i></Link></li>
                 </ul>
             </nav>
         </div>
@@ -214,24 +215,24 @@ const JobListing = () => {
             </div>
             <ul className="footer-social-links">
                 <li>
-                    <a href="#" title="Facebook" data-tippy-placement="top">
+                    <Link to="#" title="Facebook" data-tippy-placement="top">
                         <i className="icon-brand-facebook-f"></i>
-                    </a>
+                    </Link>
                 </li>
                 <li>
-                    <a href="#" title="Twitter" data-tippy-placement="top">
+                    <Link to="#" title="Twitter" data-tippy-placement="top">
                         <i className="icon-brand-twitter"></i>
-                    </a>
+                    </Link>
                 </li>
                 <li>
-                    <a href="#" title="Google Plus" data-tippy-placement="top">
+                    <Link to="#" title="Google Plus" data-tippy-placement="top">
                         <i className="icon-brand-google-plus-g"></i>
-                    </a>
+                    </Link>
                 </li>
                 <li>
-                    <a href="#" title="LinkedIn" data-tippy-placement="top">
+                    <Link to="#" title="LinkedIn" data-tippy-placement="top">
                         <i className="icon-brand-linkedin-in"></i>
-                    </a>
+                    </Link>
                 </li>
             </ul>
             <div className="clearfix"></div>

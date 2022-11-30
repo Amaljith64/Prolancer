@@ -2,6 +2,7 @@ import React,{  useContext, useEffect, useState } from 'react'
 import Header from '../../components/Header'
 import AuthContext from '../../context/AuthContext';
 import axios from "axios"
+import { Link } from "react-router-dom";
 
 const RegisterFreelancer = () => {
 
@@ -136,8 +137,8 @@ const uploadData=(e)=>{
                  so that potential buyers can get to know you better.</p>
             <nav id="breadcrumbs" className="dark">
                 <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Dashboard</a></li>
+                    <li><Link to="#">Home</Link></li>
+                    <li><Link to="#">Dashboard</Link></li>
                     <li>Settings</li>
                 </ul>
             </nav>
@@ -374,24 +375,24 @@ const uploadData=(e)=>{
             </div>
             <ul className="footer-social-links">
                 <li>
-                    <a href="#" title="Facebook" data-tippy-placement="top">
+                    <Link to="#" title="Facebook" data-tippy-placement="top">
                         <i className="icon-brand-facebook-f"></i>
-                    </a>
+                    </Link>
                 </li>
                 <li>
-                    <a href="#" title="Twitter" data-tippy-placement="top">
+                    <Link to="#" title="Twitter" data-tippy-placement="top">
                         <i className="icon-brand-twitter"></i>
-                    </a>
+                    </Link>
                 </li>
                 <li>
-                    <a href="#" title="Google Plus" data-tippy-placement="top">
+                    <Link to="#" title="Google Plus" data-tippy-placement="top">
                         <i className="icon-brand-google-plus-g"></i>
-                    </a>
+                    </Link>
                 </li>
                 <li>
-                    <a href="#" title="LinkedIn" data-tippy-placement="top">
+                    <Link to="#" title="LinkedIn" data-tippy-placement="top">
                         <i className="icon-brand-linkedin-in"></i>
-                    </a>
+                    </Link>
                 </li>
             </ul>
             <div className="clearfix"></div>

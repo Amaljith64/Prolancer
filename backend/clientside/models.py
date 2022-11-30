@@ -29,4 +29,7 @@ class ClientJobs(models.Model):
     skill_required = models.CharField(max_length=225)
     job_description = models.TextField()
     img = models.ImageField(upload_to='image',null=True)
+
+    def __str__(self):
+        return self.job_title
     

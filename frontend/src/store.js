@@ -5,7 +5,6 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import {categoryReducer} from './reducers/postReducers'
 import storage from 'redux-persist/lib/storage'
 import { persistReducer } from 'redux-persist'
-import { combineReducer } from '@reduxjs/toolkit'
 
 
 const persistConfig = {

@@ -1,5 +1,6 @@
 import React from 'react'
 import Header from '../components/Header'
+import { Link } from "react-router-dom";
 
 function Dashboard() {
   return (
@@ -16,47 +17,47 @@ function Dashboard() {
 			<div className="dashboard-nav-container">
 
 				
-				<a href="#" className="dashboard-responsive-nav-trigger">
+				<Link to="#" className="dashboard-responsive-nav-trigger">
 					<span className="hamburger hamburger--collapse" >
 						<span className="hamburger-box">
 							<span className="hamburger-inner"></span>
 						</span>
 					</span>
 					<span className="trigger-title">Dashboard Navigation</span>
-				</a>
+				</Link>
 				
 				
 				<div className="dashboard-nav">
 					<div className="dashboard-nav-inner">
 
 						<ul data-submenu-title="Start">
-							<li className="active"><a href="dashboard.html"><i className="icon-material-outline-dashboard"></i> Dashboard</a></li>
-							<li><a href="dashboard-messages.html"><i className="icon-material-outline-question-answer"></i> Messages <span className="nav-tag">2</span></a></li>
-							<li><a href="dashboard-bookmarks.html"><i className="icon-material-outline-star-border"></i> Bookmarks</a></li>
-							<li><a href="dashboard-reviews.html"><i className="icon-material-outline-rate-review"></i> Reviews</a></li>
+							<li className="active"><Link to="dashboard.html"><i className="icon-material-outline-dashboard"></i> Dashboard</Link></li>
+							<li><Link to="dashboard-messages.html"><i className="icon-material-outline-question-answer"></i> Messages <span className="nav-tag">2</span></Link></li>
+							<li><Link to="dashboard-bookmarks.html"><i className="icon-material-outline-star-border"></i> Bookmarks</Link></li>
+							<li><Link to="dashboard-reviews.html"><i className="icon-material-outline-rate-review"></i> Reviews</Link></li>
 						</ul>
 						
 						<ul data-submenu-title="Organize and Manage">
-							<li><a href="#"><i className="icon-material-outline-business-center"></i> Jobs</a>
+							<li><Link to="#"><i className="icon-material-outline-business-center"></i> Jobs</Link>
 								<ul>
-									<li><a href="dashboard-manage-jobs.html">Manage Jobs <span className="nav-tag">3</span></a></li>
-									<li><a href="dashboard-manage-candidates.html">Manage Candidates</a></li>
-									<li><a href="dashboard-post-a-job.html">Post a Job</a></li>
+									<li><Link to="dashboard-manage-jobs.html">Manage Jobs <span className="nav-tag">3</span></Link></li>
+									<li><Link to="dashboard-manage-candidates.html">Manage Candidates</Link></li>
+									<li><Link to="dashboard-post-a-job.html">Post a Job</Link></li>
 								</ul>	
 							</li>
-							<li><a href="#"><i className="icon-material-outline-assignment"></i> Tasks</a>
+							<li><Link to="#"><i className="icon-material-outline-assignment"></i> Tasks</Link>
 								<ul>
-									<li><a href="dashboard-manage-tasks.html">Manage Tasks <span className="nav-tag">2</span></a></li>
-									<li><a href="dashboard-manage-bidders.html">Manage Bidders</a></li>
-									<li><a href="dashboard-my-active-bids.html">My Active Bids <span className="nav-tag">4</span></a></li>
-									<li><a href="dashboard-post-a-task.html">Post a Task</a></li>
+									<li><Link to="dashboard-manage-tasks.html">Manage Tasks <span className="nav-tag">2</span></Link></li>
+									<li><Link to="dashboard-manage-bidders.html">Manage Bidders</Link></li>
+									<li><Link to="dashboard-my-active-bids.html">My Active Bids <span className="nav-tag">4</span></Link></li>
+									<li><Link to="dashboard-post-a-task.html">Post a Task</Link></li>
 								</ul>	
 							</li>
 						</ul>
 
 						<ul data-submenu-title="Account">
-							<li><a href="dashboard-settings.html"><i className="icon-material-outline-settings"></i> Settings</a></li>
-							<li><a href="index-logged-out.html"><i className="icon-material-outline-power-settings-new"></i> Logout</a></li>
+							<li><Link to="dashboard-settings.html"><i className="icon-material-outline-settings"></i> Settings</Link></li>
+							<li><Link to="index-logged-out.html"><i className="icon-material-outline-power-settings-new"></i> Logout</Link></li>
 						</ul>
 						
 					</div>
@@ -81,7 +82,7 @@ function Dashboard() {
 				
 				<nav id="breadcrumbs" className="dark">
 					<ul>
-						<li><a href="#">Home</a></li>
+						<li><Link to="#">Home</Link></li>
 						<li>Dashboard</li>
 					</ul>
 				</nav>
@@ -162,8 +163,8 @@ function Dashboard() {
 								<div className="note-footer">
 									<span className="note-priority high">High Priority</span>
 									<div className="note-buttons">
-										<a href="#" title="Edit" data-tippy-placement="top"><i className="icon-feather-edit"></i></a>
-										<a href="#" title="Remove" data-tippy-placement="top"><i className="icon-feather-trash-2"></i></a>
+										<Link to="#" title="Edit" data-tippy-placement="top"><i className="icon-feather-edit"></i></Link>
+										<Link to="#" title="Remove" data-tippy-placement="top"><i className="icon-feather-trash-2"></i></Link>
 									</div>
 								</div>
 							</div>
@@ -173,8 +174,8 @@ function Dashboard() {
 								<div className="note-footer">
 									<span className="note-priority low">Low Priority</span>
 									<div className="note-buttons">
-										<a href="#" title="Edit" data-tippy-placement="top"><i className="icon-feather-edit"></i></a>
-										<a href="#" title="Remove" data-tippy-placement="top"><i className="icon-feather-trash-2"></i></a>
+										<Link to="#" title="Edit" data-tippy-placement="top"><i className="icon-feather-edit"></i></Link>
+										<Link to="#" title="Remove" data-tippy-placement="top"><i className="icon-feather-trash-2"></i></Link>
 									</div>
 								</div>
 							</div>
@@ -184,14 +185,14 @@ function Dashboard() {
 								<div className="note-footer">
 									<span className="note-priority medium">Medium Priority</span>
 									<div className="note-buttons">
-										<a href="#" title="Edit" data-tippy-placement="top"><i className="icon-feather-edit"></i></a>
-										<a href="#" title="Remove" data-tippy-placement="top"><i className="icon-feather-trash-2"></i></a>
+										<Link to="#" title="Edit" data-tippy-placement="top"><i className="icon-feather-edit"></i></Link>
+										<Link to="#" title="Remove" data-tippy-placement="top"><i className="icon-feather-trash-2"></i></Link>
 									</div>
 								</div>
 							</div>
 						</div>
 							<div className="add-note-button">
-								<a href="#small-dialog" className="popup-with-zoom-anim button full-width button-sliding-icon">Add Note <i className="icon-material-outline-arrow-right-alt"></i></a>
+								<Link to="#small-dialog" className="popup-with-zoom-anim button full-width button-sliding-icon">Add Note <i className="icon-material-outline-arrow-right-alt"></i></Link>
 							</div>
 					</div>
 					
@@ -216,51 +217,51 @@ function Dashboard() {
 								<li>
 									<span className="notification-icon"><i className="icon-material-outline-group"></i></span>
 									<span className="notification-text">
-										<strong>Michael Shannah</strong> applied for a job <a href="#">Full Stack Software Engineer</a>
+										<strong>Michael Shannah</strong> applied for a job <Link to="#">Full Stack Software Engineer</Link>
 									</span>
 									
 									<div className="buttons-to-right">
-										<a href="#" className="button ripple-effect ico" title="Mark as read" data-tippy-placement="left"><i className="icon-feather-check-square"></i></a>
+										<Link to="#" className="button ripple-effect ico" title="Mark as read" data-tippy-placement="left"><i className="icon-feather-check-square"></i></Link>
 									</div>
 								</li>
 								<li>
 									<span className="notification-icon"><i className=" icon-material-outline-gavel"></i></span>
 									<span className="notification-text">
-										<strong>Gilber Allanis</strong> placed a bid on your <a href="#">iOS App Development</a> project
+										<strong>Gilber Allanis</strong> placed a bid on your <Link to="#">iOS App Development</Link> project
 									</span>
 									
 									<div className="buttons-to-right">
-										<a href="#" className="button ripple-effect ico" title="Mark as read" data-tippy-placement="left"><i className="icon-feather-check-square"></i></a>
+										<Link to="#" className="button ripple-effect ico" title="Mark as read" data-tippy-placement="left"><i className="icon-feather-check-square"></i></Link>
 									</div>
 								</li>
 								<li>
 									<span className="notification-icon"><i className="icon-material-outline-autorenew"></i></span>
 									<span className="notification-text">
-										Your job listing <a href="#">Full Stack Software Engineer</a> is expiring
+										Your job listing <Link to="#">Full Stack Software Engineer</Link> is expiring
 									</span>
 									
 									<div className="buttons-to-right">
-										<a href="#" className="button ripple-effect ico" title="Mark as read" data-tippy-placement="left"><i className="icon-feather-check-square"></i></a>
+										<Link to="#" className="button ripple-effect ico" title="Mark as read" data-tippy-placement="left"><i className="icon-feather-check-square"></i></Link>
 									</div>
 								</li>
 								<li>
 									<span className="notification-icon"><i className="icon-material-outline-group"></i></span>
 									<span className="notification-text">
-										<strong>Sindy Forrest</strong> applied for a job <a href="#">Full Stack Software Engineer</a>
+										<strong>Sindy Forrest</strong> applied for a job <Link to="#">Full Stack Software Engineer</Link>
 									</span>
 									
 									<div className="buttons-to-right">
-										<a href="#" className="button ripple-effect ico" title="Mark as read" data-tippy-placement="left"><i className="icon-feather-check-square"></i></a>
+										<Link to="#" className="button ripple-effect ico" title="Mark as read" data-tippy-placement="left"><i className="icon-feather-check-square"></i></Link>
 									</div>
 								</li>
 								<li>
 									<span className="notification-icon"><i className="icon-material-outline-rate-review"></i></span>
 									<span className="notification-text">
-										<strong>David Peterson</strong> left you a <span className="star-rating no-stars" data-rating="5.0"></span> rating after finishing <a href="#">Logo Design</a> task
+										<strong>David Peterson</strong> left you a <span className="star-rating no-stars" data-rating="5.0"></span> rating after finishing <Link to="#">Logo Design</Link> task
 									</span>
 									
 									<div className="buttons-to-right">
-										<a href="#" className="button ripple-effect ico" title="Mark as read" data-tippy-placement="left"><i className="icon-feather-check-square"></i></a>
+										<Link to="#" className="button ripple-effect ico" title="Mark as read" data-tippy-placement="left"><i className="icon-feather-check-square"></i></Link>
 									</div>
 								</li>
 							</ul>
@@ -287,7 +288,7 @@ function Dashboard() {
 									</div>
 									
 									<div className="buttons-to-right">
-										<a href="pages-checkout-page.html" className="button">Finish Payment</a>
+										<Link to="pages-checkout-page.html" className="button">Finish Payment</Link>
 									</div>
 								</li>
 								<li>
@@ -301,7 +302,7 @@ function Dashboard() {
 									</div>
 									
 									<div className="buttons-to-right">
-										<a href="pages-invoice-template.html" className="button gray">View Invoice</a>
+										<Link to="pages-invoice-template.html" className="button gray">View Invoice</Link>
 									</div>
 								</li>
 								<li>
@@ -315,7 +316,7 @@ function Dashboard() {
 									</div>
 									
 									<div className="buttons-to-right">
-										<a href="pages-invoice-template.html" className="button gray">View Invoice</a>
+										<Link to="pages-invoice-template.html" className="button gray">View Invoice</Link>
 									</div>
 								</li>
 								<li>
@@ -329,7 +330,7 @@ function Dashboard() {
 									</div>
 									
 									<div className="buttons-to-right">
-										<a href="pages-invoice-template.html" className="button gray">View Invoice</a>
+										<Link to="pages-invoice-template.html" className="button gray">View Invoice</Link>
 									</div>
 								</li>
 							</ul>
@@ -348,24 +349,24 @@ function Dashboard() {
 				</div>
 				<ul className="footer-social-links">
 					<li>
-						<a href="#" title="Facebook" data-tippy-placement="top">
+						<Link to="#" title="Facebook" data-tippy-placement="top">
 							<i className="icon-brand-facebook-f"></i>
-						</a>
+						</Link>
 					</li>
 					<li>
-						<a href="#" title="Twitter" data-tippy-placement="top">
+						<Link to="#" title="Twitter" data-tippy-placement="top">
 							<i className="icon-brand-twitter"></i>
-						</a>
+						</Link>
 					</li>
 					<li>
-						<a href="#" title="Google Plus" data-tippy-placement="top">
+						<Link to="#" title="Google Plus" data-tippy-placement="top">
 							<i className="icon-brand-google-plus-g"></i>
-						</a>
+						</Link>
 					</li>
 					<li>
-						<a href="#" title="LinkedIn" data-tippy-placement="top">
+						<Link to="#" title="LinkedIn" data-tippy-placement="top">
 							<i className="icon-brand-linkedin-in"></i>
-						</a>
+						</Link>
 					</li>
 				</ul>
 				<div className="clearfix"></div>

@@ -17,7 +17,7 @@ const LoginPage = () => {
 						<h2>Log In</h2>
 						<nav id="breadcrumbs" className="dark">
 							<ul>
-								<li><a href="#">Home</a></li>
+								<li>Home</li>
 								<li>Log In</li>
 							</ul>
 						</nav>
@@ -45,7 +45,7 @@ const LoginPage = () => {
 								<input type="password" className="input-text with-border" name="password" id="password"
 									placeholder="Password" required />
 							</div>
-							<a href="#" className="forgot-password">Forgot Password?</a>
+							<Link className="forgot-password">Forgot Password?</Link>
 						</form>
 						<button className="button full-width button-sliding-icon ripple-effect margin-top-10" type="submit"
 							form="login-form">Log In <i className="icon-material-outline-arrow-right-alt"></i></button>

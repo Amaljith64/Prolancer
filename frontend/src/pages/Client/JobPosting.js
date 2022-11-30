@@ -1,13 +1,18 @@
 import React,{useState,useEffect, useContext} from 'react'
 import Header from '../../components/Header'
 import Form from 'react-bootstrap/Form';
-import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import { useForm } from "react-hook-form";
 import ClientContext from '../../context/ClientContext'
-import axios from 'axios';
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+
 
 const JobPosting = () => {
-	const [category,setCategory] = useState([])
+
+
+	const categoryList = useSelector((state) => state.listCategory);
+  	const { category } = categoryList;
+
 	let {jobSubmit} = useContext(ClientContext)
 
     const { register, handleSubmit, formState: { errors } } = useForm({		
@@ -49,12 +54,6 @@ const JobPosting = () => {
        
         }
     };
-
-	useEffect(() => {
-        axios
-          .get("client/")
-          .then((response) => setCategory(response.data));
-      }, []);
 	
 
 
@@ -73,8 +72,8 @@ const JobPosting = () => {
 				
 				<nav id="breadcrumbs" className="dark">
 					<ul>
-						<li><a href="#">Home</a></li>
-						<li><a href="#">Dashboard</a></li>
+						<li><Link to="#">Home</Link></li>
+						<li><Link to="#">Dashboard</Link></li>
 						<li>Post a Job</li>
 					</ul>
 				</nav>
@@ -83,7 +82,7 @@ const JobPosting = () => {
 			
 			<div className="row">
 
-            <form onSubmit={handleSubmit(jobSubmit)} enctype="multipart/form-data">
+            <form onSubmit={handleSubmit(jobSubmit)} encType="multipart/form-data">
 				<div className="col-xl-12">
 					<div className="dashboard-box margin-top-0">
 						<div className="headline">
@@ -107,12 +106,12 @@ const JobPosting = () => {
 									<div className="submit-field">
 										<h5>Category</h5>
                                         <Form.Select aria-label="Default select example selectpicker with-border" name="category" {...register('category', postJob.category)}>
-                                        <small className="validationerror">{errors?.category && errors.category.message}</small>
 										{category.map((data, id) => {
             							return(
-                                        <option value={data.id}>{data.category_name}</option>
+                                        <option key={id} value={data.id}>{data.category_name}</option>
 											)})}											
                                         </Form.Select>
+
 									</div>
 								</div>
 
@@ -165,7 +164,7 @@ const JobPosting = () => {
                                         <small className="validationerror">{errors?.job_description && errors.job_description.message}</small> <br />
                                         <div className="uploadButton margin-top-30">
 											<input className="uploadButton-input" type="file" accept="image/*, application/pdf" id="upload" multiple name='img' {...register('img', postJob.img)}/>
-											<label className="uploadButton-button ripple-effect" for="upload">Upload Files</label>
+											<label className="uploadButton-button ripple-effect" htmlFor="upload">Upload Files</label>
 											<span className="uploadButton-file-name">Images or documents that might be helpful in describing your project</span>
 										</div>
 											<small className="validationerror">{errors?.img && errors.img.message}</small>
@@ -194,24 +193,24 @@ const JobPosting = () => {
 				</div>
 				<ul className="footer-social-links">
 					<li>
-						<a href="#" title="Facebook" data-tippy-placement="top">
+						<Link to="#" title="Facebook" data-tippy-placement="top">
 							<i className="icon-brand-facebook-f"></i>
-						</a>
+						</Link>
 					</li>
 					<li>
-						<a href="#" title="Twitter" data-tippy-placement="top">
+						<Link to="#" title="Twitter" data-tippy-placement="top">
 							<i className="icon-brand-twitter"></i>
-						</a>
+						</Link>
 					</li>
 					<li>
-						<a href="#" title="Google Plus" data-tippy-placement="top">
+						<Link to="#" title="Google Plus" data-tippy-placement="top">
 							<i className="icon-brand-google-plus-g"></i>
-						</a>
+						</Link>
 					</li>
 					<li>
-						<a href="#" title="LinkedIn" data-tippy-placement="top">
+						<Link to="#" title="LinkedIn" data-tippy-placement="top">
 							<i className="icon-brand-linkedin-in"></i>
-						</a>
+						</Link>
 					</li>
 				</ul>
 				<div className="clearfix"></div>

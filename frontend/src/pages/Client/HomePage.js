@@ -15,14 +15,13 @@ const HomePage = () => {
   const [job, setJob] = useState([]);
 
   useEffect(() => {
-
     axios.get("client/postjob/").then((response) => setJob(response.data));
   }, []);
+
 
   const categoryList = useSelector((state) => state.listCategory);
   const { loading,category,error} = categoryList;
 
-  
 
   useEffect(() => {
     if (!category)
@@ -136,8 +135,7 @@ const HomePage = () => {
             {category.map((data, id) => {
               return (
                 <div key={id} className="col-xl-3 col-md-6">
-                  <a
-                    href="jobs-list-layout-1.html"
+                  <Link to="jobs-list-layout-1.html"
                     className="photo-box small"
                     style={{ backgroundImage: `url(${data.category_image})` }}
                   >
@@ -145,7 +143,7 @@ const HomePage = () => {
                       <h3>{data.category_name}</h3>
                       <span>612</span>
                     </div>
-                  </a>
+                  </Link>
                 </div>
               );
             })}
@@ -159,15 +157,15 @@ const HomePage = () => {
             <div className="col-xl-12">
               <div className="section-headline margin-top-0 margin-bottom-35">
                 <h3>Recent Tasks</h3>
-                <a href="tasks-list-layout-1.html" className="headline-link">
+                <Link to="tasks-list-layout-1.html" className="headline-link">
                   Browse All Tasks
-                </a>
+                </Link>
               </div>
 
               <div className="freelancers-container freelancers-grid-layout margin-top-35">
                 {job.map((data, id) => {
                   return (
-                    <div className="freelancer">
+                    <div key={id} className="freelancer">
                       <div className="freelancer-overview">
                         <div className="freelancer-overview-inner">
                           <div className="">
@@ -205,13 +203,12 @@ const HomePage = () => {
                           </ul>
                           <p>Efficiently unlasdasdasdasdaasdd</p>
                         </div>
-                        <a
-                          href="single-freelancer-profile.html"
+                        <Link to="single-freelancer-profile.html"
                           className="button button-sliding-icon ripple-effect"
                         >
                           View Job{" "}
                           <i className="icon-material-outline-arrow-right-alt"></i>
-                        </a>
+                        </Link>
                       </div>
                     </div>
                   );
