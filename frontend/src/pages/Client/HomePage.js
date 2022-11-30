@@ -11,16 +11,10 @@ import { listcategory } from "../../actions/postActions";
 
 const HomePage = () => {
   const dispatch = useDispatch();
-  const [reload, setReload] = useState(false);
 
-//   const [category, setCategory] = useState([]);
   const [job, setJob] = useState([]);
-  let { authTokens, logoutUser } = useContext(AuthContext);
-
-  let api = useAxios();
 
   useEffect(() => {
-    // axios.get("client/").then((response) => setCategory(response.data));
 
     axios.get("client/postjob/").then((response) => setJob(response.data));
   }, []);
@@ -31,13 +25,20 @@ const HomePage = () => {
   
 
   useEffect(() => {
-    dispatch(listcategory());
+    if (!category)
+      dispatch(listcategory());
   }, []);
-//   console.log(categ, "reduxxxxxxxxxxx");
 
   return (
     <div>
       <Header />
+      <div className="margin-top-70"></div>
+
+      {loading  ?  <h2>Loading...............</h2>
+      : error ? <h3>{error}</h3>
+      : 
+      
+      
       <div
         className="intro-banner dark-overlay"
         style={{
@@ -123,7 +124,7 @@ const HomePage = () => {
           </div>
         </div>
       </div>
-
+    }
       <div className="section margin-top-65 margin-bottom-30">
         <div className="container">
           <div className="row">
