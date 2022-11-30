@@ -4,12 +4,16 @@ import PrivateRoute from './utils/PrivateRoute'
 import { AuthProvider } from './context/AuthContext'
 import { ClientProvider } from './context/ClientContext'
 
-import HomePage from './pages/HomePage'
+import HomePage from './pages/Client/HomePage'
 import LoginPage from './pages/LoginPage'
 import SignupPage from './pages/SignupPage';
 import Dashboard from './pages/Dashboard';
-import RegisterFreelancer from './pages/RegisterFreelancer';
-import JobPosting from './pages/JobPosting';
+import RegisterFreelancer from './pages/Client/RegisterFreelancer';
+import JobPosting from './pages/Client/JobPosting';
+import JobListing from './pages/Freelancer/JobListing';
+import SIngleJob from './pages/Freelancer/SIngleJob';
+import FreelancerHome from './pages/Freelancer/FreelancerHome';
+import FreelancerServicePost from './pages/Freelancer/FreelancerServicePost';
 
 
 function App() {
@@ -21,6 +25,8 @@ function App() {
           <Routes>
           
           <Route element={<HomePage/>} path="/" exact />
+          <Route element={<FreelancerHome/>} path="/freelancer"  />
+          <Route element={<FreelancerServicePost/>} path="/post_service"  />
 
           {/* <PrivateRoute element={<HomePage/>} path="/" exact/> */}
           <Route element={<LoginPage/>} path="/login"/> 
@@ -28,8 +34,11 @@ function App() {
           <Route element={<SignupPage/>} path="/signup"/> 
           <Route element={<Dashboard/>} path="/dashboard"/> 
           <Route element={<JobPosting/>} path="/post_job"/> 
+          <Route element={<JobListing/>} path="/list_job"/> 
+          <Route element={<SIngleJob/>} path="/view_job"/> 
         </Routes>
         </ClientProvider>
+        
         </AuthProvider>
       </Router>
     </div>

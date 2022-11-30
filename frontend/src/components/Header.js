@@ -2,16 +2,30 @@ import React, {useContext, useState} from 'react'
 import { Link } from 'react-router-dom'
 import AuthContext from '../context/AuthContext'
 import '../App.css'
+import { useNavigate } from 'react-router-dom'
 
 const Header = () => {
+    const Navigate = useNavigate();
     let {user, logoutUser} = useContext(AuthContext)
     const [isActive, setActive] = useState(false);
 
   const toggleClass = () => {
     setActive(!isActive);
   };
+
+  let redirectt = (e) => {
+    e.preventDefault()
+    if (user.is_freelancer === true){
+        Navigate('/freelancer')
+    }
+    else{
+        Navigate('/')
+        console.log('else worked');
+    }
+  }
     return (
 <div>
+
 
 <header id="header-container" className="fullwidth dashboard-header not-sticky">
 
@@ -21,13 +35,13 @@ const Header = () => {
         <div className="left-side"> 
             
             <div id="logo">
-                <Link to='/'><img src="images/logo.png" alt="" /></Link>
+                <Link onClick={redirectt}><img src="images/logo.png" alt="" /></Link>
             </div>
 
             <nav id="navigation">
                 <ul id="responsive">
 
-                    <li><Link to='/'> Home</Link>
+                    <li><Link onClick={redirectt}> Home</Link>
                         
                     </li>
 
@@ -38,15 +52,25 @@ const Header = () => {
                     <li><a href="#">Blog</a>
                         
                     </li>
+                    {user?.is_freelancer ? 
+                    (
+                    <li><Link to= '/list_job'>View Jobs</Link></li>
+                    )
+                    :
+                    (
+                    <li><Link to= '/post_job'>Post Job </Link></li>
+                    )
+                    }
 
-                    <li><a href="#">Post Job</a>
-                    {/* <li><a href="#" className="current">Dashboard</a> */}
-                        
-                    </li>
-
-                    <li><a href="#">Contact</a>
-                        
-                    </li>
+                    {user?.is_freelancer ? 
+                    (
+                    <li><Link to='/post_service'>Post Service</Link></li>
+                    )
+                    :
+                    (
+                    <li><a href="#">Contact </a></li>
+                    )
+                    }
 
                 </ul>
             </nav>

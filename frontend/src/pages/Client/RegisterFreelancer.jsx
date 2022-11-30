@@ -1,6 +1,6 @@
 import React,{  useContext, useEffect, useState } from 'react'
-import Header from '../components/Header'
-import AuthContext from '../context/AuthContext';
+import Header from '../../components/Header'
+import AuthContext from '../../context/AuthContext';
 import axios from "axios"
 
 const RegisterFreelancer = () => {
@@ -75,7 +75,7 @@ const uploadData=(e)=>{
     }
     console.log(formSent,'formmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm')
 //    const Authorization=`Bearer ${token.access}`
-  axios.post("http://127.0.0.1:8000/api/becomeseller/",formSent).then((response)=>{
+  axios.post("/api/becomeseller/",formSent).then((response)=>{
     console.log(response.status,'jjjjjjjjjjjjjjjjjjjjj')
            
             console.log('hhhhhhhhhhhhhhhhhhhhhhhh')
@@ -121,7 +121,7 @@ const uploadData=(e)=>{
   return (
     <>
     <Header />
-    <div class="margin-top-70"></div>
+    <div className="margin-top-70"></div>
 
     <div className="dashboard-container">
 

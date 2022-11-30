@@ -43,6 +43,7 @@ class NewUser(AbstractBaseUser, PermissionsMixin):
     about = models.TextField(('about'), max_length=500, blank=True)
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
+    is_freelancer = models.BooleanField(default=False,null=True)
 
     objects = CustomAccountManager()
 

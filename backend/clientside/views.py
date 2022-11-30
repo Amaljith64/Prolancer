@@ -11,7 +11,6 @@ import json
 
 # Create your views here.
 
-
 class CategoryView(APIView):
     def get(self,request):
         category = Category.objects.all()
@@ -23,7 +22,7 @@ class ClientJobPosting(APIView):
     def get(self,request):
         jobs = ClientJobs.objects.all()
         jobserialize = ClientJobSerializer(jobs,many = True)
-        return Response (200)
+        return Response (jobserialize.data)
     def post(self,request):
         data=request.data
         print(data['img'],'iiiiiiiiiiiiiiiiiiiii')

@@ -4,3 +4,32 @@
 .validationerror{
     color: #de5959;
 }
+
+.photo-box-custom {
+	height: 200px;
+	display: block;
+	background-size: cover;
+	background-position: 100%;
+	
+    background-repeat: no-repeat;
+}
+
+.photo-box:before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	background: #333;
+	opacity: 0.5;
+	border-radius: 4px;
+	transition: 0.4s;
+}
+.card-image{
+    width: 30px;
+    max-width: 100%;
+    border-radius: 50%;
+    vertical-align: inherit;
+    border-style: none;
+}

@@ -94,11 +94,6 @@ function SignupPage() {
 					<button className="button full-width button-sliding-icon ripple-effect margin-top-10" type="submit" >Register <i className="icon-material-outline-arrow-right-alt"></i></button>
 				</form>
 				
-
-
-				
-
-
 				<div className="social-login-separator"><span>or</span></div>
 				<div className="social-login-buttons">
 					<button className="facebook-login ripple-effect"><i className="icon-brand-facebook-f"></i> Register via Facebook</button>

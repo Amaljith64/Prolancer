@@ -16,8 +16,9 @@ export const AuthProvider = ({children}) => {
     const Navigate = useNavigate();
 
     let loginUser = async (e )=> {
+        console.log('login called.......')
         e.preventDefault()
-        let response = await fetch('http://127.0.0.1:8000/api/token/', {
+        let response = await fetch('/api/token/', {
             method:'POST',
             headers:{
                 'Content-Type':'application/json'
@@ -30,14 +31,21 @@ export const AuthProvider = ({children}) => {
             setAuthTokens(data)
             setUser(jwt_decode(data.access))
             localStorage.setItem('authTokens', JSON.stringify(data))
-            Navigate('/')
+            if ((jwt_decode(data.access)).is_freelancer)
+                Navigate('/freelancer')
+            else
+                Navigate('/')
+
+        
         }else{
             alert('Something went wrong!')
         }
     }
 
 
+
     let logoutUser = () => {
+        console.log('logout completed........')
         setAuthTokens(null)
         setUser(null)
         localStorage.removeItem('authTokens')
@@ -45,8 +53,9 @@ export const AuthProvider = ({children}) => {
     }
 
     let userSignup = async (e)=>{
+        console.log('signup called..........')
     
-        let response = await axios.post("http://127.0.0.1:8000/api/signup/",
+        let response = await axios.post("/api/signup/",
         {'username':e.name, 'email':e.email, 'password':e.password})
         
       

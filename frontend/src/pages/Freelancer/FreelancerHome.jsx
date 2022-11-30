@@ -1,25 +1,23 @@
 import React, {useState, useEffect, useContext} from 'react'
-import AuthContext from '../context/AuthContext'
-import useAxios from '../utils/useAxios'
+import AuthContext from '../../context/AuthContext'
+import useAxios from '../../utils/useAxios'
 import axios from 'axios';
-import Header from '../components/Header'
-import background from '../assets/images/image.jpg'
-
+import Header from '../../components/Header'
+import background from '../../assets/images/image.jpg'
+import { Link } from 'react-router-dom'
 const HomePage = () => {
 
     const [category,setCategory] = useState([])
+    const [job,setJob] = useState([])
     let {authTokens, logoutUser} = useContext(AuthContext)
 
     let api = useAxios()
 
     useEffect(() => {
-        axios
-          .get("http://127.0.0.1:8000/")
-          .then((response) => setCategory(response.data));
+        axios.get("client/").then((response) => setCategory(response.data));
+        axios.get("client/postjob/").then((response) =>setJob(response.data));
       }, []);
 
-   
-    console.log(category)
 
     return (
         <div>
@@ -27,7 +25,6 @@ const HomePage = () => {
             <div className="intro-banner dark-overlay" style={{
     
                 backgroundImage: `url(${background})`}}>
-
 <div className="transparent-header-spacer"></div>
 
 <div className="container">
@@ -36,14 +33,13 @@ const HomePage = () => {
         <div className="col-md-12">
             <div className="banner-headline">
                 <h3>
-                    <strong>Hire experts freelancers for any job, any time.</strong>
+                    <strong>Free  Hire experts freelancers for any job, any time.</strong>
                     <br/>
                     <span>Huge community of designers, developers and creatives ready for your project.</span>
                 </h3>
             </div>
         </div>
     </div>
-
 
     <div className="row">
         <div className="col-md-12">
@@ -55,29 +51,12 @@ const HomePage = () => {
                 </div>
 
                 
-                {/* <div className="intro-search-field">
-                    <select className="selectpicker default" multiple data-selected-text-format="count" data-size="7" title="All Categories" >
-                        <option>Admin Support</option>
-                        <option>Customer Service</option>
-                        <option>Data Analytics</option>
-                        <option>Design & Creative</option>
-                        <option>Legal</option>
-                        <option>Software Developing</option>
-                        <option>IT & Networking</option>
-                        <option>Writing</option>
-                        <option>Translation</option>
-                        <option>Sales & Marketing</option>
-                    </select>
-                </div> */}
-
-                
                 <div className="intro-search-button">
                     <button className="button ripple-effect">Search</button>
                 </div>
             </div>
         </div>
     </div>
-
     
     <div className="row">
         <div className="col-md-12">
@@ -97,97 +76,58 @@ const HomePage = () => {
             </ul>
         </div>
     </div>
-
 </div>
 </div>
-
-
-<div className="section margin-top-65 margin-bottom-30">
-<div className="container">
-    <div className="row">
-
-        
-        <div className="col-xl-12">
-            <div className="section-headline centered margin-top-0 margin-bottom-45">
-                <h3>Popular Categories</h3>
-            </div>
-        </div>
-        {category.map((data, id) => {
-            return(
-
-        <div className="col-xl-3 col-md-6">
-            
-            <a href="jobs-list-layout-1.html" className="photo-box small" style={{backgroundImage: `url(http://localhost:8000${data.category_image})`}}>
-                <div className="photo-box-content">
-                    <h3>{data.category_name}</h3>
-                    <span>612</span>
-                </div>
-            </a>
-        </div>
-            )})}
-        
-
-    </div>
-</div>
-</div>
-
-
-
-
 
 <div className="section gray margin-top-45 padding-top-65 padding-bottom-75">
-<div className="container">
+<div className="container" style={{ maxWidth :"1393px"}}>
     <div className="row">
-        <div className="col-xl-12">
-            
-            
-            <div className="section-headline margin-top-0 margin-bottom-35">
-                <h3>Recent Tasks</h3>
-                <a href="tasks-list-layout-1.html" className="headline-link">Browse All Tasks</a>
-            </div>
-            
-            
-            <div className="tasks-list-container compact-list margin-top-35">
-                    
-                
-                <a href="single-task-page.html" className="task-listing">
+    <div className="col-xl-12">
+							
+				<div className="section-headline margin-top-0 margin-bottom-35">
+					<h3>Recent Tasks</h3>
+					<a href="tasks-list-layout-1.html" className="headline-link">Browse All Tasks</a>
+				</div>
+                {job.map((data, id) => {
+                return(
+								
+				<div key={id} className="tasks-list-container compact-list margin-top-35">
+					
+					<a href="single-task-page.html" className="task-listing">
 
-                    
-                    <div className="task-listing-details">
+						
+						<div className="task-listing-details">
 
-                        
-                        <div className="task-listing-description">
-                            <h3 className="task-listing-title">Food Delviery Mobile App</h3>
-                            <ul className="task-icons">
-                                <li><i className="icon-material-outline-location-on"></i> San Francisco</li>
-                                <li><i className="icon-material-outline-access-time"></i> 2 minutes ago</li>
-                            </ul>
-                            <div className="task-tags margin-top-15">
-                                <span>iOS</span>
-                                <span>Android</span>
-                                <span>mobile apps</span>
-                                <span>design</span>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div className="task-listing-bid">
-                        <div className="task-listing-bid-inner">
-                            <div className="task-offers">
-                                <strong>$1,000 - $2,500</strong>
-                                <span>Fixed Price</span>
-                            </div>
-                            <span className="button button-sliding-icon ripple-effect">Bid Now <i className="icon-material-outline-arrow-right-alt"></i></span>
-                        </div>
-                    </div>
-                </a>
-
-            </div>
-
+							
+							<div className="task-listing-description">
+								<h3 className="task-listing-title">{data.job_title}</h3>
+								<ul className="task-icons">
+									<li><i className="icon-material-outline-location-on"></i> San Francisco</li>
+									<li><i className="icon-material-outline-access-time"></i> 2 minutes ago</li>
+								</ul>
+								<div className="task-tags margin-top-15">
+									<span>iOS</span>
+									<span>Android</span>
+									<span>mobile apps</span>
+									<span>design</span>
+								</div>
+							</div>
+						</div>
+						<div className="task-listing-bid">
+							<div className="task-listing-bid-inner">
+								<div className="task-offers">
+									<strong>$1,000 - $2,500</strong>
+									<span>Fixed Price</span>
+								</div>
+								<span className="button button-sliding-icon ripple-effect">Bid Now <i className="icon-material-outline-arrow-right-alt"></i></span>
+							</div>
+						</div>
+					</a>	
+				</div>	
+                )})}
+			</div>      
         </div>
     </div>
-</div>
 </div>
 
 <div className="section padding-top-65 padding-bottom-65">
