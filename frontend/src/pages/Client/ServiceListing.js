@@ -1,15 +1,11 @@
 import React from 'react'
 import Header from '../../components/Header'
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import Footer from '../../components/Footer';
+
 
 const JobListing = () => {
-
-const joblist = useSelector((state) => state.jobList);
-const { jobpost,jobposterror } = joblist;
-
-    return (
+    
+  return (
     <>
     <Header/>
     <div className="margin-top-70"></div>
@@ -62,6 +58,43 @@ const { jobpost,jobposterror } = joblist;
                 </select>
             </div>
             
+            
+            <div className="sidebar-widget">
+                <h3>Job Type</h3>
+
+                <div className="switches-list">
+                    <div className="switch-container">
+                        <label className="switch"><input type="checkbox" /><span className="switch-button"></span> Freelance</label>
+                    </div>
+
+                    <div className="switch-container">
+                        <label className="switch"><input type="checkbox" /><span className="switch-button"></span> Full Time</label>
+                    </div>
+
+                    <div className="switch-container">
+                        <label className="switch"><input type="checkbox" /><span className="switch-button"></span> Part Time</label>
+                    </div>
+
+                    <div className="switch-container">
+                        <label className="switch"><input type="checkbox" /><span className="switch-button"></span> Internship</label>
+                    </div>
+                    <div className="switch-container">
+                        <label className="switch"><input type="checkbox" /><span className="switch-button"></span> Temporary</label>
+                    </div>
+                </div>
+
+            </div>
+
+            
+            <div className="sidebar-widget">
+                <h3>Salary</h3>
+                <div className="margin-top-55"></div>
+
+                
+                <input className="range-slider" type="text" value="" data-slider-currency="$" data-slider-min="1500" data-slider-max="15000" data-slider-step="100" data-slider-value="[1500,15000]"/>
+            </div>
+
+            
             <div className="sidebar-widget">
                 <h3>Tags</h3>
 
@@ -110,33 +143,44 @@ const { jobpost,jobposterror } = joblist;
     </div>
 </div>
 </div>
-  
 
 
 
 <div className="full-page-content-container" data-simplebar>
     <div className="full-page-content-inner">
 
-        <h3 className="page-title">Jobs Available</h3>
+        <h3 className="page-title">Search Results</h3>
 
-        
-        {jobpost.map((data,id) => {
-            return (
+        <div className="notify-box margin-top-15">
+            <div className="switch-container">
+                <label className="switch"><input type="checkbox"/><span className="switch-button"></span><span className="switch-text">Turn on email alerts for this search</span></label>
+            </div>
 
-        <div key={data.id} className="listings-container grid-layout margin-top-35">
+            <div className="sort-by">
+                <span>Sort by:</span>
+                <select className="selectpicker hide-tick">
+                    <option>Relevance</option>
+                    <option>Newest</option>
+                    <option>Oldest</option>
+                    <option>Random</option>
+                </select>
+            </div>
+        </div>
+
+        <div className="listings-container grid-layout margin-top-35">
             
-				<Link to={`/view_job/${data.id}`} className="blog-post">
+				<Link to="pages-blog-post.html" className="blog-post">
 					
 					<div className="blog-post-thumbnail">
 						<div className="blog-post-thumbnail-inner">
 							<span className="blog-item-tag">Tips</span>
-							<img src={data.img} alt=""/>
+							<img src="images/blog-01a.jpg" alt=""/>
 						</div>
 					</div>
 					
 					<div className="blog-post-content">
 						<span className="blog-post-date">22 July 2019</span>
-						<h3>{data.job_title}</h3>
+						<h3>16 Ridiculously Easy Ways to Find & Keep a Remote Job</h3>
 						<p>Efficiently myocardinate market-driven innovation via open-source alignments. Dramatically engage high-payoff infomediaries rather than. </p>
 					</div>
 					
@@ -147,7 +191,6 @@ const { jobpost,jobposterror } = joblist;
             
 
         </div>
-        )})}
 
         
         <div className="clearfix"></div>
@@ -163,19 +206,46 @@ const { jobpost,jobposterror } = joblist;
                 </ul>
             </nav>
         </div>
-       
+        <div className="clearfix"></div>
         
 
         
-        
+        <div className="small-footer margin-top-15">
+            <div className="small-footer-copyrights">
+                © 2019 <strong>Hireo</strong>. All Rights Reserved.
+            </div>
+            <ul className="footer-social-links">
+                <li>
+                    <Link to="#" title="Facebook" data-tippy-placement="top">
+                        <i className="icon-brand-facebook-f"></i>
+                    </Link>
+                </li>
+                <li>
+                    <Link to="#" title="Twitter" data-tippy-placement="top">
+                        <i className="icon-brand-twitter"></i>
+                    </Link>
+                </li>
+                <li>
+                    <Link to="#" title="Google Plus" data-tippy-placement="top">
+                        <i className="icon-brand-google-plus-g"></i>
+                    </Link>
+                </li>
+                <li>
+                    <Link to="#" title="LinkedIn" data-tippy-placement="top">
+                        <i className="icon-brand-linkedin-in"></i>
+                    </Link>
+                </li>
+            </ul>
+            <div className="clearfix"></div>
+        </div>
         
 
     </div>
 </div>
 
 
-</div>      
-{/* <Footer /> */}
+</div>
+      
     </>
   )
 }

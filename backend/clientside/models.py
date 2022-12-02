@@ -29,7 +29,19 @@ class ClientJobs(models.Model):
     skill_required = models.CharField(max_length=225)
     job_description = models.TextField()
     img = models.ImageField(upload_to='image',null=True)
+    jobtime = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.job_title
+
+class Bids(models.Model):
+    clientjob = models.ForeignKey(ClientJobs,on_delete=models.CASCADE)
+    user = models.ForeignKey(NewUser,on_delete=models.CASCADE)
+    bidrate = models.IntegerField()
+    daysrequired = models.IntegerField()
+    bidtime = models.DateTimeField(auto_now_add=True)
+
+    
+
+
     

@@ -29,8 +29,6 @@ function SignupPage() {
     };
   return (
       <div>
-        <Header/>
-		<div className="margin-top-70"></div>
 		
         <div id="titlebar" className="gradient">
 	<div className="container">
@@ -95,10 +93,11 @@ function SignupPage() {
 				</form>
 				
 				<div className="social-login-separator"><span>or</span></div>
-				<div className="social-login-buttons">
-					<button className="facebook-login ripple-effect"><i className="icon-brand-facebook-f"></i> Register via Facebook</button>
-					<button className="google-login ripple-effect"><i className="icon-brand-google-plus-g"></i> Register via Google+</button>
-				</div>
+				<div className="social-login-buttons" style={{justifyContent: 'center'}}>
+							
+							<button className="google-login ripple-effect"><i className="icon-brand-google-plus-g"></i> Log In
+								via Google+</button>
+						</div>
 			</div>
 		</div>
 	</div>

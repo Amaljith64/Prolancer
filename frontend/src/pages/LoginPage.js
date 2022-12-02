@@ -8,8 +8,7 @@ const LoginPage = () => {
     
     return (
       
-        <div id="wrapper">
-            <Header />
+        <div>
         <div id="titlebar" className="gradient">
 			<div className="container">
 				<div className="row">
@@ -45,15 +44,14 @@ const LoginPage = () => {
 								<input type="password" className="input-text with-border" name="password" id="password"
 									placeholder="Password" required />
 							</div>
-							<Link className="forgot-password">Forgot Password?</Link>
+							{/* <Link className="forgot-password">Forgot Password?</Link> */}
 						</form>
 						<button className="button full-width button-sliding-icon ripple-effect margin-top-10" type="submit"
 							form="login-form">Log In <i className="icon-material-outline-arrow-right-alt"></i></button>
 
 						<div className="social-login-separator"><span>or</span></div>
-						<div className="social-login-buttons">
-							<button className="facebook-login ripple-effect"><i className="icon-brand-facebook-f"></i> Log In
-								via Facebook</button>
+						<div className="social-login-buttons" style={{justifyContent: 'center'}}>
+							
 							<button className="google-login ripple-effect"><i className="icon-brand-google-plus-g"></i> Log In
 								via Google+</button>
 						</div>
@@ -61,7 +59,7 @@ const LoginPage = () => {
 				</div>
 			</div>
 		</div>
-        <div className="margin-top-70"></div>
+       
         </div>
   
        

@@ -86,14 +86,14 @@ const HomePage = () => {
 							
 				<div className="section-headline margin-top-0 margin-bottom-35">
 					<h3>Recent Tasks</h3>
-					<Link to="tasks-list-layout-1.html" className="headline-link">Browse All Tasks</Link>
+					<Link to="/list_job" className="headline-link">Browse All Tasks</Link>
 				</div>
                 {job.map((data, id) => {
                 return(
 								
-				<div key={id} className="tasks-list-container compact-list margin-top-35">
+				<div key={data.id} className="tasks-list-container compact-list margin-top-35">
 					
-					<Link to="single-task-page.html" className="task-listing">
+					<Link to={`/view_job/${data.id}`} className="task-listing">
 
 						
 						<div className="task-listing-details">
@@ -103,20 +103,17 @@ const HomePage = () => {
 								<h3 className="task-listing-title">{data.job_title}</h3>
 								<ul className="task-icons">
 									<li><i className="icon-material-outline-location-on"></i> San Francisco</li>
-									<li><i className="icon-material-outline-access-time"></i> 2 minutes ago</li>
+									<li><i className="icon-material-outline-access-time"></i> {data.jobtime.slice(0,10)}</li>
 								</ul>
 								<div className="task-tags margin-top-15">
-									<span>iOS</span>
-									<span>Android</span>
-									<span>mobile apps</span>
-									<span>design</span>
+                                <p> <b>{data.job_description.slice(0,30)}</b></p>
 								</div>
 							</div>
 						</div>
 						<div className="task-listing-bid">
 							<div className="task-listing-bid-inner">
 								<div className="task-offers">
-									<strong>$1,000 - $2,500</strong>
+									<strong>${data.min_budget} - ${data.max_budget}</strong>
 									<span>Fixed Price</span>
 								</div>
 								<span className="button button-sliding-icon ripple-effect">Bid Now <i className="icon-material-outline-arrow-right-alt"></i></span>

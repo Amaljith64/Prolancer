@@ -2,7 +2,11 @@ import {configureStore} from '@reduxjs/toolkit'
 import thunk from 'redux-thunk'
 import { combineReducers, applyMiddleware } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
-import {categoryReducer} from './reducers/postReducers'
+import {
+    categoryReducer,
+    jobpostReducer,
+    singlejobpostReducer
+    } from './reducers/postReducers'
 import storage from 'redux-persist/lib/storage'
 import { persistReducer } from 'redux-persist'
 
@@ -14,7 +18,9 @@ const persistConfig = {
 }
 
 const reducers = combineReducers({
-    listCategory:categoryReducer
+    listCategory:categoryReducer,
+    jobList:jobpostReducer,
+    viewJob:singlejobpostReducer,
 })
 
 

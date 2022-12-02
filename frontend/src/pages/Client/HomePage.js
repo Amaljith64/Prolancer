@@ -7,25 +7,27 @@ import background from "../../assets/images/image.jpg";
 import { Link } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
-import { listcategory } from "../../actions/postActions";
+import { listcategory,listjobpost } from "../../actions/postActions";
+
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
+import Footer from "../../components/Footer";
 
 const HomePage = () => {
   const dispatch = useDispatch();
 
-  const [job, setJob] = useState([]);
-
-  useEffect(() => {
-    axios.get("client/postjob/").then((response) => setJob(response.data));
-  }, []);
-
-
   const categoryList = useSelector((state) => state.listCategory);
   const { loading,category,error} = categoryList;
 
+  const joblist = useSelector((state) => state.jobList);
+  const { jobpost,jobposterror} = joblist;
+
 
   useEffect(() => {
-    if (!category)
+    
       dispatch(listcategory());
+    
+      dispatch(listjobpost());
   }, []);
 
   return (
@@ -42,8 +44,7 @@ const HomePage = () => {
         className="intro-banner dark-overlay"
         style={{
           backgroundImage: `url(${background})`,
-        }}
-      >
+        }}>
         <div className="transparent-header-spacer"></div>
 
         <div className="container">
@@ -81,20 +82,7 @@ const HomePage = () => {
                   />
                 </div>
 
-                {/* <div className="intro-search-field">
-                    <select className="selectpicker default" multiple data-selected-text-format="count" data-size="7" title="All Categories" >
-                        <option>Admin Support</option>
-                        <option>Customer Service</option>
-                        <option>Data Analytics</option>
-                        <option>Design & Creative</option>
-                        <option>Legal</option>
-                        <option>Software Developing</option>
-                        <option>IT & Networking</option>
-                        <option>Writing</option>
-                        <option>Translation</option>
-                        <option>Sales & Marketing</option>
-                    </select>
-                </div> */}
+           
 
                 <div className="intro-search-button">
                   <button className="button ripple-effect">Search</button>
@@ -132,7 +120,7 @@ const HomePage = () => {
                 <h3>Popular Categories</h3>
               </div>
             </div>
-            {category.map((data, id) => {
+            {category?.map((data, id) => {
               return (
                 <div key={id} className="col-xl-3 col-md-6">
                   <Link to="jobs-list-layout-1.html"
@@ -163,7 +151,7 @@ const HomePage = () => {
               </div>
 
               <div className="freelancers-container freelancers-grid-layout margin-top-35">
-                {job.map((data, id) => {
+                {jobpost?.map((data, id) => {
                   return (
                     <div key={id} className="freelancer">
                       <div className="freelancer-overview">
@@ -285,55 +273,195 @@ const HomePage = () => {
         </div>
       </div>
 
-      <div className="section gray padding-top-70 padding-bottom-75">
-        <div className="container">
-          <div className="row">
-            <div className="col-xl-12">
-              <div className="counters-container">
-                <div className="single-counter">
-                  <i className="icon-line-awesome-suitcase"></i>
-                  <div className="counter-inner">
-                    <h3>
-                      <span className="counter">1,586</span>
-                    </h3>
-                    <span className="counter-title">Jobs Posted</span>
-                  </div>
+      
+
+<div className="section gray padding-top-65 padding-bottom-70">
+	<div className="container">
+  <Carousel
+        additionalTransfrom={0}
+        arrows
+        autoPlaySpeed={3000}
+        centerMode={false}
+        className=""
+        containerclassName="container-with-dots"
+        dotListclassName=""
+        draggable
+        focusOnSelect={false}
+        infinite
+        itemclassName=""
+        keyBoardControl
+        minimumTouchDrag={80}
+        pauseOnHover
+        renderArrowsWhenDisabled={false}
+        renderButtonGroupOutside={false}
+        renderDotsOutside={false}
+        responsive={{
+          desktop: {
+            breakpoint: {
+              max: 3000,
+              min: 1024
+            },
+            items: 3,
+            partialVisibilityGutter: 40
+          },
+          mobile: {
+            breakpoint: {
+              max: 464,
+              min: 0
+            },
+            items: 1,
+            partialVisibilityGutter: 30
+          },
+          tablet: {
+            breakpoint: {
+              max: 1024,
+              min: 464
+            },
+            items: 2,
+            partialVisibilityGutter: 30
+          }
+        }}
+        rewind={false}
+        rewindWithAnimation={false}
+        rtl={false}
+        shouldResetAutoplay
+        showDots={false}
+        sliderclassName=""
+        slidesToSlide={1}
+        swipeable
+      >
+        <div className="freelancer">			
+            <div className="freelancer-overview">
+              <div className="freelancer-overview-inner">
+              
+                <span className="bookmark-icon"></span>
+                
+                <div className="freelancer-avatar">
+                  <div className="verified-badge"></div>
+                  <a href="single-freelancer-profile.html"><img src="images/user-avatar-big-01.jpg" alt="" /></a>
                 </div>
 
-                <div className="single-counter">
-                  <i className="icon-line-awesome-legal"></i>
-                  <div className="counter-inner">
-                    <h3>
-                      <span className="counter">3,543</span>
-                    </h3>
-                    <span className="counter-title">Tasks Posted</span>
-                  </div>
+                <div className="freelancer-name">
+                  <h4><a href="single-freelancer-profile.html">Tom Smith <img className="flag" src="images/flags/gb.svg" alt="" title="United Kingdom" data-tippy-placement="top" /></a></h4>
+                  <span>UI/UX Designer</span>
                 </div>
 
-                <div className="single-counter">
-                  <i className="icon-line-awesome-user"></i>
-                  <div className="counter-inner">
-                    <h3>
-                      <span className="counter">2,413</span>
-                    </h3>
-                    <span className="counter-title">Active Members</span>
-                  </div>
-                </div>
-
-                <div className="single-counter">
-                  <i className="icon-line-awesome-trophy"></i>
-                  <div className="counter-inner">
-                    <h3>
-                      <span className="counter">99</span>%
-                    </h3>
-                    <span className="counter-title">Satisfaction Rate</span>
-                  </div>
+                <div className="freelancer-rating">
+                  <div className="star-rating" data-rating="5.0"></div>
                 </div>
               </div>
             </div>
-          </div>
+            <div className="freelancer-details">
+              <div className="freelancer-details-list">
+                <ul>
+                  <li>Location <strong><i className="icon-material-outline-location-on"></i> London</strong></li>
+                  <li>Rate <strong>$60 / hr</strong></li>
+                  <li>Job Success <strong>95%</strong></li>
+                </ul>
+              </div>
+              <a href="single-freelancer-profile.html" className="button button-sliding-icon ripple-effect">View Profile <i className="icon-material-outline-arrow-right-alt"></i></a>
+            </div>
         </div>
-      </div>
+        
+        
+      </Carousel>
+	</div>
+</div>
+
+<div className="section padding-top-60 padding-bottom-75">
+	<div className="container">
+		<div className="row">
+
+			<div className="col-xl-12">
+			
+				<div className="section-headline centered margin-top-0 margin-bottom-35">
+					<h3>Membership Plans</h3>
+				</div>
+			</div>
+
+
+			<div className="col-xl-12">
+
+			
+				<div className="billing-cycle-radios margin-bottom-70">
+					<div className="radio billed-monthly-radio">
+						<input id="radio-5" name="radio-payment-type" type="radio" checked />
+						<label for="radio-5"><span className="radio-label"></span> Billed Monthly</label>
+					</div>
+
+					<div className="radio billed-yearly-radio">
+						<input id="radio-6" name="radio-payment-type" type="radio" />
+						<label for="radio-6"><span className="radio-label"></span> Billed Yearly <span className="small-label">Save 10%</span></label>
+					</div>
+				</div>
+
+			
+				<div className="pricing-plans-container">
+
+				
+					<div className="pricing-plan">
+						<h3>Basic Plan</h3>
+						<p className="margin-top-10">One time fee for one listing or task highlighted in search results.</p>
+						<div className="pricing-plan-label billed-monthly-label"><strong>$19</strong>/ monthly</div>
+						<div className="pricing-plan-label billed-yearly-label"><strong>$205</strong>/ yearly</div>
+						<div className="pricing-plan-features">
+							<strong>Features of Basic Plan</strong>
+							<ul>
+								<li>1 Listing</li>
+								<li>30 Days Visibility</li>
+								<li>Highlighted in Search Results</li>
+							</ul>
+						</div>
+						<a href="pages-checkout-page.html" className="button full-width margin-top-20">Buy Now</a>
+					</div>
+
+				
+					<div className="pricing-plan recommended">
+						<div className="recommended-badge">Recommended</div>
+						<h3>Standard Plan</h3>
+						<p className="margin-top-10">One time fee for one listing or task highlighted in search results.</p>
+						<div className="pricing-plan-label billed-monthly-label"><strong>$49</strong>/ monthly</div>
+						<div className="pricing-plan-label billed-yearly-label"><strong>$529</strong>/ yearly</div>
+						<div className="pricing-plan-features">
+							<strong>Features of Standard Plan</strong>
+							<ul>
+								<li>5 Listings</li>
+								<li>60 Days Visibility</li>
+								<li>Highlighted in Search Results</li>
+							</ul>
+						</div>
+						<a href="pages-checkout-page.html" className="button full-width margin-top-20">Buy Now</a>
+					</div>
+
+				
+					<div className="pricing-plan">
+						<h3>Extended Plan</h3>
+						<p className="margin-top-10">One time fee for one listing or task highlighted in search results.</p>
+						<div className="pricing-plan-label billed-monthly-label"><strong>$99</strong>/ monthly</div>
+						<div className="pricing-plan-label billed-yearly-label"><strong>$1069</strong>/ yearly</div>
+						<div className="pricing-plan-features">
+							<strong>Features of Extended Plan</strong>
+							<ul>
+								<li>Unlimited Listings Listing</li>
+								<li>90 Days Visibility</li>
+								<li>Highlighted in Search Results</li>
+							</ul>
+						</div>
+						<a href="pages-checkout-page.html" className="button full-width margin-top-20">Buy Now</a>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+</div>
+
+
+
+<Footer />
+
+
     </div>
   );
 };

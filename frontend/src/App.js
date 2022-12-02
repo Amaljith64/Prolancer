@@ -10,10 +10,13 @@ import SignupPage from './pages/SignupPage';
 import Dashboard from './pages/Dashboard';
 import RegisterFreelancer from './pages/Client/RegisterFreelancer';
 import JobPosting from './pages/Client/JobPosting';
+import ServiceListing from './pages/Client/ServiceListing';
 import JobListing from './pages/Freelancer/JobListing';
 import SIngleJob from './pages/Freelancer/SIngleJob';
 import FreelancerHome from './pages/Freelancer/FreelancerHome';
 import FreelancerServicePost from './pages/Freelancer/FreelancerServicePost';
+import Upcoming from './pages/Upcoming';
+import Contact from './pages/Contact';
 
 
 function App() {
@@ -25,8 +28,12 @@ function App() {
           <Routes>
           
           <Route element={<HomePage/>} path="/" exact />
+          <Route element={<Upcoming/>} path="/upcomming"  />
           <Route element={<FreelancerHome/>} path="/freelancer"  />
           <Route element={<FreelancerServicePost/>} path="/post_service"  />
+          <Route element={<ServiceListing/>} path="/list_service"  />
+          <Route element={<Contact/>} path="/contact"  />
+          
 
           {/* <PrivateRoute element={<HomePage/>} path="/" exact/> */}
           <Route element={<LoginPage/>} path="/login"/> 
@@ -35,7 +42,7 @@ function App() {
           <Route element={<Dashboard/>} path="/dashboard"/> 
           <Route element={<JobPosting/>} path="/post_job"/> 
           <Route element={<JobListing/>} path="/list_job"/> 
-          <Route element={<SIngleJob/>} path="/view_job"/> 
+          <Route element={<SIngleJob/>} path="/view_job/:id"/> 
         </Routes>
         </ClientProvider>
         
