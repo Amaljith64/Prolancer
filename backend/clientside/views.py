@@ -36,15 +36,3 @@ class ClientJobPosting(APIView):
             return Response(status=status.HTTP_404_NOT_FOUND)
 
   
-
-
-# class GetCategory(viewsets.ModelViewSet):
-#     queryset = Category.objects.all()
-#     serializer_class = CategorySerializers
-
-#     def perform_create(self,serializer):
-#         serializer.is_valid(raise_exception = True)
-#         serializer.save()
-   
-
-

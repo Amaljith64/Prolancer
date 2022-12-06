@@ -5,7 +5,9 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import {
     categoryReducer,
     jobpostReducer,
-    singlejobpostReducer
+    singlejobpostReducer,
+    servicepostReducer,
+    singleservicepostReducer
     } from './reducers/postReducers'
 import storage from 'redux-persist/lib/storage'
 import { persistReducer } from 'redux-persist'
@@ -21,6 +23,8 @@ const reducers = combineReducers({
     listCategory:categoryReducer,
     jobList:jobpostReducer,
     viewJob:singlejobpostReducer,
+    serviceList:servicepostReducer,
+    viewService:singleservicepostReducer
 })
 
 

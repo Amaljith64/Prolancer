@@ -1,38 +1,50 @@
 import React, { useState, useEffect, useContext } from "react";
-import AuthContext from "../../context/AuthContext";
-import useAxios from "../../utils/useAxios";
-import axios from "axios";
+
 import Header from "../../components/Header";
 import background from "../../assets/images/image.jpg";
 import { Link } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
-import { listcategory,listjobpost } from "../../actions/postActions";
+import { listcategory,listservicepost } from "../../actions/postActions";
 
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import Footer from "../../components/Footer";
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const HomePage = () => {
+
+  const showToastMessage = () => {
+    console.log('toast')
+    toast.success('Success Notification !', {
+      position: toast.POSITION.BOTTOM_LEFT
+    });
+};
+
+  const notify = () => toast("Wow so easy!");
   const dispatch = useDispatch();
 
   const categoryList = useSelector((state) => state.listCategory);
   const { loading,category,error} = categoryList;
 
-  const joblist = useSelector((state) => state.jobList);
-  const { jobpost,jobposterror} = joblist;
+  const servicelist = useSelector((state) => state.serviceList);
+  const { servicepost,serviceposterror} = servicelist;
 
 
   useEffect(() => {
     
       dispatch(listcategory());
+
     
-      dispatch(listjobpost());
+      dispatch(listservicepost());
   }, []);
 
   return (
     <div>
       <Header />
+      <ToastContainer />
       <div className="margin-top-70"></div>
 
       {loading  ?  <h2>Loading...............</h2>
@@ -53,7 +65,7 @@ const HomePage = () => {
               <div className="banner-headline">
                 <h3>
                   <strong>
-                    Hire experts freelancers for any job, any time.
+                    HHire experts freelancers for any job, any time.
                   </strong>
                   <br />
                   <span>
@@ -118,6 +130,8 @@ const HomePage = () => {
             <div className="col-xl-12">
               <div className="section-headline centered margin-top-0 margin-bottom-45">
                 <h3>Popular Categories</h3>
+                <button onClick={notify}>click me</button>
+
               </div>
             </div>
             {category?.map((data, id) => {
@@ -151,7 +165,7 @@ const HomePage = () => {
               </div>
 
               <div className="freelancers-container freelancers-grid-layout margin-top-35">
-                {jobpost?.map((data, id) => {
+                {servicepost?.map((data, id) => {
                   return (
                     <div key={id} className="freelancer">
                       <div className="freelancer-overview">
@@ -178,7 +192,7 @@ const HomePage = () => {
                               />
                             </li>
                             <li>
-                              Name <strong>$6000000000 / hr</strong>
+                            {data.service_title} <strong>${data.service_title}/ hr</strong>
                             </li>
                             <li>
                               <div className="freelancer-rating">
@@ -189,7 +203,7 @@ const HomePage = () => {
                               </div>
                             </li>
                           </ul>
-                          <p>Efficiently unlasdasdasdasdaasdd</p>
+                          <p>{data.service_title}</p>
                         </div>
                         <Link to="single-freelancer-profile.html"
                           className="button button-sliding-icon ripple-effect"
@@ -385,13 +399,13 @@ const HomePage = () => {
 			
 				<div className="billing-cycle-radios margin-bottom-70">
 					<div className="radio billed-monthly-radio">
-						<input id="radio-5" name="radio-payment-type" type="radio" checked />
-						<label for="radio-5"><span className="radio-label"></span> Billed Monthly</label>
+						<input id="radio-5" name="radio-payment-type" type="radio" defaultChecked />
+						<label htmlFor="radio-5"><span className="radio-label"></span> Billed Monthly</label>
 					</div>
 
 					<div className="radio billed-yearly-radio">
 						<input id="radio-6" name="radio-payment-type" type="radio" />
-						<label for="radio-6"><span className="radio-label"></span> Billed Yearly <span className="small-label">Save 10%</span></label>
+						<label htmlFor="radio-6"><span className="radio-label"></span> Billed Yearly <span className="small-label">Save 10%</span></label>
 					</div>
 				</div>
 

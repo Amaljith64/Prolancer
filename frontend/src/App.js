@@ -17,6 +17,7 @@ import FreelancerHome from './pages/Freelancer/FreelancerHome';
 import FreelancerServicePost from './pages/Freelancer/FreelancerServicePost';
 import Upcoming from './pages/Upcoming';
 import Contact from './pages/Contact';
+import SingleService from './pages/Client/SingleService';
 
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
           <Route element={<FreelancerHome/>} path="/freelancer"  />
           <Route element={<FreelancerServicePost/>} path="/post_service"  />
           <Route element={<ServiceListing/>} path="/list_service"  />
+          <Route element={<SingleService/>} path="/single_service/:id"/>
           <Route element={<Contact/>} path="/contact"  />
           
 

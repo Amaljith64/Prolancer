@@ -18,9 +18,7 @@ const { jobpost,jobposterror } = joblist;
 
 <div className="full-page-sidebar">
     <div className="full-page-sidebar-inner" data-simplebar>
-        <div className="sidebar-container">
-            
-            
+        <div className="sidebar-container">   
             <div className="sidebar-widget">
                 <h3>Location</h3>
                 <div className="input-with-icon">
@@ -29,10 +27,7 @@ const { jobpost,jobposterror } = joblist;
                     </div>
                     <i className="icon-material-outline-location-on"></i>
                 </div>
-            </div>
-
-            
-            
+            </div> 
             <div className="sidebar-widget">
                 <h3>Keywords</h3>
                 <div className="keywords-container">
@@ -43,9 +38,7 @@ const { jobpost,jobposterror } = joblist;
                     <div className="keywords-list">
                     <div className="clearfix"></div>
                 </div>
-            </div>
-            
-            
+            </div>            
             <div className="sidebar-widget">
                 <h3>Category</h3>
                 <select className="selectpicker default" multiple data-selected-text-format="count" data-size="7" title="All Categories" >
@@ -60,69 +53,21 @@ const { jobpost,jobposterror } = joblist;
                     <option>Translation</option>
                     <option>Sales & Marketing</option>
                 </select>
-            </div>
-            
-            <div className="sidebar-widget">
-                <h3>Tags</h3>
-
-                <div className="tags-container">
-                    <div className="tag">
-                        <input type="checkbox" id="tag1"/>
-                        <label for="tag1">front-end dev</label>
-                    </div>
-                    <div className="tag">
-                        <input type="checkbox" id="tag2"/>
-                        <label for="tag2">angular</label>
-                    </div>
-                    <div className="tag">
-                        <input type="checkbox" id="tag3"/>
-                        <label for="tag3">react</label>
-                    </div>
-                    <div className="tag">
-                        <input type="checkbox" id="tag4"/>
-                        <label for="tag4">vue js</label>
-                    </div>
-                    <div className="tag">
-                        <input type="checkbox" id="tag5"/>
-                        <label for="tag5">web apps</label>
-                    </div>
-                    <div className="tag">
-                        <input type="checkbox" id="tag6"/>
-                        <label for="tag6">design</label>
-                    </div>
-                    <div className="tag">
-                        <input type="checkbox" id="tag7"/>
-                        <label for="tag7">wordpress</label>
-                    </div>
-                </div>
-                <div className="clearfix"></div>
-            </div>
-
-        </div>
-        
-
-        
+            </div>           
+        </div>      
         <div className="sidebar-search-button-container">
             <button className="button ripple-effect">Search</button>
         </div>
-        
-
     </div>
 </div>
 </div>
   
 
-
-
 <div className="full-page-content-container" data-simplebar>
     <div className="full-page-content-inner">
-
         <h3 className="page-title">Jobs Available</h3>
-
-        
         {jobpost.map((data,id) => {
             return (
-
         <div key={data.id} className="listings-container grid-layout margin-top-35">
             
 				<Link to={`/view_job/${data.id}`} className="blog-post">
@@ -133,7 +78,6 @@ const { jobpost,jobposterror } = joblist;
 							<img src={data.img} alt=""/>
 						</div>
 					</div>
-					
 					<div className="blog-post-content">
 						<span className="blog-post-date">22 July 2019</span>
 						<h3>{data.job_title}</h3>
@@ -142,14 +86,8 @@ const { jobpost,jobposterror } = joblist;
 					
 					<div className="entry-icon"></div>
 				</Link>
-
-            
-            
-
         </div>
-        )})}
-
-        
+        )})} 
         <div className="clearfix"></div>
         <div className="pagination-container margin-top-20 margin-bottom-20">
             <nav className="pagination">
@@ -162,21 +100,12 @@ const { jobpost,jobposterror } = joblist;
                     <li className="pagination-arrow"><Link to="#" className="ripple-effect"><i className="icon-material-outline-keyboard-arrow-right"></i></Link></li>
                 </ul>
             </nav>
-        </div>
-       
-        
-
-        
-        
-        
-
+        </div> 
     </div>
 </div>
-
-
 </div>      
 {/* <Footer /> */}
-    </>
+</>
   )
 }
 

@@ -15,7 +15,7 @@ const Header = () => {
 
   let redirectt = (e) => {
     e.preventDefault()
-    if (user.is_freelancer === true){
+    if (user?.is_freelancer === true){
         Navigate('/freelancer')
     }
     else{
@@ -124,10 +124,10 @@ const Header = () => {
                                 <div className="user-avatar status-online"><img src="/images/user-avatar-small-01.jpg" alt="" /></div>
                                 <div className="user-name">
                                 {user &&  <span>Hello <strong> {user.username}</strong></span>}
-                                {user.is_freelancer ? (<p>Freelancer</p>) : (<p>User</p>)}
+                                {user?.is_freelancer ? (<p>Freelancer</p>) : (<p>User</p>)}
                                 </div>
                             </div>
-                            {user.is_freelancer ? 
+                            {user?.is_freelancer ? 
                             (
                            
                             <div className="" id="snackbar-user-status">

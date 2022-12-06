@@ -14,7 +14,9 @@ class FreelanceServicePosting(APIView):
     def get(self,request):
         service = FreelancerService.objects.all()
         serviceserializer = FreelancerServiceSerializer(service,many = True)
+        
         return Response (serviceserializer.data)
+    
     def post(self,request):
         data=request.data
         print(data['img'],'iiiiiiiiiiiiiiiiiiiii')
@@ -30,17 +32,13 @@ class FreelanceServicePosting(APIView):
 class FreelanceServiceView(APIView):
     def get(self,request,id):
         print(id)
-        data ={}
+
         service = ClientJobs.objects.get(id=id)
         bids = Bids.objects.filter(clientjob=id)
         listservice = ClientJobViewSerializer(service)
         listbids = BidViewSerializer(bids,many=True)
-        
-      
-        print(data,'kkkkkkkkkkkkk')
 
-        if listservice:
-            
+        if listservice:            
             return Response ({'service' :listservice.data,
             'bids': listbids.data },status=200)
         else:

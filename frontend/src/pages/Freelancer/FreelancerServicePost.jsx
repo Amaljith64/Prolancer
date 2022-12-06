@@ -74,7 +74,7 @@ function FreelancerServicePost() {
 					<ul>
 						<li><Link to="#">Home</Link></li>
 						<li><Link to="#">Dashboard</Link></li>
-						<li>Post a Job</li>
+						<li>Post Service</li>
 					</ul>
 				</nav>
 
@@ -179,7 +179,7 @@ function FreelancerServicePost() {
                                         <small className="validationerror">{errors?.service_description && errors.service_description.message}</small> <br />
                                         <div className="uploadButton margin-top-30">
 											<input className="uploadButton-input" type="file" accept="image/*, application/pdf" id="upload" multiple name='img' {...register('img', postService.img)}/>
-											<label className="uploadButton-button ripple-effect" for="upload">Upload Files</label>
+											<label className="uploadButton-button ripple-effect" htmlFor="upload">Upload Files</label>
 											<span className="uploadButton-file-name">Images or documents that might be helpful in describing your project</span>
 										</div>
 											<small className="validationerror">{errors?.img && errors.img.message}</small>

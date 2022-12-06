@@ -2,7 +2,7 @@ import React,{useContext,useState , useEffect} from 'react'
 import Header from '../../components/Header'
 import Form from 'react-bootstrap/Form';
 import 'react-tabs/style/react-tabs.css';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from 'react-router-dom'
 import { Singlejobpost } from "../../actions/postActions";
@@ -10,12 +10,16 @@ import Footer from '../../components/Footer';
 import axios from 'axios';
 import AuthContext from '../../context/AuthContext';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const SIngleJob = () => {
 const dispatch = useDispatch();
+const navigate = useNavigate()
 
 let { id } = useParams()
-
+const [reload,setReload] = useState()
 const [quantity, setQuantity] = useState(0)
 function increment() {
     //setCount(prevCount => prevCount+=1);
@@ -52,17 +56,26 @@ const { singlejobpost,singlejobposterror } = viewjob;
 useEffect(() => {
     
 	dispatch(Singlejobpost(id));
-},[]);
+	
+
+},[reload]);
 
 
 const submitHandler=(e)=>{
+	e.preventDefault()
+	toast("Wow so easy!")
+	console.log('toast submit')
 	axios.post('/freelancer/sentbid/',{
 		'clientjob': parseInt(id) ,
 		'user': user.user_id,
 		
 		"bidrate":e.target.bidrate.value,
 		"daysrequired":e.target.daysrequired.value
-	})
+	},	
+	)
+	setReload(!reload)
+	
+	  console.log('toast submit')
 }
 
 const tosplit = singlejobpost?.service.skill_required
@@ -71,6 +84,7 @@ const bids = singlejobpost?.bids
   return (
     <>
     <Header />
+	<ToastContainer />
     <div className="margin-top-70"></div>
     
 <div className="single-page-header" data-background-image="/images/single-job.jpg">

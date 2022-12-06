@@ -5,25 +5,37 @@ import axios from 'axios';
 import Header from '../../components/Header'
 import background from '../../assets/images/image.jpg'
 import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from "react-redux";
+import { listcategory,listjobpost } from "../../actions/postActions";
+
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 const HomePage = () => {
+    const dispatch = useDispatch();
 
-    const [category,setCategory] = useState([])
-    const [job,setJob] = useState([])
-    let {authTokens, logoutUser} = useContext(AuthContext)
 
-    let api = useAxios()
+    const categoryList = useSelector((state) => state.listCategory);
+    const { loading,category,error} = categoryList;
+
+    const servicelist = useSelector((state) => state.serviceList);
+    const { servicepost,serviceposterror} = servicelist;
+
+    const joblist = useSelector((state) => state.jobList);
+    const { jobpost,jobposterror} = joblist;
 
     useEffect(() => {
-        axios.get("client/").then((response) => setCategory(response.data));
-        axios.get("client/postjob/").then((response) =>setJob(response.data));
+        dispatch(listcategory());
+        dispatch(listjobpost());
       }, []);
-
 
     return (
         <div>
             <Header />
+            <ToastContainer />
             <div className="intro-banner dark-overlay" style={{
-    
                 backgroundImage: `url(${background})`}}>
 <div className="transparent-header-spacer"></div>
 
@@ -49,7 +61,6 @@ const HomePage = () => {
                     <label htmlFor ="intro-keywords" className="field-title ripple-effect">What service are you looking for today?</label>
                     <input id="intro-keywords" type="text" placeholder="e.g. build me a website"/>
                 </div>
-
                 
                 <div className="intro-search-button">
                     <button className="button ripple-effect">Search</button>
@@ -85,28 +96,26 @@ const HomePage = () => {
     <div className="col-xl-12">
 							
 				<div className="section-headline margin-top-0 margin-bottom-35">
-					<h3>Recent Tasks</h3>
-					<Link to="/list_job" className="headline-link">Browse All Tasks</Link>
+					<h3>Recent Jobs</h3>
+					<Link to="/list_job" className="headline-link">Browse All Jobs</Link>
 				</div>
-                {job.map((data, id) => {
+                {jobpost?.map((data, id) => {
                 return(
 								
 				<div key={data.id} className="tasks-list-container compact-list margin-top-35">
 					
 					<Link to={`/view_job/${data.id}`} className="task-listing">
-
 						
 						<div className="task-listing-details">
-
 							
 							<div className="task-listing-description">
 								<h3 className="task-listing-title">{data.job_title}</h3>
 								<ul className="task-icons">
 									<li><i className="icon-material-outline-location-on"></i> San Francisco</li>
-									<li><i className="icon-material-outline-access-time"></i> {data.jobtime.slice(0,10)}</li>
+									<li><i className="icon-material-outline-access-time"></i> {data.jobtime}</li>
 								</ul>
 								<div className="task-tags margin-top-15">
-                                <p> <b>{data.job_description.slice(0,30)}</b></p>
+                                <p> <b>{data.job_description}</b></p>
 								</div>
 							</div>
 						</div>

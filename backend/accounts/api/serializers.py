@@ -25,8 +25,8 @@ class ExperienceSerializer(ModelSerializer):
 
 class UserprofileSerializer(ModelSerializer):
     
-    educations = EducationSerializer()
-    experiences = ExperienceSerializer()
+    educations = EducationSerializer(read_only=True)
+    experiences = ExperienceSerializer(read_only=True)
 
     class Meta:
         model = Userprofile

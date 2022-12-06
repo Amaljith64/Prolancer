@@ -4746,7 +4746,7 @@ span.blog-item-tag {
 /* Job Listing - Grid Layout
 ------------------------------------- */
 .grid-layout {
-	display: flex;
+
 	flex-wrap: wrap;
 	width: calc(100% + 30px);
 }

@@ -59,7 +59,7 @@ const Footer = () => {
 							<div className="footer-row">
 								<div className="footer-row-inner">
 									<select className="selectpicker language-switcher" data-selected-text-format="count" data-size="5">
-										<option selected>English</option>
+										<option defaultValue>English</option>
 										<option>Français</option>
 										<option>Español</option>
 										<option>Deutsch</option>

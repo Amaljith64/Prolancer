@@ -10,6 +10,14 @@ import{
     SINGLEJOBPOST_REQUEST,
     SINGLEJOBPOST_SUCCESS,
     SINGLEJOBPOST_FAIL,
+
+    SERVICEPOST_REQUEST,
+    SERVICEPOST_SUCCESS,
+    SERVICEPOST_FAIL,
+
+    SINGLESERVICEPOST_REQUEST,
+    SINGLESERVICEPOST_SUCCESS,
+    SINGLESERVICEPOST_FAIL,
 } from '../constants/postConstants'
 
 
@@ -59,3 +67,38 @@ export const singlejobpostReducer = (state={}, action) =>{
     }
 
 }
+
+
+export const servicepostReducer = (state = { servicepost: [] }, action) =>{
+
+    switch(action.type){
+        case SERVICEPOST_REQUEST:
+            return { loading : true , servicepost : []}
+        case SERVICEPOST_SUCCESS:
+            return { loading : false , servicepost : action.payload}
+        case SERVICEPOST_FAIL:
+            return { loading : false , serviceposterror : action.payload }
+        default :
+        return state
+
+    }
+
+}
+
+export const singleservicepostReducer = (state={}, action) =>{
+
+    switch(action.type){
+        case SINGLESERVICEPOST_REQUEST:
+            return { loading : true , singleservicepost : null}
+        case SINGLESERVICEPOST_SUCCESS:
+            return { loading : false , singleservicepost : action.payload}
+        case SINGLESERVICEPOST_FAIL:
+            return { loading : false , singleserviceposterror : action.payload }
+        default :
+        return state
+
+    }
+
+}
+
+

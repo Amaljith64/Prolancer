@@ -62,7 +62,7 @@ const Contact = () => {
 						<textarea className="with-border" name="comments" cols="40" rows="5" id="comments" placeholder="Message" spellcheck="true" required="required"></textarea>
 					</div>
 
-					<input type="submit" className="submit button margin-top-15" id="submit" value="Submit Message" />
+					<input type="submit" className="submit button margin-top-15" id="submit" defaultValue="Submit Message" />
 
 				</form>
 			</section>
