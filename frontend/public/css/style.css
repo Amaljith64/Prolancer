@@ -10612,7 +10612,7 @@ img.mfp-img {
 
 .feedback-yes-no .leave-rating {
 	transform: scale(1.1);
-	margin: 3px 0 10px 3px;
+	margin: -4px 0 28px 3px;
 }
 
 

@@ -29,17 +29,17 @@ class FreelanceServicePosting(APIView):
             print('not founddrrrrrrd')
             return Response(status=status.HTTP_404_NOT_FOUND)
 
-class FreelanceServiceView(APIView):
+class FreelanceJobView(APIView):
     def get(self,request,id):
         print(id)
 
         service = ClientJobs.objects.get(id=id)
         bids = Bids.objects.filter(clientjob=id)
-        listservice = ClientJobViewSerializer(service)
+        listjobs = ClientJobViewSerializer(service)
         listbids = BidViewSerializer(bids,many=True)
 
-        if listservice:            
-            return Response ({'service' :listservice.data,
+        if listjobs:            
+            return Response ({'service' :listjobs.data,
             'bids': listbids.data },status=200)
         else:
             print(listbids.errors)

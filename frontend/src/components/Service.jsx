@@ -14,7 +14,7 @@ function Service({data}) {
             </div>
 
             <div className="blog-post-content">
-            <span className="blog-post-date">{data.servicetime}</span>
+            <span className="blog-post-date">{data.servicetime.slice(0,10)}</span>
             <h3>{data.service_title}</h3>
             <p>
             {data.service_description}

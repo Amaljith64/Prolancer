@@ -4,7 +4,6 @@ import{
     CATEGORY_SUCCESS,
     CATEGORY_FAIL,
 
-
     JOBPOST_REQUEST,
     JOBPOST_SUCCESS,
     JOBPOST_FAIL,
@@ -105,7 +104,7 @@ export const Singlejobpost = (id) => async (dispatch) => {
                 'Content-type' : 'application/json'
             }
         }
-        const { data } = await axios.get(`/freelancer/viewservice/${id}`,config)
+        const { data } = await axios.get(`/freelancer/viewjob/${id}`,config)
 
         dispatch({
             type : SINGLEJOBPOST_SUCCESS,
@@ -165,7 +164,7 @@ export const Singleservicepost = (id) => async (dispatch) => {
                 'Content-type' : 'application/json'
             }
         }
-        const { data } = await axios.get(`/freelancer/viewservice/${id}`,config)
+        const { data } = await axios.get(`/client/viewsingleservice/${id}/`,config)
 
         dispatch({
             type : SINGLESERVICEPOST_SUCCESS,

@@ -21,3 +21,10 @@ class FreelancerService(models.Model):
     def __str__(self):
         return self.service_title
     
+class ServiceRating(models.Model):
+    reviewuser = models.ForeignKey(NewUser,on_delete=models.CASCADE)
+    service = models.ForeignKey(FreelancerService,on_delete=models.CASCADE)
+    stars = models.IntegerField()
+    title = models.CharField(max_length=225)
+    review = models.TextField()
+    reviewtime = models.DateTimeField(auto_now_add=True)

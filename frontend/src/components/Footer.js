@@ -18,7 +18,7 @@ const Footer = () => {
 						<div className="footer-rows-left">
 							<div className="footer-row">
 								<div className="footer-row-inner footer-logo">
-									<img src="images/logo2.png" alt=""/>
+									<img src="/images/logo2.png" alt=""/>
 								</div>
 							</div>
 						</div>

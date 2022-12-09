@@ -124,17 +124,17 @@ const bids = singlejobpost?.bids
 				<p>{singlejobpost?.service.job_description}</p>
 			</div>
 			
-			<div class="single-page-section">
+			<div className="single-page-section">
 				<h3>Attachments</h3>
-				<div class="attachments-container">
-					<a href="#" class="attachment-box ripple-effect"><span>Project Brief</span><i>PDF</i></a>
+				<div className="attachments-container">
+					<a href="#" className="attachment-box ripple-effect"><span>Project Brief</span><i>PDF</i></a>
 				</div>
 			</div>
 
 		
-			<div class="single-page-section">
+			<div className="single-page-section">
 				<h3>Skills Required</h3>
-				<div class="task-tags">
+				<div className="task-tags">
 				{tosplit?.split(',').map((x) => {
 					return(
 					<span style={{ marginInline: "5px"}}>{x}</span>
@@ -142,35 +142,35 @@ const bids = singlejobpost?.bids
 		
 				</div>
 			</div>
-			<div class="clearfix"></div>
+			<div className="clearfix"></div>
 			
 					 
 		
-			<div class="boxed-list margin-bottom-60">
-				<div class="boxed-list-headline">
-					<h3><i class="icon-material-outline-group"></i> Freelancers Bidding</h3>
+			<div className="boxed-list margin-bottom-60">
+				<div className="boxed-list-headline">
+					<h3><i className="icon-material-outline-group"></i> Freelancers Bidding</h3>
 				</div>
 				{bids?.map((x) => {
 					return(
-				<ul class="boxed-list-ul">
+				<ul className="boxed-list-ul">
 					<li>
-						<div class="bid">
+						<div className="bid">
 						
-							<div class="bids-avatar">
-								<div class="freelancer-avatar">
-									<div class="verified-badge"></div>
+							<div className="bids-avatar">
+								<div className="freelancer-avatar">
+									<div className="verified-badge"></div>
 									<a href="single-freelancer-profile.html"><img src="/images/user-avatar-big-01.jpg" alt=""/></a>
 								</div>
 							</div>
 							
 						
-							<div class="bids-content">
+							<div className="bids-content">
 							
-								<div class="freelancer-name">
+								<div className="freelancer-name">
 									<h4><a href="single-freelancer-profile.html">{x.user.username} </a></h4>
-									<div class="item-details margin-top-3">
-										<div class="star-rating" data-rating="5.0"></div><br />
-										<div class="detail-item"><i class="icon-material-outline-date-range"></i> {x.bidtime.slice(0,10)}</div>
+									<div className="item-details margin-top-3">
+										<div className="star-rating" data-rating="5.0"></div><br />
+										<div className="detail-item"><i className="icon-material-outline-date-range"></i> {x.bidtime.slice(0,10)}</div>
 									</div>
 									
 								</div>
@@ -181,9 +181,9 @@ const bids = singlejobpost?.bids
 						
 							
 						
-							<div class="bids-bid">
-								<div class="bid-rate">
-									<div class="rate">₹ {x.bidrate} </div>
+							<div className="bids-bid">
+								<div className="bid-rate">
+									<div className="rate">₹ {x.bidrate} </div>
 									<span>in {x.daysrequired} days</span>
 								</div>
 							</div>
@@ -203,15 +203,15 @@ const bids = singlejobpost?.bids
 			<div className="sidebar-container">
         <div className="margin-top-30"></div>
 				
-				<div class="countdown green margin-bottom-35">6 days, 23 hours left</div>
+				<div className="countdown green margin-bottom-35">6 days, 23 hours left</div>
 
-				<div class="sidebar-widget">
-					<div class="bidding-widget">
-						<div class="bidding-headline"><h3>Bid on this job!</h3></div>
+				<div className="sidebar-widget">
+					<div className="bidding-widget">
+						<div className="bidding-headline"><h3>Bid on this job!</h3></div>
 						<form onSubmit={submitHandler}>
-							<div class="bidding-inner">
+							<div className="bidding-inner">
 
-								<span class="bidding-detail" >Set your <strong> Rate</strong></span>
+								<span className="bidding-detail" >Set your <strong> Rate</strong></span>
 								<input
 
 									type="number"
@@ -224,22 +224,22 @@ const bids = singlejobpost?.bids
 								
 								
 								
-								<span class="bidding-detail margin-top-30">Set your <strong>days required</strong></span>
+								<span className="bidding-detail margin-top-30">Set your <strong>days required</strong></span>
 
 								
-								<div class="bidding-fields">
-									<div class="bidding-field">
+								<div className="bidding-fields">
+									<div className="bidding-field">
 										
-										<div class="qtyButtons">
-											<div class="qtyDec" onClick={decrement}></div>
+										<div className="qtyButtons">
+											<div className="qtyDec" onClick={decrement}></div>
 											<input type="text" name="daysrequired" value={quantity}  />
-											<div class="qtyInc" onClick={increment}></div>
+											<div className="qtyInc" onClick={increment}></div>
 										</div>
 									</div>
 									
 								</div>
 
-								<button type='submit' id="snackbar-place-bid" class="button ripple-effect move-on-hover full-width margin-top-30"><span>Place a Bid</span></button>
+								<button type='submit' id="snackbar-place-bid" className="button ripple-effect move-on-hover full-width margin-top-30"><span>Place a Bid</span></button>
 
 							</div>
 						</form>

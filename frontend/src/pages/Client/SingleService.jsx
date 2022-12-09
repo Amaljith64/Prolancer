@@ -2,49 +2,78 @@ import React,{useContext,useState , useEffect} from 'react'
 import { Singleservicepost } from "../../actions/postActions";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from 'react-router-dom'
+import Header from '../../components/Header';
+import Footer from '../../components/Footer';
+import StarRating from '../../components/StarRating';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import axios from 'axios';
+import AuthContext from '../../context/AuthContext';
+import { format, render, cancel, register } from 'timeago.js';
+
 
 const SingleService = () => {
 
+	const [rating, setRating] = useState(0);
+	const [hover, setHover] = useState(0);
+
+	const [reload,setReload] = useState()
+
+	const {user} = useContext(AuthContext)
+
     const dispatch = useDispatch();
     let { id } = useParams()
-    console.log(id,'its idddddd')
-    const servicelist = useSelector((state) => state.serviceList);
-    const { servicepost,serviceposterror} = servicelist;
-
-    const viewjob = useSelector((state) => state.viewJob);
-    const { singlejobpost,singlejobposterror } = viewjob;
+    const servicelist = useSelector((state) => state.viewService);
+    const { singleservicepost,serviceposterror} = servicelist;
 
     useEffect(() => {
-        dispatch(Singleservicepost(id));
-        console.log(singlejobpost,'full serviceeee')
-        console.log(singlejobpost.service_title,'single serviceeeeee')
-    
-    },[]);
+        dispatch(Singleservicepost(id));		
+    },[reload]);
+	
+
+	const submitHandler=(e)=>{
+		e.preventDefault()
+		toast("Review Submitted")
+		console.log('Review Submitted')
+		console.log(user.user_id,'this is userrr')
+		axios.post(`/client/viewsingleservice/${id}/`,{
+			'reviewuser': user.user_id,	
+			'service': id ,
+			"stars":parseInt(e.target.stars.value),
+			"title":e.target.title.value,
+			"review":e.target.review.value
+		},	
+		)
+		setReload(!reload)
+		
+		console.log('Reloaded')
+	}
+
+	const reviews = singleservicepost?.review
+
 
   return (
 <>
-<div class="single-page-header" data-background-image="/images/single-job.jpg">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<div class="single-page-header-inner">
-					<div class="left-side">
-						<div class="header-image"><a href="single-company-profile.html"><img src="/images/company-logo-03a.png" alt=""/></a></div>
-						<div class="header-details">
-							<h3>{servicepost?.service_title}</h3>
-							<h5>About the Employer</h5>
-							<ul>
-								<li><a href="single-company-profile.html"><i class="icon-material-outline-business"></i> King</a></li>
-								<li><div class="star-rating" data-rating="4.9"></div></li>
-								<li><img class="flag" src="/images/flags/gb.svg" alt="" /> United Kingdom</li>
-								<li><div class="verified-badge-with-title">Verified</div></li>
-							</ul>
+<Header/>
+<ToastContainer />
+<div className="margin-top-70"></div>
+<div className="single-page-header" data-background-image="/images/single-job.jpg">
+	<div className="container">
+		<div className="row">
+			<div className="col-md-12">
+				<div className="single-page-header-inner">
+					<div className="left-side">
+						<div className="header-image"><a href="single-company-profile.html"><img src="/images/company-logo-03a.png" alt=""/></a></div>
+						<div className="header-details">
+							<h3>{singleservicepost?.service.service_title}</h3>
+							<h5>Employer Name : {singleservicepost?.service.user}</h5>
+							
 						</div>
 					</div>
-					<div class="right-side">
-						<div class="salary-box">
-							<div class="salary-type">Annual Salary</div>
-							<div class="salary-amount">$35k - $38k</div>
+					<div className="right-side">
+						<div className="salary-box">
+							<div className="salary-type">Price</div>
+							<div className="salary-amount">₹ {singleservicepost?.service.Price}</div>
 						</div>
 					</div>
 				</div>
@@ -55,163 +84,110 @@ const SingleService = () => {
 
 
 
-<div class="container">
-	<div class="row">
+<div className="container">
+	<div className="row">
 		
 		
-		<div class="col-xl-8 col-lg-8 content-right-offset">
+		<div className="col-xl-8 col-lg-8 content-right-offset">
 
-			<div class="single-page-section">
-				<h3 class="margin-bottom-25">Job Description</h3>
-				<p>Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.</p>
+			<div className="single-page-section">
+				<h3 className="margin-bottom-25">Job Description</h3>
+				<p>{singleservicepost?.service.service_description}</p>
 
-				<p>Bring to the table win-win survival strategies to ensure proactive domination. At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution. User generated content in real-time will have multiple touchpoints for offshoring.</p>
+				<p>{singleservicepost?.service.response_time}</p>
 
-				<p>Capitalize on low hanging fruit to identify a ballpark value added activity to beta test. Override the digital divide with additional clickthroughs from DevOps. Nanotechnology immersion along the information highway will close the loop on focusing solely on the bottom line.</p>
+				<p>{singleservicepost?.service.Price}</p>
+			</div>
+			<div className="boxed-list margin-bottom-60">
+				<div className="boxed-list-headline">
+					<h3><i className="icon-material-outline-thumb-up"></i> Work History and Feedback</h3>
+				</div>
+				<ul className="boxed-list-ul">
+				{singleservicepost?.review.map((data,id) => {
+            	return (
+					<li key={id}>
+						<div className="boxed-list-item">	
+							<div className="item-content">
+								<h4>{data.title} <span>{data.reviewuser}</span></h4>
+								<div className="item-details margin-top-10">
+									<div className="ratingbutton" >{data.stars}.0</div>
+									<div className="star-raating">
+									{data.stars < 1 ? <span  className="star off">&#9733;</span> : <span  className="star on">&#9733;</span>}
+									{data.stars < 2 ? <span  className="star off">&#9733;</span> : <span  className="star on">&#9733;</span>}
+									{data.stars < 3 ? <span  className="star off">&#9733;</span> : <span  className="star on">&#9733;</span>}
+									{data.stars < 4 ? <span  className="star off">&#9733;</span> : <span  className="star on">&#9733;</span>}
+									{data.stars < 5 ? <span  className="star off">&#9733;</span> : <span  className="star on">&#9733;</span>}
+									
+									</div>
+									<div className="detail-item"><i className="icon-material-outline-date-range"></i>{data.reviewtime.slice(0,10)} </div>
+									{format(data.reviewtime)}
+								</div>
+								<div className="item-description">
+									<p>{data.review} </p>
+								</div>
+
+								
+							</div>
+						</div>
+					</li>
+					)})} 
+					<li>
+						<div className="boxed-list-itemm">	
+							<div className="item-content">
+								<h3>Add Review</h3>
+								<span>Your Rating</span>
+									<form onSubmit={submitHandler} >
+										<div className="feedback-yes-no">
+											<div className="leave-rating">
+											<StarRating setRating={setRating} setHover={setHover} rating={rating} hover={hover}/>
+											</div>
+											<input type="hidden" name="stars" value={rating} />
+											<input type="text"  placeholder="Add a title." name='title'/>
+										<textarea  className="with-border" placeholder="Enter your review.." name="review"  required></textarea>
+										</div>
+									
+								<input className="button full-width button-sliding-icon ripple-effect" type="submit" value="Add Review" />
+								</form>
+							</div>
+						</div>
+					</li>				
+				</ul>	
+				<div className="clearfix"></div>
+			</div>
 			</div>
 
-			<div class="single-page-section">
-				<h3 class="margin-bottom-30">Location</h3>
-				<div id="single-job-map-container">
-					<div id="singleListingMap" data-latitude="51.507717" data-longitude="-0.131095" data-map-icon="im im-icon-Hamburger"></div>
-					<a href="#" id="streetView">Street View</a>
-				</div>
-			</div>
-
-			<div class="single-page-section">
-				<h3 class="margin-bottom-25">Similar Jobs</h3>
-
-				
-				<div class="listings-container grid-layout">
-
-						
-						<a href="#" class="job-listing">
-
-							
-							<div class="job-listing-details">
-								
-								<div class="job-listing-company-logo">
-									<img src="/images/company-logo-02.png" alt="" />
-								</div>
-
-								
-								<div class="job-listing-description">
-									<h4 class="job-listing-company">Coffee</h4>
-									<h3 class="job-listing-title">Barista and Cashier</h3>
-								</div>
-							</div>
-
-							
-							<div class="job-listing-footer">
-								<ul>
-									<li><i class="icon-material-outline-location-on"></i> San Francisco</li>
-									<li><i class="icon-material-outline-business-center"></i> Full Time</li>
-									<li><i class="icon-material-outline-account-balance-wallet"></i> $35000-$38000</li>
-									<li><i class="icon-material-outline-access-time"></i> 2 days ago</li>
-								</ul>
-							</div>
-						</a>
-
-						
-						<a href="#" class="job-listing">
-
-							
-							<div class="job-listing-details">
-								
-								<div class="job-listing-company-logo">
-									<img src="/images/company-logo-03.png" alt="" />
-								</div>
-
-								
-								<div class="job-listing-description">
-									<h4 class="job-listing-company">King <span class="verified-badge" title="Verified Employer" data-tippy-placement="top"></span></h4>
-									<h3 class="job-listing-title">Restaurant Manager</h3>
-								</div>
-							</div>
-
-							
-							<div class="job-listing-footer">
-								<ul>
-									<li><i class="icon-material-outline-location-on"></i> San Francisco</li>
-									<li><i class="icon-material-outline-business-center"></i> Full Time</li>
-									<li><i class="icon-material-outline-account-balance-wallet"></i> $35000-$38000</li>
-									<li><i class="icon-material-outline-access-time"></i> 2 days ago</li>
-								</ul>
-							</div>
-						</a>
-					</div>
-					
-
-				</div>
-		</div>
 		
+		<div className="col-xl-4 col-lg-4">
+			<div className="sidebar-container">
 
-		
-		<div class="col-xl-4 col-lg-4">
-			<div class="sidebar-container">
+				<a href="#small-dialog" className="apply-now-button popup-with-zoom-anim">Apply Now <i className="icon-material-outline-arrow-right-alt"></i></a>
 
-				<a href="#small-dialog" class="apply-now-button popup-with-zoom-anim">Apply Now <i class="icon-material-outline-arrow-right-alt"></i></a>
 					
 				
-				<div class="sidebar-widget">
-					<div class="job-overview">
-						<div class="job-overview-headline">Job Summary</div>
-						<div class="job-overview-inner">
+				<div className="sidebar-widget">
+					<div className="job-overview">
+						<div className="job-overview-headline">Job Summary</div>
+						<div className="job-overview-inner">
 							<ul>
 								<li>
-									<i class="icon-material-outline-location-on"></i>
+									<i className="icon-material-outline-location-on"></i>
 									<span>Location</span>
 									<h5>London, United Kingdom</h5>
 								</li>
+								
 								<li>
-									<i class="icon-material-outline-business-center"></i>
-									<span>Job Type</span>
-									<h5>Full Time</h5>
+									<i className="icon-material-outline-local-atm"></i>
+									<span>Price</span>
+									<h5>₹{singleservicepost?.service.Price}</h5>
 								</li>
 								<li>
-									<i class="icon-material-outline-local-atm"></i>
-									<span>Salary</span>
-									<h5>$35k - $38k</h5>
-								</li>
-								<li>
-									<i class="icon-material-outline-access-time"></i>
+									<i className="icon-material-outline-access-time"></i>
 									<span>Date Posted</span>
-									<h5>2 days ago</h5>
+									<h5>{format(singleservicepost?.service.servicetime)}</h5>
 								</li>
 							</ul>
 						</div>
-					</div>
-				</div>
-
-				
-				<div class="sidebar-widget">
-					<h3>Bookmark or Share</h3>
-
-					
-					<button class="bookmark-button margin-bottom-25">
-						<span class="bookmark-icon"></span>
-						<span class="bookmark-text">Bookmark</span>
-						<span class="bookmarked-text">Bookmarked</span>
-					</button>
-
-					
-					<div class="copy-url">
-						<input id="copy-url" type="text" value="" class="with-border" />
-						<button class="copy-url-button ripple-effect" data-clipboard-target="#copy-url" title="Copy to Clipboard" data-tippy-placement="top"><i class="icon-material-outline-file-copy"></i></button>
-					</div>
-
-					
-					<div class="share-buttons margin-top-25">
-						<div class="share-buttons-trigger"><i class="icon-feather-share-2"></i></div>
-						<div class="share-buttons-content">
-							<span>Interesting? <strong>Share It!</strong></span>
-							<ul class="share-buttons-icons">
-								<li><a href="#" data-button-color="#3b5998" title="Share on Facebook" data-tippy-placement="top"><i class="icon-brand-facebook-f"></i></a></li>
-								<li><a href="#" data-button-color="#1da1f2" title="Share on Twitter" data-tippy-placement="top"><i class="icon-brand-twitter"></i></a></li>
-								<li><a href="#" data-button-color="#dd4b39" title="Share on Google Plus" data-tippy-placement="top"><i class="icon-brand-google-plus-g"></i></a></li>
-								<li><a href="#" data-button-color="#0077b5" title="Share on LinkedIn" data-tippy-placement="top"><i class="icon-brand-linkedin-in"></i></a></li>
-							</ul>
-						</div>
+						
 					</div>
 				</div>
 
@@ -220,6 +196,9 @@ const SingleService = () => {
 
 	</div>
 </div>  
+
+
+<Footer/>
 </>
   )
 }
