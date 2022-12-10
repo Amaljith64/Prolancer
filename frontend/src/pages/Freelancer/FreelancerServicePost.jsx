@@ -16,6 +16,7 @@ function FreelancerServicePost() {
 
     const { register, handleSubmit, formState: { errors } } = useForm({		
         mode: "onChange"
+		
     });
     const postService = {
         service_title: {

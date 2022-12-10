@@ -5,7 +5,7 @@ import background from "../../assets/images/image.jpg";
 import { Link } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
-import { listcategory,listservicepost } from "../../actions/postActions";
+import { listcategory,listservicepost,listjobpost } from "../../actions/postActions";
 
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
@@ -23,7 +23,7 @@ const HomePage = () => {
     });
 };
 
-  const notify = () => toast("Wow so easy!");
+  const notify = () => toast.warning("Wowwww so easy!");
   const dispatch = useDispatch();
 
   const categoryList = useSelector((state) => state.listCategory);
@@ -32,6 +32,9 @@ const HomePage = () => {
   const servicelist = useSelector((state) => state.serviceList);
   const { servicepost,serviceposterror} = servicelist;
 
+  const joblist = useSelector((state) => state.jobList);
+  const { jobpost,jobposterror} = joblist;
+
 
   useEffect(() => {
     
@@ -39,6 +42,7 @@ const HomePage = () => {
 
     
       dispatch(listservicepost());
+      dispatch(listjobpost())
   }, []);
 
   return (

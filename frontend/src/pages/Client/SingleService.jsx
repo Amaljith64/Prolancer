@@ -10,9 +10,15 @@ import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import AuthContext from '../../context/AuthContext';
 import { format, render, cancel, register } from 'timeago.js';
+import { Link } from 'react-router-dom'
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 const SingleService = () => {
+
+	const [modalShow, setModalShow] = React.useState(false);
 
 	const [rating, setRating] = useState(0);
 	const [hover, setHover] = useState(0);
@@ -29,11 +35,21 @@ const SingleService = () => {
     useEffect(() => {
         dispatch(Singleservicepost(id));		
     },[reload]);
+
+	const reportPost=(e)=>{
+		toast.danger("You have Reported")
+		
+		axios.post(`/client/reportservice/${id}/`,{
+			'reportuser' : user.user_id,
+			'service' : id
+		})
+		
+	}
 	
 
 	const submitHandler=(e)=>{
 		e.preventDefault()
-		toast("Review Submitted")
+		toast.success("Review Submitted")
 		console.log('Review Submitted')
 		console.log(user.user_id,'this is userrr')
 		axios.post(`/client/viewsingleservice/${id}/`,{
@@ -50,8 +66,6 @@ const SingleService = () => {
 	}
 
 	const reviews = singleservicepost?.review
-
-
   return (
 <>
 <Header/>
@@ -81,8 +95,6 @@ const SingleService = () => {
 		</div>
 	</div>
 </div>
-
-
 
 <div className="container">
 	<div className="row">
@@ -125,7 +137,6 @@ const SingleService = () => {
 								<div className="item-description">
 									<p>{data.review} </p>
 								</div>
-
 								
 							</div>
 						</div>
@@ -155,26 +166,82 @@ const SingleService = () => {
 				<div className="clearfix"></div>
 			</div>
 			</div>
-
 		
 		<div className="col-xl-4 col-lg-4">
 			<div className="sidebar-container">
+				<Button  variant="primary" onClick={() => setModalShow(true)}>
+					Launch vertically centered modal
+				</Button>
 
-				<a href="#small-dialog" className="apply-now-button popup-with-zoom-anim">Apply Now <i className="icon-material-outline-arrow-right-alt"></i></a>
+				<Modal
+					class="zoom-anim-dialog mfp-hide dialog-with-tabs sign-in-form"
+					show={modalShow}
+					
+					size="lg"
+					aria-labelledby="contained-modal-title-vcenter"
+					centered
+					>
+						<div id="small-dialog" class="zoom-anim-dialog mfp-hide dialog-with-tabs"></div>
+					<Modal.Header closeButton>
+						<Modal.Title  id="contained-modal-title-vcenter">
+						<ul class="popup-tabs-nav">
+							<li><a href="#tab">Apply Now</a></li>
+							<Button style={{    float: "right",
+    padding: "21px"}} onClick={() => setModalShow(false)}>Close</Button>
+						</ul>
+						</Modal.Title>
+					</Modal.Header>
+					<Modal.Body >
+					<div class="popup-tabs-container">
 
+			
+			<div class="popup-tab-content" id="tab">
+				
+				
+				<div class="welcome-text">
+					<h3>Attach File With CV</h3>
+				</div>
 					
 				
+				<form method="post" id="apply-now-form">
+
+					<div class="input-with-icon-left">
+						<i class="icon-material-outline-account-circle"></i>
+						<input type="text" class="input-text with-border" name="name" id="name" placeholder="First and Last Name" required/>
+					</div>
+
+					<div class="input-with-icon-left">
+						<i class="icon-material-baseline-mail-outline"></i>
+						<input type="text" class="input-text with-border" name="emailaddress" id="emailaddress" placeholder="Email Address" required/>
+					</div>
+
+					<div class="uploadButton">
+						<input class="uploadButton-input" type="file" accept="image/*, application/pdf" id="upload-cv" />
+						<label class="uploadButton-button ripple-effect" for="upload-cv">Select File</label>
+						<span class="uploadButton-file-name">Upload your CV / resume relevant file. <br/> Max. file size: 50 MB.</span>
+					</div>
+
+				</form>
+				
+				
+				<button class="button margin-top-35 full-width button-sliding-icon ripple-effect" type="submit" form="apply-now-form">Apply Now <i class="icon-material-outline-arrow-right-alt"></i></button>
+
+			</div>
+
+		</div>
+					</Modal.Body>
+					<Modal.Footer>
+						
+					</Modal.Footer>
+				</Modal>
+
+				<Link className="apply-now-button popup-with-zoom-anim">Apply Now <i className="icon-material-outline-arrow-right-alt"></i></Link>
+		
 				<div className="sidebar-widget">
 					<div className="job-overview">
 						<div className="job-overview-headline">Job Summary</div>
 						<div className="job-overview-inner">
 							<ul>
-								<li>
-									<i className="icon-material-outline-location-on"></i>
-									<span>Location</span>
-									<h5>London, United Kingdom</h5>
-								</li>
-								
 								<li>
 									<i className="icon-material-outline-local-atm"></i>
 									<span>Price</span>
@@ -184,6 +251,11 @@ const SingleService = () => {
 									<i className="icon-material-outline-access-time"></i>
 									<span>Date Posted</span>
 									<h5>{format(singleservicepost?.service.servicetime)}</h5>
+								</li>
+								<li>
+									<i className="icon-feather-flag"></i>
+									<span>Report Post</span>
+									<Link onClick={reportPost}>Click here</Link>									
 								</li>
 							</ul>
 						</div>
@@ -196,6 +268,56 @@ const SingleService = () => {
 
 	</div>
 </div>  
+
+<div id="small-dialog" class="zoom-anim-dialog mfp-hide dialog-with-tabs">
+	
+	<div class="sign-in-form ">
+
+		<ul class="popup-tabs-nav">
+			<li><a href="#tab">Apply Now</a></li>
+		</ul>
+
+		<div class="popup-tabs-container">
+
+			
+			<div class="popup-tab-content" id="tab">
+				
+				
+				<div class="welcome-text">
+					<h3>Attach File With CV</h3>
+				</div>
+					
+				
+				<form method="post" id="apply-now-form">
+
+					<div class="input-with-icon-left">
+						<i class="icon-material-outline-account-circle"></i>
+						<input type="text" class="input-text with-border" name="name" id="name" placeholder="First and Last Name" required/>
+					</div>
+
+					<div class="input-with-icon-left">
+						<i class="icon-material-baseline-mail-outline"></i>
+						<input type="text" class="input-text with-border" name="emailaddress" id="emailaddress" placeholder="Email Address" required/>
+					</div>
+
+					<div class="uploadButton">
+						<input class="uploadButton-input" type="file" accept="image/*, application/pdf" id="upload-cv" />
+						<label class="uploadButton-button ripple-effect" for="upload-cv">Select File</label>
+						<span class="uploadButton-file-name">Upload your CV / resume relevant file. <br/> Max. file size: 50 MB.</span>
+					</div>
+
+				</form>
+				
+				
+				<button class="button margin-top-35 full-width button-sliding-icon ripple-effect" type="submit" form="apply-now-form">Apply Now <i class="icon-material-outline-arrow-right-alt"></i></button>
+
+			</div>
+
+		</div>
+	</div>
+</div>
+
+
 
 
 <Footer/>

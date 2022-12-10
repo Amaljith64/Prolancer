@@ -81,7 +81,7 @@ export const listjobpost = () => async (dispatch) => {
             type : JOBPOST_SUCCESS,
             payload : data
         })
-        	toast.success("Wow so easy!")
+        
 
     }
     catch(error){

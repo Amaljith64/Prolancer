@@ -9,6 +9,8 @@ urlpatterns = [
     path('postjob/',views.ClientJobPosting.as_view(),name="postjob"),
     path('viewservice/',views.ClientServiceView.as_view(),name="viewservice"),
     path('viewsingleservice/<int:id>/',views.ClientSingleServiceView.as_view(),name="viewsingleservice"),
+    path('accceptbid/<int:id>/',views.AcceptBid.as_view(),name="accceptbid"),
+    path('reportservice/<int:id>/',views.ReportService.as_view(),name="reportservice"),
    
 ]
 

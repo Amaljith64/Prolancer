@@ -2,11 +2,8 @@ import React, {useContext, useState} from 'react'
 import { Link } from 'react-router-dom'
 import AuthContext from '../context/AuthContext'
 import '../App.css'
-import { useNavigate } from 'react-router-dom'
-import Footer from './Footer'
 
-const Header = () => {
-    const Navigate = useNavigate();
+const AdminHeader = () => {
     let {user, logoutUser} = useContext(AuthContext)
     const [isActive, setActive] = useState(false);
 
@@ -14,19 +11,9 @@ const Header = () => {
     setActive(!isActive);
   };
 
-  let redirectt = (e) => {
-    e.preventDefault()
-    if (user?.is_freelancer === true){
-        Navigate('/freelancer')
-    }
-    else{
-        Navigate('/')
-        console.log('else worked');
-    }
-  }
-
-    return (
-<div>
+  return (
+    <>
+    <div>
 
 
 <header id="header-container" className="fullwidth dashboard-header not-sticky">
@@ -37,73 +24,44 @@ const Header = () => {
         <div className="left-side"> 
             
             <div id="logo">
-                <Link onClick={redirectt}><img src="/images/logo.png" alt="" /></Link>
+                <Link><img src="/images/logo.png" alt="" /></Link>
             </div>
 
             <nav id="navigation">
                 <ul id="responsive">
 
-                    <li><Link onClick={redirectt}> Home</Link>
-                        
-                    </li>
-
                     <li><Link to="/list_service">Services</Link>
                         
                     </li>
-
-                    <li><Link to="/upcomming">Blog</Link>
-                        
-                    </li>
-                    {user?.is_freelancer ? 
-                    (
-                    <li><Link to= '/list_job'>View Jobs</Link>
-                                    
-                    </li>
-                    )
-                    :
-                    (
+             
                     <li><Link to= ''>Jobs </Link>
                         <ul className="dropdown-nav">
                             <li><Link  to= '/manage_job'>Manage Jobs</Link></li>
                             <li><Link to= '/post_job'>Post a Job</Link></li>
                         </ul>
                     </li>
-                    )
-                    }
-
-                    {user?.is_freelancer ? 
-                    (
+                  
                     <li><Link to='/post_service'>Post Service</Link></li>
-                    )
-                    :
-                    (
+                 
                     <li><Link to="/contact">Contact </Link></li>
-                    )
-                    }
 
                 </ul>
             </nav>
             <div className="clearfix"></div>
-            
-            
+           
         </div>
         
         <div className="right-side">
-
-            
-            <div className="header-widget hide-on-mobile">
-                
-                
+           <div className="header-widget hide-on-mobile">
+               
                 <div className="header-notifications">
-
-                    
+                   
                     <div className="header-notifications-trigger">
                         <Link to="/upcomming"><i className="icon-feather-bell"></i><span>4</span></Link>
                     </div>
 
                 </div>
-                
-                
+                         
                 <div className="header-notifications">
                     <div className="header-notifications-trigger">
                         <Link to="/upcomming"><i className="icon-feather-mail"></i><span>3</span></Link>
@@ -113,22 +71,17 @@ const Header = () => {
 
             </div>
 
-
             <div className="header-widget" onClick={toggleClass}>
-
-                
+              
                 <div className= {isActive ? 'header-notifications user-menu active': "header-notifications user-menu"}>
                     <div className="header-notifications-trigger">
                         <Link to="#"><div className="user-avatar status-online"><img src="/images/user-avatar-small-01.jpg" alt="" /></div></Link>
                     </div>
-
-                    
+                   
                     <div className="header-notifications-dropdown">
-
-                        
+                       
                         <div className="user-status">
-
-                            
+                          
                             <div className="user-details">
                                 <div className="user-avatar status-online"><img src="/images/user-avatar-small-01.jpg" alt="" /></div>
                                 <div className="user-name">
@@ -136,20 +89,11 @@ const Header = () => {
                                 {user?.is_freelancer ? (<p>Freelancer</p>) : (<p>User</p>)}
                                 </div>
                             </div>
-                            {user?.is_freelancer ? 
-                            (
-                           
+                            
                             <div className="" id="snackbar-user-status">
                                 <Link to='/seller_register' className='button greencolor full-width ' >Dashboard</Link>
                             </div>	
-                            )
-                            :
-                            (
-                            <div className="" id="snackbar-user-status">
-                                <Link to='/seller_register' className='button greencolor full-width ' >Become Freelancer</Link>  
-                            </div>	
-                            )
-                        }
+                 
                     </div>
                     
                     <ul className="user-menu-small-nav" style={{float: 'right',
@@ -166,9 +110,7 @@ const Header = () => {
                 </div>
 
             </div>
-            
-
-            
+         
             <span className="mmenu-trigger">
                 <button className="hamburger hamburger--collapse" type="button">
                     <span className="hamburger-box">
@@ -178,17 +120,16 @@ const Header = () => {
             </span>
 
         </div>
-        
-
-
+ 
     </div>
 </div>
-
 
 </header>
            
         </div>
-    )
+      
+    </>
+  )
 }
 
-export default Header
+export default AdminHeader

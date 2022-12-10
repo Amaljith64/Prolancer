@@ -16,7 +16,6 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const SIngleJob = () => {
 const dispatch = useDispatch();
-const navigate = useNavigate()
 
 let { id } = useParams()
 const [reload,setReload] = useState()
@@ -63,7 +62,7 @@ useEffect(() => {
 
 const submitHandler=(e)=>{
 	e.preventDefault()
-	toast("Wow so easy!")
+	toast.success("Bid added")
 	console.log('toast submit')
 	axios.post('/freelancer/sentbid/',{
 		'clientjob': parseInt(id) ,

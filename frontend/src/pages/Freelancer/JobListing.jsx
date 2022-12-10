@@ -10,9 +10,9 @@ const joblist = useSelector((state) => state.jobList);
 const { jobpost,jobposterror } = joblist;
 
     return (
-    <>
-    <Header/>
-    <div className="margin-top-70"></div>
+<>
+<Header/>
+<div className="margin-top-70"></div>
     
 <div className="full-page-container">
 

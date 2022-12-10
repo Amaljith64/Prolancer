@@ -17,6 +17,7 @@ class FreelancerService(models.Model):
     service_description = models.TextField()
     img = models.ImageField(upload_to='image',null=True)
     servicetime = models.DateTimeField(auto_now_add=True)
+    reported = models.BooleanField(default= False,null=True)
 
     def __str__(self):
         return self.service_title
@@ -28,3 +29,8 @@ class ServiceRating(models.Model):
     title = models.CharField(max_length=225)
     review = models.TextField()
     reviewtime = models.DateTimeField(auto_now_add=True)
+
+class ServiceReport(models.Model):
+    reportuser = models.ForeignKey(NewUser,on_delete=models.CASCADE)
+    service = models.ForeignKey(FreelancerService,on_delete=models.CASCADE)
+    reportedtime = models.DateTimeField(auto_now_add=True)

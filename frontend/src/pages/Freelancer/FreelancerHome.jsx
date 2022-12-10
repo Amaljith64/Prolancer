@@ -1,16 +1,13 @@
 import React, {useState, useEffect, useContext} from 'react'
 import AuthContext from '../../context/AuthContext'
-import useAxios from '../../utils/useAxios'
-import axios from 'axios';
 import Header from '../../components/Header'
 import background from '../../assets/images/image.jpg'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux";
 import { listcategory,listjobpost } from "../../actions/postActions";
-
-
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Footer from '../../components/Footer'
 
 
 const HomePage = () => {
@@ -233,6 +230,7 @@ const HomePage = () => {
     </div>
 </div>
 </div>
+<Footer/>
 
         </div>
     )

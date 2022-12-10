@@ -30,9 +30,19 @@ class ClientJobs(models.Model):
     job_description = models.TextField()
     img = models.ImageField(upload_to='image',null=True)
     jobtime = models.DateTimeField(auto_now_add=True)
+    bidder = models.BooleanField(default= False,null=True)
+    reported = models.BooleanField(default= False,null=True)
+    
 
     def __str__(self):
         return self.job_title
+
+class JobReport(models.Model):
+    reportuser = models.ForeignKey(NewUser,on_delete=models.CASCADE)
+    job = models.ForeignKey(ClientJobs,on_delete=models.CASCADE)
+    reportedtime = models.DateTimeField(auto_now_add=True)
+
+
 
 class Bids(models.Model):
     clientjob = models.ForeignKey(ClientJobs,on_delete=models.CASCADE)
@@ -40,6 +50,8 @@ class Bids(models.Model):
     bidrate = models.IntegerField()
     daysrequired = models.IntegerField()
     bidtime = models.DateTimeField(auto_now_add=True)
+    bidaccepted = models.BooleanField(default=False,null=True)
+
 
     
 

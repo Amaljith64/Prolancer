@@ -18,6 +18,11 @@ import FreelancerServicePost from './pages/Freelancer/FreelancerServicePost';
 import Upcoming from './pages/Upcoming';
 import Contact from './pages/Contact';
 import SingleService from './pages/Client/SingleService';
+import JobManaging from './pages/Client/JobManaging';
+import Bidders from './pages/Client/Bidders';
+import AdminHome from './pages/Admin/AdminHome';
+import AllPosts from './pages/Admin/AllPosts';
+import AllUsers from './pages/Admin/AllUsers';
 
 
 function App() {
@@ -43,8 +48,16 @@ function App() {
           <Route element={<SignupPage/>} path="/signup"/> 
           <Route element={<Dashboard/>} path="/dashboard"/> 
           <Route element={<JobPosting/>} path="/post_job"/> 
+          <Route element={<JobManaging/>} path="/manage_job"/> 
+          <Route element={<Bidders/>} path="/bidders/:id"/> 
+          
           <Route element={<JobListing/>} path="/list_job"/> 
           <Route element={<SIngleJob/>} path="/view_job/:id"/> 
+
+
+          <Route element={<AdminHome/>} path="/admin"/> 
+          <Route element={<AllPosts/>} path="/allpost"/> 
+          <Route element={<AllUsers/>} path="/allusers"/> 
         </Routes>
         </ClientProvider>
         

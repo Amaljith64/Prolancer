@@ -55,4 +55,17 @@ class SentBid(APIView):
         bid=Bids.objects.create(user=user,clientjob=service,bidrate=data['bidrate'],daysrequired=data['daysrequired'])
         serializer = BidSerializer(data=bid)
         return Response(serializer.data,status=status.HTTP_201_CREATED)
-        
+
+class ReportJob(APIView):
+    def post(self,request,id):
+        job = ClientJobs.objects.get(id = id)
+        job.reported = True
+        job.save()
+        data = request.data
+        report = JobReportSerializer(data=data)
+        if report.is_valid():
+            report.save()
+            return Response(status=status.HTTP_201_CREATED)
+        else:
+            print(report.errors,'fff')
+            return Response(status=status.HTTP_404_NOT_FOUND)

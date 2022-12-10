@@ -7,7 +7,7 @@ const Footer = () => {
 	
 
 	<div className="footer-top-section">
-		<div className="container">
+		<div className="container-fluid">
 			<div className="row">
 				<div className="col-xl-12">
 
