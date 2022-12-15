@@ -32,6 +32,7 @@ const HomePage = () => {
         <div>
             <Header />
             <ToastContainer />
+            <div className="margin-top-80"></div>
             <div className="intro-banner dark-overlay" style={{
                 backgroundImage: `url(${background})`}}>
 <div className="transparent-header-spacer"></div>

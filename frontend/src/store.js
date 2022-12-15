@@ -7,7 +7,10 @@ import {
     jobpostReducer,
     singlejobpostReducer,
     servicepostReducer,
-    singleservicepostReducer
+    singleservicepostReducer,
+    profileReducer,
+    allUsersReducer,
+    singleUsersReducer,
     } from './reducers/postReducers'
 import storage from 'redux-persist/lib/storage'
 import { persistReducer } from 'redux-persist'
@@ -20,11 +23,15 @@ const persistConfig = {
 }
 
 const reducers = combineReducers({
-    listCategory:categoryReducer,
-    jobList:jobpostReducer,
-    viewJob:singlejobpostReducer,
-    serviceList:servicepostReducer,
-    viewService:singleservicepostReducer
+    listCategory : categoryReducer,
+    jobList : jobpostReducer,
+    viewJob : singlejobpostReducer,
+    serviceList : servicepostReducer,
+    viewService : singleservicepostReducer,
+    userProfile : profileReducer,
+    allUsers : allUsersReducer,
+    singleUser : singleUsersReducer,
+
 })
 
 

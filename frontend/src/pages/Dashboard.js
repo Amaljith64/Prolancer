@@ -168,7 +168,6 @@ function Dashboard() {
 									</div>
 								</div>
 							</div>
-							
 							<div className="dashboard-note">
 								<p>Extend premium plan for next month</p>
 								<div className="note-footer">

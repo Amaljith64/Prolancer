@@ -47,9 +47,6 @@ const Header = () => {
                         
                     </li>
 
-                    <li><Link to="/list_service">Services</Link>
-                        
-                    </li>
 
                     <li><Link to="/upcomming">Blog</Link>
                         
@@ -62,11 +59,8 @@ const Header = () => {
                     )
                     :
                     (
-                    <li><Link to= ''>Jobs </Link>
-                        <ul className="dropdown-nav">
-                            <li><Link  to= '/manage_job'>Manage Jobs</Link></li>
-                            <li><Link to= '/post_job'>Post a Job</Link></li>
-                        </ul>
+                    <li><Link to= '/list_service'>View Services </Link>
+                    
                     </li>
                     )
                     }
@@ -77,7 +71,7 @@ const Header = () => {
                     )
                     :
                     (
-                    <li><Link to="/contact">Contact </Link></li>
+                    <li><Link to="/freelancerprofile">View Freelancers </Link></li>
                     )
                     }
 
@@ -119,7 +113,7 @@ const Header = () => {
                 
                 <div className= {isActive ? 'header-notifications user-menu active': "header-notifications user-menu"}>
                     <div className="header-notifications-trigger">
-                        <Link to="#"><div className="user-avatar status-online"><img src="/images/user-avatar-small-01.jpg" alt="" /></div></Link>
+                        <Link to=""><div className="user-avatar status-online"><img src="/images/user-avatar-small-01.jpg" alt="" /></div></Link>
                     </div>
 
                     
@@ -130,12 +124,15 @@ const Header = () => {
 
                             
                             <div className="user-details">
+                                <Link to='/userprofile'>
                                 <div className="user-avatar status-online"><img src="/images/user-avatar-small-01.jpg" alt="" /></div>
+                                </Link>
                                 <div className="user-name">
-                                {user &&  <span>Hello <strong> {user.username}</strong></span>}
-                                {user?.is_freelancer ? (<p>Freelancer</p>) : (<p>User</p>)}
+                                {user &&  <h3>Hello <strong> {user.username}</strong></h3>}
+                                {user?.is_freelancer ? (<span>Freelancer</span>) : (<span>User</span>)}
                                 </div>
                             </div>
+                            <div className="margin-top-30"></div>
                             {user?.is_freelancer ? 
                             (
                            

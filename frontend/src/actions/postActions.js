@@ -19,6 +19,17 @@ import{
     SINGLESERVICEPOST_REQUEST,
     SINGLESERVICEPOST_SUCCESS,
     SINGLESERVICEPOST_FAIL,
+
+    USERPROFILE_REQUEST,
+    USERPROFILE_SUCCESS,
+    USERPROFILE_FAIL,
+
+    ALLUSERS_REQUEST,
+    ALLUSERS_SUCCESS,
+    ALLUSERS_FAIL,
+    SINGLEUSERS_REQUEST,
+    SINGLEUSERS_SUCCESS,
+    SINGLEUSERS_FAIL,
  
 } from '../constants/postConstants'
 import { ToastContainer, toast } from 'react-toastify';
@@ -179,3 +190,84 @@ export const Singleservicepost = (id) => async (dispatch) => {
 
     }
 }
+
+
+/* -------------------------------------------------------------------------- */
+/*                                USER PROFILE                                */
+/* -------------------------------------------------------------------------- */
+
+export const UserProfile = (id) => async (dispatch) => {
+    try{
+        dispatch({
+            type : USERPROFILE_REQUEST
+        })
+        const config = {
+            headers : {
+                'Content-type' : 'application/json'
+            }
+        }
+        const { data } = await axios.get(`api/userprofile/${id}/`,config)
+
+        dispatch({
+            type : USERPROFILE_SUCCESS,
+            payload : data
+        })
+    }
+    catch(error){
+        dispatch({
+            type : USERPROFILE_FAIL,
+            payload : error.response && error.response.data.detail ? error.response.data.detail:error.message 
+        })
+    }
+}
+
+export const AllUsers = (id) => async (dispatch) => {
+    try{
+        dispatch({
+            type : ALLUSERS_REQUEST
+        })
+        const config = {
+            headers : {
+                'Content-type' : 'application/json'
+            }
+        }
+        const { data } = await axios.get(`api/allusers/`,config)
+
+        dispatch({
+            type : ALLUSERS_SUCCESS,
+            payload : data
+        })
+    }
+    catch(error){
+        dispatch({
+            type : ALLUSERS_FAIL,
+            payload : error.response && error.response.data.detail ? error.response.data.detail:error.message 
+        })
+    }
+}
+
+export const SingleUsers = (id) => async (dispatch) => {
+    try{
+        dispatch({
+            type : SINGLEUSERS_REQUEST
+        })
+        const config = {
+            headers : {
+                'Content-type' : 'application/json'
+            }
+        }
+        const { data } = await axios.get(`/api/userprofile/${id}/`,config)
+
+        dispatch({
+            type : SINGLEUSERS_SUCCESS,
+            payload : data
+        })
+    }
+    catch(error){
+        dispatch({
+            type : SINGLEUSERS_FAIL,
+            payload : error.response && error.response.data.detail ? error.response.data.detail:error.message 
+        })
+    }
+}
+

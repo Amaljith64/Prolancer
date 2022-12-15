@@ -83,8 +83,8 @@ class Education(models.Model):
     end_date = models.DateField()
 
     def __str__(self):
-
         return self.user.email
+        
 class Experience(models.Model):
     user = models.ForeignKey(NewUser,on_delete=models.CASCADE,related_name='experiences')
     company = models.CharField(max_length=225,null=True)

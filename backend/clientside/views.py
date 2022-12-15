@@ -63,23 +63,12 @@ class ClientSingleServiceView(APIView):
 
 class AcceptBid(APIView):
     def post(self,request,id):
-        print('reacher accept')
-        print(id,'its iddd')
         bid = Bids.objects.get(id=id)
-
-        print(bid.bidaccepted,'its before bid')
         job = ClientJobs.objects.get(id=bid.clientjob.id)
-        print(bid.clientjob.bidder,'its bidderr')
         job.bidder = True
         bid.bidaccepted = True 
-        # bid.clientjob.bidder = True 
-        
         job.save()
-        bid.save()
-        print(bid.clientjob,'its after savre')
-        print(bid.clientjob.bidder,'its bidderr afterr')
-        # print(job,'its after job')
-        print("accept ended")
+        bid.save()   
         return Response(status=status.HTTP_200_OK)
 
 

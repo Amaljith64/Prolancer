@@ -27,6 +27,8 @@ const SingleService = () => {
 
 	const {user} = useContext(AuthContext)
 
+	const Swal=require("sweetalert2")
+
     const dispatch = useDispatch();
     let { id } = useParams()
     const servicelist = useSelector((state) => state.viewService);
@@ -37,13 +39,25 @@ const SingleService = () => {
     },[reload]);
 
 	const reportPost=(e)=>{
-		toast.danger("You have Reported")
-		
-		axios.post(`/client/reportservice/${id}/`,{
-			'reportuser' : user.user_id,
-			'service' : id
-		})
-		
+
+		Swal.fire({
+			title:"Are you sure !",
+			 text:"You want to report this post ?",
+			 icon:"warning",
+			 showCancelButton:"true",
+			 confirmButtonColor:"#3085D6",
+			 cancelButtonColor:"#d33",
+			 confirmButtonText:"YES,Report",
+		   }).then((result)=>{
+			 if(result.isConfirmed){
+				axios.post(`/client/reportservice/${id}/`,{
+					'reportuser' : user.user_id,
+					'service' : id
+				})			   
+				toast.danger("You have Reported")
+			 }
+		   })
+
 	}
 	
 
@@ -66,18 +80,20 @@ const SingleService = () => {
 	}
 
 	const reviews = singleservicepost?.review
+
   return (
 <>
 <Header/>
 <ToastContainer />
 <div className="margin-top-70"></div>
-<div className="single-page-header" data-background-image="/images/single-job.jpg">
+<div className="single-page-header" data-background-image="/images/single-job.jpg"
+>
 	<div className="container">
 		<div className="row">
 			<div className="col-md-12">
 				<div className="single-page-header-inner">
 					<div className="left-side">
-						<div className="header-image"><a href="single-company-profile.html"><img src="/images/company-logo-03a.png" alt=""/></a></div>
+						<div className="header-image"><a href="single-company-profile.html"><img src={singleservicepost?.service.img} alt=""/></a></div>
 						<div className="header-details">
 							<h3>{singleservicepost?.service.service_title}</h3>
 							<h5>Employer Name : {singleservicepost?.service.user}</h5>
@@ -99,12 +115,13 @@ const SingleService = () => {
 <div className="container">
 	<div className="row">
 		
-		
 		<div className="col-xl-8 col-lg-8 content-right-offset">
 
 			<div className="single-page-section">
 				<h3 className="margin-bottom-25">Job Description</h3>
-				<p>{singleservicepost?.service.service_description}</p>
+				<pre style={{ whiteSpace: 'pre-wrap',
+			fontFamily: '"Nunito", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif',
+			textTransform: 'none'}}>{singleservicepost?.service.service_description}</pre>
 
 				<p>{singleservicepost?.service.response_time}</p>
 
@@ -118,6 +135,8 @@ const SingleService = () => {
 				{singleservicepost?.review.map((data,id) => {
             	return (
 					<li key={id}>
+						<div className="avatar"><img src="/images/user-avatar-placeholder.png" alt=""/></div>
+
 						<div className="boxed-list-item">	
 							<div className="item-content">
 								<h4>{data.title} <span>{data.reviewuser}</span></h4>
@@ -137,9 +156,29 @@ const SingleService = () => {
 								<div className="item-description">
 									<p>{data.review} </p>
 								</div>
+								<br />
+								<div className="detail-item " style={{display : 'flex',
+										gap: '23px',
+										paddingTop:' 1px'}}>
+								<p>  <strong>Helpful? </strong> </p>
+								<i className="fa icon-material-outline-thumb-up">Yes</i>	 	
+								<i className="fa icon-material-outline-thumb-down">No</i>	 	
+								</div>
 								
 							</div>
 						</div>
+						<ul className="boxed-list-ul" style={{  paddingLeft: "34px"
+}}>
+							<li>
+								<div className="avatar"><img src="/images/user-avatar-placeholder.png" alt=""/></div>
+								<div className="item-content"><div className="arrow-comment"></div>
+									<div className="comment-by">Tom Smith
+										
+									</div>
+									<p>Rrhoncus et erat. Nam posuere tristique sem, eu ultricies tortor imperdiet vitae. Curabitur lacinia neque.</p>
+								</div>
+							</li>
+						</ul>
 					</li>
 					)})} 
 					<li>
@@ -161,7 +200,7 @@ const SingleService = () => {
 								</form>
 							</div>
 						</div>
-					</li>				
+					</li>		
 				</ul>	
 				<div className="clearfix"></div>
 			</div>
@@ -174,17 +213,17 @@ const SingleService = () => {
 				</Button>
 
 				<Modal
-					class="zoom-anim-dialog mfp-hide dialog-with-tabs sign-in-form"
+					className="zoom-anim-dialog mfp-hide dialog-with-tabs sign-in-form"
 					show={modalShow}
 					
 					size="lg"
 					aria-labelledby="contained-modal-title-vcenter"
 					centered
 					>
-						<div id="small-dialog" class="zoom-anim-dialog mfp-hide dialog-with-tabs"></div>
+						<div id="small-dialog" className="zoom-anim-dialog mfp-hide dialog-with-tabs"></div>
 					<Modal.Header closeButton>
 						<Modal.Title  id="contained-modal-title-vcenter">
-						<ul class="popup-tabs-nav">
+						<ul className="popup-tabs-nav">
 							<li><a href="#tab">Apply Now</a></li>
 							<Button style={{    float: "right",
     padding: "21px"}} onClick={() => setModalShow(false)}>Close</Button>
@@ -192,39 +231,39 @@ const SingleService = () => {
 						</Modal.Title>
 					</Modal.Header>
 					<Modal.Body >
-					<div class="popup-tabs-container">
+					<div className="popup-tabs-container">
 
 			
-			<div class="popup-tab-content" id="tab">
+			<div className="popup-tab-content" id="tab">
 				
 				
-				<div class="welcome-text">
+				<div className="welcome-text">
 					<h3>Attach File With CV</h3>
 				</div>
 					
 				
 				<form method="post" id="apply-now-form">
 
-					<div class="input-with-icon-left">
-						<i class="icon-material-outline-account-circle"></i>
-						<input type="text" class="input-text with-border" name="name" id="name" placeholder="First and Last Name" required/>
+					<div className="input-with-icon-left">
+						<i className="icon-material-outline-account-circle"></i>
+						<input type="text" className="input-text with-border" name="name" id="name" placeholder="First and Last Name" required/>
 					</div>
 
-					<div class="input-with-icon-left">
-						<i class="icon-material-baseline-mail-outline"></i>
-						<input type="text" class="input-text with-border" name="emailaddress" id="emailaddress" placeholder="Email Address" required/>
+					<div className="input-with-icon-left">
+						<i className="icon-material-baseline-mail-outline"></i>
+						<input type="text" className="input-text with-border" name="emailaddress" id="emailaddress" placeholder="Email Address" required/>
 					</div>
 
-					<div class="uploadButton">
-						<input class="uploadButton-input" type="file" accept="image/*, application/pdf" id="upload-cv" />
-						<label class="uploadButton-button ripple-effect" for="upload-cv">Select File</label>
-						<span class="uploadButton-file-name">Upload your CV / resume relevant file. <br/> Max. file size: 50 MB.</span>
+					<div className="uploadButton">
+						<input className="uploadButton-input" type="file" accept="image/*, application/pdf" id="upload-cv" />
+						<label className="uploadButton-button ripple-effect" for="upload-cv">Select File</label>
+						<span className="uploadButton-file-name">Upload your CV / resume relevant file. <br/> Max. file size: 50 MB.</span>
 					</div>
 
 				</form>
 				
 				
-				<button class="button margin-top-35 full-width button-sliding-icon ripple-effect" type="submit" form="apply-now-form">Apply Now <i class="icon-material-outline-arrow-right-alt"></i></button>
+				<button className="button margin-top-35 full-width button-sliding-icon ripple-effect" type="submit" form="apply-now-form">Apply Now <i className="icon-material-outline-arrow-right-alt"></i></button>
 
 			</div>
 
@@ -269,47 +308,47 @@ const SingleService = () => {
 	</div>
 </div>  
 
-<div id="small-dialog" class="zoom-anim-dialog mfp-hide dialog-with-tabs">
+<div id="small-dialog" className="zoom-anim-dialog mfp-hide dialog-with-tabs">
 	
-	<div class="sign-in-form ">
+	<div className="sign-in-form ">
 
-		<ul class="popup-tabs-nav">
+		<ul className="popup-tabs-nav">
 			<li><a href="#tab">Apply Now</a></li>
 		</ul>
 
-		<div class="popup-tabs-container">
+		<div className="popup-tabs-container">
 
 			
-			<div class="popup-tab-content" id="tab">
+			<div className="popup-tab-content" id="tab">
 				
 				
-				<div class="welcome-text">
+				<div className="welcome-text">
 					<h3>Attach File With CV</h3>
 				</div>
 					
 				
 				<form method="post" id="apply-now-form">
 
-					<div class="input-with-icon-left">
-						<i class="icon-material-outline-account-circle"></i>
-						<input type="text" class="input-text with-border" name="name" id="name" placeholder="First and Last Name" required/>
+					<div className="input-with-icon-left">
+						<i className="icon-material-outline-account-circle"></i>
+						<input type="text" className="input-text with-border" name="name" id="name" placeholder="First and Last Name" required/>
 					</div>
 
-					<div class="input-with-icon-left">
-						<i class="icon-material-baseline-mail-outline"></i>
-						<input type="text" class="input-text with-border" name="emailaddress" id="emailaddress" placeholder="Email Address" required/>
+					<div className="input-with-icon-left">
+						<i className="icon-material-baseline-mail-outline"></i>
+						<input type="text" className="input-text with-border" name="emailaddress" id="emailaddress" placeholder="Email Address" required/>
 					</div>
 
-					<div class="uploadButton">
-						<input class="uploadButton-input" type="file" accept="image/*, application/pdf" id="upload-cv" />
-						<label class="uploadButton-button ripple-effect" for="upload-cv">Select File</label>
-						<span class="uploadButton-file-name">Upload your CV / resume relevant file. <br/> Max. file size: 50 MB.</span>
+					<div className="uploadButton">
+						<input className="uploadButton-input" type="file" accept="image/*, application/pdf" id="upload-cv" />
+						<label className="uploadButton-button ripple-effect" for="upload-cv">Select File</label>
+						<span className="uploadButton-file-name">Upload your CV / resume relevant file. <br/> Max. file size: 50 MB.</span>
 					</div>
 
 				</form>
 				
 				
-				<button class="button margin-top-35 full-width button-sliding-icon ripple-effect" type="submit" form="apply-now-form">Apply Now <i class="icon-material-outline-arrow-right-alt"></i></button>
+				<button className="button margin-top-35 full-width button-sliding-icon ripple-effect" type="submit" form="apply-now-form">Apply Now <i className="icon-material-outline-arrow-right-alt"></i></button>
 
 			</div>
 

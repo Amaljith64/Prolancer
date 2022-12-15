@@ -2804,7 +2804,7 @@ body #backtotop a {
 
 #titlebar #breadcrumbs span {
 	font-size: 14px
-}
+}	
 
 #titlebar h1,
 #titlebar h2 {
@@ -3547,7 +3547,7 @@ body .comment-content p { padding: 5px 0; }
 	display: inline-block;
 	float: left;
 	padding: 0 17px 0 0;
-	position: absolute;
+	
 	left: 0px;
 	top: -5px;
 }
@@ -6379,7 +6379,6 @@ table.basic-table { margin-bottom: 0; }
 .accordion-body {
 	background: #fff;
 	color: #666;
-	display: none;
 }
 
 .accordion-body__contents {
@@ -10711,7 +10710,7 @@ img.mfp-img {
 }
 
 .popup-tab-content {
-	padding: 50px 35px;
+	padding: 0px 35px;
 	position: relative;
 	z-index: 10;
 	display: inline-block;
@@ -15055,7 +15054,7 @@ ul.dashboard-box-list > li:hover {
     position: relative;
     transform: none;
     top: 0;
-    margin: 5px 0 10px -2px;
+	margin: 5px 4px 10px -2px;
     opacity: 1;
     right: auto;
     display: inline-block;

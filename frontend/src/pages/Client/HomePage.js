@@ -5,7 +5,7 @@ import background from "../../assets/images/image.jpg";
 import { Link } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
-import { listcategory,listservicepost,listjobpost } from "../../actions/postActions";
+import { listcategory,listservicepost,listjobpost,UserProfile } from "../../actions/postActions";
 
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
@@ -13,15 +13,14 @@ import Footer from "../../components/Footer";
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Service from "../../components/Service";
+import AuthContext from "../../context/AuthContext";
 
 const HomePage = () => {
 
-  const showToastMessage = () => {
-    console.log('toast')
-    toast.success('Success Notification !', {
-      position: toast.POSITION.BOTTOM_LEFT
-    });
-};
+  const { user } = useContext(AuthContext);
+
+  const userid = user.user_id
 
   const notify = () => toast.warning("Wowwww so easy!");
   const dispatch = useDispatch();
@@ -35,27 +34,30 @@ const HomePage = () => {
   const joblist = useSelector((state) => state.jobList);
   const { jobpost,jobposterror} = joblist;
 
+  const userdetails = useSelector((state) => state.userProfile);
+  const { userprofile,userprofileerror} = userdetails;
+
 
   useEffect(() => {
-    
-      dispatch(listcategory());
 
-    
-      dispatch(listservicepost());
-      dispatch(listjobpost())
+    dispatch(listcategory());
+    dispatch(listservicepost());
+    dispatch(listjobpost())
+    dispatch(UserProfile(userid))
+
   }, []);
+
 
   return (
     <div>
       <Header />
       <ToastContainer />
-      <div className="margin-top-70"></div>
+      <div className="margin-top-80"></div>
 
-      {loading  ?  <h2>Loading...............</h2>
+      {
+      loading  ?  <div className="loadingspinner"></div>
       : error ? <h3>{error}</h3>
       : 
-      
-      
       <div
         className="intro-banner dark-overlay"
         style={{
@@ -67,9 +69,10 @@ const HomePage = () => {
           <div className="row">
             <div className="col-md-12">
               <div className="banner-headline">
+                           
                 <h3>
                   <strong>
-                    HHire experts freelancers for any job, any time.
+                    Hire experts freelancers for any job, any time.
                   </strong>
                   <br />
                   <span>
@@ -158,133 +161,24 @@ const HomePage = () => {
       </div>
 
       <div className="section gray margin-top-45 padding-top-65 padding-bottom-75">
-        <div className="container" style={{ maxWidth: "1393px" }}>
+        <div className="container" >
           <div className="row">
             <div className="col-xl-12">
               <div className="section-headline margin-top-0 margin-bottom-35">
                 <h3>Recent Tasks</h3>
-                <Link to="tasks-list-layout-1.html" className="headline-link">
+                <Link to="/list_service" className="headline-link">
                   Browse All Tasks
                 </Link>
               </div>
 
               <div className="freelancers-container freelancers-grid-layout margin-top-35">
-                {servicepost?.map((data, id) => {
-                  return (
-                    <div key={id} className="freelancer">
-                      <div className="freelancer-overview">
-                        <div className="freelancer-overview-inner">
-                          <div className="">
-                            <Link
-                              className="photo-box-custom "
-                              style={{ backgroundImage: `url(${data.img})` }}
-                            >
-                              <div className="photo-box-content"></div>
-                            </Link>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="freelancer-details">
-                        <div className="freelancer-details-list">
-                          <ul>
-                            <li>
-                              <img
-                                className="card-image"
-                                src="images/user-avatar-big-02.jpg"
-                                alt=""
-                              />
-                            </li>
-                            <li>
-                            {data.service_title} <strong>${data.service_title}/ hr</strong>
-                            </li>
-                            <li>
-                              <div className="freelancer-rating">
-                                <div
-                                  className="star-rating"
-                                  data-rating="4.2"
-                                ></div>
-                              </div>
-                            </li>
-                          </ul>
-                          <p>{data.service_title}</p>
-                        </div>
-                        <Link to="single-freelancer-profile.html"
-                          className="button button-sliding-icon ripple-effect"
-                        >
-                          View Job{" "}
-                          <i className="icon-material-outline-arrow-right-alt"></i>
-                        </Link>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="section padding-top-65 padding-bottom-65">
-        <div className="container">
-          <div className="row">
-            <div className="col-xl-12">
-              <div className="section-headline centered margin-top-0 margin-bottom-5">
-                <h3>How It Works?</h3>
-              </div>
-            </div>
-
-            <div className="col-xl-4 col-md-4">
-              <div className="icon-box with-line">
-                <div className="icon-box-circle">
-                  <div className="icon-box-circle-inner">
-                    <i className="icon-line-awesome-lock"></i>
-                    <div className="icon-box-check">
-                      <i className="icon-material-outline-check"></i>
-                    </div>
-                  </div>
-                </div>
-                <h3>Create an Account</h3>
-                <p>
-                  Bring to the table win-win survival strategies to ensure
-                  proactive domination going forward.
-                </p>
-              </div>
-            </div>
-
-            <div className="col-xl-4 col-md-4">
-              <div className="icon-box with-line">
-                <div className="icon-box-circle">
-                  <div className="icon-box-circle-inner">
-                    <i className="icon-line-awesome-legal"></i>
-                    <div className="icon-box-check">
-                      <i className="icon-material-outline-check"></i>
-                    </div>
-                  </div>
-                </div>
-                <h3>Post a Task</h3>
-                <p>
-                  Efficiently unleash cross-media information without. Quickly
-                  maximize return on investment.
-                </p>
-              </div>
-            </div>
-
-            <div className="col-xl-4 col-md-4">
-              <div className="icon-box">
-                <div className="icon-box-circle">
-                  <div className="icon-box-circle-inner">
-                    <i className=" icon-line-awesome-trophy"></i>
-                    <div className="icon-box-check">
-                      <i className="icon-material-outline-check"></i>
-                    </div>
-                  </div>
-                </div>
-                <h3>Choose an Expert</h3>
-                <p>
-                  Nanotechnology immersion along the information highway will
-                  close the loop on focusing solely.
-                </p>
+              {servicepost?.map((data, id) => {
+              return (
+                
+                  <Service key={id} data={data} />
+               
+              );
+            }).slice(0,2)}
               </div>
             </div>
           </div>
@@ -293,98 +187,6 @@ const HomePage = () => {
 
       
 
-<div className="section gray padding-top-65 padding-bottom-70">
-	<div className="container">
-  <Carousel
-        additionalTransfrom={0}
-        arrows
-        autoPlaySpeed={3000}
-        centerMode={false}
-        className=""
-        containerclassName="container-with-dots"
-        dotListclassName=""
-        draggable
-        focusOnSelect={false}
-        infinite
-        itemclassName=""
-        keyBoardControl
-        minimumTouchDrag={80}
-        pauseOnHover
-        renderArrowsWhenDisabled={false}
-        renderButtonGroupOutside={false}
-        renderDotsOutside={false}
-        responsive={{
-          desktop: {
-            breakpoint: {
-              max: 3000,
-              min: 1024
-            },
-            items: 3,
-            partialVisibilityGutter: 40
-          },
-          mobile: {
-            breakpoint: {
-              max: 464,
-              min: 0
-            },
-            items: 1,
-            partialVisibilityGutter: 30
-          },
-          tablet: {
-            breakpoint: {
-              max: 1024,
-              min: 464
-            },
-            items: 2,
-            partialVisibilityGutter: 30
-          }
-        }}
-        rewind={false}
-        rewindWithAnimation={false}
-        rtl={false}
-        shouldResetAutoplay
-        showDots={false}
-        sliderclassName=""
-        slidesToSlide={1}
-        swipeable
-      >
-        <div className="freelancer">			
-            <div className="freelancer-overview">
-              <div className="freelancer-overview-inner">
-              
-                <span className="bookmark-icon"></span>
-                
-                <div className="freelancer-avatar">
-                  <div className="verified-badge"></div>
-                  <a href="single-freelancer-profile.html"><img src="images/user-avatar-big-01.jpg" alt="" /></a>
-                </div>
-
-                <div className="freelancer-name">
-                  <h4><a href="single-freelancer-profile.html">Tom Smith <img className="flag" src="images/flags/gb.svg" alt="" title="United Kingdom" data-tippy-placement="top" /></a></h4>
-                  <span>UI/UX Designer</span>
-                </div>
-
-                <div className="freelancer-rating">
-                  <div className="star-rating" data-rating="5.0"></div>
-                </div>
-              </div>
-            </div>
-            <div className="freelancer-details">
-              <div className="freelancer-details-list">
-                <ul>
-                  <li>Location <strong><i className="icon-material-outline-location-on"></i> London</strong></li>
-                  <li>Rate <strong>$60 / hr</strong></li>
-                  <li>Job Success <strong>95%</strong></li>
-                </ul>
-              </div>
-              <a href="single-freelancer-profile.html" className="button button-sliding-icon ripple-effect">View Profile <i className="icon-material-outline-arrow-right-alt"></i></a>
-            </div>
-        </div>
-        
-        
-      </Carousel>
-	</div>
-</div>
 
 <div className="section padding-top-60 padding-bottom-75">
 	<div className="container">

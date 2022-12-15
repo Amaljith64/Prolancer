@@ -17,12 +17,16 @@ import FreelancerHome from './pages/Freelancer/FreelancerHome';
 import FreelancerServicePost from './pages/Freelancer/FreelancerServicePost';
 import Upcoming from './pages/Upcoming';
 import Contact from './pages/Contact';
+import TestFile from './pages/TestFile';
 import SingleService from './pages/Client/SingleService';
 import JobManaging from './pages/Client/JobManaging';
 import Bidders from './pages/Client/Bidders';
 import AdminHome from './pages/Admin/AdminHome';
 import AllPosts from './pages/Admin/AllPosts';
 import AllUsers from './pages/Admin/AllUsers';
+import { Profile } from './pages/Profile';
+import UserProfile from './pages/UserProfile';
+import FreelancerProfile from './pages/Client/FreelancerProfile';
 
 
 function App() {
@@ -40,6 +44,10 @@ function App() {
           <Route element={<ServiceListing/>} path="/list_service"  />
           <Route element={<SingleService/>} path="/single_service/:id"/>
           <Route element={<Contact/>} path="/contact"  />
+          <Route element={<Profile/>} path="/profile/:id"  />
+          <Route element={<UserProfile/>} path="/userprofile"  />
+          <Route element={<AllUsers/>} path="/allusers"  />
+          
           
 
           {/* <PrivateRoute element={<HomePage/>} path="/" exact/> */}
@@ -57,7 +65,11 @@ function App() {
 
           <Route element={<AdminHome/>} path="/admin"/> 
           <Route element={<AllPosts/>} path="/allpost"/> 
-          <Route element={<AllUsers/>} path="/allusers"/> 
+          <Route element={<FreelancerProfile/>} path="/freelancerprofile"/> 
+
+
+          <Route element={<TestFile/>} path="/testfile"/> 
+          
         </Routes>
         </ClientProvider>
         

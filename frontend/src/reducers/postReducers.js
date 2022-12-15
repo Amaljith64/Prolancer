@@ -18,6 +18,16 @@ import{
     SINGLESERVICEPOST_REQUEST,
     SINGLESERVICEPOST_SUCCESS,
     SINGLESERVICEPOST_FAIL,
+
+    USERPROFILE_REQUEST,
+    USERPROFILE_SUCCESS,
+    USERPROFILE_FAIL,
+    ALLUSERS_REQUEST,
+    ALLUSERS_SUCCESS,
+    ALLUSERS_FAIL,
+    SINGLEUSERS_REQUEST,
+    SINGLEUSERS_SUCCESS,
+    SINGLEUSERS_FAIL,
 } from '../constants/postConstants'
 
 
@@ -102,3 +112,48 @@ export const singleservicepostReducer = (state={}, action) =>{
 }
 
 
+export const profileReducer = (state = {userprofile:[]}, action) =>{
+    switch(action.type){
+        case USERPROFILE_REQUEST:
+            return { loading : true , userprofile : []}
+        case USERPROFILE_SUCCESS:
+            return { loading : false , userprofile : action.payload}
+        case USERPROFILE_FAIL:
+            return { loading : false , userprofileerror : action.payload }
+        default :
+        return state
+        
+
+    }
+}
+
+
+export const allUsersReducer = (state = {allusers:[]}, action) =>{
+    switch(action.type){
+        case ALLUSERS_REQUEST:
+            return { alluserloading : true , allusers : []}
+        case ALLUSERS_SUCCESS:
+            return { alluserloading : false , allusers : action.payload}
+        case ALLUSERS_FAIL:
+            return { alluserloading : false , alluserserror : action.payload }
+        default :
+        return state
+        
+
+    }
+}
+
+export const singleUsersReducer = (state = {singleusers:[]}, action) =>{
+    switch(action.type){
+        case SINGLEUSERS_REQUEST:
+            return { singleuserloading : true , singleusers : [] }
+        case SINGLEUSERS_SUCCESS:
+            return { singleuserloading : false , singleusers : action.payload }
+        case SINGLEUSERS_FAIL:
+            return { singleuserloading : false , singleuserserror : action.payload }
+        default :
+        return state
+        
+
+    }
+}

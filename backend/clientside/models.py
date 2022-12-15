@@ -21,7 +21,7 @@ class Category(models.Model):
 
 
 class ClientJobs(models.Model):
-    user = models.ForeignKey(NewUser,on_delete=models.CASCADE)
+    user = models.ForeignKey(NewUser,on_delete=models.CASCADE,related_name='clientjob')
     job_title = models.CharField(max_length=225)
     category = models.ForeignKey(Category,on_delete=models.CASCADE)
     min_budget = models.IntegerField()

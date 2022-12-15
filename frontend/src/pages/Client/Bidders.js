@@ -32,7 +32,6 @@ const Bidders = () => {
 		setReload(!reload)
 	}
 
-
 	console.log(singlejobpost?.service.bidder,'current status')
 
 

@@ -39,25 +39,10 @@ const { jobpost,jobposterror } = joblist;
                     <div className="clearfix"></div>
                 </div>
             </div>            
-            <div className="sidebar-widget">
-                <h3>Category</h3>
-                <select className="selectpicker default" multiple data-selected-text-format="count" data-size="7" title="All Categories" >
-                    <option>Admin Support</option>
-                    <option>Customer Service</option>
-                    <option>Data Analytics</option>
-                    <option>Design & Creative</option>
-                    <option>Legal</option>
-                    <option>Software Developing</option>
-                    <option>IT & Networking</option>
-                    <option>Writing</option>
-                    <option>Translation</option>
-                    <option>Sales & Marketing</option>
-                </select>
-            </div>           
+                     
         </div>      
-        <div className="sidebar-search-button-container">
             <button className="button ripple-effect">Search</button>
-        </div>
+     
     </div>
 </div>
 </div>
@@ -89,7 +74,7 @@ const { jobpost,jobposterror } = joblist;
         </div>
         )})} 
         <div className="clearfix"></div>
-        <div className="pagination-container margin-top-20 margin-bottom-20">
+        {/* <div className="pagination-container margin-top-20 margin-bottom-20">
             <nav className="pagination">
                 <ul>
                     <li className="pagination-arrow"><Link to="#" className="ripple-effect"><i className="icon-material-outline-keyboard-arrow-left"></i></Link></li>
@@ -100,7 +85,7 @@ const { jobpost,jobposterror } = joblist;
                     <li className="pagination-arrow"><Link to="#" className="ripple-effect"><i className="icon-material-outline-keyboard-arrow-right"></i></Link></li>
                 </ul>
             </nav>
-        </div> 
+        </div>  */}
     </div>
 </div>
 </div>      
