@@ -7,6 +7,7 @@ class ClientJobsAdmin(admin.ModelAdmin):
 
 admin.site.register(Category)
 admin.site.register(ClientJobs,ClientJobsAdmin)
+admin.site.register(PayJob)
 
 
 

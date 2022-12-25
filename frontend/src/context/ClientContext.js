@@ -3,6 +3,7 @@ import { createContext, useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import AuthContext from "./AuthContext";
+import { ToastContainer, toast } from 'react-toastify';
 
 const ClientContext = createContext();
 
@@ -21,6 +22,7 @@ export const ClientProvider = ({ children }) => {
 
 
   let jobSubmit = async (e) => {
+
     const config = {
       headers: {
         "Content-type": "multipart/form-data",
@@ -49,41 +51,19 @@ export const ClientProvider = ({ children }) => {
       console.log("Something problem in Posting");
     }
   };
-  let serviceSubmit = async (e) => {
-    const config = {
-      headers: {
-        "Content-type": "multipart/form-data",
-      },
-    };
-    let response = await axios.post(
-      "freelancer/postservice/",
-      {
-        user: user.user_id,
-        service_title: e.service_title,
-        category: e.category,
-        Price: e.Price,
-        response_time: e.response_time,
-        skills: e.skills,
-        language: e.language,
-        service_description: e.service_description,
-        img: e.img[0],
-      },
-      config
-    );
+ 
 
-    if (response.status === 200) {
-      Navigate("/freelancer");
-
-      console.log("Service Posted");
-    } else {
-      console.log("Something problem in Posting");
-    }
-  };
-
+  let searchHandler = (e) => {
+    if (e) {
+      Navigate(`?keyword=${e}&page=1`)
+  } else {
+      Navigate('/list_job')
+  }
+}
 
   let contextData = {
     jobSubmit: jobSubmit,
-    serviceSubmit: serviceSubmit,
+    searchHandler,
   };
   return (
     <ClientContext.Provider value={contextData}>

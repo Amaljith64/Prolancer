@@ -3,16 +3,28 @@ import Header from '../../components/Header'
 import Form from 'react-bootstrap/Form';
 import { useForm } from "react-hook-form";
 import ClientContext from '../../context/ClientContext'
+import AuthContext from '../../context/AuthContext'
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function FreelancerServicePost() {
+
+	const { user } = useContext(AuthContext);
+	var Navigate = useNavigate();
 
 
   const categoryList = useSelector((state) => state.listCategory);
   const { category } = categoryList;
 
-  let {serviceSubmit} = useContext(ClientContext)
+  const userdetails = useSelector((state) => state.userProfile);
+  const { userprofile,userprofileerror} = userdetails;
+
+  console.log(userprofile,'from post')
+
 
     const { register, handleSubmit, formState: { errors } } = useForm({		
         mode: "onChange"
@@ -56,11 +68,63 @@ function FreelancerServicePost() {
 		}
     };
 
+	let serviceSubmit = async (e) => {
+		var myDate = new Date();
+		console.log(myDate,'its dateeeeeeee')
+		const active_membership =userprofile.active_membership
+		{active_membership == 'Basic' ? (myDate.setDate(myDate.getDate() + 3))
+		: active_membership == 'Standard' ? (myDate.setDate(myDate.getDate() + 6))
+		: (myDate.setDate(myDate.getDate() + 10) )}
+
+		const config = {
+		  headers: {
+			"Content-type": "multipart/form-data",
+		  },
+		};
+		if (active_membership === null) {
+			toast.error("You don't have a membership")
+			
+		}
+		else{
+			let response = await axios.post(
+			"freelancer/postservice/",
+			{
+				user: user.user_id,
+				service_title: e.service_title,
+				category: e.category,
+				Price: e.Price,
+				response_time: e.response_time,
+				skills: e.skills,
+				language: e.language,
+				service_description: e.service_description,
+				img: e.img[0],
+				expiry_on: myDate,
+			},
+			config
+			);
+			console.log(response,'respppppppp')
+		
+			if (response.data === 200) {
+			toast.success("Service Posted")
+			Navigate("/freelancer");
+		
+			console.log("Service Posted");
+			}
+			else if (response.data.status === 402){
+
+				console.log(response.data.Message)
+				toast.warning(response.data.Message)
+
+			}
+		}
+
+	  };
 
 
   return (
     <>
     <Header/>
+	<ToastContainer />
 
     <div className="margin-top-70"></div>
     

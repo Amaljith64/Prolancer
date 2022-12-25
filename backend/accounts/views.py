@@ -27,3 +27,24 @@ class AllUsers(APIView):
         else:
             print(alluserserializer.errors,'AllUser erooro')
             return Response( status= status.HTTP_404_NOT_FOUND)
+
+
+class EducationView(APIView):
+    def post(self,request):
+        education = EducatationSerializer(data=request.data)
+        if education.is_valid():
+            education.save()
+            print('validdddddddddd')
+            return Response (status=status.HTTP_201_CREATED)
+        else:
+            print(education.errors,'errrrrrrrrrrr')
+            return Response(status=status.HTTP_404_NOT_FOUND)
+class EditEducationView(APIView):
+    def patch(self,request,id):
+        education = Education.objects.filter(id=id)
+        educationserializer = EducatationSerializer(data=request.data)
+        if educationserializer.is_valid():
+            education.update(educationserializer.data)
+            return Response (status=status.HTTP_201_CREATED)
+        else:
+            return Response(status=status.HTTP_404_NOT_FOUND)

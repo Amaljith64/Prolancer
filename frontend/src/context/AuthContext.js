@@ -35,8 +35,6 @@ export const AuthProvider = ({children}) => {
                 Navigate('/freelancer')
             else
                 Navigate('/')
-
-        
         }else{
             alert('Something went wrong!')
         }
@@ -57,20 +55,55 @@ export const AuthProvider = ({children}) => {
     
         let response = await axios.post("/api/signup/",
         {'username':e.name, 'email':e.email, 'password':e.password})
-        
-      
     
         if (response.status === 200){
             
           Navigate("/login");
              
-             console.log("register Successful");
+            console.log("register Successful");
             }
             else{
               
               
-              console.log("SOmething problem in register");
+            console.log("SOmething problem in register");
         }
+    }
+
+    let googleSignin = async(e)=>{
+        console.log('google signinn..........')
+        console.log(e,'event')
+        var userObject =jwt_decode(e.credential)
+        console.log(userObject,'from googleeeee')
+
+        let response = await axios.post("/api/googlesignin/",
+        {'username':userObject.name, 'email':userObject.email, 'password':userObject.sub})
+    
+        if (response.status === 200){
+            
+            let response = await fetch('/api/token/', {
+                method:'POST',
+                headers:{
+                    'Content-Type':'application/json'
+                },
+                body:JSON.stringify({'email':userObject.email, 'password':userObject.sub
+            })
+            })
+            let data = await response.json()
+            setAuthTokens(data)
+            setUser(jwt_decode(data.access))
+            localStorage.setItem('authTokens', JSON.stringify(data))
+            if ((jwt_decode(data.access)).is_freelancer)
+                Navigate('/freelancer')
+            else
+                Navigate('/')
+             
+            console.log("google login Successful");
+            }
+        
+        else
+            console.log("Something problem in google loginn");
+        
+
     }
 
 
@@ -107,6 +140,7 @@ export const AuthProvider = ({children}) => {
         loginUser:loginUser,
         logoutUser:logoutUser,
         userSignup:userSignup,
+        googleSignin:googleSignin,
     }
 
 

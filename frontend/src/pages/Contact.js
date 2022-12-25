@@ -1,5 +1,6 @@
 import React from 'react'
 import Header from '../components/Header'
+import { Link } from "react-router-dom";
 
 const Contact = () => {
   return (
@@ -17,8 +18,8 @@ const Contact = () => {
 				
 				<nav id="breadcrumbs" className="dark">
 					<ul>
-						<li><a href="#">Home</a></li>
-						<li><a href="#">Pages</a></li>
+						<li><Link to="#">Home</Link></li>
+						<li><Link to="#">Pages</Link></li>
 						<li>Contact</li>
 					</ul>
 				</nav>

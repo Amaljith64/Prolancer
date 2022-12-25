@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Category,ClientJobs,JobReport
+from .models import Category,ClientJobs,JobReport,PayJob
 from accounts.models import NewUser
 
 class UserAccountSerializer(serializers.ModelSerializer):
@@ -31,3 +31,9 @@ class JobReportSerializer(serializers.ModelSerializer):
     class Meta:
         model = JobReport
         fields = "__all__"
+
+
+class PayJobSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PayJob
+        fields = '__all__'

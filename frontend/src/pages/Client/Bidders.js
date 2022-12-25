@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
 
 
-import { Singlejobpost } from "../../actions/postActions";
+import { Singlejobpost, Singleservicepost } from "../../actions/postActions";
 import axios from 'axios';
 
 
@@ -47,13 +47,13 @@ const Bidders = () => {
 			
 			<div className="dashboard-headline">
 				<h3>Manage Bidders</h3>
-				<span className="margin-top-7">Bids for <a href="#">{singlejobpost?.service.job_title}</a></span>
+				<span className="margin-top-7">Bids for <Link to="#">{singlejobpost?.service.job_title}</Link></span>
 
 				
 				<nav id="breadcrumbs" className="dark">
 					<ul>
-						<li><a href="#">Home</a></li>
-						{/* <li><a href="#">Dashboard</a></li> */}
+						<li><Link to="#">Home</Link></li>
+						{/* <li><Link to="#">Dashboard</Link></li> */}
 						<li>Manage Bidders</li>
 					</ul>
 				</nav>
@@ -79,6 +79,9 @@ const Bidders = () => {
 
 						<div className="content">
 							<ul className="dashboard-box-list">
+							{singlejobpost?.bids === undefined ? <h4> Empty </h4>
+							:	
+							<>
                             {singlejobpost?.bids.map((x) => {
 							if (singlejobpost?.service.bidder == false){
 					        return(
@@ -90,15 +93,15 @@ const Bidders = () => {
 											
 											<div className="freelancer-avatar">
 												<div className="verified-badge"></div>
-												<a href="#"><img src="/images/user-avatar-placeholder.png" alt=""/></a>
+												<Link to="#"><img src="/images/user-avatar-placeholder.png" alt=""/></Link>
 											</div>
 
 											
 											<div className="freelancer-name">
-												<h4><a href="#">{x.user.username}</a></h4>
+												<h4><Link to="#">{x.user.username}</Link></h4>
 
 												
-												<span className="freelancer-detail-item"><a href="#"><i className="icon-feather-mail"></i>{x.user.email}</a></span>
+												<span className="freelancer-detail-item"><Link to="#"><i className="icon-feather-mail"></i>{x.user.email}</Link></span>
 												{/* <span className="freelancer-detail-item"><i className="icon-feather-phone"></i> (+48) 123-456-789</span> */}
 
 										
@@ -114,8 +117,8 @@ const Bidders = () => {
 													:
 													(<Link onClick={(e)=>submitHandler(x.id)} className="popup-with-zoom-anim button ripple-effect"><i className="icon-material-outline-check"></i> Accepted</Link>)
 													}
-													<a href="#small-dialog-2" className="popup-with-zoom-anim button dark ripple-effect"><i className="icon-feather-mail"></i> Send Message</a>
-													<a href="#" className="button gray ripple-effect ico" title="Remove Bid" data-tippy-placement="top"><i className="icon-feather-trash-2"></i></a>
+													<Link to="#small-dialog-2" className="popup-with-zoom-anim button dark ripple-effect"><i className="icon-feather-mail"></i> Send Message</Link>
+													<Link to="#" className="button gray ripple-effect ico" title="Remove Bid" data-tippy-placement="top"><i className="icon-feather-trash-2"></i></Link>
 												</div>
 											</div>
 										</div>
@@ -133,15 +136,15 @@ const Bidders = () => {
 											
 											<div className="freelancer-avatar">
 												<div className="verified-badge"></div>
-												<a href="#"><img src="/images/user-avatar-placeholder.png" alt=""/></a>
+												<Link to="#"><img src="/images/user-avatar-placeholder.png" alt=""/></Link>
 											</div>
 
 											
 											<div className="freelancer-name">
-												<h4><a href="#">{x.user.username}</a></h4>
+												<h4><Link to="#">{x.user.username}</Link></h4>
 
 												
-												<span className="freelancer-detail-item"><a href="#"><i className="icon-feather-mail"></i>{x.user.email}</a></span>
+												<span className="freelancer-detail-item"><Link to="#"><i className="icon-feather-mail"></i>{x.user.email}</Link></span>
 												{/* <span className="freelancer-detail-item"><i className="icon-feather-phone"></i> (+48) 123-456-789</span> */}
 
 										
@@ -157,8 +160,8 @@ const Bidders = () => {
 													:
 													(<Link oonClick={(e)=>submitHandler(x.id)} className="popup-with-zoom-anim button ripple-effect"><i className="icon-material-outline-check"></i> Accepted</Link>)
 													}
-													<a href="#small-dialog-2" className="popup-with-zoom-anim button dark ripple-effect"><i className="icon-feather-mail"></i> Send Message</a>
-													<a href="#" className="button gray ripple-effect ico" title="Remove Bid" data-tippy-placement="top"><i className="icon-feather-trash-2"></i></a>
+													<Link to="#small-dialog-2" className="popup-with-zoom-anim button dark ripple-effect"><i className="icon-feather-mail"></i> Send Message</Link>
+													<Link to="#" className="button gray ripple-effect ico" title="Remove Bid" data-tippy-placement="top"><i className="icon-feather-trash-2"></i></Link>
 												</div>
 											</div>
 										</div>
@@ -170,15 +173,15 @@ const Bidders = () => {
 											
 											<div className="freelancer-avatar">
 												<div className="verified-badge"></div>
-												<a href="#"><img src="/images/user-avatar-placeholder.png" alt=""/></a>
+												<Link to="#"><img src="/images/user-avatar-placeholder.png" alt=""/></Link>
 											</div>
 
 											
 											<div className="freelancer-name">
-												<h4><a href="#">{x.user.username} </a></h4>
+												<h4><Link to="#">{x.user.username} </Link></h4>
 
 												
-												<span className="freelancer-detail-item"><a href="#"><i className="icon-feather-mail"></i>{x.user.email}</a></span>
+												<span className="freelancer-detail-item"><Link to="#"><i className="icon-feather-mail"></i>{x.user.email}</Link></span>
 												{/* <span className="freelancer-detail-item"><i className="icon-feather-phone"></i> (+48) 123-456-789</span> */}
 
 												
@@ -199,8 +202,8 @@ const Bidders = () => {
 													:
 													(<Link onClick={submitHandler} className="popup-with-zoom-anim button ripple-effect"><i className="icon-material-outline-check"></i> Accepted</Link>)
 													}
-													<a href="#small-dialog-2" className="popup-with-zoom-anim button dark ripple-effect"><i className="icon-feather-mail"></i> Send Message</a>
-													<a href="#" className="button gray ripple-effect ico" title="Remove Bid" data-tippy-placement="top"><i className="icon-feather-trash-2"></i></a>
+													<Link to="#small-dialog-2" className="popup-with-zoom-anim button dark ripple-effect"><i className="icon-feather-mail"></i> Send Message</Link>
+													<Link to="#" className="button gray ripple-effect ico" title="Remove Bid" data-tippy-placement="top"><i className="icon-feather-trash-2"></i></Link>
 												</div>
 											</div>
 										</div>
@@ -212,6 +215,8 @@ const Bidders = () => {
 							}
 							)					
 							}
+							</>
+}
 							</ul>
 						</div>
 					</div>
@@ -228,24 +233,24 @@ const Bidders = () => {
 				</div>
 				<ul className="footer-social-links">
 					<li>
-						<a href="#" title="Facebook" data-tippy-placement="top">
+						<Link to="#" title="Facebook" data-tippy-placement="top">
 							<i className="icon-brand-facebook-f"></i>
-						</a>
+						</Link>
 					</li>
 					<li>
-						<a href="#" title="Twitter" data-tippy-placement="top">
+						<Link to="#" title="Twitter" data-tippy-placement="top">
 							<i className="icon-brand-twitter"></i>
-						</a>
+						</Link>
 					</li>
 					<li>
-						<a href="#" title="Google Plus" data-tippy-placement="top">
+						<Link to="#" title="Google Plus" data-tippy-placement="top">
 							<i className="icon-brand-google-plus-g"></i>
-						</a>
+						</Link>
 					</li>
 					<li>
-						<a href="#" title="LinkedIn" data-tippy-placement="top">
+						<Link to="#" title="LinkedIn" data-tippy-placement="top">
 							<i className="icon-brand-linkedin-in"></i>
-						</a>
+						</Link>
 					</li>
 				</ul>
 				<div className="clearfix"></div>

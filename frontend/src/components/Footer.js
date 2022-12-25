@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -31,24 +32,24 @@ const Footer = () => {
 								<div className="footer-row-inner">
 									<ul className="footer-social-links">
 										<li>
-											<a href="#" title="Facebook" data-tippy-placement="bottom" data-tippy-theme="light">
+											<Link to="#" title="Facebook" data-tippy-placement="bottom" data-tippy-theme="light">
 												<i className="icon-brand-facebook-f"></i>
-											</a>
+											</Link>
 										</li>
 										<li>
-											<a href="#" title="Twitter" data-tippy-placement="bottom" data-tippy-theme="light">
+											<Link to="#" title="Twitter" data-tippy-placement="bottom" data-tippy-theme="light">
 												<i className="icon-brand-twitter"></i>
-											</a>
+											</Link>
 										</li>
 										<li>
-											<a href="#" title="Google Plus" data-tippy-placement="bottom" data-tippy-theme="light">
+											<Link to="#" title="Google Plus" data-tippy-placement="bottom" data-tippy-theme="light">
 												<i className="icon-brand-google-plus-g"></i>
-											</a>
+											</Link>
 										</li>
 										<li>
-											<a href="#" title="LinkedIn" data-tippy-placement="bottom" data-tippy-theme="light">
+											<Link to="#" title="LinkedIn" data-tippy-placement="bottom" data-tippy-theme="light">
 												<i className="icon-brand-linkedin-in"></i>
-											</a>
+											</Link>
 										</li>
 									</ul>
 									<div className="clearfix"></div>
@@ -86,10 +87,10 @@ const Footer = () => {
 					<div className="footer-links">
 						<h3>For Candidates</h3>
 						<ul>
-							<li><a href="#"><span>Browse Jobs</span></a></li>
-							<li><a href="#"><span>Add Resume</span></a></li>
-							<li><a href="#"><span>Job Alerts</span></a></li>
-							<li><a href="#"><span>My Bookmarks</span></a></li>
+							<li><Link to="#"><span>Browse Jobs</span></Link></li>
+							<li><Link to="#"><span>Add Resume</span></Link></li>
+							<li><Link to="#"><span>Job Alerts</span></Link></li>
+							<li><Link to="#"><span>My Bookmarks</span></Link></li>
 						</ul>
 					</div>
 				</div>
@@ -99,10 +100,10 @@ const Footer = () => {
 					<div className="footer-links">
 						<h3>For Employers</h3>
 						<ul>
-							<li><a href="#"><span>Browse Candidates</span></a></li>
-							<li><a href="#"><span>Post a Job</span></a></li>
-							<li><a href="#"><span>Post a Task</span></a></li>
-							<li><a href="#"><span>Plans & Pricing</span></a></li>
+							<li><Link to="#"><span>Browse Candidates</span></Link></li>
+							<li><Link to="#"><span>Post a Job</span></Link></li>
+							<li><Link to="#"><span>Post a Task</span></Link></li>
+							<li><Link to="#"><span>Plans & Pricing</span></Link></li>
 						</ul>
 					</div>
 				</div>
@@ -112,9 +113,9 @@ const Footer = () => {
 					<div className="footer-links">
 						<h3>Helpful Links</h3>
 						<ul>
-							<li><a href="#"><span>Contact</span></a></li>
-							<li><a href="#"><span>Privacy Policy</span></a></li>
-							<li><a href="#"><span>Terms of Use</span></a></li>
+							<li><Link to="#"><span>Contact</span></Link></li>
+							<li><Link to="#"><span>Privacy Policy</span></Link></li>
+							<li><Link to="#"><span>Terms of Use</span></Link></li>
 						</ul>
 					</div>
 				</div>
@@ -124,8 +125,8 @@ const Footer = () => {
 					<div className="footer-links">
 						<h3>Account</h3>
 						<ul>
-							<li><a href="#"><span>Log In</span></a></li>
-							<li><a href="#"><span>My Account</span></a></li>
+							<li><Link to="#"><span>Log In</span></Link></li>
+							<li><Link to="#"><span>My Account</span></Link></li>
 						</ul>
 					</div>
 				</div>

@@ -7,7 +7,7 @@ from clientside.models import Category
 
 
 class FreelancerService(models.Model):
-    user = models.ForeignKey(NewUser,on_delete=models.CASCADE)
+    user = models.ForeignKey(NewUser,on_delete=models.CASCADE,related_name='getservices')
     service_title = models.CharField(max_length=225)
     category = models.ForeignKey(Category,on_delete=models.CASCADE)
     Price = models.IntegerField()
@@ -18,6 +18,8 @@ class FreelancerService(models.Model):
     img = models.ImageField(upload_to='image',null=True)
     servicetime = models.DateTimeField(auto_now_add=True)
     reported = models.BooleanField(default= False,null=True)
+    expired = models.BooleanField(default= False,null=True)
+    expiry_on = models.DateTimeField(null=True)
 
     def __str__(self):
         return self.service_title
@@ -34,3 +36,10 @@ class ServiceReport(models.Model):
     reportuser = models.ForeignKey(NewUser,on_delete=models.CASCADE)
     service = models.ForeignKey(FreelancerService,on_delete=models.CASCADE)
     reportedtime = models.DateTimeField(auto_now_add=True)
+
+
+class BuyService(models.Model):
+    serviceid = models.ForeignKey(FreelancerService,on_delete=models.CASCADE)
+    user = models.ForeignKey(NewUser,on_delete=models.CASCADE)
+    price = models.IntegerField()
+    payment_method = models.CharField(max_length=225)

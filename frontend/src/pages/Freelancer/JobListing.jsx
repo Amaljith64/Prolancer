@@ -1,13 +1,48 @@
-import React from 'react'
+import React,{useContext,useEffect} from 'react'
 import Header from '../../components/Header'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Footer from '../../components/Footer';
+import SearchBox from '../../components/SearchBox';
+import { useSearchParams } from 'react-router-dom';
+import { listcategory, listjobpost } from "../../actions/postActions";
+import Paginate from '../../components/Paginate';
+import { useState } from 'react';
+import ClientContext from '../../context/ClientContext'
+
 
 const JobListing = () => {
 
+const dispatch = useDispatch();
+
+let {searchHandler} = useContext(ClientContext)
+
 const joblist = useSelector((state) => state.jobList);
 const { jobpost,jobposterror } = joblist;
+
+const categoryList = useSelector((state) => state.listCategory);
+const { loading, category, error } = categoryList;
+
+console.log(category)
+
+const[choosedCategory,setchoosedCategory] = useState(null)
+
+console.log(choosedCategory,'choosedd')
+
+const [searchParams, setSearchParams] = useSearchParams();
+const someQueryParam = searchParams.get("keyword");
+
+
+
+
+useEffect(() => {
+    console.log('useeffect called')
+    setchoosedCategory(null)
+
+    dispatch(listjobpost(searchParams))
+
+}, [searchParams])
+
 
     return (
 <>
@@ -19,21 +54,29 @@ const { jobpost,jobposterror } = joblist;
 <div className="full-page-sidebar">
     <div className="full-page-sidebar-inner" data-simplebar>
         <div className="sidebar-container">   
+            
             <div className="sidebar-widget">
-                <h3>Location</h3>
+                <h3>Search</h3>
                 <div className="input-with-icon">
                     <div id="autocomplete-container">
-                        <input id="autocomplete-input" type="text" placeholder="Location" />
+                       <SearchBox />
                     </div>
-                    <i className="icon-material-outline-location-on"></i>
+                   
                 </div>
             </div> 
             <div className="sidebar-widget">
-                <h3>Keywords</h3>
+                <h3>Category</h3>
                 <div className="keywords-container">
                     <div className="keyword-input-container">
-                        <input type="text" className="keyword-input" placeholder="e.g. job title"/>
-                        <button className="keyword-input-button ripple-effect"><i className="icon-material-outline-add"></i></button>
+                    <div className="task-tags">
+                        {category?.map((x)=>{
+                            return(
+                               
+						    <span   onClick={()=>searchHandler(x.category_name)} className='margin-left'>{x.category_name}</span>
+                            )
+                        })}
+						
+					</div>
                     </div>
                     <div className="keywords-list">
                     <div className="clearfix"></div>
@@ -41,7 +84,6 @@ const { jobpost,jobposterror } = joblist;
             </div>            
                      
         </div>      
-            <button className="button ripple-effect">Search</button>
      
     </div>
 </div>
@@ -50,8 +92,15 @@ const { jobpost,jobposterror } = joblist;
 
 <div className="full-page-content-container" data-simplebar>
     <div className="full-page-content-inner">
-        <h3 className="page-title">Jobs Available</h3>
-        {jobpost.map((data,id) => {
+        <h3 className="page-title">Jobs Availablle</h3>
+        {jobpost?.jobs?.filter(jobs => {
+            if(choosedCategory === null){
+                return jobs?.job_title.includes('')
+            }
+            else{
+                return jobs.category === choosedCategory
+            }
+        }).map((data,id) => {
             return (
         <div key={data.id} className="listings-container grid-layout margin-top-35">
             
@@ -74,18 +123,9 @@ const { jobpost,jobposterror } = joblist;
         </div>
         )})} 
         <div className="clearfix"></div>
-        {/* <div className="pagination-container margin-top-20 margin-bottom-20">
-            <nav className="pagination">
-                <ul>
-                    <li className="pagination-arrow"><Link to="#" className="ripple-effect"><i className="icon-material-outline-keyboard-arrow-left"></i></Link></li>
-                    <li><Link to="#" className="ripple-effect">1</Link></li>
-                    <li><Link to="#" className="ripple-effect current-page">2</Link></li>
-                    <li><Link to="#" className="ripple-effect">3</Link></li>
-                    <li><Link to="#" className="ripple-effect">4</Link></li>
-                    <li className="pagination-arrow"><Link to="#" className="ripple-effect"><i className="icon-material-outline-keyboard-arrow-right"></i></Link></li>
-                </ul>
-            </nav>
-        </div>  */}
+    
+            <Paginate pages={jobpost?.pages} page={jobpost?.page} />
+            
     </div>
 </div>
 </div>      

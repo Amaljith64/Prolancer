@@ -1,11 +1,29 @@
-import React, {useContext} from 'react'
+import React, {useContext,useEffect,useState} from 'react'
 import AuthContext from '../context/AuthContext'
-import Header from '../components/Header'
 import { Link } from "react-router-dom";
 
 const LoginPage = () => {
-    let {loginUser} = useContext(AuthContext)
-    
+
+    let {loginUser,googleSignin} = useContext(AuthContext)
+
+	function handleCallbackResponse(response){
+		googleSignin(response)
+	}
+
+	useEffect(() => {
+		/* global google */
+		google.accounts.id.initialize({
+			client_id:"343457976454-bvvnulla58ojkknd3l9jtb5kd10aq8ns.apps.googleusercontent.com",
+			callback:handleCallbackResponse
+			
+		});
+		google.accounts.id.renderButton(
+			document.getElementById("signInDiv"),
+			{ theme: 'outline',size: "large"}
+		);
+	  
+	}, [])
+
     return (
       
         <div>
@@ -51,9 +69,8 @@ const LoginPage = () => {
 
 						<div className="social-login-separator"><span>or</span></div>
 						<div className="social-login-buttons" style={{justifyContent: 'center'}}>
-							
-							<button className="google-login ripple-effect"><i className="icon-brand-google-plus-g"></i> Log In
-								via Google+</button>
+						<div id="signInDiv"></div>
+
 						</div>
 					</div>
 				</div>

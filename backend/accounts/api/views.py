@@ -43,19 +43,8 @@ def getRoutes(request):
 
     return Response(routes)
 
-
-@api_view(['GET'])
-# @permission_classes([IsAuthenticated])
-def getNotes(request):
-    user=Userprofile.objects.all()
-
-    serializer = UserprofileSerializer(user,many=True)
-    return Response(serializer.data)
-
-
 class Usersignup(APIView):
     def post(self,request):
-
         body = request.body.decode('utf-8')
         body = json.loads(body)
         username = body['username']
@@ -63,6 +52,19 @@ class Usersignup(APIView):
         password=body['password']
         NewUser.objects.create_user(username=username, email=email,password=password
         )
+        return Response(200)
+class GoogleSignup(APIView):
+    def post(self,request):
+        data = request.data
+        if NewUser.objects.filter(email=data['email']):
+            print('exixttttttttttttttt')
+            return Response(200)
+        username = data['username']
+        email = data['email']
+        password=data['password']
+        NewUser.objects.create_user(username=username, email=email,password=password
+        )
+        print('created googleeeeeeeeeeeeeeeeeee')
         return Response(200)
 
 

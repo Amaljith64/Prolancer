@@ -25,19 +25,19 @@ const FreelancerProfile = () => {
   return (
 	<>
 	<Header/>
-	<div class="clearfix"></div>
+	<div className="clearfix"></div>
 
-<div class="margin-top-100"></div>
-	<div class="container">
-	<div class="row">
-		<div class="col-xl-3 col-lg-4">
-			<div class="sidebar-container">
+<div className="margin-top-100"></div>
+	<div className="container">
+	<div className="row">
+		<div className="col-xl-3 col-lg-4">
+			<div className="sidebar-container">
 								
 
 				
-				<div class="sidebar-widget">
+				<div className="sidebar-widget">
 					<h3>Category</h3>
-					<select class="selectpicker default" multiple data-selected-text-format="count" data-size="7" title="All Categories" >
+					<select className="selectpicker default" multiple data-selected-text-format="count" data-size="7" title="All Categories" >
 						<option>Admin Support</option>
 						<option>Customer Service</option>
 						<option>Data Analytics</option>
@@ -51,115 +51,115 @@ const FreelancerProfile = () => {
 					</select>
 				</div>
 				
-				<div class="sidebar-widget">
+				<div className="sidebar-widget">
 					<h3>Keywords</h3>
-					<div class="keywords-container">
-						<div class="keyword-input-container">
-							<input type="text" class="keyword-input" placeholder="e.g. task title"/>
-							<button class="keyword-input-button ripple-effect"><i class="icon-material-outline-add"></i></button>
+					<div className="keywords-container">
+						<div className="keyword-input-container">
+							<input type="text" className="keyword-input" placeholder="e.g. task title"/>
+							<button className="keyword-input-button ripple-effect"><i className="icon-material-outline-add"></i></button>
 						</div>
-						<div class="keywords-list"></div>
-						<div class="clearfix"></div>
+						<div className="keywords-list"></div>
+						<div className="clearfix"></div>
 					</div>
 				</div>
 				
-				<div class="sidebar-widget">
+				<div className="sidebar-widget">
 					<h3>Skills</h3>
 
-					<div class="tags-container">
-						<div class="tag">
+					<div className="tags-container">
+						<div className="tag">
 							<input type="checkbox" id="tag1"/>
 							<label for="tag1">front-end dev</label>
 						</div>
-						<div class="tag">
+						<div className="tag">
 							<input type="checkbox" id="tag2"/>
 							<label for="tag2">angular</label>
 						</div>
-						<div class="tag">
+						<div className="tag">
 							<input type="checkbox" id="tag3"/>
 							<label for="tag3">react</label>
 						</div>
-						<div class="tag">
+						<div className="tag">
 							<input type="checkbox" id="tag4"/>
 							<label for="tag4">vue js</label>
 						</div>
-						<div class="tag">
+						<div className="tag">
 							<input type="checkbox" id="tag5"/>
 							<label for="tag5">web apps</label>
 						</div>
-						<div class="tag">
+						<div className="tag">
 							<input type="checkbox" id="tag6"/>
 							<label for="tag6">design</label>
 						</div>
-						<div class="tag">
+						<div className="tag">
 							<input type="checkbox" id="tag7"/>
 							<label for="tag7">wordpress</label>
 						</div>
 					</div>
-					<div class="clearfix"></div>
+					<div className="clearfix"></div>
 
-					<div class="keywords-container margin-top-20">
-						<div class="keyword-input-container">
-							<input type="text" class="keyword-input" placeholder="add more skills"/>
-							<button class="keyword-input-button ripple-effect"><i class="icon-material-outline-add"></i></button>
+					<div className="keywords-container margin-top-20">
+						<div className="keyword-input-container">
+							<input type="text" className="keyword-input" placeholder="add more skills"/>
+							<button className="keyword-input-button ripple-effect"><i className="icon-material-outline-add"></i></button>
 						</div>
-						<div class="keywords-list"></div>
-						<div class="clearfix"></div>
+						<div className="keywords-list"></div>
+						<div className="clearfix"></div>
 
 					</div>
 				</div>
-				<div class="clearfix"></div>
+				<div className="clearfix"></div>
 			</div>
 		</div>
-		<div class="col-xl-9 col-lg-8 content-left-offset">
+		<div className="col-xl-9 col-lg-8 content-left-offset">
 
-			<h3 class="page-title">Search Results</h3>
+			<h3 className="page-title">Search Results</h3>
 			{
 				alluserloading ? <div className="loadingspinner"></div>
 				: alluserserror ? <h3>{alluserserror}</h3>
 				:
-				<div class="freelancers-container freelancers-list-layout compact-list margin-top-35">
+				<div className="freelancers-container freelancers-list-layout compact-list margin-top-35">
 					{allusers?.map((data,id)=>{
 						return(
 
-				<div key={data.id} class="freelancer">
+				<div key={data.id} className="freelancer">
 
 					
-					<div class="freelancer-overview">
-						<div class="freelancer-overview-inner">
+					<div className="freelancer-overview">
+						<div className="freelancer-overview-inner">
 							
 							
-							<span class="bookmark-icon"></span>
+							<span className="bookmark-icon"></span>
 							
 							
-							<div class="freelancer-avatar">
-								<div class="verified-badge"></div>
+							<div className="freelancer-avatar">
+								<div className="verified-badge"></div>
 								<Link to={`/profile/${data.id}`}><img src="images/user-avatar-big-01.jpg" alt=""/></Link>
 							</div>
 							
 
 							
-							<div class="freelancer-name">
-								<h4><a href="#">{data.username} <img class="flag" src="images/flags/gb.svg" alt="" title="United Kingdom" data-tippy-placement="top"/></a></h4>
+							<div className="freelancer-name">
+								<h4><Link to="#">{data.username} <img className="flag" src="images/flags/gb.svg" alt="" title="United Kingdom" data-tippy-placement="top"/></Link></h4>
 								<span>UI/UX Designer</span>
 								
-								<div class="freelancer-rating">
-									<div class="star-rating" data-rating="4.9"></div>
+								<div className="freelancer-rating">
+									<div className="star-rating" data-rating="4.9"></div>
 								</div>
 							</div>
 						</div>
 					</div>
 					
 					
-					<div class="freelancer-details">
-						<div class="freelancer-details-list">
+					<div className="freelancer-details">
+						<div className="freelancer-details-list">
 							<ul>
-								<li>Location <strong><i class="icon-material-outline-location-on"></i> London</strong></li>
+								<li>Location <strong><i className="icon-material-outline-location-on"></i> London</strong></li>
 								<li>Rate <strong>$60 / hr</strong></li>
 								<li>Job Success <strong>95%</strong></li>
 							</ul>
 						</div>
-						<a href="single-freelancer-profile.html" class="button button-sliding-icon ripple-effect">View Profile <i class="icon-material-outline-arrow-right-alt"></i></a>
+						<Link to="single-freelancer-profile.html" className="button button-sliding-icon ripple-effect">View Profile <i className="icon-material-outline-arrow-right-alt"></i></Link>
 					</div>
 				</div>
 				)})}		
@@ -168,19 +168,19 @@ const FreelancerProfile = () => {
 			
 			}
 
-			<div class="clearfix"></div>
-			{/* <div class="row">
-				<div class="col-md-12">
+			<div className="clearfix"></div>
+			{/* <div className="row">
+				<div className="col-md-12">
 					
-					<div class="pagination-container margin-top-40 margin-bottom-60">
-						<nav class="pagination">
+					<div className="pagination-container margin-top-40 margin-bottom-60">
+						<nav className="pagination">
 							<ul>
-								<li class="pagination-arrow"><a href="#" class="ripple-effect"><i class="icon-material-outline-keyboard-arrow-left"></i></a></li>
-								<li><a href="#" class="ripple-effect">1</a></li>
-								<li><a href="#" class="current-page ripple-effect">2</a></li>
-								<li><a href="#" class="ripple-effect">3</a></li>
-								<li><a href="#" class="ripple-effect">4</a></li>
-								<li class="pagination-arrow"><a href="#" class="ripple-effect"><i class="icon-material-outline-keyboard-arrow-right"></i></a></li>
+								<li className="pagination-arrow"><Link to="#" className="ripple-effect"><i className="icon-material-outline-keyboard-arrow-left"></i></Link></li>
+								<li><Link to="#" className="ripple-effect">1</Link></li>
+								<li><Link to="#" className="current-page ripple-effect">2</Link></li>
+								<li><Link to="#" className="ripple-effect">3</Link></li>
+								<li><Link to="#" className="ripple-effect">4</Link></li>
+								<li className="pagination-arrow"><Link to="#" className="ripple-effect"><i className="icon-material-outline-keyboard-arrow-right"></i></Link></li>
 							</ul>
 						</nav>
 					</div>

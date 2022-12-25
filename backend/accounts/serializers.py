@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from . models import *
 from clientside.serializer import ClientJobSerializer
+from freelancerside.serializers import FreelancerServiceSerializer
 
 
 
@@ -18,6 +19,7 @@ class UserprofileSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class FullProfileSerializer(serializers.ModelSerializer):
+    getservices = FreelancerServiceSerializer(read_only = True,many = True)
     clientjob = ClientJobSerializer(read_only = True,many = True)
     pro_user_set = UserprofileSerializer(read_only = True,many = True)
     experiences = ExperienceSerializer(read_only = True,many = True)

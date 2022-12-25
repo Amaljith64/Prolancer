@@ -2,12 +2,11 @@ import React, { useState, useEffect, useContext } from "react";
 
 import Header from "../../components/Header";
 import background from "../../assets/images/image.jpg";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 import { listcategory,listservicepost,listjobpost,UserProfile } from "../../actions/postActions";
 
-import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import Footer from "../../components/Footer";
 
@@ -16,14 +15,20 @@ import 'react-toastify/dist/ReactToastify.css';
 import Service from "../../components/Service";
 import AuthContext from "../../context/AuthContext";
 
+const plan1 = 100;
+const plan2 = 200;
+const plan3 = 300;
+
+
 const HomePage = () => {
 
   const { user } = useContext(AuthContext);
 
-  const userid = user.user_id
+  const userid = user?.user_id
 
   const notify = () => toast.warning("Wowwww so easy!");
   const dispatch = useDispatch();
+  const Navigate = useNavigate();
 
   const categoryList = useSelector((state) => state.listCategory);
   const { loading,category,error} = categoryList;
@@ -62,6 +67,7 @@ const HomePage = () => {
         className="intro-banner dark-overlay"
         style={{
           backgroundImage: `url(${background})`,
+          backgroundPositionY: 'center'
         }}>
         <div className="transparent-header-spacer"></div>
 
@@ -204,70 +210,71 @@ const HomePage = () => {
 
 			
 				<div className="billing-cycle-radios margin-bottom-70">
-					<div className="radio billed-monthly-radio">
-						<input id="radio-5" name="radio-payment-type" type="radio" defaultChecked />
-						<label htmlFor="radio-5"><span className="radio-label"></span> Billed Monthly</label>
-					</div>
-
-					<div className="radio billed-yearly-radio">
-						<input id="radio-6" name="radio-payment-type" type="radio" />
-						<label htmlFor="radio-6"><span className="radio-label"></span> Billed Yearly <span className="small-label">Save 10%</span></label>
-					</div>
+					
 				</div>
 
 			
 				<div className="pricing-plans-container">
-
-				
 					<div className="pricing-plan">
 						<h3>Basic Plan</h3>
-						<p className="margin-top-10">One time fee for one listing or task highlighted in search results.</p>
-						<div className="pricing-plan-label billed-monthly-label"><strong>$19</strong>/ monthly</div>
-						<div className="pricing-plan-label billed-yearly-label"><strong>$205</strong>/ yearly</div>
+						<p className="margin-top-10"> One time fee you need to pay for this membership.</p>
+						<div className="pricing-plan-label billed-monthly-label"><strong>₹{plan1}</strong>/ monthly</div>
 						<div className="pricing-plan-features">
 							<strong>Features of Basic Plan</strong>
 							<ul>
-								<li>1 Listing</li>
-								<li>30 Days Visibility</li>
+								<li>1 Listings</li>
+								<li>5 Days Visibility</li>
 								<li>Highlighted in Search Results</li>
 							</ul>
 						</div>
-						<a href="pages-checkout-page.html" className="button full-width margin-top-20">Buy Now</a>
-					</div>
+            <button
+                     
+                     className="button full-width margin-top-20"
+                     onClick={() => {
+                       Navigate(`/checkout/${plan3}`);
+                     }}
+                   >
+                     Buy Now
+                   </button>					</div>
 
 				
 					<div className="pricing-plan recommended">
 						<div className="recommended-badge">Recommended</div>
 						<h3>Standard Plan</h3>
-						<p className="margin-top-10">One time fee for one listing or task highlighted in search results.</p>
-						<div className="pricing-plan-label billed-monthly-label"><strong>$49</strong>/ monthly</div>
-						<div className="pricing-plan-label billed-yearly-label"><strong>$529</strong>/ yearly</div>
+						<p className="margin-top-10"> One time fee you need to pay for this membership.</p>
+						<div className="pricing-plan-label billed-monthly-label"><strong>₹{plan2}</strong>/ monthly</div>
 						<div className="pricing-plan-features">
 							<strong>Features of Standard Plan</strong>
 							<ul>
 								<li>5 Listings</li>
-								<li>60 Days Visibility</li>
+								<li>10 Days Visibility</li>
 								<li>Highlighted in Search Results</li>
 							</ul>
 						</div>
-						<a href="pages-checkout-page.html" className="button full-width margin-top-20">Buy Now</a>
-					</div>
+            <button
+                     
+                     className="button full-width margin-top-20"
+                     onClick={() => {
+                       Navigate(`/checkout/${plan3}`);
+                     }}
+                   >
+                     Buy Now
+                   </button>					</div>
 
 				
 					<div className="pricing-plan">
 						<h3>Extended Plan</h3>
-						<p className="margin-top-10">One time fee for one listing or task highlighted in search results.</p>
-						<div className="pricing-plan-label billed-monthly-label"><strong>$99</strong>/ monthly</div>
-						<div className="pricing-plan-label billed-yearly-label"><strong>$1069</strong>/ yearly</div>
+						<p className="margin-top-10"> One time fee you need to pay for this membership.</p>
+						<div className="pricing-plan-label billed-monthly-label"><strong>₹{plan3}</strong>/ monthly</div>
 						<div className="pricing-plan-features">
 							<strong>Features of Extended Plan</strong>
 							<ul>
 								<li>Unlimited Listings Listing</li>
-								<li>90 Days Visibility</li>
+								<li>15 Days Visibility</li>
 								<li>Highlighted in Search Results</li>
 							</ul>
 						</div>
-						<a href="pages-checkout-page.html" className="button full-width margin-top-20">Buy Now</a>
+						<Link to="pages-checkout-page.html" className="button full-width margin-top-20">Buy Now</Link>
 					</div>
 				</div>
 

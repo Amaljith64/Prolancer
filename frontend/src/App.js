@@ -7,7 +7,7 @@ import { ClientProvider } from './context/ClientContext'
 import HomePage from './pages/Client/HomePage'
 import LoginPage from './pages/LoginPage'
 import SignupPage from './pages/SignupPage';
-import Dashboard from './pages/Dashboard';
+import Dashboard from './pages/Freelancer/Dashboard';
 import RegisterFreelancer from './pages/Client/RegisterFreelancer';
 import JobPosting from './pages/Client/JobPosting';
 import ServiceListing from './pages/Client/ServiceListing';
@@ -27,10 +27,23 @@ import AllUsers from './pages/Admin/AllUsers';
 import { Profile } from './pages/Profile';
 import UserProfile from './pages/UserProfile';
 import FreelancerProfile from './pages/Client/FreelancerProfile';
+import PaymentPage from './pages/Freelancer/PaymentPage';
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
+import { GoogleOAuthProvider } from '@react-oauth/google';
+import { Reviews } from './pages/Freelancer/Reviews';
+import MyBids from './pages/Freelancer/MyBids';
+import Checkout from './pages/Checkout';
+import Success from './pages/Success';
+import FailedPage from './pages/FailedPage';
+
+
 
 
 function App() {
   return (
+    <GoogleOAuthProvider clientId="343457976454-bvvnulla58ojkknd3l9jtb5kd10aq8ns.apps.googleusercontent.com">
+    <PayPalScriptProvider
+    options={{ "client-id":process.env.REACT_APP_PAYPAL_CLIENT_ID }} >
     <div className="App">
       <Router>
         <AuthProvider>
@@ -55,6 +68,9 @@ function App() {
           <Route element={<RegisterFreelancer/>} path="/seller_register"/> 
           <Route element={<SignupPage/>} path="/signup"/> 
           <Route element={<Dashboard/>} path="/dashboard"/> 
+          <Route element={<Reviews/>} path="/myreviews"/> 
+          <Route element={<MyBids/>} path="/mybids"/> 
+
           <Route element={<JobPosting/>} path="/post_job"/> 
           <Route element={<JobManaging/>} path="/manage_job"/> 
           <Route element={<Bidders/>} path="/bidders/:id"/> 
@@ -69,6 +85,13 @@ function App() {
 
 
           <Route element={<TestFile/>} path="/testfile"/> 
+          <Route element={<PaymentPage/>} path="/payment/:price"/>
+          <Route element={<Checkout/>} path="/checkout/:price"/>
+          <Route element={<Success/>} path="/success"/>
+          <Route element={<FailedPage/>} path="/cancelled"/>
+
+
+
           
         </Routes>
         </ClientProvider>
@@ -76,6 +99,8 @@ function App() {
         </AuthProvider>
       </Router>
     </div>
+    </PayPalScriptProvider>
+    </GoogleOAuthProvider>
   );
 }
 

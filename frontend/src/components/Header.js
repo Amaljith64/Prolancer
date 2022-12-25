@@ -43,14 +43,12 @@ const Header = () => {
             <nav id="navigation">
                 <ul id="responsive">
 
-                    <li><Link onClick={redirectt}> Home</Link>
-                        
-                    </li>
+                        <li><Link onClick={redirectt}> Home</Link>
+                            
+                        </li>
 
 
-                    <li><Link to="/upcomming">Blog</Link>
-                        
-                    </li>
+                    
                     {user?.is_freelancer ? 
                     (
                     <li><Link to= '/list_job'>View Jobs</Link>
@@ -137,7 +135,7 @@ const Header = () => {
                             (
                            
                             <div className="" id="snackbar-user-status">
-                                <Link to='/seller_register' className='button greencolor full-width ' >Dashboard</Link>
+                                <Link to='/dashboard' className='button greencolor full-width ' >Dashboard</Link>
                             </div>	
                             )
                             :

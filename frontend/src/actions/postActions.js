@@ -76,7 +76,7 @@ export const listcategory = () => async (dispatch) => {
 /* -------------------------------------------------------------------------- */
 
 
-export const listjobpost = () => async (dispatch) => {
+export const listjobpost = (keyword = '') => async (dispatch) => {
     try{
         dispatch({
             type : JOBPOST_REQUEST
@@ -86,7 +86,7 @@ export const listjobpost = () => async (dispatch) => {
                 'Content-type' : 'application/json'
             }
         }
-        const { data } = await axios.get("client/postjob/",config)
+        const { data } = await axios.get(`client/postjob?${keyword}`)
 
         dispatch({
             type : JOBPOST_SUCCESS,

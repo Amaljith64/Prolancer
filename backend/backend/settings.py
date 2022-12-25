@@ -182,3 +182,6 @@ MEDIA_ROOT=os.path.join(BASE_DIR,'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+STRIPE_SECRET_KEY='sk_test_51MGcwNSGGnxwKUV96ZjUZJlwhWsDFhGZZENTvILi4SvzcI7dYKXjGyauZIvrrEESMNRk32SOTP26uFJOPPCYuNKR00mw2GCvq1'
+SITE_URL='http://localhost:3000/'

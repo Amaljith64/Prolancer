@@ -2,26 +2,32 @@ import React,{useContext,useState , useEffect} from 'react'
 import Header from '../../components/Header'
 import Form from 'react-bootstrap/Form';
 import 'react-tabs/style/react-tabs.css';
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from 'react-router-dom'
 import { Singlejobpost } from "../../actions/postActions";
 import Footer from '../../components/Footer';
 import axios from 'axios';
 import AuthContext from '../../context/AuthContext';
-
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import CountdownTimer  from '../../components/CountdownTimer'
 
 const SIngleJob = () => {
+
+	const viewjob = useSelector((state) => state.viewJob);
+	const { singlejobpost,singlejobposterror } = viewjob;
+
+	console.log(singlejobpost)
+	const expdate = new Date (singlejobpost?.service.expiry_on).getTime()
+  
 const dispatch = useDispatch();
 
 let { id } = useParams()
 const [reload,setReload] = useState()
 const [quantity, setQuantity] = useState(0)
+
 function increment() {
-    //setCount(prevCount => prevCount+=1);
     setQuantity(function (prevCount) {
       return (prevCount += 1);
     });
@@ -47,11 +53,6 @@ function increment() {
 
   const {user} = useContext(AuthContext)
 
-console.log(id,'its idddddddddddddd')
-
-const viewjob = useSelector((state) => state.viewJob);
-const { singlejobpost,singlejobposterror } = viewjob;
-
 useEffect(() => {
     
 	dispatch(Singlejobpost(id));
@@ -67,7 +68,6 @@ const submitHandler=(e)=>{
 	axios.post('/freelancer/sentbid/',{
 		'clientjob': parseInt(id) ,
 		'user': user.user_id,
-		
 		"bidrate":e.target.bidrate.value,
 		"daysrequired":e.target.daysrequired.value
 	},	
@@ -126,7 +126,7 @@ const bids = singlejobpost?.bids
 			<div className="single-page-section">
 				<h3>Attachments</h3>
 				<div className="attachments-container">
-					<a href="#" className="attachment-box ripple-effect"><span>Project Brief</span><i>PDF</i></a>
+					<Link to="#" className="attachment-box ripple-effect"><span>Project Brief</span><i>PDF</i></Link>
 				</div>
 			</div>
 
@@ -158,7 +158,7 @@ const bids = singlejobpost?.bids
 							<div className="bids-avatar">
 								<div className="freelancer-avatar">
 									<div className="verified-badge"></div>
-									<a href="single-freelancer-profile.html"><img src="/images/user-avatar-big-01.jpg" alt=""/></a>
+									<Link to="single-freelancer-profile.html"><img src="/images/user-avatar-big-01.jpg" alt=""/></Link>
 								</div>
 							</div>
 							
@@ -166,7 +166,7 @@ const bids = singlejobpost?.bids
 							<div className="bids-content">
 							
 								<div className="freelancer-name">
-									<h4><a href="single-freelancer-profile.html">{x.user.username} </a></h4>
+									<h4><Link to="single-freelancer-profile.html">{x.user.username} </Link></h4>
 									<div className="item-details margin-top-3">
 										<div className="star-rating" data-rating="5.0"></div><br />
 										<div className="detail-item"><i className="icon-material-outline-date-range"></i> {x.bidtime.slice(0,10)}</div>
@@ -202,7 +202,7 @@ const bids = singlejobpost?.bids
 			<div className="sidebar-container">
         <div className="margin-top-30"></div>
 				
-				<div className="countdown green margin-bottom-35">6 days, 23 hours left</div>
+				<CountdownTimer targetDate={expdate} />
 
 				<div className="sidebar-widget">
 					<div className="bidding-widget">

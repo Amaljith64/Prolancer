@@ -7,16 +7,15 @@ const AdminSidebar = () => {
     <div className="dashboard-sidebar">
 		<div className="dashboard-sidebar-inner" data-simplebar>
 			<div className="dashboard-nav-container">
-
 				
-				<a href="#" className="dashboard-responsive-nav-trigger">
+				<Link to="#" className="dashboard-responsive-nav-trigger">
 					<span className="hamburger hamburger--collapse" >
 						<span className="hamburger-box">
 							<span className="hamburger-inner"></span>
 						</span>
 					</span>
 					<span className="trigger-title">Dashboard Navigation</span>
-				</a>
+				</Link>
 				
 				
 				<div className="dashboard-nav">
@@ -30,17 +29,17 @@ const AdminSidebar = () => {
 						</ul>
 						
 						{/* <ul data-submenu-title="Organize and Manage">
-							<li><a href="#"><i className="icon-material-outline-business-center"></i> Jobs</a>
+							<li><Link to="#"><i className="icon-material-outline-business-center"></i> Jobs</Link>
 									
 							</li>
-							<li><a href="#"><i className="icon-material-outline-assignment"></i> Tasks</a>
+							<li><Link to="#"><i className="icon-material-outline-assignment"></i> Tasks</Link>
 									
 							</li>
 						</ul> */}
 
 						{/* <ul data-submenu-title="Account">
-							<li><a href="dashboard-settings.html"><i className="icon-material-outline-settings"></i> Settings</a></li>
-							<li><a href="index-logged-out.html"><i className="icon-material-outline-power-settings-new"></i> Logout</a></li>
+							<li><Link to="dashboard-settings.html"><i className="icon-material-outline-settings"></i> Settings</Link></li>
+							<li><Link to="index-logged-out.html"><i className="icon-material-outline-power-settings-new"></i> Logout</Link></li>
 						</ul> */}
 						
 					</div>

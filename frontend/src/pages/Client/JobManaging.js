@@ -50,7 +50,7 @@ const JobManaging = () => {
 									<div className="job-listing width-adjustment">
 										<div className="job-listing-details">											
 											<div className="job-listing-description">
-												<h3 className="job-listing-title"><a href="#">{data.job_title} </a> <span className="dashboard-status-button yellow">Expiring</span></h3>												
+												<h3 className="job-listing-title"><Link to="#">{data.job_title} </Link> <span className="dashboard-status-button yellow">Expiring</span></h3>												
 												<div className="job-listing-footer">
 													<ul>
 														<li><i className="icon-material-outline-access-time"></i> 23 hours left</li>
@@ -68,8 +68,8 @@ const JobManaging = () => {
 									
 									<div className="buttons-to-right always-visible">
 										<Link to={`/bidders/${data.id}`} className="button ripple-effect"><i className="icon-material-outline-supervisor-account"></i> Manage Bidders </Link>
-										<a href="#" className="button gray ripple-effect ico" title="Edit" data-tippy-placement="top"><i className="icon-feather-edit"></i></a>
-										<a href="#" className="button gray ripple-effect ico" title="Remove" data-tippy-placement="top"><i className="icon-feather-trash-2"></i></a>
+										<Link to="#" className="button gray ripple-effect ico" title="Edit" data-tippy-placement="top"><i className="icon-feather-edit"></i></Link>
+										<Link to="#" className="button gray ripple-effect ico" title="Remove" data-tippy-placement="top"><i className="icon-feather-trash-2"></i></Link>
 									</div>
 								</li>
                                 ))}
@@ -88,24 +88,24 @@ const JobManaging = () => {
 				</div>
 				<ul className="footer-social-links">
 					<li>
-						<a href="#" title="Facebook" data-tippy-placement="top">
+						<Link to="#" title="Facebook" data-tippy-placement="top">
 							<i className="icon-brand-facebook-f"></i>
-						</a>
+						</Link>
 					</li>
 					<li>
-						<a href="#" title="Twitter" data-tippy-placement="top">
+						<Link to="#" title="Twitter" data-tippy-placement="top">
 							<i className="icon-brand-twitter"></i>
-						</a>
+						</Link>
 					</li>
 					<li>
-						<a href="#" title="Google Plus" data-tippy-placement="top">
+						<Link to="#" title="Google Plus" data-tippy-placement="top">
 							<i className="icon-brand-google-plus-g"></i>
-						</a>
+						</Link>
 					</li>
 					<li>
-						<a href="#" title="LinkedIn" data-tippy-placement="top">
+						<Link to="#" title="LinkedIn" data-tippy-placement="top">
 							<i className="icon-brand-linkedin-in"></i>
-						</a>
+						</Link>
 					</li>
 				</ul>
 				<div className="clearfix"></div>

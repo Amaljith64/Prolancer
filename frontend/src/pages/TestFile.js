@@ -1,72 +1,56 @@
-import React, { Component } from "react";
-import { render } from "react-dom";
-// import "bootstrap/dist/css/bootstrap.css";
-// import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
-import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import React from "react";
+import { produce } from 'immer';
 
-class TestFile extends Component {
+class TestFile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      openedModal: null
+      user: {
+        name: "hello",
+        namer: {
+          hello:'its hello',
+          hii : 'its hii'
+        }
+      },
+      users: []
     };
   }
-  openModal = id => {
-    this.setState({ openedModal: id });
+
+  onInputChange = event => {
+    console.log(this.state)
+    this.setState(
+      produce(this.state.user, draftState => {
+        draftState.user = {
+          name: event.target.value
+        };
+      })
+    );
   };
-  closeModal = () => {
-    this.setState({ openedModal: null });
+
+  onSubmitUser = () => {
+    this.setState(
+      produce(draftState => {
+        draftState.users.push(this.state.user);
+        draftState.user = {
+          name: ""
+        };
+      })
+    );
   };
 
   render() {
-
-    const {
-      value
-    } = this.props
-
-    console.log(value.category,'to mapp')
-
+    const { users, user } = this.state;
     return (
       <div>
-        {value.category.map((item, i) => (
-          <div key={item.id}>
-            <Link color="danger" onClick={() => this.openModal(item.id)}>
-              test Modal
-            </Link>
-            <Modal
-              show={this.closeModal && this.state.openedModal === item.id}
-            >
-              <Modal.Header>Modal title</Modal.Header>
-              <Modal.Body>
-                <b>{item.category_name}</b>
-                <br />
-                Lorem ipsum
-              </Modal.Body>
-              <Modal.Footer>
-                <Button color="primary" onClick={this.closeModal}>
-                  Do Something
-                </Button>
-              </Modal.Footer>
-            </Modal>
-          </div>
+        <h1>Immer with React</h1>
+        {users.map(user => (
+          <h4>{user.name}</h4>
         ))}
+        <input type="text" value={user.name} onChange={this.onInputChange} />
+        <button onClick={this.onSubmitUser}>Submit</button>
       </div>
     );
   }
 }
 
-const mapStateToProps = (state) => {
-  return{
-
-    value : state.listCategory
-
-  }
-}
-
-export default connect(mapStateToProps) (TestFile)
-
-
-
+export default TestFile;

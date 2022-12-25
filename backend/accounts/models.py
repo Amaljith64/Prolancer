@@ -44,6 +44,8 @@ class NewUser(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     is_freelancer = models.BooleanField(default=False,null=True)
+    active_membership = models.CharField(max_length=225,null=True, blank=True)
+    membership_expiry = models.DateTimeField(null=True, blank=True)
 
     objects = CustomAccountManager()
 

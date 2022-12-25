@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import FreelancerService, ServiceRating,ServiceReport
+from .models import FreelancerService, ServiceRating,ServiceReport,BuyService
 from clientside.models import Bids
 from clientside.serializer import UserAccountSerializer
 
@@ -33,3 +33,9 @@ class ServiceReportSerializer(serializers.ModelSerializer):
     class Meta:
         model = ServiceReport
         fields = "__all__"
+
+class BuyServiceSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = BuyService
+        fields = '__all__'

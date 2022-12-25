@@ -32,6 +32,8 @@ class ClientJobs(models.Model):
     jobtime = models.DateTimeField(auto_now_add=True)
     bidder = models.BooleanField(default= False,null=True)
     reported = models.BooleanField(default= False,null=True)
+    expired = models.BooleanField(default= False,null=True)
+    expiry_on = models.DateTimeField(null=True)
     
 
     def __str__(self):
@@ -54,6 +56,9 @@ class Bids(models.Model):
 
 
     
+class PayJob(models.Model):
+    jobid = models.ForeignKey(ClientJobs,on_delete=models.CASCADE)
+    user = models.ForeignKey(NewUser,on_delete=models.CASCADE)
+    price = models.IntegerField()
+    payment_method = models.CharField(max_length=225)
 
-
-    

@@ -4,7 +4,7 @@ import Header from '../components/Header'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux";
 import { SingleUsers } from '../actions/postActions';
-
+import { Link } from "react-router-dom";
 
 
 export const Profile = () => {
@@ -15,7 +15,6 @@ export const Profile = () => {
 	const {singleuserloading, singleusers,singleuserserror} = singleuser;
 
 	console.log(singleusers,'singleeeeeeeeeee')
-
 
 	let { id } = useParams()
 	console.log(id,'idddddddddd')
@@ -95,15 +94,14 @@ export const Profile = () => {
 				<div className="pagination-container margin-top-40 margin-bottom-10">
 					<nav className="pagination">
 						<ul>
-							<li><a href="#" className="ripple-effect current-page">1</a></li>
-							<li><a href="#" className="ripple-effect">2</a></li>
-							<li className="pagination-arrow"><a href="#" className="ripple-effect"><i className="icon-material-outline-keyboard-arrow-right"></i></a></li>
+							<li><Link to="#" className="ripple-effect current-page">1</Link></li>
+							<li><Link to="#" className="ripple-effect">2</Link></li>
+							<li className="pagination-arrow"><Link to="#" className="ripple-effect"><i className="icon-material-outline-keyboard-arrow-right"></i></Link></li>
 						</ul>
 					</nav>
 				</div>
 				<div className="clearfix"></div>
 				
-
 			</div>
 			
 			
@@ -124,7 +122,7 @@ export const Profile = () => {
 							<div className="item-content">
 								<h4>Development Team Leader</h4>
 								<div className="item-details margin-top-7">
-									<div className="detail-item"><a href="#"><i className="icon-material-outline-business"></i> Acodia</a></div>
+									<div className="detail-item"><Link to="#"><i className="icon-material-outline-business"></i> Acodia</Link></div>
 									<div className="detail-item"><i className="icon-material-outline-date-range"></i> May 2019 - Present</div>
 								</div>
 								<div className="item-description">
@@ -139,8 +137,6 @@ export const Profile = () => {
 			
 		</div>
 		
-
-		
 		<div className="col-xl-4 col-lg-4">
 			<div className="sidebar-container">
 				
@@ -151,7 +147,7 @@ export const Profile = () => {
 					<div className="overview-item"><strong>22</strong><span>Rehired</span></div>
 				</div>
 
-				<a href="#small-dialog" className="apply-now-button popup-with-zoom-anim margin-bottom-50">Make an Offer <i className="icon-material-outline-arrow-right-alt"></i></a>
+				<Link to="#small-dialog" className="apply-now-button popup-with-zoom-anim margin-bottom-50">Make an Offer <i className="icon-material-outline-arrow-right-alt"></i></Link>
 
 				<div className="sidebar-widget">
 					<div className="freelancer-indicators">
@@ -186,21 +182,19 @@ export const Profile = () => {
 					</div>
 				</div>
 				
-				
 				<div className="sidebar-widget">
 					<h3>Social Profiles</h3>
 					<div className="freelancer-socials margin-top-25">
 						<ul>
-							<li><a href="#" title="Dribbble" data-tippy-placement="top"><i className="icon-brand-dribbble"></i></a></li>
-							<li><a href="#" title="Twitter" data-tippy-placement="top"><i className="icon-brand-twitter"></i></a></li>
-							<li><a href="#" title="Behance" data-tippy-placement="top"><i className="icon-brand-behance"></i></a></li>
-							<li><a href="#" title="GitHub" data-tippy-placement="top"><i className="icon-brand-github"></i></a></li>
+							<li><Link to="#" title="Dribbble" data-tippy-placement="top"><i className="icon-brand-dribbble"></i></Link></li>
+							<li><Link to="#" title="Twitter" data-tippy-placement="top"><i className="icon-brand-twitter"></i></Link></li>
+							<li><Link to="#" title="Behance" data-tippy-placement="top"><i className="icon-brand-behance"></i></Link></li>
+							<li><Link to="#" title="GitHub" data-tippy-placement="top"><i className="icon-brand-github"></i></Link></li>
 						
 						</ul>
 					</div>
 				</div>
 
-				
 				<div className="sidebar-widget">
 					<h3>Skills</h3>
 					<div className="task-tags">
@@ -215,19 +209,16 @@ export const Profile = () => {
 					</div>
 				</div>
 
-				
 				<div className="sidebar-widget">
 					<h3>Attachments</h3>
 					<div className="attachments-container">
-						<a href="#" className="attachment-box ripple-effect"><span>Cover Letter</span><i>PDF</i></a>
-						<a href="#" className="attachment-box ripple-effect"><span>Contract</span><i>DOCX</i></a>
+						<Link to="#" className="attachment-box ripple-effect"><span>Cover Letter</span><i>PDF</i></Link>
+						<Link to="#" className="attachment-box ripple-effect"><span>Contract</span><i>DOCX</i></Link>
 					</div>
 				</div>
 
-				
 				<div className="sidebar-widget">
 					<h3>Bookmark or Share</h3>
-
 					
 					<button className="bookmark-button margin-bottom-25">
 						<span className="bookmark-icon"></span>
@@ -235,22 +226,20 @@ export const Profile = () => {
 						<span className="bookmarked-text">Bookmarked</span>
 					</button>
 
-					
 					<div className="copy-url">
 						<input id="copy-url" type="text" value="" className="with-border"/>
 						<button className="copy-url-button ripple-effect" data-clipboard-target="#copy-url" title="Copy to Clipboard" data-tippy-placement="top"><i className="icon-material-outline-file-copy"></i></button>
 					</div>
 
-					
 					<div className="share-buttons margin-top-25">
 						<div className="share-buttons-trigger"><i className="icon-feather-share-2"></i></div>
 						<div className="share-buttons-content">
 							<span>Interesting? <strong>Share It!</strong></span>
 							<ul className="share-buttons-icons">
-								<li><a href="#" data-button-color="#3b5998" title="Share on Facebook" data-tippy-placement="top"><i className="icon-brand-facebook-f"></i></a></li>
-								<li><a href="#" data-button-color="#1da1f2" title="Share on Twitter" data-tippy-placement="top"><i className="icon-brand-twitter"></i></a></li>
-								<li><a href="#" data-button-color="#dd4b39" title="Share on Google Plus" data-tippy-placement="top"><i className="icon-brand-google-plus-g"></i></a></li>
-								<li><a href="#" data-button-color="#0077b5" title="Share on LinkedIn" data-tippy-placement="top"><i className="icon-brand-linkedin-in"></i></a></li>
+								<li><Link to="#" data-button-color="#3b5998" title="Share on Facebook" data-tippy-placement="top"><i className="icon-brand-facebook-f"></i></Link></li>
+								<li><Link to="#" data-button-color="#1da1f2" title="Share on Twitter" data-tippy-placement="top"><i className="icon-brand-twitter"></i></Link></li>
+								<li><Link to="#" data-button-color="#dd4b39" title="Share on Google Plus" data-tippy-placement="top"><i className="icon-brand-google-plus-g"></i></Link></li>
+								<li><Link to="#" data-button-color="#0077b5" title="Share on LinkedIn" data-tippy-placement="top"><i className="icon-brand-linkedin-in"></i></Link></li>
 							</ul>
 						</div>
 					</div>

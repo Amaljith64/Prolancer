@@ -2,6 +2,7 @@ import React, {useState, useEffect, useContext} from 'react'
 import AdminHeader from '../../components/AdminHeader'
 import AdminSidebar from '../../components/AdminSidebar'
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { listcategory,listjobpost,listservicepost } from "../../actions/postActions";
 
 
@@ -45,7 +46,7 @@ const AdminHome = () => {
 				
 				<nav id="breadcrumbs" className="dark">
 					<ul>
-						<li><a href="#">Home</a></li>
+						<li><Link to="#">Home</Link></li>
 						<li>Dashboard</li>
 					</ul>
 				</nav>
@@ -100,51 +101,51 @@ const AdminHome = () => {
 								<li>
 									<span className="notification-icon"><i className="icon-material-outline-group"></i></span>
 									<span className="notification-text">
-										<strong>Michael Shannah</strong> applied for a job <a href="#">Full Stack Software Engineer</a>
+										<strong>Michael Shannah</strong> applied for a job <Link to="#">Full Stack Software Engineer</Link>
 									</span>
 									
 									<div className="buttons-to-right">
-										<a href="#" className="button ripple-effect ico" title="Mark as read" data-tippy-placement="left"><i className="icon-feather-check-square"></i></a>
+										<Link to="#" className="button ripple-effect ico" title="Mark as read" data-tippy-placement="left"><i className="icon-feather-check-square"></i></Link>
 									</div>
 								</li>
 								<li>
 									<span className="notification-icon"><i className=" icon-material-outline-gavel"></i></span>
 									<span className="notification-text">
-										<strong>Gilber Allanis</strong> placed a bid on your <a href="#">iOS App Development</a> project
+										<strong>Gilber Allanis</strong> placed a bid on your <Link to="#">iOS App Development</Link> project
 									</span>
 									
 									<div className="buttons-to-right">
-										<a href="#" className="button ripple-effect ico" title="Mark as read" data-tippy-placement="left"><i className="icon-feather-check-square"></i></a>
+										<Link to="#" className="button ripple-effect ico" title="Mark as read" data-tippy-placement="left"><i className="icon-feather-check-square"></i></Link>
 									</div>
 								</li>
 								<li>
 									<span className="notification-icon"><i className="icon-material-outline-autorenew"></i></span>
 									<span className="notification-text">
-										Your job listing <a href="#">Full Stack Software Engineer</a> is expiring
+										Your job listing <Link to="#">Full Stack Software Engineer</Link> is expiring
 									</span>
 									
 									<div className="buttons-to-right">
-										<a href="#" className="button ripple-effect ico" title="Mark as read" data-tippy-placement="left"><i className="icon-feather-check-square"></i></a>
+										<Link to="#" className="button ripple-effect ico" title="Mark as read" data-tippy-placement="left"><i className="icon-feather-check-square"></i></Link>
 									</div>
 								</li>
 								<li>
 									<span className="notification-icon"><i className="icon-material-outline-group"></i></span>
 									<span className="notification-text">
-										<strong>Sindy Forrest</strong> applied for a job <a href="#">Full Stack Software Engineer</a>
+										<strong>Sindy Forrest</strong> applied for a job <Link to="#">Full Stack Software Engineer</Link>
 									</span>
 									
 									<div className="buttons-to-right">
-										<a href="#" className="button ripple-effect ico" title="Mark as read" data-tippy-placement="left"><i className="icon-feather-check-square"></i></a>
+										<Link to="#" className="button ripple-effect ico" title="Mark as read" data-tippy-placement="left"><i className="icon-feather-check-square"></i></Link>
 									</div>
 								</li>
 								<li>
 									<span className="notification-icon"><i className="icon-material-outline-rate-review"></i></span>
 									<span className="notification-text">
-										<strong>David Peterson</strong> left you a <span className="star-rating no-stars" data-rating="5.0"></span> rating after finishing <a href="#">Logo Design</a> task
+										<strong>David Peterson</strong> left you a <span className="star-rating no-stars" data-rating="5.0"></span> rating after finishing <Link to="#">Logo Design</Link> task
 									</span>
 									
 									<div className="buttons-to-right">
-										<a href="#" className="button ripple-effect ico" title="Mark as read" data-tippy-placement="left"><i className="icon-feather-check-square"></i></a>
+										<Link to="#" className="button ripple-effect ico" title="Mark as read" data-tippy-placement="left"><i className="icon-feather-check-square"></i></Link>
 									</div>
 								</li>
 							</ul>
@@ -171,7 +172,7 @@ const AdminHome = () => {
 									</div>
 									
 									<div className="buttons-to-right">
-										<a href="pages-checkout-page.html" className="button">Finish Payment</a>
+										<Link to="pages-checkout-page.html" className="button">Finish Payment</Link>
 									</div>
 								</li>
 								<li>
@@ -185,7 +186,7 @@ const AdminHome = () => {
 									</div>
 									
 									<div className="buttons-to-right">
-										<a href="pages-invoice-template.html" className="button gray">View Invoice</a>
+										<Link to="pages-invoice-template.html" className="button gray">View Invoice</Link>
 									</div>
 								</li>
 								<li>
@@ -199,7 +200,7 @@ const AdminHome = () => {
 									</div>
 									
 									<div className="buttons-to-right">
-										<a href="pages-invoice-template.html" className="button gray">View Invoice</a>
+										<Link to="pages-invoice-template.html" className="button gray">View Invoice</Link>
 									</div>
 								</li>
 								<li>
@@ -213,7 +214,7 @@ const AdminHome = () => {
 									</div>
 									
 									<div className="buttons-to-right">
-										<a href="pages-invoice-template.html" className="button gray">View Invoice</a>
+										<Link to="pages-invoice-template.html" className="button gray">View Invoice</Link>
 									</div>
 								</li>
 							</ul>
@@ -232,24 +233,24 @@ const AdminHome = () => {
 				</div>
 				<ul className="footer-social-links">
 					<li>
-						<a href="#" title="Facebook" data-tippy-placement="top">
+						<Link to="#" title="Facebook" data-tippy-placement="top">
 							<i className="icon-brand-facebook-f"></i>
-						</a>
+						</Link>
 					</li>
 					<li>
-						<a href="#" title="Twitter" data-tippy-placement="top">
+						<Link to="#" title="Twitter" data-tippy-placement="top">
 							<i className="icon-brand-twitter"></i>
-						</a>
+						</Link>
 					</li>
 					<li>
-						<a href="#" title="Google Plus" data-tippy-placement="top">
+						<Link to="#" title="Google Plus" data-tippy-placement="top">
 							<i className="icon-brand-google-plus-g"></i>
-						</a>
+						</Link>
 					</li>
 					<li>
-						<a href="#" title="LinkedIn" data-tippy-placement="top">
+						<Link to="#" title="LinkedIn" data-tippy-placement="top">
 							<i className="icon-brand-linkedin-in"></i>
-						</a>
+						</Link>
 					</li>
 				</ul>
 				<div className="clearfix"></div>
@@ -271,7 +272,7 @@ const AdminHome = () => {
 	<div className="sign-in-form">
 
 		<ul className="popup-tabs-nav">
-			<li><a href="#tab">Add Note</a></li>
+			<li><Link to="#tab">Add Note</Link></li>
 		</ul>
 
 		<div className="popup-tabs-container">

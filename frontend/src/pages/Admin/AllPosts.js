@@ -2,6 +2,7 @@ import React from 'react'
 import AdminHeader from '../../components/AdminHeader'
 import AdminSidebar from '../../components/AdminSidebar'
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 
 const AllPosts = () => {
@@ -31,8 +32,8 @@ const AllPosts = () => {
             
             <nav id="breadcrumbs" className="dark">
                 <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Dashboard</a></li>
+                    <li><Link to="#">Home</Link></li>
+                    <li><Link to="#">Dashboard</Link></li>
                     <li>Manage Jobs</li>
                 </ul>
             </nav>
@@ -58,13 +59,13 @@ const AllPosts = () => {
 
                                     
                                     <div className="job-listing-details">
-											<a href="#" className="job-listing-company-logo">
+											<Link to="#" className="job-listing-company-logo">
                                             <img src="images/company-logo-05.png" alt=""/>
-                                        </a> 
+                                        </Link> 
 
                                         
                                         <div className="job-listing-description">
-                                            <h3 className="job-listing-title"><a href="#">Frontend React Developer</a> <span className="dashboard-status-button green">Pending Approval</span></h3>
+                                            <h3 className="job-listing-title"><Link to="#">Frontend React Developer</Link> <span className="dashboard-status-button green">Pending Approval</span></h3>
 
                                             
                                             <div className="job-listing-footer">
@@ -79,9 +80,9 @@ const AllPosts = () => {
 
                                 
                                 <div className="buttons-to-right always-visible">
-                                    <a href="dashboard-manage-candidates.html" className="button ripple-effect"><i className="icon-material-outline-supervisor-account"></i> Manage Candidates <span className="button-info">0</span></a>
-                                    <a href="#" className="button gray ripple-effect ico" title="Edit" data-tippy-placement="top"><i className="icon-feather-edit"></i></a>
-                                    <a href="#" className="button gray ripple-effect ico" title="Remove" data-tippy-placement="top"><i className="icon-feather-trash-2"></i></a>
+                                    <Link to="dashboard-manage-candidates.html" className="button ripple-effect"><i className="icon-material-outline-supervisor-account"></i> Manage Candidates <span className="button-info">0</span></Link>
+                                    <Link to="#" className="button gray ripple-effect ico" title="Edit" data-tippy-placement="top"><i className="icon-feather-edit"></i></Link>
+                                    <Link to="#" className="button gray ripple-effect ico" title="Remove" data-tippy-placement="top"><i className="icon-feather-trash-2"></i></Link>
                                 </div>
                             </li>
 
@@ -103,24 +104,24 @@ const AllPosts = () => {
             </div>
             <ul className="footer-social-links">
                 <li>
-                    <a href="#" title="Facebook" data-tippy-placement="top">
+                    <Link to="#" title="Facebook" data-tippy-placement="top">
                         <i className="icon-brand-facebook-f"></i>
-                    </a>
+                    </Link>
                 </li>
                 <li>
-                    <a href="#" title="Twitter" data-tippy-placement="top">
+                    <Link to="#" title="Twitter" data-tippy-placement="top">
                         <i className="icon-brand-twitter"></i>
-                    </a>
+                    </Link>
                 </li>
                 <li>
-                    <a href="#" title="Google Plus" data-tippy-placement="top">
+                    <Link to="#" title="Google Plus" data-tippy-placement="top">
                         <i className="icon-brand-google-plus-g"></i>
-                    </a>
+                    </Link>
                 </li>
                 <li>
-                    <a href="#" title="LinkedIn" data-tippy-placement="top">
+                    <Link to="#" title="LinkedIn" data-tippy-placement="top">
                         <i className="icon-brand-linkedin-in"></i>
-                    </a>
+                    </Link>
                 </li>
             </ul>
             <div className="clearfix"></div>
