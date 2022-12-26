@@ -14,7 +14,6 @@ const Checkout = () => {
 
 
 	useEffect(() => {
-		window.scrollTo(0, 0);
   
     const values = QueryString.parse(location.search)
     console.log(values)

@@ -18,6 +18,7 @@ urlpatterns = [
     path('paypalpayment/', views.PaypalPayment.as_view(), name='paypalpayment'),    
     path('paypalservicepayment/', views.ServicePaypalPayment.as_view(), name='paypalservicepayment'),    
     path('paypaljobpayment/', views.JobPaypalPayment.as_view(), name='paypaljobpayment'),    
+    path('freelancerrequest/', views.Freelancer_request.as_view(), name='freelancerrequest'),    
 
    
 ]

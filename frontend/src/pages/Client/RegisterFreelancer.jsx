@@ -136,11 +136,7 @@ const uploadData=(e)=>{
             <p>Tell us a bit about yourself. This information will appear on your public profile,<br/>
                  so that potential buyers can get to know you better.</p>
             <nav id="breadcrumbs" className="dark">
-                <ul>
-                    <li><Link to="#">Home</Link></li>
-                    <li><Link to="#">Dashboard</Link></li>
-                    <li>Settings</li>
-                </ul>
+              
             </nav>
         </div>
 

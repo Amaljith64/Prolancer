@@ -136,7 +136,7 @@ const bids = singlejobpost?.bids
 				<div className="task-tags">
 				{tosplit?.split(',').map((x) => {
 					return(
-					<span style={{ marginInline: "5px"}}>{x}</span>
+					<span key={x.id} style={{ marginInline: "5px"}}>{x}</span>
 					 )})}
 		
 				</div>
@@ -151,7 +151,7 @@ const bids = singlejobpost?.bids
 				</div>
 				{bids?.map((x) => {
 					return(
-				<ul className="boxed-list-ul">
+				<ul key={x.id} className="boxed-list-ul">
 					<li>
 						<div className="bid">
 						

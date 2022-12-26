@@ -60,10 +60,18 @@ export const ClientProvider = ({ children }) => {
       Navigate('/list_job')
   }
 }
+  let servicesearchHandler = (e) => {
+    if (e) {
+      Navigate(`?keyword=${e}&page=1`)
+  } else {
+      Navigate('/list_service')
+  }
+}
 
   let contextData = {
     jobSubmit: jobSubmit,
     searchHandler,
+    servicesearchHandler
   };
   return (
     <ClientContext.Provider value={contextData}>

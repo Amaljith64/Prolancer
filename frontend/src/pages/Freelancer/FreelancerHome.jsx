@@ -50,7 +50,6 @@ const HomePage = () => {
 
   console.log(jobpost)
   useEffect(() => {
-    window.scrollTo(0, 0);
     
     const values = QueryString.parse(location.search)
     console.log(values)
@@ -100,7 +99,6 @@ const HomePage = () => {
             </div>
           </div>
 
-          
 
           
         </div>
@@ -260,7 +258,7 @@ const HomePage = () => {
                       <strong>Features of Basic Plan</strong>
                       <ul>
                         <li>1 Listing</li>
-                        <li>30 Days Visibility</li>
+                        <li>3  Days Visibility</li>
                         <li>Highlighted in Search Results</li>
                       </ul>
                     </div>
@@ -288,7 +286,7 @@ const HomePage = () => {
                       <strong>Features of Standard Plan</strong>
                       <ul>
                         <li>5 Listings</li>
-                        <li>60 Days Visibility</li>
+                        <li>6 Days Visibility</li>
                         <li>Highlighted in Search Results</li>
                       </ul>
                     </div>
@@ -317,8 +315,8 @@ const HomePage = () => {
                     <div className="pricing-plan-features">
                       <strong>Features of Extended Plan</strong>
                       <ul>
-                        <li>Unlimited Listings Listing</li>
-                        <li>90 Days Visibility</li>
+                        <li>10 Listings</li>
+                        <li>10 Days Visibility</li>
                         <li>Highlighted in Search Results</li>
                       </ul>
                     </div>

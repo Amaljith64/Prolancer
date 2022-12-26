@@ -17,42 +17,52 @@ def post_validation(request,user):
     service_count = FreelancerService.objects.filter(user=user).count()
     print(service_count,'counttttttttt')
     try:
-        if user_membership == 'Basic' :
-            if service_count < 1:
-                return True
-            else:
-                return False
-
-        elif user_membership == 'Standard' :
-            if service_count < 3:
-                return True
-            else:
-                return False
-
+        if user_membership == 'Basic':
+            return service_count < 1
         elif user_membership == 'Extended ':
-            if service_count < 6:
-                return True
-            else:
-                return False
-
+            return service_count < 5
+        elif user_membership == 'Standard':
+            return service_count < 10
         else:
             return False
 
-    except:
+    except Exception:
         return False
+
+
+from django.db.models import Q
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 class FreelanceServicePosting(APIView):
     def get(self,request):
-        service = FreelancerService.objects.all()
+
+        query = request.query_params.get('keyword')
+        if query is None:
+            query = ''
+        service = FreelancerService.objects.filter(
+            Q(service_title__icontains=query) | Q(category__category_name=query)).order_by('-servicetime')
+        page = request.query_params.get('page')
+        paginator = Paginator(service, 2)
+        try:
+            service = paginator.page(page)
+        except PageNotAnInteger:
+            service = paginator.page(1)
+        except EmptyPage:
+            service = paginator.page(paginator.num_pages)
+
+        if page is None:
+            page = 1
+        page = int(page)
+
         serviceserializer = FreelancerServiceSerializer(service,many = True)
-        return Response (serviceserializer.data)
+        return Response ({'service':serviceserializer.data, 'page': page, 'pages': paginator.num_pages})
+
     def post(self,request):
         data=request.data
         active_user= data['user']
         user = NewUser.objects.get(id=active_user)
         approval=post_validation(request,user)
         print(approval,'its approvallll')
-        pass
         if not post_validation(request,user):
             message = 'Buy Membership Or Upgrade Your Membership'
             print('Upgrade Your Membership')
@@ -77,33 +87,31 @@ class FreelanceJobView(APIView):
         listjobs = ClientJobViewSerializer(service)
         listbids = BidViewSerializer(bids,many=True)
 
-        if listjobs:            
+        if listjobs:
             return Response ({'service' :listjobs.data,
             'bids': listbids.data },status=200)
-        else:
-            print(listbids.errors)
-            return Response (status=400)
+        print(listbids.errors)
+        return Response (status=400)
    
 class SentBid(APIView):
      def post(self,request):
-        data = request.data
-        service = ClientJobs.objects.get(id=data['clientjob'])
-        user = NewUser.objects.get(id = data['user'] )
-        bids =Bids.objects.filter(user=user,clientjob = service)
-        if bids :
-            bids.update(bidrate=data['bidrate'],daysrequired=data['daysrequired'])
-            print("updated existing") 
-            return Response(status=status.HTTP_201_CREATED)
-        else :
-            serializer = BidSerializer(data=data)
-            if serializer.is_valid():
-                serializer.save()
-                print("created new bid")
-                return Response(serializer.data,status=status.HTTP_201_CREATED)
-            else:
-                print(serializer.errors)
-                print('Not valid') 
-                return Response(serializer.data,status=status.HTTP_404_NOT_FOUND)
+         data = request.data
+         service = ClientJobs.objects.get(id=data['clientjob'])
+         user = NewUser.objects.get(id = data['user'] )
+         if bids := Bids.objects.filter(user=user, clientjob=service):
+             bids.update(bidrate=data['bidrate'],daysrequired=data['daysrequired'])
+             print("updated existing")
+             return Response(status=status.HTTP_201_CREATED)
+         else:
+             serializer = BidSerializer(data=data)
+             if serializer.is_valid():
+                 serializer.save()
+                 print("created new bid")
+                 return Response(serializer.data,status=status.HTTP_201_CREATED)
+             else:
+                 print(serializer.errors)
+                 print('Not valid') 
+                 return Response(serializer.data,status=status.HTTP_404_NOT_FOUND)
    
 
 class ReportJob(APIView):

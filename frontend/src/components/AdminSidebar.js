@@ -25,7 +25,7 @@ const AdminSidebar = () => {
 							<li ><Link to='/admin'><i className="icon-material-outline-dashboard"></i> Dashboard</Link></li>
 							<li><Link to="/allpost"><i className="icon-material-outline-question-answer"></i> Posts</Link></li>
 							<li><Link to='/allusers'><i className="icon-material-outline-star-border"></i> Users</Link></li>
-							<li><Link to='/upcomming'><i className="icon-material-outline-rate-review"></i> Verifications</Link></li>
+							<li><Link to='/freelancerrequest'><i className="icon-material-outline-rate-review"></i>Freelancer Approval </Link></li>
 						</ul>
 						
 						{/* <ul data-submenu-title="Organize and Manage">

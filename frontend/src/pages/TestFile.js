@@ -44,7 +44,7 @@ class TestFile extends React.Component {
       <div>
         <h1>Immer with React</h1>
         {users.map(user => (
-          <h4>{user.name}</h4>
+          <h4 key={user.id}>{user.name}</h4>
         ))}
         <input type="text" value={user.name} onChange={this.onInputChange} />
         <button onClick={this.onSubmitUser}>Submit</button>

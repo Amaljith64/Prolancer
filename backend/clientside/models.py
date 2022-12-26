@@ -62,3 +62,6 @@ class PayJob(models.Model):
     price = models.IntegerField()
     payment_method = models.CharField(max_length=225)
 
+class FreelancerRequest(models.Model):
+    requested_user = models.ForeignKey(NewUser,on_delete=models.CASCADE)
+    approval = models.BooleanField(default=False)

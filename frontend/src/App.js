@@ -35,6 +35,8 @@ import MyBids from './pages/Freelancer/MyBids';
 import Checkout from './pages/Checkout';
 import Success from './pages/Success';
 import FailedPage from './pages/FailedPage';
+import ScrollToTop from './components/ScrollToTop';
+import FreelancerRequest from './pages/Admin/FreelancerRequest';
 
 
 
@@ -46,6 +48,7 @@ function App() {
     options={{ "client-id":process.env.REACT_APP_PAYPAL_CLIENT_ID }} >
     <div className="App">
       <Router>
+        <ScrollToTop/>
         <AuthProvider>
           <ClientProvider>
           <Routes>
@@ -82,6 +85,7 @@ function App() {
           <Route element={<AdminHome/>} path="/admin"/> 
           <Route element={<AllPosts/>} path="/allpost"/> 
           <Route element={<FreelancerProfile/>} path="/freelancerprofile"/> 
+          <Route element={<FreelancerRequest/>} path="/freelancerrequest"/> 
 
 
           <Route element={<TestFile/>} path="/testfile"/> 
@@ -94,6 +98,7 @@ function App() {
 
           
         </Routes>
+  
         </ClientProvider>
         
         </AuthProvider>

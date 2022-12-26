@@ -293,7 +293,7 @@ const SingleService = () => {
                   <Modal.Title id="contained-modal-title-vcenter">
                     <ul className="popup-tabs-nav">
                       <li>
-                        <Link to="#tab">Apply Now</Link>
+                        <Link to="#tab">Buy Now</Link>
                       </li>
                       <Button
                         style={{ float: "right", padding: "21px" }}
@@ -348,7 +348,7 @@ const SingleService = () => {
               </Modal>
 
               <Link onClick={() => setModalShow(true)} className="apply-now-button popup-with-zoom-anim">
-                Apply Now
+                Buy Now
                 <i className="icon-material-outline-arrow-right-alt"></i>
               </Link>
 

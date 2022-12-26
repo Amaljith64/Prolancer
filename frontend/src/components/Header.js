@@ -3,12 +3,14 @@ import { Link } from 'react-router-dom'
 import AuthContext from '../context/AuthContext'
 import '../App.css'
 import { useNavigate } from 'react-router-dom'
-import Footer from './Footer'
+import { ToastContainer, toast } from "react-toastify";
+import axios from 'axios'
 
 const Header = () => {
     const Navigate = useNavigate();
     let {user, logoutUser} = useContext(AuthContext)
     const [isActive, setActive] = useState(false);
+    const Swal = require("sweetalert2");
 
   const toggleClass = () => {
     setActive(!isActive);
@@ -23,6 +25,28 @@ const Header = () => {
         Navigate('/')
         console.log('else worked');
     }
+  }
+
+  let sentrequest = () =>{
+
+    Swal.fire({
+        title:"Are you sure",
+        text: "You have filled all details in your Profile",
+
+        icon:"warning",
+        showCancelButton:"true",
+        confirmButtonColor:"#3085D6",
+        cancelButtonColor:"#d33",
+        confirmButtonText:"YES,Proceed",
+       }).then((result)=>{
+        if(result.isConfirmed){
+            axios.post(`/client/freelancerrequest/`,{
+                'requested_user': user.user_id
+            })
+            toast.success("Your request has been sent.");
+        }
+       })
+
   }
 
     return (
@@ -141,7 +165,7 @@ const Header = () => {
                             :
                             (
                             <div className="" id="snackbar-user-status">
-                                <Link to='/seller_register' className='button greencolor full-width ' >Become Freelancer</Link>  
+                                <Link onClick={sentrequest} className='button greencolor full-width ' >Become Freelancer</Link>  
                             </div>	
                             )
                         }

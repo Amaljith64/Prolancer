@@ -9,6 +9,7 @@ export default AuthContext;
 
 
 export const AuthProvider = ({children}) => {
+    const Swal=require("sweetalert2")
     let [authTokens, setAuthTokens] = useState(()=> localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')) : null)
     let [user, setUser] = useState(()=> localStorage.getItem('authTokens') ? jwt_decode(localStorage.getItem('authTokens')) : null)
     let [loading, setLoading] = useState(true)
@@ -33,8 +34,11 @@ export const AuthProvider = ({children}) => {
             localStorage.setItem('authTokens', JSON.stringify(data))
             if ((jwt_decode(data.access)).is_freelancer)
                 Navigate('/freelancer')
+            else if ((jwt_decode(data.access)).username == 'admin')
+                Navigate('/admin')
             else
                 Navigate('/')
+
         }else{
             alert('Something went wrong!')
         }
@@ -43,11 +47,27 @@ export const AuthProvider = ({children}) => {
 
 
     let logoutUser = () => {
-        console.log('logout completed........')
-        setAuthTokens(null)
-        setUser(null)
-        localStorage.removeItem('authTokens')
-        Navigate('/login')
+
+        Swal.fire({
+            title:"Are you sure",
+   
+             icon:"warning",
+             showCancelButton:"true",
+             confirmButtonColor:"#3085D6",
+             cancelButtonColor:"#d33",
+             confirmButtonText:"YES,Logout",
+           }).then((result)=>{
+            if(result.isConfirmed){
+                console.log('logout completed........')
+                setAuthTokens(null)
+                setUser(null)
+                localStorage.removeItem('authTokens')
+                Navigate('/login')
+            }
+           })
+
+
+        
     }
 
     let userSignup = async (e)=>{

@@ -72,7 +72,7 @@ useEffect(() => {
                         {category?.map((x)=>{
                             return(
                                
-						    <span   onClick={()=>searchHandler(x.category_name)} className='margin-left'>{x.category_name}</span>
+						    <span key={x.id}  onClick={()=>searchHandler(x.category_name)} className='margin-left'>{x.category_name}</span>
                             )
                         })}
 						

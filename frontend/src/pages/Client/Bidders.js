@@ -51,11 +51,7 @@ const Bidders = () => {
 
 				
 				<nav id="breadcrumbs" className="dark">
-					<ul>
-						<li><Link to="#">Home</Link></li>
-						{/* <li><Link to="#">Dashboard</Link></li> */}
-						<li>Manage Bidders</li>
-					</ul>
+				
 				</nav>
 			</div>
 	
@@ -118,7 +114,6 @@ const Bidders = () => {
 													(<Link onClick={(e)=>submitHandler(x.id)} className="popup-with-zoom-anim button ripple-effect"><i className="icon-material-outline-check"></i> Accepted</Link>)
 													}
 													<Link to="#small-dialog-2" className="popup-with-zoom-anim button dark ripple-effect"><i className="icon-feather-mail"></i> Send Message</Link>
-													<Link to="#" className="button gray ripple-effect ico" title="Remove Bid" data-tippy-placement="top"><i className="icon-feather-trash-2"></i></Link>
 												</div>
 											</div>
 										</div>

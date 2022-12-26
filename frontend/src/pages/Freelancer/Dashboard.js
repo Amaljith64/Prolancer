@@ -28,10 +28,7 @@ function Dashboard() {
 
 				
 				<nav id="breadcrumbs" className="dark">
-					<ul>
-						<li><Link to="#">Home</Link></li>
-						<li>Dashboard</li>
-					</ul>
+					
 				</nav>
 			</div>
 

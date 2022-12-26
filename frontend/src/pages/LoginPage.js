@@ -33,10 +33,7 @@ const LoginPage = () => {
 					<div className="col-md-12">
 						<h2>Log In</h2>
 						<nav id="breadcrumbs" className="dark">
-							<ul>
-								<li>Home</li>
-								<li>Log In</li>
-							</ul>
+							
 						</nav>
 					</div>
 				</div>

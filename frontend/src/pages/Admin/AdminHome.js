@@ -45,10 +45,7 @@ const AdminHome = () => {
 
 				
 				<nav id="breadcrumbs" className="dark">
-					<ul>
-						<li><Link to="#">Home</Link></li>
-						<li>Dashboard</li>
-					</ul>
+					
 				</nav>
 			</div>
 	
@@ -86,150 +83,14 @@ const AdminHome = () => {
 				</div>
 			</div>
 		
-			<div className="row">
-
-				<div className="col-xl-6">
-					<div className="dashboard-box">
-						<div className="headline">
-							<h3><i className="icon-material-baseline-notifications-none"></i> Notifications</h3>
-							<button className="mark-as-read ripple-effect-dark" data-tippy-placement="left" title="Mark all as read">
-									<i className="icon-feather-check-square"></i>
-							</button>
-						</div>
-						<div className="content">
-							<ul className="dashboard-box-list">
-								<li>
-									<span className="notification-icon"><i className="icon-material-outline-group"></i></span>
-									<span className="notification-text">
-										<strong>Michael Shannah</strong> applied for a job <Link to="#">Full Stack Software Engineer</Link>
-									</span>
-									
-									<div className="buttons-to-right">
-										<Link to="#" className="button ripple-effect ico" title="Mark as read" data-tippy-placement="left"><i className="icon-feather-check-square"></i></Link>
-									</div>
-								</li>
-								<li>
-									<span className="notification-icon"><i className=" icon-material-outline-gavel"></i></span>
-									<span className="notification-text">
-										<strong>Gilber Allanis</strong> placed a bid on your <Link to="#">iOS App Development</Link> project
-									</span>
-									
-									<div className="buttons-to-right">
-										<Link to="#" className="button ripple-effect ico" title="Mark as read" data-tippy-placement="left"><i className="icon-feather-check-square"></i></Link>
-									</div>
-								</li>
-								<li>
-									<span className="notification-icon"><i className="icon-material-outline-autorenew"></i></span>
-									<span className="notification-text">
-										Your job listing <Link to="#">Full Stack Software Engineer</Link> is expiring
-									</span>
-									
-									<div className="buttons-to-right">
-										<Link to="#" className="button ripple-effect ico" title="Mark as read" data-tippy-placement="left"><i className="icon-feather-check-square"></i></Link>
-									</div>
-								</li>
-								<li>
-									<span className="notification-icon"><i className="icon-material-outline-group"></i></span>
-									<span className="notification-text">
-										<strong>Sindy Forrest</strong> applied for a job <Link to="#">Full Stack Software Engineer</Link>
-									</span>
-									
-									<div className="buttons-to-right">
-										<Link to="#" className="button ripple-effect ico" title="Mark as read" data-tippy-placement="left"><i className="icon-feather-check-square"></i></Link>
-									</div>
-								</li>
-								<li>
-									<span className="notification-icon"><i className="icon-material-outline-rate-review"></i></span>
-									<span className="notification-text">
-										<strong>David Peterson</strong> left you a <span className="star-rating no-stars" data-rating="5.0"></span> rating after finishing <Link to="#">Logo Design</Link> task
-									</span>
-									
-									<div className="buttons-to-right">
-										<Link to="#" className="button ripple-effect ico" title="Mark as read" data-tippy-placement="left"><i className="icon-feather-check-square"></i></Link>
-									</div>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-
-				
-				<div className="col-xl-6">
-					<div className="dashboard-box">
-						<div className="headline">
-							<h3><i className="icon-material-outline-assignment"></i> Orders</h3>
-						</div>
-						<div className="content">
-							<ul className="dashboard-box-list">
-								<li>
-									<div className="invoice-list-item">
-									<strong>Professional Plan</strong>
-										<ul>
-											<li><span className="unpaid">Unpaid</span></li>
-											<li>Order: #326</li>
-											<li>Date: 12/08/2019</li>
-										</ul>
-									</div>
-									
-									<div className="buttons-to-right">
-										<Link to="pages-checkout-page.html" className="button">Finish Payment</Link>
-									</div>
-								</li>
-								<li>
-									<div className="invoice-list-item">
-									<strong>Professional Plan</strong>
-										<ul>
-											<li><span className="paid">Paid</span></li>
-											<li>Order: #264</li>
-											<li>Date: 10/07/2019</li>
-										</ul>
-									</div>
-									
-									<div className="buttons-to-right">
-										<Link to="pages-invoice-template.html" className="button gray">View Invoice</Link>
-									</div>
-								</li>
-								<li>
-									<div className="invoice-list-item">
-									<strong>Professional Plan</strong>
-										<ul>
-											<li><span className="paid">Paid</span></li>
-											<li>Order: #211</li>
-											<li>Date: 12/06/2019</li>
-										</ul>
-									</div>
-									
-									<div className="buttons-to-right">
-										<Link to="pages-invoice-template.html" className="button gray">View Invoice</Link>
-									</div>
-								</li>
-								<li>
-									<div className="invoice-list-item">
-									<strong>Professional Plan</strong>
-										<ul>
-											<li><span className="paid">Paid</span></li>
-											<li>Order: #179</li>
-											<li>Date: 06/05/2019</li>
-										</ul>
-									</div>
-									
-									<div className="buttons-to-right">
-										<Link to="pages-invoice-template.html" className="button gray">View Invoice</Link>
-									</div>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-
-			</div>
+			
 			
 
 			
 			<div className="dashboard-footer-spacer"></div>
 			<div className="small-footer margin-top-15">
 				<div className="small-footer-copyrights">
-					© 2019 <strong>Hireo</strong>. All Rights Reserved.
+					© 2022 <strong>Hireo</strong>. All Rights Reserved.
 				</div>
 				<ul className="footer-social-links">
 					<li>

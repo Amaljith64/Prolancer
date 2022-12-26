@@ -1,14 +1,46 @@
-import React from "react";
+import React,{useContext,useEffect,useState} from 'react'
 import Header from "../../components/Header";
 import Service from "../../components/Service";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { useSearchParams } from 'react-router-dom';
+import ClientContext from '../../context/ClientContext'
+import ServiceSearch from '../../components/ServiceSearch';
+import { listservicepost } from "../../actions/postActions";
+import Paginate from '../../components/Paginate';
+
+
+
 
 const JobListing = () => {
+
+  const dispatch = useDispatch();
+
+
   const servicelist = useSelector((state) => state.serviceList);
   const { servicepost, serviceposterror } = servicelist;
 
+  const categoryList = useSelector((state) => state.listCategory);
+  const { loading, category, error } = categoryList;
+
+  const[choosedCategory,setchoosedCategory] = useState(null)
+
+  let {servicesearchHandler} = useContext(ClientContext)
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const someQueryParam = searchParams.get("keyword");
+
+
   console.log(servicepost, "jhhhhhhhhhhhhhhhhh");
+
+  useEffect(() => {
+    console.log('useeffect called')
+
+    setchoosedCategory(null)
+
+    dispatch(listservicepost(searchParams))
+
+}, [searchParams])
 
   return (  
     <>
@@ -16,49 +48,43 @@ const JobListing = () => {
       <div className="margin-top-70"></div>
 
       <div className="full-page-container">
-        <div className="full-page-sidebar">
-          <div className="full-page-sidebar-inner" data-simplebar>
-            <div className="sidebar-container">
-              <div className="sidebar-widget">
-                <h3>Location</h3>
+      <div className="full-page-sidebar">
+    <div className="full-page-sidebar-inner" data-simplebar>
+        <div className="sidebar-container">   
+            
+            <div className="sidebar-widget">
+                <h3>Search</h3>
                 <div className="input-with-icon">
-                  <div id="autocomplete-container">
-                    <input
-                      id="autocomplete-input"
-                      type="text"
-                      placeholder="Location"
-                    />
-                  </div>
-                  <i className="icon-material-outline-location-on"></i>
+                    <div id="autocomplete-container">
+                       <ServiceSearch/>
+                    </div>
+                   
                 </div>
-              </div>
-
-              <div className="sidebar-widget">
-                <h3>Keywords</h3>
+            </div> 
+            <div className="sidebar-widget">
+                <h3>Category</h3>
                 <div className="keywords-container">
-                  <div className="keyword-input-container">
-                    <input
-                      type="text"
-                      className="keyword-input"
-                      placeholder="e.g. job title"
-                    />
-                    <button className="keyword-input-button ripple-effect">
-                      <i className="icon-material-outline-add"></i>
-                    </button>
-                  </div>
-                  <div className="keywords-list">
+                    <div className="keyword-input-container">
+                    <div className="task-tags">
+                        {category?.map((x)=>{
+                            return(
+                               
+						    <span   onClick={()=>servicesearchHandler(x.category_name)} className='margin-left'>{x.category_name}</span>
+                            )
+                        })}
+						
+					</div>
+                    </div>
+                    <div className="keywords-list">
                     <div className="clearfix"></div>
-                  </div>
                 </div>
-
-                
-              </div>
-                <button className="button ripple-effect">Search</button>
-             
-
-            </div>
-          </div>
-        </div>
+            </div>            
+                     
+        </div>      
+     
+    </div>
+</div>
+</div>
 
         <div className="full-page-content-container" data-simplebar>
           <div className="full-page-content-inner">
@@ -66,7 +92,7 @@ const JobListing = () => {
 
         
 
-            {servicepost?.map((data, id) => {
+            {servicepost?.service?.map((data, id) => {
               return (
                 
                   <Service key={id} data={data} />
@@ -75,43 +101,9 @@ const JobListing = () => {
             })}
 
             <div className="clearfix"></div>
-            {/* <div className="pagination-container margin-top-20 margin-bottom-20">
-              <nav className="pagination">
-                <ul>
-                  <li className="pagination-arrow">
-                    <Link to="#" className="ripple-effect">
-                      <i className="icon-material-outline-keyboard-arrow-left"></i>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="#" className="ripple-effect">
-                      1
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="#" className="ripple-effect current-page">
-                      2
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="#" className="ripple-effect">
-                      3
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="#" className="ripple-effect">
-                      4
-                    </Link>
-                  </li>
-                  <li className="pagination-arrow">
-                    <Link to="#" className="ripple-effect">
-                      <i className="icon-material-outline-keyboard-arrow-right"></i>
-                    </Link>
-                  </li>
-                </ul>
-              </nav>
-            </div> */}
+           
             <div className="clearfix"></div>
+            <Paginate pages={servicepost?.pages} page={servicepost?.page} />
 
            
           </div>

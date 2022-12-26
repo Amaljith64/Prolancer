@@ -3,10 +3,10 @@ import AdminHeader from '../../components/AdminHeader'
 import AdminSidebar from '../../components/AdminSidebar'
 import { Link } from "react-router-dom";
 
-const AllUsers = () => {
+const FreelancerRequest = () => {
   return (
-    <>
-       <div id="wrapper"></div> 
+    <div>
+      <div id="wrapper"></div> 
     <AdminHeader/>
     <div className="clearfix"></div>
     <div className="dashboard-container">
@@ -22,7 +22,7 @@ const AllUsers = () => {
 
             
             <nav id="breadcrumbs" className="dark">
-               
+                
             </nav>
         </div>
 
@@ -54,22 +54,20 @@ const AllUsers = () => {
                                             <span className="freelancer-detail-item"><Link to="#"><i className="icon-feather-mail"></i> david@example.com</Link></span>
 
                                             
-                                            <div className="freelancer-rating">
-                                                <div className="star-rating" data-rating="5.0"></div>
-                                            </div>
+                                           
 
                                             
                                             <ul className="dashboard-task-info bid-info">
-                                                <li><strong>$3,200</strong><span>Fixed Price</span></li>
-                                                <li><strong>14 Days</strong><span>Delivery Time</span></li>
+                                                <li><Link to="#small-dialog-1"  className="popup-with-zoom-anim button ripple-effect"><i className="icon-material-outline-check"></i> Accept</Link>
+                                                </li>
+                                                <li><Link to="#small-dialog-1"  className="popup-with-zoom-anim button ripple-effect" style={{backgroundColor : '#e82a2c'}}><i className="icon-line-awesome-close"></i> Reject</Link>
+                                                </li>
+                                               
+                                            
                                             </ul>
 
                                             
-                                            <div className="buttons-to-right always-visible margin-top-25 margin-bottom-0">
-                                                <Link to="#small-dialog-1"  className="popup-with-zoom-anim button ripple-effect"><i className="icon-material-outline-check"></i> Accept Offer</Link>
-                                                <Link to="#small-dialog-2" className="popup-with-zoom-anim button dark ripple-effect"><i className="icon-feather-mail"></i> Send Message</Link>
-                                                <Link to="#" className="button gray ripple-effect ico" title="Remove Bid" data-tippy-placement="top"><i className="icon-feather-trash-2"></i></Link>
-                                            </div>
+                                          
                                         </div>
                                     </div>
                                 </div>
@@ -120,9 +118,8 @@ const AllUsers = () => {
 
 
 </div>
-      
-    </>
+    </div>
   )
 }
 
-export default AllUsers
+export default FreelancerRequest

@@ -71,11 +71,7 @@ const JobPosting = () => {
 
 				
 				<nav id="breadcrumbs" className="dark">
-					<ul>
-						<li><Link to="#">Home</Link></li>
-						<li><Link to="#">Dashboard</Link></li>
-						<li>Post a Job</li>
-					</ul>
+					
 				</nav>
 			</div>
 	

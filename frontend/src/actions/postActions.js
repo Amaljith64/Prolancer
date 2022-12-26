@@ -138,7 +138,7 @@ export const Singlejobpost = (id) => async (dispatch) => {
 /* -------------------------------------------------------------------------- */
 
 
-export const listservicepost = () => async (dispatch) => {
+export const listservicepost = (keyword = '') => async (dispatch) => {
     try{
         dispatch({
             type : SERVICEPOST_REQUEST
@@ -148,7 +148,7 @@ export const listservicepost = () => async (dispatch) => {
                 'Content-type' : 'application/json'
             }
         }
-        const { data } = await axios.get("/freelancer/postservice/",config)
+        const { data } = await axios.get(`/freelancer/postservice?${keyword}`,config)
 
         dispatch({
             type : SERVICEPOST_SUCCESS,

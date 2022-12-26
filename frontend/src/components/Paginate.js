@@ -10,14 +10,7 @@ function Paginate({ pages, page, keyword = '', isAdmin = false }) {
        
         backgroundColor:"red"
       };
-      
-
-
-
-
-
-
-
+    
 
     console.log(pages,'keyy')
     if (keyword) {

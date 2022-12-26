@@ -136,11 +136,7 @@ function FreelancerServicePost() {
 				<h3>Add Services</h3>
 
 				<nav id="breadcrumbs" className="dark">
-					<ul>
-						<li><Link to="#">Home</Link></li>
-						<li><Link to="#">Dashboard</Link></li>
-						<li>Post Service</li>
-					</ul>
+					
 				</nav>
 
 			</div>
