@@ -46,6 +46,8 @@ class NewUser(AbstractBaseUser, PermissionsMixin):
     is_freelancer = models.BooleanField(default=False,null=True)
     active_membership = models.CharField(max_length=225,null=True, blank=True)
     membership_expiry = models.DateTimeField(null=True, blank=True)
+    profile_photo = models.ImageField(upload_to='images/user',blank=True, default= 'images/user/4.png', null=True) 
+    
 
     objects = CustomAccountManager()
 
@@ -65,11 +67,11 @@ class Userprofile(models.Model):
 
     user = models.ForeignKey(NewUser,on_delete=models.CASCADE,related_name='pro_user_set')
     first_name = models.CharField(max_length=225,null=True)
-    last_name = models.CharField(max_length=225,blank=True)
-    date_of_birth = models.DateField()
-    profile_photo = models.ImageField(upload_to='images/user') 
-    cv = models.FileField(upload_to='cv/user')
-    about = models.TextField()
+    last_name = models.CharField(max_length=225,blank=True,null=True)
+    date_of_birth = models.DateField(null=True)
+    profile_photo = models.ImageField(upload_to='images/user',blank=True, default= 'images/user/4.png', null=True) 
+    cv = models.FileField(upload_to='cv/user',null=True)
+    about = models.TextField(null=True)
 
     def __str__(self) :
 

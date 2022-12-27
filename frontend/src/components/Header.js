@@ -4,6 +4,8 @@ import AuthContext from '../context/AuthContext'
 import '../App.css'
 import { useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+
 import axios from 'axios'
 
 const Header = () => {
@@ -11,6 +13,10 @@ const Header = () => {
     let {user, logoutUser} = useContext(AuthContext)
     const [isActive, setActive] = useState(false);
     const Swal = require("sweetalert2");
+
+
+    const userdetails = useSelector((state) => state.userProfile);
+    const { userprofile,userprofileerror} = userdetails;
 
   const toggleClass = () => {
     setActive(!isActive);
@@ -135,7 +141,7 @@ const Header = () => {
                 
                 <div className= {isActive ? 'header-notifications user-menu active': "header-notifications user-menu"}>
                     <div className="header-notifications-trigger">
-                        <Link to=""><div className="user-avatar status-online"><img src="/images/user-avatar-small-01.jpg" alt="" /></div></Link>
+                        <Link to=""><div className="user-avatar status-online"><img src={userprofile?.profile_photo}  alt="" /></div></Link>
                     </div>
 
                     
@@ -147,11 +153,13 @@ const Header = () => {
                             
                             <div className="user-details">
                                 <Link to='/userprofile'>
-                                <div className="user-avatar status-online"><img src="/images/user-avatar-small-01.jpg" alt="" /></div>
+                                <div className="user-avatar status-online"><img src={userprofile?.profile_photo} style={{height: '-webkit-fill-available'}} alt="" /></div>
                                 </Link>
                                 <div className="user-name">
                                 {user &&  <h3>Hello <strong> {user.username}</strong></h3>}
                                 {user?.is_freelancer ? (<span>Freelancer</span>) : (<span>User</span>)}
+                                <span><strong>{userprofile?.active_membership == null ? 'No Membership'
+                                : userprofile?.active_membership}</strong></span>
                                 </div>
                             </div>
                             <div className="margin-top-30"></div>

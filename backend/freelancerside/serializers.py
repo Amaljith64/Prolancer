@@ -4,10 +4,21 @@ from clientside.models import Bids
 from clientside.serializer import UserAccountSerializer
 
 
+
+class ServiceRatingSerializer(serializers.ModelSerializer):
+    reviewuser=UserAccountSerializer(read_only=True)
+    class Meta:
+        model =ServiceRating
+        fields = "__all__"
+        
 class FreelancerServiceSerializer(serializers.ModelSerializer):
+    user=UserAccountSerializer(read_only=True)
+    reviewed_user_details = ServiceRatingSerializer(read_only = True,many=True)
     class Meta:
         model = FreelancerService
         fields = "__all__"
+
+
 
 class BidSerializer(serializers.ModelSerializer):
     
@@ -22,12 +33,7 @@ class BidViewSerializer(serializers.ModelSerializer):
         model = Bids
         fields = "__all__"
 
-class ServiceRatingSerializer(serializers.ModelSerializer):
-    user = UserAccountSerializer(read_only=True)
-    class Meta:
-        model =ServiceRating
-        fields = "__all__"
-        
+
 class ServiceReportSerializer(serializers.ModelSerializer):
 
     class Meta:

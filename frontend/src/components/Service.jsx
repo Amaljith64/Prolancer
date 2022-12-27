@@ -1,11 +1,12 @@
 import React from 'react'
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 
 function Service({data}) {
+  const Navigate = useNavigate();
   return (
     <>
     <div  className="listings-container grid-layout margin-top-35" style={{ width: "100%"}}>
-        <Link to={`/single_service/${data.id}`} className="blog-post">
+        <a onClick={()=>Navigate(`/single_service/${data.id}`)} className="blog-post">
             <div className="blog-post-thumbnail">
             <div className="blog-post-thumbnail-inner">
                 <span className="blog-item-tag">₹{data.Price}</span>
@@ -22,7 +23,7 @@ function Service({data}) {
             </div>
 
             <div className="entry-icon"></div>
-        </Link>
+        </a>
     </div>
     </>
   )

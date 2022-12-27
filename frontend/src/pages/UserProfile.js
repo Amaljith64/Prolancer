@@ -46,11 +46,6 @@ class UserProfileComponent extends React.Component {
   };
 
 
-
-
-
-
-
   openModal = (id) => {
     this.setState({ openedModal: id });
   };
@@ -59,7 +54,7 @@ class UserProfileComponent extends React.Component {
   };
 
   handleChange = (event) => {
-    this.setState({ value : event.target.value})
+    this.setState({ [event.target.name] : event.target.value})
 
   };
 
@@ -113,10 +108,62 @@ class UserProfileComponent extends React.Component {
                 <div className="single-page-header-inner">
                   <div className="left-side">
                     <div className="header-image freelancer-avatar">
-                      <img src="/images/user-avatar-big-02.jpg" alt="" />
-                      <button className="btnn">
+                      <img src={userdetails?.profile_photo} style={{height:'-webkit-fill-available'}} alt="" />
+                      <button onClick={() => this.openModal("image")} className="btnn" >
                         <i className="icon-feather-plus"></i>
                       </button>
+
+                      <Modal
+                                show={
+                                  this.closeModal &&
+                                  this.state.openedModal === "image"
+                                }
+                              >
+                                <div
+                                  id="small-dialog"
+                                  className="zoom-anim-dialog mfp-hide dialog-with-tabs"
+                                ></div>
+                                <Modal.Header closeButton>
+                                  <Modal.Title id="contained-modal-title-vcenter">
+                                    <ul className="popup-tabs-nav">
+                                      <li>
+                                        <Link to="#tab">Add</Link>
+                                      </li>
+                                      <Button
+                                        style={{
+                                          float: "right",
+                                          padding: "21px",
+                                        }}
+                                        onClick={this.closeModal}
+                                      >
+                                        Close
+                                      </Button>
+                                    </ul>
+                                  </Modal.Title>
+                                </Modal.Header>
+                                <Modal.Body>
+                                  <div className="popup-tabs-container">
+                                    <div className="welcome-text">
+                                      <h3>Add Image</h3>
+                                    </div>
+                                    <div className="popup-tab-content" id="tab" style={{ textAlignLast: 'center'}}>
+                                    <img src={userdetails?.profile_photo} style={{height:'-webkit-fill-available'}} alt="" />
+                                      <form >
+                                        <input type="file" />
+
+                                       
+                                        <button
+                                                  className="button big ripple-effect margin-top-20 margin-bottom-20 "
+                                                  style={{ float: "right" }}
+                                                >
+                                                  Save
+                                                </button>
+                                      
+                                      </form>
+                                    </div>
+                                  </div>
+                                </Modal.Body>
+                              </Modal>
                     </div>
                     <div className="header-details">
                       <h3>

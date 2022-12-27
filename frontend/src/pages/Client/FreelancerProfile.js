@@ -134,13 +134,13 @@ const FreelancerProfile = () => {
 							
 							<div className="freelancer-avatar">
 								<div className="verified-badge"></div>
-								<Link to={`/profile/${data.id}`}><img src="images/user-avatar-big-01.jpg" alt=""/></Link>
+								<Link to={`/profile/${data.id}`}><img src={data.profile_photo} alt=""/></Link>
 							</div>
 							
 
 							
 							<div className="freelancer-name">
-								<h4><Link to="#">{data.username} <img className="flag" src="images/flags/gb.svg" alt="" title="United Kingdom" data-tippy-placement="top"/></Link></h4>
+								<h4><Link to="#">{data.username} <img className="flag" src={"images/flags/gb.svg"} alt="" title="United Kingdom" data-tippy-placement="top"/></Link></h4>
 								<span>UI/UX Designer</span>
 								
 								<div className="freelancer-rating">

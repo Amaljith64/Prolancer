@@ -66,13 +66,17 @@ class ClientServiceView(APIView):
         return Response (serviceserializer.data)
 class ClientSingleServiceView(APIView):
     def get(self,request,id):
+        print('im hereeeeeeeeeeee')
         service = FreelancerService.objects.get(id = id)
         serviceserializer = FreelancerServiceSerializer(service)
-        reviews = ServiceRating.objects.filter(service = service)
-        reviewserializer = ServiceRatingSerializer(reviews,many=True)
+        
+        # reviews = ServiceRating.objects.filter(service = service)
+        # reviewserializer = ServiceRatingSerializer(reviews,many=True)
         if serviceserializer.is_valid :
-            return Response ({'service':serviceserializer.data,
-            'review' : reviewserializer.data},status=status.HTTP_200_OK)
+            print(serviceserializer.data,'dataaaaaaaaaaaaaa')
+            return Response (serviceserializer.data,status=status.HTTP_200_OK)
+            # return Response ({'service':serviceserializer.data,
+            # 'review' : reviewserializer.data},status=status.HTTP_200_OK)
         else:
             return Response (status=status.HTTP_404_NOT_FOUND)
         

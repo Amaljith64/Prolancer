@@ -16,12 +16,13 @@ import Modal from "react-bootstrap/Modal";
 import PaypalCheckOutButton from "../Freelancer/PaypalCheckOutButton";
 
 const SingleService = () => {
+
   const [modalShow, setModalShow] = useState(false);
 
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
 
-  const [reload, setReload] = useState();
+  const [reload, setReload] = useState(false);
 
   const { user } = useContext(AuthContext);
 
@@ -31,9 +32,13 @@ const SingleService = () => {
   let { id } = useParams();
   const servicelist = useSelector((state) => state.viewService);
   const { singleservicepost, serviceposterror } = servicelist;
+
   console.log(singleservicepost)
 
+
+
   useEffect(() => {
+    console.log('useeffect  for single post called')
     dispatch(Singleservicepost(id));
   }, [reload]);
 
@@ -92,19 +97,19 @@ const SingleService = () => {
                 <div className="left-side">
                   <div className="header-image">
                     <Link to="single-company-profile.html">
-                      <img src={singleservicepost?.service.img} alt="" />
+                      <img src={singleservicepost?.img} alt="" />
                     </Link>
                   </div>
                   <div className="header-details">
-                    <h3>{singleservicepost?.service.service_title}</h3>
-                    <h5>Employer Name : {singleservicepost?.service.user}</h5>
+                    <h3>{singleservicepost?.service_title}</h3>
+                    <h5>Employer Name : {singleservicepost?.user.username}</h5>
                   </div>
                 </div>
                 <div className="right-side">
                   <div className="salary-box">
                     <div className="salary-type">Price</div>
                     <div className="salary-amount">
-                      ₹ {singleservicepost?.service.Price}
+                      ₹ {singleservicepost?.Price}
                     </div>
                   </div>
                 </div>
@@ -127,12 +132,12 @@ const SingleService = () => {
                   textTransform: "none",
                 }}
               >
-                {singleservicepost?.service.service_description}
+                {singleservicepost?.service_description}
               </pre>
 
-              <p>{singleservicepost?.service.response_time}</p>
+              <p>{singleservicepost?.response_time}</p>
 
-              <p>{singleservicepost?.service.Price}</p>
+              <p>{singleservicepost?.Price}</p>
             </div>
             <div className="boxed-list margin-bottom-60">
               <div className="boxed-list-headline">
@@ -142,17 +147,17 @@ const SingleService = () => {
                 </h3>
               </div>
               <ul className="boxed-list-ul">
-                {singleservicepost?.review.map((data, id) => {
+                {singleservicepost?.reviewed_user_details.map((data, id) => {
                   return (
                     <li key={id}>
                       <div className="avatar">
-                        <img src="/images/user-avatar-placeholder.png" alt="" />
+                        <img src={data.reviewuser.profile_photo} alt="" />
                       </div>
 
                       <div className="boxed-list-item">
                         <div className="item-content">
                           <h4>
-                            {data.title} <span>{data.reviewuser}</span>
+                            {data.title} <span>{data.reviewuser.username}</span>
                           </h4>
                           <div className="item-details margin-top-10">
                             <div className="ratingbutton">{data.stars}.0</div>
@@ -307,19 +312,19 @@ const SingleService = () => {
                 <Modal.Body>
 				<div className="popup-tabs-container">
 				<div className="welcome-text">
-					<h3>Pay Rupees : {singleservicepost?.service.Price}</h3>
+					<h3>Pay Rupees : {singleservicepost?.Price}</h3>
 				</div>
 				<div className="payment margin-top-30">
 
 				<div className="payment-tab payment-tab-active">
 					<div className="payment-tab-trigger margin-top-20">
-						<PaypalCheckOutButton  price={singleservicepost?.service.Price} 
-						serviceid={singleservicepost?.service.id}
+						<PaypalCheckOutButton  price={singleservicepost?.Price} 
+						serviceid={singleservicepost?.id}
 						/>
 					</div>
 					<div className="payment-tab-trigger margin-top-20">
 					<form action={`/client/create-checkout-session/`} method="POST">
-						<input type="hidden" name="price" value={singleservicepost?.service.Price}/>
+						<input type="hidden" name="price" value={singleservicepost?.Price}/>
 						<button
 						type="submit"
 						className="btn btn-primary btn-rounded fs-4 margin-bottom-20"
@@ -360,13 +365,13 @@ const SingleService = () => {
                       <li>
                         <i className="icon-material-outline-local-atm"></i>
                         <span>Price</span>
-                        <h5>₹{singleservicepost?.service.Price}</h5>
+                        <h5>₹{singleservicepost?.Price}</h5>
                       </li>
                       <li>
                         <i className="icon-material-outline-access-time"></i>
                         <span>Date Posted</span>
                         <h5>
-                          {format(singleservicepost?.service.servicetime)}
+                          {format(singleservicepost?.servicetime)}
                         </h5>
                       </li>
                       <li>
