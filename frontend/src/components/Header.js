@@ -251,20 +251,20 @@ const Header = () => {
 
             <div className="right-side">
               <div className="header-widget hide-on-mobile">
-                <div className="header-notifications">
+                {/* <div className="header-notifications">
                   <div className="header-notifications-trigger">
                     <Link to="/upcomming">
                       <i className="icon-feather-bell"></i>
                       <span>4</span>
                     </Link>
                   </div>
-                </div>
+                </div> */}
 
                 <div className="header-notifications">
                   <div className="header-notifications-trigger">
-                    <Link to="/upcomming">
-                      <i className="icon-feather-mail"></i>
-                      <span>3</span>
+                    <Link to="/chat">
+                      <i className="icon-feather-message-circle"></i>
+                      
                     </Link>
                   </div>
                 </div>

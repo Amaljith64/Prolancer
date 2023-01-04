@@ -5,9 +5,12 @@ import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux";
 import { SingleUsers } from '../actions/postActions';
 import { Link } from "react-router-dom";
+import AuthContext from '../context/AuthContext'
 
 
 export const Profile = () => {
+
+	const { user, profileid,Setprofileid } = useContext(AuthContext)
 
 	const dispatch = useDispatch();
 
@@ -41,6 +44,7 @@ export const Profile = () => {
 								<li><div className="star-rating" data-rating="5.0"></div></li>
 								<li><img className="flag" src="/images/flags/de.svg" alt=""/> Germany</li>
 								<li><div className="verified-badge-with-title">Verified</div></li>
+								<Link onClick={()=> Setprofileid(id)} to='/chat'><div className="">Click to Chat</div></Link>
 							</ul>
 						</div>
 					</div>

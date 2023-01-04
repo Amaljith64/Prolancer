@@ -34,7 +34,8 @@
     "sass": "^1.56.2",
     "sweetalert2": "^11.6.10",
     "timeago.js": "^4.0.2",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "websocket": "^1.0.34"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -37,6 +37,7 @@ import FailedPage from './pages/FailedPage';
 import ScrollToTop from './components/ScrollToTop';
 import FreelancerRequest from './pages/Admin/FreelancerRequest';
 import Header from './components/Header';
+import { ChatPage } from './pages/ChatPage';
 
 
 
@@ -92,6 +93,9 @@ function App() {
           <Route element={<Checkout/>} path="/checkout/:price"/>
           <Route element={<Success/>} path="/success"/>
           <Route element={<FailedPage/>} path="/cancelled"/>
+
+
+          <Route element={<ChatPage/>} path="/chat"/>
 
 
 

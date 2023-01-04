@@ -24,4 +24,5 @@ urlpatterns = [
     path('freelancer/',include('freelancerside.urls')),
     path('prolanceadmin/',include('adminpanel.urls')),
     path('api/', include('accounts.api.urls')),
+    path('chat/', include('chat.urls')),
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

@@ -22,9 +22,12 @@ from django.contrib.auth.hashers import make_password
 from accounts.api.helpers import verify_account_after_registration
 
 
+
+
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
     def get_token(cls, user):
+
         print('at loginn ')
         token = super().get_token(user)
 
