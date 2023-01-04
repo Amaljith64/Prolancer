@@ -185,3 +185,20 @@ CORS_ALLOW_ALL_ORIGINS = True
 
 STRIPE_SECRET_KEY='sk_test_51MGcwNSGGnxwKUV96ZjUZJlwhWsDFhGZZENTvILi4SvzcI7dYKXjGyauZIvrrEESMNRk32SOTP26uFJOPPCYuNKR00mw2GCvq1'
 SITE_URL='http://localhost:3000/'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'prolancer2022@gmail.com'
+EMAIL_HOST_PASSWORD = 'zslrjeleljixlasp'
+
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+}

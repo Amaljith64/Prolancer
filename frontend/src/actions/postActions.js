@@ -206,7 +206,7 @@ export const UserProfile = (id) => async (dispatch) => {
                 'Content-type' : 'application/json'
             }
         }
-        const { data } = await axios.get(`api/userprofile/${id}/`,config)
+        const { data } = await axios.get(`/api/userprofile/${id}/`,config)
 
         dispatch({
             type : USERPROFILE_SUCCESS,

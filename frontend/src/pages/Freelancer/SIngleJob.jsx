@@ -1,7 +1,6 @@
 import React,{useContext,useState , useEffect} from 'react'
 import Header from '../../components/Header'
 import Form from 'react-bootstrap/Form';
-import 'react-tabs/style/react-tabs.css';
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from 'react-router-dom'
@@ -92,7 +91,7 @@ const bids = singlejobpost?.bids
 			<div className="col-md-12">
 				<div className="single-page-header-inner">
 					<div className="left-side">
-						<div className="header-image"><Link to="single-company-profile.html"><img src= {singlejobpost?.service.img} alt=""/></Link></div>
+						<div className="header-image"><Link to=""><img src= {singlejobpost?.service.img} alt=""/></Link></div>
 						<div className="header-details">
 							<h3> {singlejobpost?.service.job_title} </h3>
 							<h5> {singlejobpost?.service.user?.username}</h5>							
@@ -158,7 +157,7 @@ const bids = singlejobpost?.bids
 							<div className="bids-avatar">
 								<div className="freelancer-avatar">
 									<div className="verified-badge"></div>
-									<Link to="single-freelancer-profile.html"><img src="/images/user-avatar-big-01.jpg" alt=""/></Link>
+									<Link to=""><img src="/images/user-avatar-big-01.jpg" alt=""/></Link>
 								</div>
 							</div>
 							
@@ -166,7 +165,7 @@ const bids = singlejobpost?.bids
 							<div className="bids-content">
 							
 								<div className="freelancer-name">
-									<h4><Link to="single-freelancer-profile.html">{x.user.username} </Link></h4>
+									<h4><Link to="">{x.user.username} </Link></h4>
 									<div className="item-details margin-top-3">
 										<div className="star-rating" data-rating="5.0"></div><br />
 										<div className="detail-item"><i className="icon-material-outline-date-range"></i> {x.bidtime.slice(0,10)}</div>

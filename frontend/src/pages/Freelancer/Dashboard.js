@@ -231,7 +231,7 @@ function Dashboard() {
 									</div>
 									
 									<div className="buttons-to-right">
-										<Link to="pages-checkout-page.html" className="button">Finish Payment</Link>
+										<Link to="" className="button">Finish Payment</Link>
 									</div>
 								</li>
 								<li>
@@ -245,7 +245,7 @@ function Dashboard() {
 									</div>
 									
 									<div className="buttons-to-right">
-										<Link to="pages-invoice-template.html" className="button gray">View Invoice</Link>
+										<Link to="" className="button gray">View Invoice</Link>
 									</div>
 								</li>
 								<li>
@@ -259,7 +259,7 @@ function Dashboard() {
 									</div>
 									
 									<div className="buttons-to-right">
-										<Link to="pages-invoice-template.html" className="button gray">View Invoice</Link>
+										<Link to="" className="button gray">View Invoice</Link>
 									</div>
 								</li>
 								<li>
@@ -273,7 +273,7 @@ function Dashboard() {
 									</div>
 									
 									<div className="buttons-to-right">
-										<Link to="pages-invoice-template.html" className="button gray">View Invoice</Link>
+										<Link to="" className="button gray">View Invoice</Link>
 									</div>
 								</li>
 							</ul>

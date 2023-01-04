@@ -1,10 +1,16 @@
 import React, {useContext,useEffect,useState} from 'react'
 import AuthContext from '../context/AuthContext'
 import { Link } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import { useForm } from "react-hook-form";
 
 const LoginPage = () => {
 
     let {loginUser,googleSignin} = useContext(AuthContext)
+
+	const { register, handleSubmit, formState: { errors } } = useForm({
+        mode: "onChange"
+    })
 
 	function handleCallbackResponse(response){
 		googleSignin(response)
@@ -24,9 +30,27 @@ const LoginPage = () => {
 	  
 	}, [])
 
+	const registerOptions = {
+        email: {
+            required: 'Email is required.',
+            pattern: {
+                value: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/,
+                message: 'Email is not valid.'
+            }
+        },
+        password: {
+            required: "Password is required",
+            minLength: {
+                value: 5,
+                message: "Password must have at least 5 characters"
+            }
+        }
+    };
+
     return (
       
         <div>
+		<ToastContainer />
         <div id="titlebar" className="gradient">
 			<div className="container">
 				<div className="row">
@@ -51,13 +75,23 @@ const LoginPage = () => {
 						<form onSubmit={loginUser} id="login-form">
 							<div className="input-with-icon-left">
 								<i className="icon-material-baseline-mail-outline"></i>
-								<input type="text" className="input-text with-border" name="email" id="emailaddress"
-									placeholder="Email Address" required />
+								<input style={{margin:'0'}} type="text" className="input-text with-border" name="email" id="emailaddress"
+									placeholder="Email Address" required {...register('email', registerOptions.email)} />
+									<small>
+									<div style={{height: '27px',color: 'red'}} className="text-danger">
+										{errors?.email && errors.email.message}
+									</div>
+									</small>
 							</div>
 							<div className="input-with-icon-left">
 								<i className="icon-material-outline-lock"></i>
-								<input type="password" className="input-text with-border" name="password" id="password"
-									placeholder="Password" required />
+								<input style={{margin:'0'}} type="password" className="input-text with-border" name="password" id="password"
+									placeholder="Password" required {...register('password', registerOptions.password)}/>
+									<small>
+									<div style={{height: '27px',color: 'red'}} className="text-danger">
+										{errors?.password && errors.password.message}
+									</div>
+									</small>
 							</div>
 							{/* <Link className="forgot-password">Forgot Password?</Link> */}
 						</form>

@@ -30,6 +30,7 @@ class CustomAccountManager(BaseUserManager):
         email = self.normalize_email(email)
         user = self.model(email=email, username=username,**other_fields)
         user.set_password(password)
+        
         user.save()
         return user
 
@@ -47,7 +48,9 @@ class NewUser(AbstractBaseUser, PermissionsMixin):
     active_membership = models.CharField(max_length=225,null=True, blank=True)
     membership_expiry = models.DateTimeField(null=True, blank=True)
     profile_photo = models.ImageField(upload_to='images/user',blank=True, default= 'images/user/4.png', null=True) 
-    
+    otp = models.CharField(null=True,max_length=100)
+    email_token = models.CharField(max_length=100 ,null=True)
+    is_email_verified = models.BooleanField(default=False)
 
     objects = CustomAccountManager()
 

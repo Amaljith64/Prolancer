@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import AuthContext from "./AuthContext";
 import { ToastContainer, toast } from 'react-toastify';
+import { useSearchParams } from 'react-router-dom';
 
 const ClientContext = createContext();
 
@@ -13,6 +14,20 @@ export const ClientProvider = ({ children }) => {
   const { user } = useContext(AuthContext);
 
   const Navigate = useNavigate();
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const someQueryParam = searchParams.get("keyword");
+
+
+
+  const [query, setQuery] = useState('')
+  const [listing, setListing] = useState([])
+  const [searchloading, setSearchLoading] = useState(false)
+
+
+
+
+
 
 
   //* -------------------------------------------------------------------------- */
@@ -59,6 +74,7 @@ export const ClientProvider = ({ children }) => {
   } else {
       Navigate('/list_job')
   }
+
 }
   let servicesearchHandler = (e) => {
     if (e) {
@@ -66,12 +82,18 @@ export const ClientProvider = ({ children }) => {
   } else {
       Navigate('/list_service')
   }
+    setSearchLoading(false)
 }
 
   let contextData = {
+
     jobSubmit: jobSubmit,
     searchHandler,
-    servicesearchHandler
+    servicesearchHandler,
+    query,setQuery,
+    listing,setListing,
+    searchloading,setSearchLoading
+
   };
   return (
     <ClientContext.Provider value={contextData}>

@@ -2,6 +2,7 @@ from django.urls import path
 from . import views
 from .views import MyTokenObtainPairView
 from accounts.views import UserProfile,AllUsers,EducationView,EditEducationView
+from .helpers import resend_verification_credentials,otp_verify
 
 from rest_framework_simplejwt.views import (
     TokenRefreshView,
@@ -17,6 +18,8 @@ urlpatterns = [
 
     path('signup/',views.Usersignup.as_view(),name="signup"),
     path('googlesignin/',views.GoogleSignup.as_view(),name="googlesignin"),
+    path('sentotp/',resend_verification_credentials,name='sentotp'),
+    path('verifyotp/',otp_verify,name='verifyotp'),
 
     path('userprofile/<int:id>/',UserProfile.as_view(),name='userprofile'),
     path('education/',EducationView.as_view(),name='education'),

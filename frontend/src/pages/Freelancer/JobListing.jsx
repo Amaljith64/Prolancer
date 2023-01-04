@@ -15,7 +15,7 @@ const JobListing = () => {
 
 const dispatch = useDispatch();
 
-let {searchHandler} = useContext(ClientContext)
+let {searchHandler,searchloading} = useContext(ClientContext)
 
 const joblist = useSelector((state) => state.jobList);
 const { jobpost,jobposterror } = joblist;
@@ -23,14 +23,12 @@ const { jobpost,jobposterror } = joblist;
 const categoryList = useSelector((state) => state.listCategory);
 const { loading, category, error } = categoryList;
 
-console.log(category)
 
 const[choosedCategory,setchoosedCategory] = useState(null)
 
 console.log(choosedCategory,'choosedd')
 
 const [searchParams, setSearchParams] = useSearchParams();
-const someQueryParam = searchParams.get("keyword");
 
 
 

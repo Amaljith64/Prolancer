@@ -69,19 +69,16 @@ class ClientSingleServiceView(APIView):
         print('im hereeeeeeeeeeee')
         service = FreelancerService.objects.get(id = id)
         serviceserializer = FreelancerServiceSerializer(service)
-        
-        # reviews = ServiceRating.objects.filter(service = service)
-        # reviewserializer = ServiceRatingSerializer(reviews,many=True)
         if serviceserializer.is_valid :
             print(serviceserializer.data,'dataaaaaaaaaaaaaa')
             return Response (serviceserializer.data,status=status.HTTP_200_OK)
-            # return Response ({'service':serviceserializer.data,
-            # 'review' : reviewserializer.data},status=status.HTTP_200_OK)
         else:
             return Response (status=status.HTTP_404_NOT_FOUND)
         
     def post(self,request,id):
+        print('review post')
         data = request.data
+        print(data,'its data')
         if ifexist := ServiceRating.objects.filter(
             reviewuser=data['reviewuser'], service=data['service']
         ):
@@ -171,7 +168,6 @@ class CreateCheckOutSession(APIView):
             return redirect(checkout_session.url)
         except Exception as e:
             return Response({'msg': 'something went wrong while creating stripe session', 'error': str(e)}, status=500)
-
 
 
 

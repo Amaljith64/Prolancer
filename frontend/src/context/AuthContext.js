@@ -2,6 +2,7 @@ import { createContext, useState, useEffect } from 'react'
 import jwt_decode from "jwt-decode";
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
+import { ToastContainer, toast } from "react-toastify";
 
 const AuthContext = createContext()
 
@@ -40,7 +41,7 @@ export const AuthProvider = ({children}) => {
                 Navigate('/')
 
         }else{
-            alert('Something went wrong!')
+            toast.error("Invalid Credentials")
         }
     }
 
@@ -73,20 +74,24 @@ export const AuthProvider = ({children}) => {
     let userSignup = async (e)=>{
         console.log('signup called..........')
     
-        let response = await axios.post("/api/signup/",
-        {'username':e.name, 'email':e.email, 'password':e.password})
+        axios.post("/api/signup/",
+        {'username':e.name, 'email':e.email, 'password':e.password}). then((response) => {
+            toast.success('Register Successful Please Login')
+            console.log(response,'signup response')
+            if (response.status === 200){
+                Navigate("/login"); 
+                toast.success('Register Successful Please Login')
+                console.log("register Successful");
+                  }
+              
+              else{
+                  console.log("SOmething problem in register");
+              }
+        }).catch((response) =>{
+            toast.error(response.response.data.error)
+        })
     
-        if (response.status === 200){
-            
-          Navigate("/login");
-             
-            console.log("register Successful");
-            }
-            else{
-              
-              
-            console.log("SOmething problem in register");
-        }
+        
     }
 
     let googleSignin = async(e)=>{

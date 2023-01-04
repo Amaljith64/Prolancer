@@ -18,6 +18,7 @@ const Checkout = () => {
     const values = QueryString.parse(location.search)
     console.log(values)
     if (values.success) {
+		
         Navigate('/success')
     }
 

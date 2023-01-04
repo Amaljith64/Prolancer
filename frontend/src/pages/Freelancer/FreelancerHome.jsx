@@ -26,12 +26,6 @@ const HomePage = () => {
 
   const userid = user?.user_id
 
-  // const categoryList = useSelector((state) => state.listCategory);
-  // const { loading, category, error } = categoryList;
-
-  // const servicelist = useSelector((state) => state.serviceList);
-  // const { servicepost, serviceposterror } = servicelist;
-
   const [keyword, setKeyword] = useState('')
 
   console.log(keyword)

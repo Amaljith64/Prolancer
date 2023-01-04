@@ -88,7 +88,6 @@ class UserProfileComponent extends React.Component {
 
   render() {
 
-    console.log(this.state.details,'uuuuuuuuuuuuuuuuuu');
     
     const { userdetails, SetUpdate } = this.props;
 
@@ -897,7 +896,6 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) =>{
-  console.log('logged to check')
   return {
     SetUpdate: (id) =>{
       dispatch(

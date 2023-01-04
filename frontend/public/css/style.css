@@ -15271,7 +15271,7 @@ ul.dashboard-box-list > li:hover {
 }
 
 .dashboard-box .job-listing.width-adjustment {
-	max-width: 60%
+	max-width: 100%
 }
 
 .dashboard-box .job-listing h3 a {

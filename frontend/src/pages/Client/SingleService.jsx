@@ -96,7 +96,7 @@ const SingleService = () => {
               <div className="single-page-header-inner">
                 <div className="left-side">
                   <div className="header-image">
-                    <Link to="single-company-profile.html">
+                    <Link to="">
                       <img src={singleservicepost?.img} alt="" />
                     </Link>
                   </div>
@@ -310,14 +310,14 @@ const SingleService = () => {
                   </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-				<div className="popup-tabs-container">
-				<div className="welcome-text">
-					<h3>Pay Rupees : {singleservicepost?.Price}</h3>
-				</div>
-				<div className="payment margin-top-30">
+                <div className="popup-tabs-container">
+                <div className="welcome-text">
+                  <h3>Pay Rupees : {singleservicepost?.Price}</h3>
+                </div>
+                <div className="payment margin-top-30">
 
-				<div className="payment-tab payment-tab-active">
-					<div className="payment-tab-trigger margin-top-20">
+                <div className="payment-tab payment-tab-active">
+                  <div className="payment-tab-trigger margin-top-20">
 						<PaypalCheckOutButton  price={singleservicepost?.Price} 
 						serviceid={singleservicepost?.id}
 						/>

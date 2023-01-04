@@ -1,34 +1,24 @@
 import React, { useState, useContext } from 'react'
 import { useEffect } from 'react'
 import ClientContext from '../context/ClientContext'
-import { useSearchParams } from 'react-router-dom';
+import { useDebounce } from '../customHooks/useDebounce'
 
 
 
 function SearchBox() {
 
-
-    const [searchParams, setSearchParams] = useSearchParams();
-    const someQueryParam = searchParams.get("keyword");
-
-
-    console.log(someQueryParam,'querry boxxxxxx')
-
-
-
     const [keyword, setKeyword] = useState('')
+    
+    const searchQuery = useDebounce(keyword, 2000)
     let {searchHandler} = useContext(ClientContext)
     console.log(keyword)
  
 
     useEffect(() => {
 
-        const getData = setTimeout(() => {
-            searchHandler(keyword)
-          }, 2000)
+         searchHandler(searchQuery)
     
-      return () => clearTimeout(getData);
-    }, [keyword])
+    }, [searchQuery])
 
 
 

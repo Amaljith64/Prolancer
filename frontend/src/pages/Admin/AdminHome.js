@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from 'react'
+import React, {useState, useEffect, useContext,useRef } from 'react'
 import AdminHeader from '../../components/AdminHeader'
 import AdminSidebar from '../../components/AdminSidebar'
 import { useDispatch, useSelector } from "react-redux";
@@ -82,90 +82,20 @@ const AdminHome = () => {
 					<div className="fun-fact-icon"><i className="icon-feather-trending-up"></i></div>
 				</div>
 			</div>
-		
-			
-			
-
-			
+	
 			<div className="dashboard-footer-spacer"></div>
 			<div className="small-footer margin-top-15">
 				<div className="small-footer-copyrights">
-					© 2022 <strong>Hireo</strong>. All Rights Reserved.
+					© 2022 <strong>Prolancer</strong>. All Rights Reserved.
 				</div>
-				<ul className="footer-social-links">
-					<li>
-						<Link to="#" title="Facebook" data-tippy-placement="top">
-							<i className="icon-brand-facebook-f"></i>
-						</Link>
-					</li>
-					<li>
-						<Link to="#" title="Twitter" data-tippy-placement="top">
-							<i className="icon-brand-twitter"></i>
-						</Link>
-					</li>
-					<li>
-						<Link to="#" title="Google Plus" data-tippy-placement="top">
-							<i className="icon-brand-google-plus-g"></i>
-						</Link>
-					</li>
-					<li>
-						<Link to="#" title="LinkedIn" data-tippy-placement="top">
-							<i className="icon-brand-linkedin-in"></i>
-						</Link>
-					</li>
-				</ul>
+				
 				<div className="clearfix"></div>
 			</div>
-			
-
 		</div>
 	</div>
-	
 
 </div>
 
-
-</div>
-
-<div id="small-dialog" className="zoom-anim-dialog mfp-hide dialog-with-tabs">
-
-	
-	<div className="sign-in-form">
-
-		<ul className="popup-tabs-nav">
-			<li><Link to="#tab">Add Note</Link></li>
-		</ul>
-
-		<div className="popup-tabs-container">
-
-			
-			<div className="popup-tab-content" id="tab">
-				
-				
-				<div className="welcome-text">
-					<h3>Do Not Forget 😎</h3>
-				</div>
-					
-				
-				<form method="post" id="add-note">
-
-					<select className="selectpicker with-border default margin-bottom-20" data-size="7" title="Priority">
-						<option>Low Priority</option>
-						<option>Medium Priority</option>
-						<option>High Priority</option>
-					</select>
-
-					<textarea name="textarea" cols="10" placeholder="Note" className="with-border"></textarea>
-
-				</form>
-				
-				
-				<button className="button full-width button-sliding-icon ripple-effect" type="submit" form="add-note">Add Note <i className="icon-material-outline-arrow-right-alt"></i></button>
-
-			</div>
-
-		</div>
-	</div>
 </div>
 
       

@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from "react";
-
 import Header from "../../components/Header";
 import background from "../../assets/images/image.jpg";
 import { Link, useNavigate } from "react-router-dom";
@@ -12,19 +11,19 @@ import {
   UserProfile,
 } from "../../actions/postActions";
 
-import "react-multi-carousel/lib/styles.css";
 import Footer from "../../components/Footer";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Service from "../../components/Service";
 import AuthContext from "../../context/AuthContext";
+import useAxios from '../../utils/useAxios'
 
 const plan1 = 100;
 const plan2 = 200;
 const plan3 = 300;
 
-const HomePage = () => {
+const HomePage = () => { 
   const { user } = useContext(AuthContext);
 
   const userid = user?.user_id;
@@ -39,7 +38,6 @@ const HomePage = () => {
   const servicelist = useSelector((state) => state.serviceList);
   const { servicepost, serviceposterror } = servicelist;
 
-  console.log(servicepost, "postttttttttt homeeeeee");
 
   const joblist = useSelector((state) => state.jobList);
   const { jobpost, jobposterror } = joblist;
@@ -47,13 +45,15 @@ const HomePage = () => {
   const userdetails = useSelector((state) => state.userProfile);
   const { userprofile, userprofileerror } = userdetails;
 
+  useAxios()
   useEffect(() => {
-    console.log("effectt");
 
     dispatch(listcategory());
     dispatch(listservicepost());
     dispatch(listjobpost());
     dispatch(UserProfile(userid));
+
+
   }, []);
 
   return (
@@ -109,7 +109,7 @@ const HomePage = () => {
               return (
                 <div key={id} className="col-xl-3 col-md-6">
                   <Link
-                    to="jobs-list-layout-1.html"
+                    to=""
                     className="photo-box small"
                     style={{ backgroundImage: `url(${data.category_image})` }}
                   >
@@ -178,14 +178,23 @@ const HomePage = () => {
                       <li>Highlighted in Search Results</li>
                     </ul>
                   </div>
-                  <button
-                    className="button full-width margin-top-20"
-                    onClick={() => {
-                      Navigate(`/checkout/${plan3}`);
-                    }}
-                  >
-                    Buy Now
-                  </button>{" "}
+                  {userprofile?.active_membership == 'Basic'
+                                  ? <button style={{ width: '100%'}}
+                                  className="pricing-plan-label full-width margin-top-20"
+                                 
+                                >
+                                  <h3 > Purchased</h3>
+                                 
+                                </button>
+                                  : <button
+                                  className="button full-width margin-top-20"
+                                  onClick={() => {
+                                    Navigate(`/checkout/${plan1}`);
+                                  }}
+                                >
+                                  Buy Now
+                                </button>}
+                  {" "}
                 </div>
 
                 <div className="pricing-plan recommended">
@@ -206,14 +215,29 @@ const HomePage = () => {
                       <li>Highlighted in Search Results</li>
                     </ul>
                   </div>
-                  <button
-                    className="button full-width margin-top-20"
-                    onClick={() => {
-                      Navigate(`/checkout/${plan3}`);
-                    }}
-                  >
-                    Buy Now
-                  </button>{" "}
+                  
+
+
+                  {userprofile?.active_membership == 'Standard'
+                                  ? <button style={{ width: '100%'}}
+                                  className="pricing-plan-label full-width margin-top-20"
+                                 
+                                >
+                                  <h3 > Purchased</h3>
+                                 
+                                </button>
+                                  : <button
+                                  className="button full-width margin-top-20"
+                                  onClick={() => {
+                                    Navigate(`/checkout/${plan2}`);
+                                  }}
+                                >
+                                  Buy Now
+                                </button> }
+                                
+
+
+                            
                 </div>
                 <div className="pricing-plan">
                   <h3>Extended Plan</h3>
@@ -232,12 +256,22 @@ const HomePage = () => {
                       <li>Highlighted in Search Results</li>
                     </ul>
                   </div>
-                  <Link
-                    to="pages-checkout-page.html"
-                    className="button full-width margin-top-20"
-                  >
-                    Buy Now
-                  </Link>
+                  {userprofile?.active_membership == 'Extended'
+                      ? <button style={{ width: '100%'}}
+                      className="pricing-plan-label full-width margin-top-20"
+                      
+                    >
+                      <h3 > Purchased</h3>
+                      
+                    </button>
+                      : <button
+                      className="button full-width margin-top-20"
+                      onClick={() => {
+                        Navigate(`/checkout/${plan3}`);
+                      }}
+                    >
+                      Buy Now
+                    </button> }
                 </div>
               </div>
             </div>

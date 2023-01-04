@@ -5,15 +5,19 @@ from clientside.serializer import UserAccountSerializer
 
 
 
-class ServiceRatingSerializer(serializers.ModelSerializer):
+class ServiceAddRatingSerializer(serializers.ModelSerializer):
     reviewuser=UserAccountSerializer(read_only=True)
+    class Meta:
+        model =ServiceRating
+        fields = "__all__"
+class ServiceRatingSerializer(serializers.ModelSerializer):
     class Meta:
         model =ServiceRating
         fields = "__all__"
         
 class FreelancerServiceSerializer(serializers.ModelSerializer):
     user=UserAccountSerializer(read_only=True)
-    reviewed_user_details = ServiceRatingSerializer(read_only = True,many=True)
+    reviewed_user_details = ServiceAddRatingSerializer(read_only = True,many=True)
     class Meta:
         model = FreelancerService
         fields = "__all__"

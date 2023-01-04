@@ -28,24 +28,7 @@ const AdminHeader = () => {
             </div>
 
             <nav id="navigation">
-                <ul id="responsive">
-
-                    <li><Link to="/list_service">Services</Link>
-                        
-                    </li>
-             
-                    <li><Link to= ''>Jobs </Link>
-                        <ul className="dropdown-nav">
-                            <li><Link  to= '/manage_job'>Manage Jobs</Link></li>
-                            <li><Link to= '/post_job'>Post a Job</Link></li>
-                        </ul>
-                    </li>
-                  
-                    <li><Link to='/post_service'>Post Service</Link></li>
-                 
-                    <li><Link to="/contact">Contact </Link></li>
-
-                </ul>
+                
             </nav>
             <div className="clearfix"></div>
            
@@ -91,20 +74,12 @@ const AdminHeader = () => {
                             </div>
                             
                             <div className="" id="snackbar-user-status">
-                                <Link to='/seller_register' className='button greencolor full-width ' >Dashboard</Link>
+                                <Link onClick={logoutUser} className='button greencolor full-width ' >Logout</Link>
                             </div>	
                  
                     </div>
                     
-                    <ul className="user-menu-small-nav" style={{float: 'right',
-                            marginRight: '10px'}}>
-                        {user ? (
-                            
-                        <li onClick={logoutUser}><i className="icon-material-outline-power-settings-new"></i> Logout</li>
-                        ): (
-                        <li> <Link to="/login"><i className="icon-material-outline-power-settings-new"></i> Login</Link> </li>
-                        )}
-                    </ul>
+                  
 
                     </div>
                 </div>

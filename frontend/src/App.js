@@ -27,7 +27,6 @@ import AllUsers from './pages/Admin/AllUsers';
 import { Profile } from './pages/Profile';
 import UserProfile from './pages/UserProfile';
 import FreelancerProfile from './pages/Client/FreelancerProfile';
-import PaymentPage from './pages/Freelancer/PaymentPage';
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { Reviews } from './pages/Freelancer/Reviews';
@@ -37,6 +36,7 @@ import Success from './pages/Success';
 import FailedPage from './pages/FailedPage';
 import ScrollToTop from './components/ScrollToTop';
 import FreelancerRequest from './pages/Admin/FreelancerRequest';
+import Header from './components/Header';
 
 
 
@@ -89,7 +89,6 @@ function App() {
 
 
           <Route element={<TestFile/>} path="/testfile"/> 
-          <Route element={<PaymentPage/>} path="/payment/:price"/>
           <Route element={<Checkout/>} path="/checkout/:price"/>
           <Route element={<Success/>} path="/success"/>
           <Route element={<FailedPage/>} path="/cancelled"/>
