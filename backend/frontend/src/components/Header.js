@@ -12,6 +12,7 @@ import {
   UserProfile,
 } from "../actions/postActions";
 import useAxios from '../utils/useAxios'
+import logo from '../assets/logo.png'
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -233,7 +234,7 @@ const Header = () => {
             <div className="left-side">
               <div id="logo" style={{ width : '339px'}}>
                 <Link onClick={redirectt}>
-                  <img src="/images/logo.png" alt="" />
+                  <img src={logo} alt="" />
                 </Link>
               </div>
 
