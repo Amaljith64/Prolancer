@@ -28,6 +28,15 @@ import{
     SINGLEUSERS_REQUEST,
     SINGLEUSERS_SUCCESS,
     SINGLEUSERS_FAIL,
+    JOB_PURCHASE_HISTORY_REQUEST,
+    JOB_PURCHASE_HISTORY_SUCCESS,
+    JOB_PURCHASE_HISTORY_FAIL,
+    SERVICE_PURCHASE_HISTORY_REQUEST,
+    SERVICE_PURCHASE_HISTORY_SUCCESS,
+    SERVICE_PURCHASE_HISTORY_FAIL,
+    FREELANCER_REQUEST_REQUEST,
+    FREELANCER_REQUEST_SUCCESS,
+    FREELANCER_REQUEST_FAIL,
 } from '../constants/postConstants'
 
 
@@ -151,6 +160,50 @@ export const singleUsersReducer = (state = {singleusers:[]}, action) =>{
             return { singleuserloading : false , singleusers : action.payload }
         case SINGLEUSERS_FAIL:
             return { singleuserloading : false , singleuserserror : action.payload }
+        default :
+        return state
+        
+
+    }
+}
+
+export const jobPurchaseHistoryReducer = (state = {jobhistory:[]}, action) =>{
+    switch(action.type){
+        case JOB_PURCHASE_HISTORY_REQUEST:
+            return { jobhistoryloading : true , jobhistory : [] }
+        case JOB_PURCHASE_HISTORY_SUCCESS:
+            return { jobhistoryloading : false , jobhistory : action.payload }
+        case JOB_PURCHASE_HISTORY_FAIL:
+            return { jobhistoryloading : false , jobhistoryerror : action.payload }
+        default :
+        return state
+        
+
+    }
+}
+export const servicePurchaseHistoryReducer = (state = {servicehistory:[]}, action) =>{
+    switch(action.type){
+        case SERVICE_PURCHASE_HISTORY_REQUEST:
+            return { servicehistoryloading : true , servicehistory : [] }
+        case SERVICE_PURCHASE_HISTORY_SUCCESS:
+            return { servicehistoryloading : false , servicehistory : action.payload }
+        case SERVICE_PURCHASE_HISTORY_FAIL:
+            return { servicehistoryloading : false , servicehistoryerror : action.payload }
+        default :
+        return state
+        
+
+    }
+}
+
+export const freelancerRequestReducer = (state = {freelancerRequest:[]}, action) =>{
+    switch(action.type){
+        case FREELANCER_REQUEST_REQUEST:
+            return { freelancerRequestloading : true , freelancerRequest : [] }
+        case FREELANCER_REQUEST_SUCCESS:
+            return { freelancerRequestloading : false , freelancerRequest : action.payload }
+        case FREELANCER_REQUEST_FAIL:
+            return { freelancerRequestloading : false , freelancerRequesterror : action.payload }
         default :
         return state
         

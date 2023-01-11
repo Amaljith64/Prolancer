@@ -13,7 +13,7 @@ import {
 
 import Footer from "../../components/Footer";
 
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Service from "../../components/Service";
 import AuthContext from "../../context/AuthContext";
@@ -24,11 +24,15 @@ const plan2 = 200;
 const plan3 = 300;
 
 const HomePage = () => { 
+  let api = useAxios()
+  const userdetails = useSelector((state) => state.userProfile);
+  const { userprofile, userprofileerror } = userdetails;
   const { user } = useContext(AuthContext);
+  console.log(user,'profile')
 
   const userid = user?.user_id;
 
-  const notify = () => toast.warning("Wowwww so easy!");
+  const refresh = () => toast.warning("Wowwww so easy!");
   const dispatch = useDispatch();
   const Navigate = useNavigate();
 
@@ -42,13 +46,12 @@ const HomePage = () => {
   const joblist = useSelector((state) => state.jobList);
   const { jobpost, jobposterror } = joblist;
 
-  const userdetails = useSelector((state) => state.userProfile);
-  const { userprofile, userprofileerror } = userdetails;
 
-  useAxios()
+
+
   useEffect(() => {
 
-    dispatch(listcategory());
+    dispatch(listcategory(api));
     dispatch(listservicepost());
     dispatch(listjobpost());
     dispatch(UserProfile(userid));
@@ -59,7 +62,6 @@ const HomePage = () => {
   return (
     <div>
       <Header />
-      <ToastContainer />
       <div className="margin-top-80"></div>
 
       {loading ? (
@@ -102,7 +104,6 @@ const HomePage = () => {
             <div className="col-xl-12">
               <div className="section-headline centered margin-top-0 margin-bottom-45">
                 <h3>Popular Categories</h3>
-                <button onClick={notify}>click me</button>
               </div>
             </div>
             {category?.map((data, id) => {
@@ -115,7 +116,7 @@ const HomePage = () => {
                   >
                     <div className="photo-box-content">
                       <h3>{data.category_name}</h3>
-                      <span>612</span>
+                      
                     </div>
                   </Link>
                 </div>
@@ -189,7 +190,10 @@ const HomePage = () => {
                                   : <button
                                   className="button full-width margin-top-20"
                                   onClick={() => {
+                                    {userprofile?.is_email_verified === false ? toast.error('Verify your account')
+                                  :
                                     Navigate(`/checkout/${plan1}`);
+                                  }
                                   }}
                                 >
                                   Buy Now
@@ -229,7 +233,10 @@ const HomePage = () => {
                                   : <button
                                   className="button full-width margin-top-20"
                                   onClick={() => {
+                                    {userprofile?.is_email_verified === false ? toast.error('Verify your account')
+                                  :
                                     Navigate(`/checkout/${plan2}`);
+                                  }
                                   }}
                                 >
                                   Buy Now
@@ -267,7 +274,10 @@ const HomePage = () => {
                       : <button
                       className="button full-width margin-top-20"
                       onClick={() => {
+                        {userprofile?.is_email_verified === false ? toast.error('Verify your account')
+                      :
                         Navigate(`/checkout/${plan3}`);
+                      }
                       }}
                     >
                       Buy Now

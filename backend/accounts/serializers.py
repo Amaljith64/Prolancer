@@ -19,7 +19,7 @@ class UserprofileSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class FullProfileSerializer(serializers.ModelSerializer):
-    getservices = FreelancerServiceSerializer(read_only = True,many = True)
+    getservice = FreelancerServiceSerializer(read_only = True,many = True)
     clientjob = ClientJobSerializer(read_only = True,many = True)
     pro_user_set = UserprofileSerializer(read_only = True,many = True)
     experiences = ExperienceSerializer(read_only = True,many = True)
@@ -29,7 +29,6 @@ class FullProfileSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class NewUserSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = NewUser
         fields = '__all__'

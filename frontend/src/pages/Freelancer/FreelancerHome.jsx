@@ -5,18 +5,30 @@ import background from "../../assets/images/image.jpg";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { listcategory, listjobpost, UserProfile } from "../../actions/postActions";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Footer from "../../components/Footer";
 import QueryString from 'query-string'
 import { useLocation } from 'react-router-dom'
 import { format} from 'timeago.js';
+import useAxios from '../../utils/useAxios'
+import { useSearchParams } from 'react-router-dom';
 
 const plan1 = 100;
 const plan2 = 200;
 const plan3 = 300;
 
 const HomePage = () => {
+  let api = useAxios()
+
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const price = searchParams.get("price");
+  const id = searchParams.get("id");
+
+
+
+  console.log(price,'its priceeeeeeeeeeeeeee')
 
   const dispatch = useDispatch();
   const Navigate = useNavigate();
@@ -36,6 +48,12 @@ const HomePage = () => {
   const userdetails = useSelector((state) => state.userProfile);
   const { userprofile,userprofileerror} = userdetails;
 
+  const categoryList = useSelector((state) => state.listCategory);
+  const { loading, category, error } = categoryList;
+  console.log(category,'its cat err')
+
+  
+
   let searchHandler = (e) => {
     if (e) {
       Navigate(`/list_job?keyword=${e}&page=1`)
@@ -44,27 +62,66 @@ const HomePage = () => {
 
   console.log(jobpost)
   useEffect(() => {
+
     
     const values = QueryString.parse(location.search)
     console.log(values)
     if (values.success) {
-        Navigate('/success')
-    }
+      if (values.type === 'membership'){
+        console.log('membership')
+  
+        api.post('/client/strpiemembershippayment/',{
+          'user': user.user_id,
+          'price':price
+          }).then((response)=>{
+          Navigate('/success')
+          })
+  
+  
+      }
+  
+      else if (values.type === 'job'){
+        console.log('job')
+  
+        api.post('/client/stripejobpayment/',{
+          'user': user.user_id,
+          'price':price,
+          'jobid': id,
+          'payment_method': 'PayPal'
+          }).then((response)=>{
+          Navigate('/success')
+          })
+  
+  
+      }
+      else if (values.type === 'service'){
+        console.log('service')
+        api.post('/client/stripeservicepayment/',{
+          'user': user.user_id,
+          'price':price,
+          'serviceid': id,
+          'payment_method': 'PayPal'
+          }).then((response)=>{
+          Navigate('/success')
+          })
+      }
+      
+      }
+  
+      if (values.canceled) {
+          Navigate("/cancelled")
+      }
+      dispatch(listcategory());
+      dispatch(listjobpost());
+      dispatch(UserProfile(userid))
 
-    if (values.canceled) {
-        Navigate("/cancelled")
-    }
 
-    dispatch(listcategory());
-    dispatch(listjobpost());
-    dispatch(UserProfile(userid))
     
   }, []);
 
   return (
     <div>
       <Header />
-      <ToastContainer />
       <div className="margin-top-80"></div>
       <div
         className="intro-banner dark-overlay"

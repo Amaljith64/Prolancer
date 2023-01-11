@@ -8,7 +8,7 @@ import { Singlejobpost } from "../../actions/postActions";
 import Footer from '../../components/Footer';
 import axios from 'axios';
 import AuthContext from '../../context/AuthContext';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import CountdownTimer  from '../../components/CountdownTimer'
 
@@ -82,7 +82,6 @@ const bids = singlejobpost?.bids
   return (
     <>
     <Header />
-	<ToastContainer />
     <div className="margin-top-70"></div>
     
 <div className="single-page-header" data-background-image="/images/single-job.jpg">
@@ -94,7 +93,7 @@ const bids = singlejobpost?.bids
 						<div className="header-image"><Link to=""><img src= {singlejobpost?.service.img} alt=""/></Link></div>
 						<div className="header-details">
 							<h3> {singlejobpost?.service.job_title} </h3>
-							<h5> {singlejobpost?.service.user?.username}</h5>							
+							<Link to={`/profile/${singlejobpost?.service.user?.id}`}><h5> {singlejobpost?.service.user?.username}</h5>	</Link>						
 						</div>
 					</div>
 					<div className="right-side">

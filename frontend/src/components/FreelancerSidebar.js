@@ -17,25 +17,23 @@ const FreelancerSidebar = () => {
 					</span>
 					<span className="trigger-title">Dashboard Navigation</span>
 				</Link>
-				
-				
+								
 				<div className="dashboard-nav">
 					<div className="dashboard-nav-inner">
 
 						<ul data-submenu-title="Start">
 							<li ><Link to='/dashboard'><i className="icon-material-outline-dashboard"></i> Dashboard</Link></li>
 							<li><Link to='/myreviews'><i className="icon-material-outline-rate-review"></i>Reviews</Link></li>
-							<li><Link to="/service"><i className="icon-material-outline-question-answer"></i>Jobs</Link></li>
+							<li><Link to=""><i className="icon-material-outline-question-answer"></i>Jobs To Do</Link></li>
 						</ul>
 						<ul data-submenu-title="Organize and Manage">
 							<li><Link to='/mybids'><i className="icon-material-outline-rate-review"></i>My Bids</Link></li>
-							<li><Link to="/service"><i className="icon-material-outline-question-answer"></i> My Services</Link></li>
+							<li><Link to="/myservice"><i className="icon-material-outline-question-answer"></i>My Services</Link></li>
 						</ul>
 						<ul data-submenu-title="Account">
 							<li><Link to='/profile'><i className="icon-material-outline-star-border"></i> Profile</Link></li>
 						</ul>
-						
-						
+												
 					</div>
 				</div>
 				

@@ -7,7 +7,7 @@ from clientside.models import Category
 
 
 class FreelancerService(models.Model):
-    user = models.ForeignKey(NewUser,on_delete=models.CASCADE,related_name='user')
+    user = models.ForeignKey(NewUser,on_delete=models.CASCADE,related_name='getservice')
     service_title = models.CharField(max_length=225)
     category = models.ForeignKey(Category,on_delete=models.CASCADE)
     Price = models.IntegerField()
@@ -39,7 +39,7 @@ class ServiceReport(models.Model):
 
 
 class BuyService(models.Model):
-    serviceid = models.ForeignKey(FreelancerService,on_delete=models.CASCADE)
+    getservice = models.ForeignKey(FreelancerService,on_delete=models.CASCADE)
     user = models.ForeignKey(NewUser,on_delete=models.CASCADE)
     price = models.IntegerField()
     payment_method = models.CharField(max_length=225)

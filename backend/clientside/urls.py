@@ -18,7 +18,16 @@ urlpatterns = [
     path('paypalpayment/', views.PaypalPayment.as_view(), name='paypalpayment'),    
     path('paypalservicepayment/', views.ServicePaypalPayment.as_view(), name='paypalservicepayment'),    
     path('paypaljobpayment/', views.JobPaypalPayment.as_view(), name='paypaljobpayment'),    
-    path('freelancerrequest/', views.Freelancer_request.as_view(), name='freelancerrequest'),    
+    path('freelancerrequest/', views.Freelancer_request.as_view(), name='freelancerrequest'), 
+    path('acceptrequest/<int:id>/', views.AcceptRequest.as_view(), name='acceptrequest'),
+
+
+    path('viewjobpurchase/<int:id>/', views.ViewJobPurchase.as_view(), name='viewjobpurchase'),    
+    path('viewservicepurchase/<int:id>/', views.ViewServicePurchase.as_view(), name='viewservicepurchase'),  
+
+    path('strpiemembershippayment/', views.MembershipStripePayment.as_view(), name='strpiemembershippayment'),    
+    path('stripeservicepayment/', views.ServiceStripePayment.as_view(), name='stripeservicepayment'),    
+    path('stripejobpayment/', views.JobStripePayment.as_view(), name='stripejobpayment'),      
 
    
 ]

@@ -36,7 +36,7 @@ export const AuthProvider = ({children}) => {
             localStorage.setItem('authTokens', JSON.stringify(data))
             if ((jwt_decode(data.access)).is_freelancer)
                 Navigate('/freelancer')
-            else if ((jwt_decode(data.access)).username == 'admin')
+            else if ((jwt_decode(data.access)).is_superuser)
                 Navigate('/admin')
             else
                 Navigate('/')

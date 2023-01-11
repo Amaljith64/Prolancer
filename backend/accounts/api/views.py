@@ -40,6 +40,21 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         # ...
 
         return token
+    def validate(self, attrs):
+        data = super().validate(attrs)
+        refresh = self.get_token(self.user)
+        
+        # Add custom claims
+        data['refresh'] = str(refresh)
+        data['access'] = str(refresh.access_token)
+        data['username'] = self.user.username
+        data['is_superuser'] = self.user.is_superuser
+        data['user_id'] = self.user.id
+        data['is_freelancer'] = self.user.is_freelancer
+        data['is_email_verified'] = self.user.is_email_verified
+        # ...
+
+        return data
 
 
 class MyTokenObtainPairView(TokenObtainPairView):

@@ -1,25 +1,75 @@
-import React,{ useEffect,useState } from "react";
+import React,{ useEffect,useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import Footer from '../components/Footer';
 import Header from '../components/Header'
 import PaypalCheckOutButton from "./Freelancer/PaypalCheckOutButton";
 import { useLocation ,useNavigate } from 'react-router-dom'
+import AuthContext from "../context/AuthContext";
 
 import QueryString from 'query-string'
+import { toast } from "react-toastify";
+import axios from "axios";
+import useAxios from '../utils/useAxios'
+
 
 const Checkout = () => {
-	const price = useParams().price;
+	let api = useAxios()
 	const Navigate = useNavigate()
+
+	let {user} = useContext(AuthContext)
+
+
+
+	const price = useParams().price;
+	const id = useParams().id;
 	const location = useLocation()
 
 
 	useEffect(() => {
+
   
     const values = QueryString.parse(location.search)
-    console.log(values)
+    console.log(values,'its valllllllll')
     if (values.success) {
+		if (values.type === 'membership'){
+			console.log('membership')
+
+			api.post('/client/strpiemembershippayment/',{
+				'user': user.user_id,
+				'price':price
+			  }).then((response)=>{
+				Navigate('/success')
+			  })
+
+
+		}
+
+		else if (values.type === 'job'){
+			console.log('job')
+
+			api.post('/client/stripejobpayment/',{
+				'user': user.user_id,
+				'price':price,
+				'jobid': id,
+				'payment_method': 'PayPal'
+			  }).then((response)=>{
+				Navigate('/success')
+			  })
+
+
+		}
+		else if (values.type === 'service'){
+			console.log('service')
+			api.post('/client/stripeservicepayment/',{
+				'user': user.user_id,
+				'price':price,
+				'serviceid': id,
+				'payment_method': 'PayPal'
+			  }).then((response)=>{
+				Navigate('/success')
+			  })
+		}
 		
-        Navigate('/success')
     }
 
     if (values.canceled) {
@@ -90,6 +140,8 @@ const Checkout = () => {
 					<div className="payment-tab-trigger margin-top-20">
 					<form action={`/client/create-checkout-session/`} method="POST">
 						<input type="hidden" name="price" value={FinalPrice}/>
+						<input type="hidden" name="membership" value='membership'/>
+
 						<button
 						type="submit"
 						className="btn btn-primary btn-rounded fs-4 margin-bottom-20"

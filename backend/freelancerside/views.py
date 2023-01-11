@@ -54,7 +54,7 @@ class FreelanceServicePosting(APIView):
             page = 1
         page = int(page)
 
-        serviceserializer = FreelancerServiceSerializer(service,many = True)
+        serviceserializer = ViewFreelancerServiceSerializer(service,many = True)
         return Response ({'service':serviceserializer.data, 'page': page, 'pages': paginator.num_pages})
 
     def post(self,request):

@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import StarRating from "../../components/StarRating";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import AuthContext from "../../context/AuthContext";
@@ -14,6 +14,7 @@ import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import PaypalCheckOutButton from "../Freelancer/PaypalCheckOutButton";
+import ShowReview from "../../components/ShowReview";
 
 const SingleService = () => {
 
@@ -33,7 +34,7 @@ const SingleService = () => {
   const servicelist = useSelector((state) => state.viewService);
   const { singleservicepost, serviceposterror } = servicelist;
 
-  console.log(singleservicepost)
+  console.log(singleservicepost,'single service')
 
 
 
@@ -64,7 +65,7 @@ const SingleService = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    toast.success("Review Submitted");
+ 
     console.log("Review Submitted");
     console.log(user.user_id, "this is userrr");
     axios.post(`/client/viewsingleservice/${id}/`, {
@@ -73,8 +74,18 @@ const SingleService = () => {
       stars: parseInt(e.target.stars.value),
       title: e.target.title.value,
       review: e.target.review.value,
-    });
+    }).then((res) =>{
+      console.log(res,'response')
+    }).catch((error) =>{
+
+      toast.error(error.response?.data?.messgage);
+      console.log(error.response?.data?.messgage,'error')
+    })
     setReload(!reload);
+    setRating(0)
+    setHover(0)
+    e.target.title.value=""
+    e.target.review.value=""
 
     console.log("Reloaded");
   };
@@ -84,7 +95,6 @@ const SingleService = () => {
   return (
     <>
       <Header />
-      <ToastContainer />
       <div className="margin-top-70"></div>
       <div
         className="single-page-header"
@@ -102,7 +112,7 @@ const SingleService = () => {
                   </div>
                   <div className="header-details">
                     <h3>{singleservicepost?.service_title}</h3>
-                    <h5>Employer Name : {singleservicepost?.user.username}</h5>
+                    <Link to={`/profile/${singleservicepost?.user.id}`}><h5>Employer Name : {singleservicepost?.user.username}</h5></Link>
                   </div>
                 </div>
                 <div className="right-side">
@@ -147,101 +157,9 @@ const SingleService = () => {
                 </h3>
               </div>
               <ul className="boxed-list-ul">
-                {singleservicepost?.reviewed_user_details.map((data, id) => {
+                {singleservicepost?.reviewed_user_details?.map((data, id) => {
                   return (
-                    <li key={id}>
-                      <div className="avatar">
-                        <img src={data.reviewuser.profile_photo} alt="" />
-                      </div>
-
-                      <div className="boxed-list-item">
-                        <div className="item-content">
-                          <h4>
-                            {data.title} <span>{data.reviewuser.username}</span>
-                          </h4>
-                          <div className="item-details margin-top-10">
-                            <div className="ratingbutton">{data.stars}.0</div>
-                            <div className="star-raating">
-                              {data.stars < 1 ? (
-                                <span className="star off">&#9733;</span>
-                              ) : (
-                                <span className="star on">&#9733;</span>
-                              )}
-                              {data.stars < 2 ? (
-                                <span className="star off">&#9733;</span>
-                              ) : (
-                                <span className="star on">&#9733;</span>
-                              )}
-                              {data.stars < 3 ? (
-                                <span className="star off">&#9733;</span>
-                              ) : (
-                                <span className="star on">&#9733;</span>
-                              )}
-                              {data.stars < 4 ? (
-                                <span className="star off">&#9733;</span>
-                              ) : (
-                                <span className="star on">&#9733;</span>
-                              )}
-                              {data.stars < 5 ? (
-                                <span className="star off">&#9733;</span>
-                              ) : (
-                                <span className="star on">&#9733;</span>
-                              )}
-                            </div>
-                            <div className="detail-item">
-                              <i className="icon-material-outline-date-range"></i>
-                              {data.reviewtime.slice(0, 10)}{" "}
-                            </div>
-                            {format(data.reviewtime)}
-                          </div>
-                          <div className="item-description">
-                            <p>{data.review} </p>
-                          </div>
-                          <br />
-                          <div
-                            className="detail-item "
-                            style={{
-                              display: "flex",
-                              gap: "23px",
-                              paddingTop: " 1px",
-                            }}
-                          >
-                            <p>
-                              {" "}
-                              <strong>Helpful? </strong>{" "}
-                            </p>
-                            <i className="fa icon-material-outline-thumb-up">
-                              Yes
-                            </i>
-                            <i className="fa icon-material-outline-thumb-down">
-                              No
-                            </i>
-                          </div>
-                        </div>
-                      </div>
-                      <ul
-                        className="boxed-list-ul"
-                        style={{ paddingLeft: "34px" }}
-                      >
-                        <li>
-                          <div className="avatar">
-                            <img
-                              src="/images/user-avatar-placeholder.png"
-                              alt=""
-                            />
-                          </div>
-                          <div className="item-content">
-                            <div className="arrow-comment"></div>
-                            <div className="comment-by">Tom Smith</div>
-                            <p>
-                              Rrhoncus et erat. Nam posuere tristique sem, eu
-                              ultricies tortor imperdiet vitae. Curabitur
-                              lacinia neque.
-                            </p>
-                          </div>
-                        </li>
-                      </ul>
-                    </li>
+                    <ShowReview data={data} />
                   );
                 })}
                 <li>
@@ -325,6 +243,7 @@ const SingleService = () => {
 					<div className="payment-tab-trigger margin-top-20">
 					<form action={`/client/create-checkout-session/`} method="POST">
 						<input type="hidden" name="price" value={singleservicepost?.Price}/>
+						<input type="hidden" name="serviceid" value={singleservicepost?.id}/>
 						<button
 						type="submit"
 						className="btn btn-primary btn-rounded fs-4 margin-bottom-20"
@@ -388,80 +307,7 @@ const SingleService = () => {
         </div>
       </div>
 
-      <div
-        id="small-dialog"
-        className="zoom-anim-dialog mfp-hide dialog-with-tabs"
-      >
-        <div className="sign-in-form ">
-          <ul className="popup-tabs-nav">
-            <li>
-              <Link to="#tab">Apply Now</Link>
-            </li>
-          </ul>
-
-          <div className="popup-tabs-container">
-            <div className="popup-tab-content" id="tab">
-              <div className="welcome-text">
-                <h3>Attach File With CV</h3>
-              </div>
-
-              <form method="post" id="apply-now-form">
-                <div className="input-with-icon-left">
-                  <i className="icon-material-outline-account-circle"></i>
-                  <input
-                    type="text"
-                    className="input-text with-border"
-                    name="name"
-                    id="name"
-                    placeholder="First and Last Name"
-                    required
-                  />
-                </div>
-
-                <div className="input-with-icon-left">
-                  <i className="icon-material-baseline-mail-outline"></i>
-                  <input
-                    type="text"
-                    className="input-text with-border"
-                    name="emailaddress"
-                    id="emailaddress"
-                    placeholder="Email Address"
-                    required
-                  />
-                </div>
-
-                <div className="uploadButton">
-                  <input
-                    className="uploadButton-input"
-                    type="file"
-                    accept="image/*, application/pdf"
-                    id="upload-cv"
-                  />
-                  <label
-                    className="uploadButton-button ripple-effect"
-                    for="upload-cv"
-                  >
-                    Select File
-                  </label>
-                  <span className="uploadButton-file-name">
-                    Upload your CV / resume relevant file. <br /> Max. file
-                    size: 50 MB.
-                  </span>
-                </div>
-              </form>
-
-              <button
-                className="button margin-top-35 full-width button-sliding-icon ripple-effect"
-                type="submit"
-                form="apply-now-form"
-              >
-                Apply Now{" "}
-                <i className="icon-material-outline-arrow-right-alt"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+      
 
       <Footer />
     </>

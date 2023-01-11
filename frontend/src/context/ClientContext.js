@@ -5,6 +5,8 @@ import axios from "axios";
 import AuthContext from "./AuthContext";
 import { ToastContainer, toast } from 'react-toastify';
 import { useSearchParams } from 'react-router-dom';
+import { useSelector } from "react-redux";
+
 
 const ClientContext = createContext();
 
@@ -14,6 +16,9 @@ export const ClientProvider = ({ children }) => {
   const { user } = useContext(AuthContext);
 
   const Navigate = useNavigate();
+
+  const userdetails = useSelector((state) => state.userProfile);
+  const { userprofile,userprofileerror} = userdetails;
 
   const [searchParams, setSearchParams] = useSearchParams();
   const someQueryParam = searchParams.get("keyword");
@@ -37,6 +42,12 @@ export const ClientProvider = ({ children }) => {
 
 
   let jobSubmit = async (e) => {
+    var myDate = new Date();
+		console.log(myDate,'its dateeeeeeee')
+		const active_membership =userprofile.active_membership
+		{active_membership == 'Basic' ? (myDate.setDate(myDate.getDate() + 3))
+		: active_membership == 'Standard' ? (myDate.setDate(myDate.getDate() + 6))
+		: (myDate.setDate(myDate.getDate() + 10) )}
 
     const config = {
       headers: {
@@ -54,6 +65,7 @@ export const ClientProvider = ({ children }) => {
         skill_required: e.skill_required,
         job_description: e.job_description,
         img: e.img[0],
+        expiry_on: myDate,
       },
       config
     );

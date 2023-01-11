@@ -5,30 +5,28 @@ import Modal from "react-bootstrap/Modal";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { connect } from "react-redux";
-import { ToastContainer, toast } from 'react-toastify';
-import { produce } from 'immer';
+import { toast } from "react-toastify";
+import { produce } from "immer";
 import { UserProfile } from "../actions/postActions";
-
 
 class UserProfileComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       openedModal: null,
-      value: '',
-      details: this.props.userdetails
-     
+      value: "",
+      details: this.props.userdetails,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleEducationSubmit = this.handleEducationSubmit.bind(this);
     this.updateEducationSubmit = this.updateEducationSubmit.bind(this);
   }
 
-  onInputChange = event => {
+  onInputChange = (event) => {
     this.setState(
-      produce(this.state.user, draftState => {
+      produce(this.state.user, (draftState) => {
         draftState.user = {
-          name: event.target.value
+          name: event.target.value,
         };
       })
     );
@@ -36,15 +34,14 @@ class UserProfileComponent extends React.Component {
 
   onSubmitUser = () => {
     this.setState(
-      produce(draftState => {
+      produce((draftState) => {
         draftState.users.push(this.state.user);
         draftState.user = {
-          name: ""
+          name: "",
         };
       })
     );
   };
-
 
   openModal = (id) => {
     this.setState({ openedModal: id });
@@ -54,47 +51,43 @@ class UserProfileComponent extends React.Component {
   };
 
   handleChange = (event) => {
-    this.setState({ [event.target.name] : event.target.value})
-
+    this.setState({ [event.target.name]: event.target.value });
   };
 
   handleEducationSubmit = (event) => {
     event.preventDefault();
-    toast.success("New Education Added")
+    toast.success("New Education Added");
     axios.post(`api/education/`, {
-        user : this.props.userdetails.id,  
-        university: event.target.university.value,
-        department: event.target.department.value,
-        remark: event.target.remark.value,
-        start_date: event.target.start_date.value,
-        end_date: event.target.end_date.value,
-      })
-      this.props.SetUpdate(this.props.userdetails.id)
-      
+      user: this.props.userdetails.id,
+      university: event.target.university.value,
+      department: event.target.department.value,
+      remark: event.target.remark.value,
+      start_date: event.target.start_date.value,
+      end_date: event.target.end_date.value,
+    });
+    this.props.SetUpdate(this.props.userdetails.id);
   };
   updateEducationSubmit = (event) => {
     event.preventDefault();
-    toast.success("Education Updated")
+    toast.success("Education Updated");
     axios.post(`api/editeducation/${this.openedModal}`, {
-        user: 'user',
-        description: event.target.description.value,
-        university: event.target.university.value,
-        department: event.target.department.value,
-        remark: event.target.remark.value,
-        start_date: event.target.start_date.value,
-        end_date: event.target.end_date.value,
-      })  
+      user: "user",
+      description: event.target.description.value,
+      university: event.target.university.value,
+      department: event.target.department.value,
+      remark: event.target.remark.value,
+      start_date: event.target.start_date.value,
+      end_date: event.target.end_date.value,
+    });
   };
 
   render() {
-
-    
     const { userdetails, SetUpdate } = this.props;
+    console.log(userdetails,'its profile')
 
     return (
       <div>
         <Header />
-        <ToastContainer/>
         <div className="margin-top-80"></div>
         <div
           className="single-page-header freelancer-header"
@@ -107,62 +100,74 @@ class UserProfileComponent extends React.Component {
                 <div className="single-page-header-inner">
                   <div className="left-side">
                     <div className="header-image freelancer-avatar">
-                      <img src={userdetails?.profile_photo} style={{height:'-webkit-fill-available'}} alt="" />
-                      <button onClick={() => this.openModal("image")} className="btnn" >
+                      <img
+                        src={userdetails?.profile_photo}
+                        style={{ height: "-webkit-fill-available" }}
+                        alt=""
+                      />
+                      <button
+                        onClick={() => this.openModal("image")}
+                        className="btnn"
+                      >
                         <i className="icon-feather-plus"></i>
                       </button>
 
                       <Modal
-                                show={
-                                  this.closeModal &&
-                                  this.state.openedModal === "image"
-                                }
+                        show={
+                          this.closeModal && this.state.openedModal === "image"
+                        }
+                      >
+                        <div
+                          id="small-dialog"
+                          className="zoom-anim-dialog mfp-hide dialog-with-tabs"
+                        ></div>
+                        <Modal.Header closeButton>
+                          <Modal.Title id="contained-modal-title-vcenter">
+                            <ul className="popup-tabs-nav">
+                              <li>
+                                <Link to="#tab">Add</Link>
+                              </li>
+                              <Button
+                                style={{
+                                  float: "right",
+                                  padding: "21px",
+                                }}
+                                onClick={this.closeModal}
                               >
-                                <div
-                                  id="small-dialog"
-                                  className="zoom-anim-dialog mfp-hide dialog-with-tabs"
-                                ></div>
-                                <Modal.Header closeButton>
-                                  <Modal.Title id="contained-modal-title-vcenter">
-                                    <ul className="popup-tabs-nav">
-                                      <li>
-                                        <Link to="#tab">Add</Link>
-                                      </li>
-                                      <Button
-                                        style={{
-                                          float: "right",
-                                          padding: "21px",
-                                        }}
-                                        onClick={this.closeModal}
-                                      >
-                                        Close
-                                      </Button>
-                                    </ul>
-                                  </Modal.Title>
-                                </Modal.Header>
-                                <Modal.Body>
-                                  <div className="popup-tabs-container">
-                                    <div className="welcome-text">
-                                      <h3>Add Image</h3>
-                                    </div>
-                                    <div className="popup-tab-content" id="tab" style={{ textAlignLast: 'center'}}>
-                                    <img src={userdetails?.profile_photo} style={{height:'-webkit-fill-available'}} alt="" />
-                                      <form >
-                                        <input type="file" />
+                                Close
+                              </Button>
+                            </ul>
+                          </Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                          <div className="popup-tabs-container">
+                            <div className="welcome-text">
+                              <h3>Add Image</h3>
+                            </div>
+                            <div
+                              className="popup-tab-content"
+                              id="tab"
+                              style={{ textAlignLast: "center" }}
+                            >
+                              <img
+                                src={userdetails?.profile_photo}
+                                style={{ height: "-webkit-fill-available" }}
+                                alt=""
+                              />
+                              <form>
+                                <input type="file" />
 
-                                       
-                                        <button
-                                                  className="button big ripple-effect margin-top-20 margin-bottom-20 "
-                                                  style={{ float: "right" }}
-                                                >
-                                                  Save
-                                                </button>
-                                      
-                                      </form>
-                                    </div>
-                                  </div>
-                                </Modal.Body>
-                              </Modal>
+                                <button
+                                  className="button big ripple-effect margin-top-20 margin-bottom-20 "
+                                  style={{ float: "right" }}
+                                >
+                                  Save
+                                </button>
+                              </form>
+                            </div>
+                          </div>
+                        </Modal.Body>
+                      </Modal>
                     </div>
                     <div className="header-details">
                       <h3>
@@ -202,7 +207,10 @@ class UserProfileComponent extends React.Component {
                     <ul className="dashboard-box-list">
                       <li>
                         <div className="boxed-list-item">
-                          <div className="item-content" style={{ width: "100%" }}>
+                          <div
+                            className="item-content"
+                            style={{ width: "100%" }}
+                          >
                             <div
                               style={{
                                 display: "flex",
@@ -210,36 +218,37 @@ class UserProfileComponent extends React.Component {
                               }}
                             >
                               <h4>Description</h4>
-                              {userdetails?.about === "" ? <Link
-                                style={{ marginRight: "5px" }}
-                                onClick={() => this.openModal("description")}
-                              >
-                                <i className="icon-material-outline-add">
-                                  {" "}
-                                  Add Description
-                                </i>
-                              </Link>
-                              :
-                              <>
-                               <Link
-                                style={{ marginRight: "5px" }}
-                                onClick={() => this.openModal("description")}
-                              >
-                                <i className="icon-feather-edit"></i>
-                              </Link>
-                              <div className="item-description">
-                              <p>
-                                Great clarity in specification and
-                                communication. I got payment really fast. Really
-                                recommend this employer for his professionalism.
-                                I will work for him again with pleasure.
-                              </p>
-                            </div>
-                              </>
-
-
-                             
-                              }
+                              {userdetails?.about === "" ? (
+                                <Link
+                                  style={{ marginRight: "5px" }}
+                                  onClick={() => this.openModal("description")}
+                                >
+                                  <i className="icon-material-outline-add">
+                                    {" "}
+                                    Add Description
+                                  </i>
+                                </Link>
+                              ) : (
+                                <>
+                                  <Link
+                                    style={{ marginRight: "5px" }}
+                                    onClick={() =>
+                                      this.openModal("description")
+                                    }
+                                  >
+                                    <i className="icon-feather-edit"></i>
+                                  </Link>
+                                  <div className="item-description">
+                                    <p>
+                                      Great clarity in specification and
+                                      communication. I got payment really fast.
+                                      Really recommend this employer for his
+                                      professionalism. I will work for him again
+                                      with pleasure.
+                                    </p>
+                                  </div>
+                                </>
+                              )}
                               <Modal
                                 show={
                                   this.closeModal &&
@@ -274,7 +283,7 @@ class UserProfileComponent extends React.Component {
                                       <h3>Edit Description</h3>
                                     </div>
                                     <div className="popup-tab-content" id="tab">
-                                      <form >
+                                      <form>
                                         <textarea
                                           name="comment-content"
                                           cols="30"
@@ -282,18 +291,17 @@ class UserProfileComponent extends React.Component {
                                           placeholder="Comment"
                                         ></textarea>
                                         <button
-                                                  className="button big ripple-effect margin-top-20 margin-bottom-20 "
-                                                  style={{ float: "right" }}
-                                                >
-                                                  Save
-                                                </button>
+                                          className="button big ripple-effect margin-top-20 margin-bottom-20 "
+                                          style={{ float: "right" }}
+                                        >
+                                          Save
+                                        </button>
                                       </form>
                                     </div>
                                   </div>
                                 </Modal.Body>
                               </Modal>
                             </div>
-                     
                           </div>
                         </div>
                       </li>
@@ -354,87 +362,81 @@ class UserProfileComponent extends React.Component {
                                       <h3>Add Education</h3>
                                     </div>
                                     <div className="popup-tab-content" id="tab">
-                                    <form
-                                               onSubmit={this.handleEducationSubmit}
-                                               
-                                              >
-                                                <div className="row">
-                                                  <div className="col-xl-12">
-                                                    <div className="input-with-icon-left no-border">
-                                                      <i className="icon-line-awesome-university"></i>
-                                                      <input
-                                                        type="text"
-                                                        className="input-text"
-                                                        name="university"
-                                                        
-                                                        onChange={this.handleChange}
-                                                        placeholder="University"
-                                                        required
-                                                      />
-                                                    </div>
-                                                  </div>
-                                                  <div className="col-xl-6">
-                                                    <label>From date</label>
+                                      <form
+                                        onSubmit={this.handleEducationSubmit}
+                                      >
+                                        <div className="row">
+                                          <div className="col-xl-12">
+                                            <div className="input-with-icon-left no-border">
+                                              <i className="icon-line-awesome-university"></i>
+                                              <input
+                                                type="text"
+                                                className="input-text"
+                                                name="university"
+                                                onChange={this.handleChange}
+                                                placeholder="University"
+                                                required
+                                              />
+                                            </div>
+                                          </div>
+                                          <div className="col-xl-6">
+                                            <label>From date</label>
 
-                                                    <div className="input-with-icon-left no-border">
-                                                      <i className="icon-line-awesome-calendar"></i>
-                                                      <input
-                                                        type="date"
-                                                        className="input-text"
-                                                        name="start_date"
-                                          
-                                                        onChange={this.handleChange}
-                                                        placeholder="From Year"
-                                                        required
-                                                      />
-                                                    </div>
-                                                  </div>
-                                                  <div className="col-xl-6">
-                                                    <label>Till date</label>
-                                                    <div className="input-with-icon-left no-border">
-                                                      <i className="icon-line-awesome-calendar"></i>
-                                                      <input
-                                                        type="date"
-                                                        className="input-text"
-                                                        name="end_date"
-                                                        
-                                                        onChange={this.handleChange}
-                                                        placeholder="Till Year"
-                                                        required
-                                                      />
-                                                    </div>
-                                                  </div>
-                                                  <div className="col-xl-12">
-                                                    <div className="">
-                                                      <input
-                                                        type="text"
-                                                        className="input-text"
-                                                        name="department"
-                                                        
-                                                        onChange={this.handleChange}
-                                                        placeholder="Department"
-                                                        required
-                                                      />
-                                                    </div>
-                                                  </div>
-                                                </div>
-                                                <textarea
-                                                  name="remark"
-                                                  
-                                                  onChange={this.handleChange}
-                                                  cols="30"
-                                                  rows="5"
-                                                  placeholder="Comment"
-                                                ></textarea>
+                                            <div className="input-with-icon-left no-border">
+                                              <i className="icon-line-awesome-calendar"></i>
+                                              <input
+                                                type="date"
+                                                className="input-text"
+                                                name="start_date"
+                                                onChange={this.handleChange}
+                                                placeholder="From Year"
+                                                required
+                                              />
+                                            </div>
+                                          </div>
+                                          <div className="col-xl-6">
+                                            <label>Till date</label>
+                                            <div className="input-with-icon-left no-border">
+                                              <i className="icon-line-awesome-calendar"></i>
+                                              <input
+                                                type="date"
+                                                className="input-text"
+                                                name="end_date"
+                                                onChange={this.handleChange}
+                                                placeholder="Till Year"
+                                                required
+                                              />
+                                            </div>
+                                          </div>
+                                          <div className="col-xl-12">
+                                            <div className="">
+                                              <input
+                                                type="text"
+                                                className="input-text"
+                                                name="department"
+                                                onChange={this.handleChange}
+                                                placeholder="Department"
+                                                required
+                                              />
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <textarea
+                                          name="remark"
+                                          onChange={this.handleChange}
+                                          cols="30"
+                                          rows="5"
+                                          placeholder="Comment"
+                                        ></textarea>
 
-                                                <button
-                                                  className="button big ripple-effect margin-top-20 margin-bottom-20 "
-                                                  style={{ float: "right" }}
-                                                  onClick={this.closeModal}
-                                                >
-                                                  Save
-                                                </button>
-                                              </form>
+                                        <button
+                                          className="button big ripple-effect margin-top-20 margin-bottom-20 "
+                                          style={{ float: "right" }}
+                                          onClick={this.closeModal}
+                                        >
+                                          Save
+                                        </button>
+                                      </form>
                                     </div>
                                   </div>
                                 </Modal.Body>
@@ -527,8 +529,9 @@ class UserProfileComponent extends React.Component {
                                               id="tab"
                                             >
                                               <form
-                                                onSubmit={this.updateEducationSubmit}
-                                                
+                                                onSubmit={
+                                                  this.updateEducationSubmit
+                                                }
                                               >
                                                 <div className="row">
                                                   <div className="col-xl-12">
@@ -539,7 +542,9 @@ class UserProfileComponent extends React.Component {
                                                         className="input-text"
                                                         name="commentname"
                                                         value={data.university}
-                                                        onChange={this.handleChange}
+                                                        onChange={
+                                                          this.handleChange
+                                                        }
                                                         placeholder="University"
                                                         required
                                                       />
@@ -555,7 +560,9 @@ class UserProfileComponent extends React.Component {
                                                         className="input-text"
                                                         name="commentname"
                                                         value={data.start_date}
-                                                        onChange={this.handleChange}
+                                                        onChange={
+                                                          this.handleChange
+                                                        }
                                                         placeholder="From Year"
                                                         required
                                                       />
@@ -570,7 +577,9 @@ class UserProfileComponent extends React.Component {
                                                         className="input-text"
                                                         name="emailaddress"
                                                         value={data.end_date}
-                                                        onChange={this.handleChange}
+                                                        onChange={
+                                                          this.handleChange
+                                                        }
                                                         placeholder="Till Year"
                                                         required
                                                       />
@@ -583,7 +592,9 @@ class UserProfileComponent extends React.Component {
                                                         className="input-text"
                                                         name="commentname"
                                                         value={data.department}
-                                                        onChange={this.handleChange}
+                                                        onChange={
+                                                          this.handleChange
+                                                        }
                                                         placeholder="Department"
                                                         required
                                                       />
@@ -675,7 +686,7 @@ class UserProfileComponent extends React.Component {
                                       <h3>Add Work Details</h3>
                                     </div>
                                     <div className="popup-tab-content" id="tab">
-                                      <form >
+                                      <form>
                                         <div className="row">
                                           <div className="col-xl-6">
                                             <div className="input-with-icon-left no-border">
@@ -801,14 +812,37 @@ class UserProfileComponent extends React.Component {
                     <h3 style={{ alignSelf: "center" }}>
                       <i className="icon-line-awesome-list-ul"></i> Your Posts
                     </h3>
-                    <Link
-                      to="/post_job"
-                      className="popup-with-zoom-anim button ripple-effect margin-top-5 margin-bottom-10"
-                    >
-                      <i className="icon-feather-edit"></i> Post a Job
-                    </Link>
-                  </div>
+                    {userdetails.is_email_verified === false ? (
 
+                      <Link
+                        onClick={() =>
+                          toast.error("Please verify your account")
+                        }
+                        className="popup-with-zoom-anim button ripple-effect margin-top-5 margin-bottom-10"
+                      >
+                        <i className="icon-feather-edit"></i> Post a Job
+                      </Link>
+                    ) : (
+
+                      userdetails.active_membership === null ?
+                      <Link
+                        onClick={() =>
+                          toast.error("You need a membership")
+                        }
+                        className="popup-with-zoom-anim button ripple-effect margin-top-5 margin-bottom-10"
+                      >
+                        <i className="icon-feather-edit"></i> Post a Job
+                      </Link>
+:
+
+                      <Link
+                        to="/post_job"
+                        className="popup-with-zoom-anim button ripple-effect margin-top-5 margin-bottom-10"
+                      >
+                        <i className="icon-feather-edit"></i> Post a Job
+                      </Link>
+                    )}
+                  </div>
                   <div className="content">
                     <ul className="dashboard-box-list">
                       {userdetails?.clientjob?.map((data, id) => {
@@ -822,10 +856,8 @@ class UserProfileComponent extends React.Component {
                                 <div className="job-listing-details">
                                   <div className="job-listing-description">
                                     <h3 className="job-listing-title">
-                                      <Link to="#">{data.job_title} </Link>{" "}
-                                      <span className="dashboard-status-button yellow">
-                                        Expiring
-                                      </span>
+                                      <Link to={`/view_job/${data.id}`}>{data.job_title} </Link>{" "}
+                                     
                                     </h3>
                                     <div className="job-listing-footer">
                                       <ul>
@@ -841,8 +873,8 @@ class UserProfileComponent extends React.Component {
 
                               <ul className="dashboard-task-info">
                                 <li>
-                                  <strong>₹18 - ₹30</strong>
-                                  <span>Hourly Rate</span>
+                                  <strong>₹{data.min_budget} - ₹{data.max_budget}</strong>
+
                                 </li>
                               </ul>
 
@@ -854,22 +886,7 @@ class UserProfileComponent extends React.Component {
                                   <i className="icon-material-outline-supervisor-account"></i>{" "}
                                   Manage Bidders{" "}
                                 </Link>
-                                <Link
-                                  to="#"
-                                  className="button gray ripple-effect ico"
-                                  title="Edit"
-                                  data-tippy-placement="top"
-                                >
-                                  <i className="icon-feather-edit"></i>
-                                </Link>
-                                <Link
-                                  to="#"
-                                  className="button gray ripple-effect ico"
-                                  title="Remove"
-                                  data-tippy-placement="top"
-                                >
-                                  <i className="icon-feather-trash-2"></i>
-                                </Link>
+                                
                               </div>
                             </div>
                           </li>
@@ -895,19 +912,20 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) =>{
+const mapDispatchToProps = (dispatch) => {
   return {
-    SetUpdate: (id) =>{
-      dispatch(
-        UserProfile(id)
-      )
-    }
-  }
-}
+    SetUpdate: (id) => {
+      dispatch(UserProfile(id));
+    },
+  };
+};
 
 //* now higher order function will call this function first
 
-export default connect(mapStateToProps,mapDispatchToProps)(UserProfileComponent);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(UserProfileComponent);
 
 //* state and dispatch will be comming as props
 

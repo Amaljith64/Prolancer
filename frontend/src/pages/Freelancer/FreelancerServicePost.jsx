@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function FreelancerServicePost() {
@@ -124,7 +124,6 @@ function FreelancerServicePost() {
   return (
     <>
     <Header/>
-	<ToastContainer />
 
     <div className="margin-top-70"></div>
     
@@ -167,7 +166,7 @@ function FreelancerServicePost() {
 										<h5>Category</h5>
                                         <Form.Select aria-label="Default select example selectpicker with-border" name="category" {...register('category', postService.category)}>
                                         <small className="validationerror">{errors?.category && errors.category.message}</small>
-										{category.map((data, id) => {
+										{category?.map((data, id) => {
             							return(
                                         <option key={id} value={data.id}>{data.category_name}</option>
 											)})}											

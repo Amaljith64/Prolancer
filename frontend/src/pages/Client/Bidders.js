@@ -4,7 +4,7 @@ import Header from '../../components/Header'
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from 'react-router-dom'
 import { Link } from 'react-router-dom'
-import { ToastContainer, toast } from 'react-toastify';
+import {  toast } from 'react-toastify';
 
 
 import { Singlejobpost, Singleservicepost } from "../../actions/postActions";
@@ -39,7 +39,6 @@ const Bidders = () => {
 
     <>
     <Header/>
-	<ToastContainer />
     <div className="margin-top-70"></div>
     <div className="dashboard-content-container" data-simplebar>
 		<div className="dashboard-content-inner" >

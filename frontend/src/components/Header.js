@@ -11,11 +11,12 @@ import axios from "axios";
 import {
   UserProfile,
 } from "../actions/postActions";
+import useAxios from '../utils/useAxios'
 
 const Header = () => {
   const dispatch = useDispatch();
   const Navigate = useNavigate();
-  let { user, logoutUser } = useContext(AuthContext);
+  let { user, logoutUser, authTokens } = useContext(AuthContext);
   const [modalShow, setModalShow] = useState(false);
   const [isActive, setActive] = useState(false);
   const [reload, setReload] = useState(false);
@@ -34,13 +35,13 @@ const Header = () => {
 
   let redirectt = (e) => {
     e.preventDefault();
-    if (user?.is_freelancer === true) {
+    if (userprofile?.is_freelancer === true) {
       Navigate("/freelancer");
     } else {
       Navigate("/");
       console.log("else worked");
     }
-  };
+  }
 
   let sentrequest = () => {
     Swal.fire({
@@ -55,12 +56,14 @@ const Header = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios.post(`/client/freelancerrequest/`, {
-          requested_user: user.user_id,
+          requested_user: user?.user_id,
         });
         toast.success("Your request has been sent.");
       }
     });
   };
+
+  let api = useAxios()
 
   let sentotp = () => {
 
@@ -102,8 +105,15 @@ const Header = () => {
     sentotp();
   };
 
+  let getNotes = async() =>{
+
+    await api.get('/api')
+
+    
+}
+
   useEffect(() => {
-    dispatch(UserProfile(user.user_id))
+ 
     const interval = setInterval(() => {
       if (seconds > 0) {
         setSeconds(seconds - 1);
@@ -122,7 +132,15 @@ const Header = () => {
     return () => {
       clearInterval(interval);
     };
-  }, [seconds,reload]);
+  }, [seconds]);
+
+
+  useEffect(() => {
+    getNotes()
+    dispatch(UserProfile(user?.user_id))
+ 
+  }, [reload])
+  
 
   return (
     <div>
@@ -244,6 +262,13 @@ const Header = () => {
                       <Link to="/freelancerprofile">View Freelancers </Link>
                     </li>
                   )}
+                  {user?.is_freelancer ? (
+                    null
+                  ) : (
+                    <li>
+                      <Link to="/myorders">My Orders</Link>
+                    </li>
+                  )}
                 </ul>
               </nav>
               <div className="clearfix"></div>
@@ -291,7 +316,7 @@ const Header = () => {
                       <div className="user-status">
                         <div className="user-details">
                           <Link to="/userprofile">
-                            <div className="user-avatar status-online">
+                            <div className="user-avatar status">
                               <img
                                 src={userprofile?.profile_photo}
                                 style={{ height: "-webkit-fill-available" }}
@@ -324,20 +349,36 @@ const Header = () => {
                           <div className="" id="snackbar-user-status">
                             <Link
                               to="/dashboard"
-                              className="button greencolor full-width "
+                              className="button full-width "
                             >
                               Dashboard
                             </Link>
                           </div>
                         ) : (
+                          <>
                           <div className="" id="snackbar-user-status">
                             <Link
-                              onClick={sentrequest}
-                              className="button greencolor full-width "
+                            onClick={() => {
+                              {userprofile.is_email_verified === false ? toast.error('Verify your account')
+                            :
+                            sentrequest();
+                            }
+                            }}
+                              
+                              className="button full-width "
                             >
                               Become Freelancer
                             </Link>
                           </div>
+                         
+                          <div  className="" id="snackbar-user-status">
+                            <Link to='/myorders' style={{backgroundColor : "black"}}                     
+                              className="button full-width margin-top-10 "
+                            >
+                              My Orders
+                            </Link>
+                          </div>
+                          </>
                         )}
                       </div>
 

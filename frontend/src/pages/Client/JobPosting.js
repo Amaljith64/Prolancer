@@ -5,6 +5,8 @@ import { useForm } from "react-hook-form";
 import ClientContext from '../../context/ClientContext'
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+
 
 
 const JobPosting = () => {
@@ -12,6 +14,9 @@ const JobPosting = () => {
 
 	const categoryList = useSelector((state) => state.listCategory);
   	const { category } = categoryList;
+	const userdetails = useSelector((state) => state.userProfile);
+	const { userprofile, userprofileerror } = userdetails;
+	console.log(userprofile,'profileee')
 
 	let {jobSubmit} = useContext(ClientContext)
 
@@ -54,6 +59,7 @@ const JobPosting = () => {
        
         }
     };
+
 	
 
 

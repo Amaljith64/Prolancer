@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import AuthContext from '../context/AuthContext'
 import Header from '../components/Header'
 import { useForm } from "react-hook-form";
-import { ToastContainer, toast } from "react-toastify";
+import {  toast } from "react-toastify";
 
 function SignupPage() {
 	let {userSignup,googleSignin } = useContext(AuthContext)
@@ -47,7 +47,6 @@ function SignupPage() {
 	}, [])
   return (
       <div>
-		 <ToastContainer />
 		
         <div id="titlebar" className="gradient">
 	<div className="container">

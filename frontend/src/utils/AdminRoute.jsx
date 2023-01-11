@@ -2,13 +2,13 @@ import { Navigate, Outlet, Route, useNavigate } from 'react-router-dom'
 import { useContext } from 'react'
 import AuthContext from '../context/AuthContext'
 
-const PrivateRoute = () => {
+const AdminRoute = () => {
     let {user} = useContext(AuthContext)
 
-
     return(
-        !user?<Navigate to = '/login'/>: <Outlet/>
+        !user.is_superuser?<Navigate to = '/restricted'/>: <Outlet/>
     )
+    
 }
 
-export default PrivateRoute;
+export default AdminRoute;

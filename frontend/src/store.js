@@ -11,9 +11,13 @@ import {
     profileReducer,
     allUsersReducer,
     singleUsersReducer,
+    jobPurchaseHistoryReducer,
+    servicePurchaseHistoryReducer,
+    freelancerRequestReducer,
     } from './reducers/postReducers'
 import storage from 'redux-persist/lib/storage'
 import { persistReducer } from 'redux-persist'
+
 
 
 const persistConfig = {
@@ -31,6 +35,9 @@ const reducers = combineReducers({
     userProfile : profileReducer,
     allUsers : allUsersReducer,
     singleUser : singleUsersReducer,
+    jobHistory : jobPurchaseHistoryReducer,
+    serviceHistory : servicePurchaseHistoryReducer,
+    freelancerRequest: freelancerRequestReducer,
 
 })
 

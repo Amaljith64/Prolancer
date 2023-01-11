@@ -1,4 +1,5 @@
 import axios from 'axios'
+import useAxios from '../utils/useAxios'
 import{
     CATEGORY_REQUEST,
     CATEGORY_SUCCESS,
@@ -30,6 +31,15 @@ import{
     SINGLEUSERS_REQUEST,
     SINGLEUSERS_SUCCESS,
     SINGLEUSERS_FAIL,
+    JOB_PURCHASE_HISTORY_REQUEST,
+    JOB_PURCHASE_HISTORY_SUCCESS,
+    JOB_PURCHASE_HISTORY_FAIL,
+    SERVICE_PURCHASE_HISTORY_REQUEST,
+    SERVICE_PURCHASE_HISTORY_SUCCESS,
+    SERVICE_PURCHASE_HISTORY_FAIL,
+    FREELANCER_REQUEST_REQUEST,
+    FREELANCER_REQUEST_SUCCESS,
+    FREELANCER_REQUEST_FAIL,
  
 } from '../constants/postConstants'
 import { ToastContainer, toast } from 'react-toastify';
@@ -266,6 +276,80 @@ export const SingleUsers = (id) => async (dispatch) => {
     catch(error){
         dispatch({
             type : SINGLEUSERS_FAIL,
+            payload : error.response && error.response.data.detail ? error.response.data.detail:error.message 
+        })
+    }
+}
+export const JobPurchaseHistory = (id) => async (dispatch) => {
+    try{
+        dispatch({
+            type : JOB_PURCHASE_HISTORY_REQUEST
+        })
+        const config = {
+            headers : {
+                'Content-type' : 'application/json'
+            }
+        }
+        const { data } = await axios.get(`/client/viewjobpurchase/${id}/`,config)
+
+        dispatch({
+            type : JOB_PURCHASE_HISTORY_SUCCESS,
+            payload : data
+        })
+    }
+    catch(error){
+        dispatch({
+            type : JOB_PURCHASE_HISTORY_FAIL,
+            payload : error.response && error.response.data.detail ? error.response.data.detail:error.message 
+        })
+    }
+}
+
+export const ServicePurchaseHistory = (id) => async (dispatch) => {
+    try{
+        dispatch({
+            type : SERVICE_PURCHASE_HISTORY_REQUEST
+        })
+        const config = {
+            headers : {
+                'Content-type' : 'application/json'
+            }
+        }
+        const { data } = await axios.get(`/client/viewservicepurchase/${id}/`,config)
+
+        dispatch({
+            type : SERVICE_PURCHASE_HISTORY_SUCCESS,
+            payload : data
+        })
+    }
+    catch(error){
+        dispatch({
+            type : SERVICE_PURCHASE_HISTORY_FAIL,
+            payload : error.response && error.response.data.detail ? error.response.data.detail:error.message 
+        })
+    }
+}
+
+export const FreelancerRequest = () => async (dispatch) => {
+    try{
+        dispatch({
+            type : FREELANCER_REQUEST_REQUEST
+        })
+        const config = {
+            headers : {
+                'Content-type' : 'application/json'
+            }
+        }
+        const { data } = await axios.get(`/client/freelancerrequest/`,config)
+
+        dispatch({
+            type : FREELANCER_REQUEST_SUCCESS,
+            payload : data
+        })
+    }
+    catch(error){
+        dispatch({
+            type : FREELANCER_REQUEST_FAIL,
             payload : error.response && error.response.data.detail ? error.response.data.detail:error.message 
         })
     }

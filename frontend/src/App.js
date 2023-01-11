@@ -35,14 +35,21 @@ import Checkout from './pages/Checkout';
 import Success from './pages/Success';
 import FailedPage from './pages/FailedPage';
 import ScrollToTop from './components/ScrollToTop';
-import FreelancerRequest from './pages/Admin/FreelancerRequest';
+import FreelanceRequest from './pages/Admin/FreelanceRequest';
 import Header from './components/Header';
 import { ChatPage } from './pages/ChatPage';
+import UserPurchase from './pages/UserPurchase';
+import MyServices from './pages/Freelancer/MyServices';
+import Restricted from './pages/Restricted'
+import AdminRoute from './utils/AdminRoute';
+
+import { ToastContainer, toast } from "react-toastify";
 
 
 
 
 function App() {
+
   return (
     <GoogleOAuthProvider clientId="343457976454-bvvnulla58ojkknd3l9jtb5kd10aq8ns.apps.googleusercontent.com">
     <PayPalScriptProvider
@@ -50,52 +57,68 @@ function App() {
     <div className="App">
       <Router>
         <ScrollToTop/>
+        <ToastContainer />
         <AuthProvider>
           <ClientProvider>
           <Routes>
           
           <Route element={<HomePage/>} path="/" exact />
-          <Route element={<Upcoming/>} path="/upcomming"  />
-          <Route element={<FreelancerHome/>} path="/freelancer"  />
-          <Route element={<FreelancerServicePost/>} path="/post_service"  />
-          <Route element={<ServiceListing/>} path="/list_service"  />
-          <Route element={<SingleService/>} path="/single_service/:id"/>
-          <Route element={<Contact/>} path="/contact"  />
-          <Route element={<Profile/>} path="/profile/:id"  />
-          <Route element={<UserProfile/>} path="/userprofile"  />
-          <Route element={<AllUsers/>} path="/allusers"  />
-          
-          
-
-          {/* <PrivateRoute element={<HomePage/>} path="/" exact/> */}
+          <Route element={<Restricted/>} path="/restricted"  />
           <Route element={<LoginPage/>} path="/login"/> 
-          <Route element={<RegisterFreelancer/>} path="/seller_register"/> 
           <Route element={<SignupPage/>} path="/signup"/> 
-          <Route element={<Dashboard/>} path="/dashboard"/> 
-          <Route element={<Reviews/>} path="/myreviews"/> 
-          <Route element={<MyBids/>} path="/mybids"/> 
 
-          <Route element={<JobPosting/>} path="/post_job"/> 
-          <Route element={<JobManaging/>} path="/manage_job"/> 
-          <Route element={<Bidders/>} path="/bidders/:id"/> 
-          
-          <Route element={<JobListing/>} path="/list_job"/> 
-          <Route element={<SIngleJob/>} path="/view_job/:id"/> 
+          <Route element={<PrivateRoute/>}>
+
+            <Route element={<Upcoming/>} path="/upcomming"  />
+            <Route element={<FreelancerHome/>} path="/freelancer"  />
+            <Route element={<FreelancerServicePost/>} path="/post_service"  />
+            <Route element={<ServiceListing/>} path="/list_service"  />
+            <Route element={<SingleService/>} path="/single_service/:id"/>
+            <Route element={<Contact/>} path="/contact"  />
+            <Route element={<Profile/>} path="/profile/:id"  />
+            <Route element={<UserProfile/>} path="/userprofile"  />
+            
+            
+
+            {/* <PrivateRoute element={<HomePage/>} path="/" exact/> */}
+            <Route element={<RegisterFreelancer/>} path="/seller_register"/> 
+            <Route element={<Dashboard/>} path="/dashboard"/> 
+            <Route element={<Reviews/>} path="/myreviews"/> 
+            <Route element={<MyBids/>} path="/mybids"/> 
+            <Route element={<MyServices/>} path="/myservice"/> 
+
+            <Route element={<JobPosting/>} path="/post_job"/> 
+            <Route element={<JobManaging/>} path="/manage_job"/> 
+            <Route element={<Bidders/>} path="/bidders/:id"/> 
+            
+            <Route element={<JobListing/>} path="/list_job"/> 
+            <Route element={<SIngleJob/>} path="/view_job/:id"/> 
 
 
-          <Route element={<AdminHome/>} path="/admin"/> 
-          <Route element={<AllPosts/>} path="/allpost"/> 
-          <Route element={<FreelancerProfile/>} path="/freelancerprofile"/> 
-          <Route element={<FreelancerRequest/>} path="/freelancerrequest"/> 
+            <Route element={<FreelancerProfile/>} path="/freelancerprofile"/> 
+
+            <Route element={<AdminRoute/>}>
 
 
-          <Route element={<TestFile/>} path="/testfile"/> 
-          <Route element={<Checkout/>} path="/checkout/:price"/>
-          <Route element={<Success/>} path="/success"/>
-          <Route element={<FailedPage/>} path="/cancelled"/>
+            <Route element={<AdminHome/>} path="/admin"/> 
+            <Route element={<AllPosts/>} path="/allpost"/> 
+            <Route element={<AllUsers/>} path="/allusers"  />
+            <Route element={<FreelanceRequest/>} path="/freelancerrequest"/> 
+            </Route>
 
 
-          <Route element={<ChatPage/>} path="/chat"/>
+
+
+            <Route element={<TestFile/>} path="/testfile"/> 
+            <Route element={<Checkout/>} path="/checkout/:price"/>
+            <Route element={<Success/>} path="/success"/>
+            <Route element={<FailedPage/>} path="/cancelled"/>
+            <Route element={<UserPurchase/>} path="/myorders"/>
+
+
+            <Route element={<ChatPage/>} path="/chat"/>
+
+          </Route>
 
 
 
@@ -105,6 +128,7 @@ function App() {
         </ClientProvider>
         
         </AuthProvider>
+
       </Router>
     </div>
     </PayPalScriptProvider>

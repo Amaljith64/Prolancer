@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react'
 import FreelancerSidebar from "../../components/FreelancerSidebar";
 import Header from "../../components/Header";
 import { Link } from "react-router-dom";
 
-const MyBids = () => {
+const MyServices = () => {
   return (
     <div>
       <Header />
@@ -15,7 +15,7 @@ const MyBids = () => {
         <div className="dashboard-content-container" data-simplebar>
           <div className="dashboard-content-inner">
             <div className="dashboard-headline">
-              <h3>My Active Bids</h3>
+              <h3>My Services</h3>
             </div>
 
             <div className="row">
@@ -23,7 +23,7 @@ const MyBids = () => {
                 <div className="dashboard-box margin-top-0">
                   <div className="headline">
                     <h3>
-                      <i className="icon-material-outline-gavel"></i> Bids List
+                      <i className="icon-line-awesome-tasks"></i> Service List
                     </h3>
                   </div>
 
@@ -84,7 +84,7 @@ const MyBids = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default MyBids;
+export default MyServices

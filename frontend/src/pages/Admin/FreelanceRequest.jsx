@@ -1,9 +1,30 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import AdminHeader from '../../components/AdminHeader'
 import AdminSidebar from '../../components/AdminSidebar'
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { FreelancerRequest, listcategory,listjobpost,listservicepost } from "../../actions/postActions";
+import axios from 'axios';
 
-const FreelancerRequest = () => {
+const FreelanceRequest = () => {
+    
+    const dispatch = useDispatch();
+
+    const freelancerrequest = useSelector((state) => state.freelancerRequest);
+	const { freelancerRequestloading, freelancerRequest,freelancerRequesterror } = freelancerrequest;
+
+    console.log(freelancerRequest)
+
+    let acceptrequest=(id) =>{
+        axios.post(`/client/acceptrequest/${id}/`)
+    }
+
+
+    useEffect(() => {
+        dispatch(FreelancerRequest())
+
+    }, [])
+    
   return (
     <div>
       <div id="wrapper"></div> 
@@ -35,32 +56,35 @@ const FreelancerRequest = () => {
 
                     <div className="content">
                         <ul className="dashboard-box-list">
-                            <li>
+                            {freelancerRequest?.map((data)=>{
+                                return(
+
+                                    <li key={data.id}>
                                 
                                 <div className="freelancer-overview manage-candidates">
                                     <div className="freelancer-overview-inner">
 
                                         
                                         <div className="freelancer-avatar">
-                                            <div className="verified-badge"></div>
-                                            <Link to="#"><img src="images/user-avatar-big-02.jpg" alt=""/></Link>
+                                           
+                                            <Link to="#"><img src={data.requested_user.profile_photo} alt=""/></Link>
                                         </div>
 
                                         
                                         <div className="freelancer-name">
-                                            <h4><Link to="#">David Peterson <img className="flag" src="images/flags/de.svg" alt="" title="Germany" data-tippy-placement="top"/></Link></h4>
+                                            <h4><Link to="#">{data.requested_user.username} <img className="flag" data-tippy-placement="top"/></Link></h4>
 
                                             
-                                            <span className="freelancer-detail-item"><Link to="#"><i className="icon-feather-mail"></i> david@example.com</Link></span>
+                                            <span className="freelancer-detail-item"><Link to="#"><i className="icon-feather-mail"></i> {data.requested_user.email}</Link></span>
 
                                             
                                            
 
                                             
                                             <ul className="dashboard-task-info bid-info">
-                                                <li><Link to="#small-dialog-1"  className="popup-with-zoom-anim button ripple-effect"><i className="icon-material-outline-check"></i> Accept</Link>
+                                                <li><Link onClick={()=>acceptrequest(data.id)}   className="popup-with-zoom-anim button ripple-effect"><i className="icon-material-outline-check"></i> Accept</Link>
                                                 </li>
-                                                <li><Link to="#small-dialog-1"  className="popup-with-zoom-anim button ripple-effect" style={{backgroundColor : '#e82a2c'}}><i className="icon-line-awesome-close"></i> Reject</Link>
+                                                <li><Link   className="popup-with-zoom-anim button ripple-effect" style={{backgroundColor : '#e82a2c'}}><i className="icon-line-awesome-close"></i> Reject</Link>
                                                 </li>
                                                
                                             
@@ -72,6 +96,10 @@ const FreelancerRequest = () => {
                                     </div>
                                 </div>
                             </li>
+
+                                )
+                            })}
+                            
                     
                         </ul>
                     </div>
@@ -83,34 +111,7 @@ const FreelancerRequest = () => {
 
         
         <div className="dashboard-footer-spacer"></div>
-        <div className="small-footer margin-top-15">
-            <div className="small-footer-copyrights">
-                © 2019 <strong>Hireo</strong>. All Rights Reserved.
-            </div>
-            <ul className="footer-social-links">
-                <li>
-                    <Link to="#" title="Facebook" data-tippy-placement="top">
-                        <i className="icon-brand-facebook-f"></i>
-                    </Link>
-                </li>
-                <li>
-                    <Link to="#" title="Twitter" data-tippy-placement="top">
-                        <i className="icon-brand-twitter"></i>
-                    </Link>
-                </li>
-                <li>
-                    <Link to="#" title="Google Plus" data-tippy-placement="top">
-                        <i className="icon-brand-google-plus-g"></i>
-                    </Link>
-                </li>
-                <li>
-                    <Link to="#" title="LinkedIn" data-tippy-placement="top">
-                        <i className="icon-brand-linkedin-in"></i>
-                    </Link>
-                </li>
-            </ul>
-            <div className="clearfix"></div>
-        </div>
+        
         
 
     </div>
@@ -122,4 +123,4 @@ const FreelancerRequest = () => {
   )
 }
 
-export default FreelancerRequest
+export default FreelanceRequest

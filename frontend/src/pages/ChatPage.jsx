@@ -10,10 +10,9 @@ export const ChatPage = () => {
 
   const initialState = profileid ? profileid : null;
   const [receiverId, setReceiverId] = useState(initialState);
-  const [ChatList, SetChatList] = useState(null);
+  const [ChatList, SetChatList] = useState([]);
   const [messages,setMessages] = useState([])
   
-  console.log(receiverId, "guy to chatttt");
 
   const socket = new WebSocket(
     "ws://127.0.0.1:8000/ws/" + user.user_id + "/" + receiverId + "/"
@@ -45,14 +44,12 @@ export const ChatPage = () => {
     axios.post("/chat/chatlist/",{
         'userid' : user.user_id,
     }).then((res) => {
-        console.log(res,'response from user_chatlist')
       SetChatList(res.data);
     });
   };
 
   const messagetoserver = (message,recieverId) =>{
 
-    console.log(message)
     socket.send(JSON.stringify({
         'message': message ,
         'senderId' : user.user_id,
@@ -67,7 +64,6 @@ export const ChatPage = () => {
         'recieverId' : receiverId
     }).then((res)=>{
         setMessages(res.data)
-        console.log(res.data)
     })
 
   }
@@ -104,7 +100,7 @@ export const ChatPage = () => {
                   </div>
 
                   <ul>
-                    {ChatList?.map((x) => {
+                    {ChatList.length !=0 ? ChatList?.map((x) => {
                         return(
 
                     <li>
@@ -131,7 +127,15 @@ export const ChatPage = () => {
                     </li>
 
                         )
-                    })}
+                    }):
+                    <div className="message-content-inner">
+                        <div className="message-time-sign">
+                         <strong> <span>No Chat</span> </strong>
+                      </div>
+                      </div>
+                    
+                    
+                    }
                     
                   </ul>
                 </div>

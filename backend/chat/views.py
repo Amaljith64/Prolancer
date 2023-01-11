@@ -22,24 +22,30 @@ class ChatPage(APIView):
         print(data['userid'],'its reqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq')
         user=NewUser.objects.get(id= data['userid'])
 
-        chats = ChatModel.objects.filter(Q(sender = user.id) | Q(reciever = user.id))
-        if chats :
-            chat_list = set()
-
-            for chat in chats:
-                sender = NewUser.objects.get(id = chat.sender.id)
-                reciever = NewUser.objects.get(id = chat.reciever.id)
-                chat_list.add(sender)
-                chat_list.add(reciever)
-            
-            otherusers = NewUser.objects.exclude(id = user.id)
-            chatted_user = [user for user in otherusers if user in chat_list]
-            serializers = NewUserSerializer(chatted_user, many=True)
-            if serializers.is_valid:
-                return Response(serializers.data,status=status.HTTP_200_OK)
-            else:
-                return Response(status=status.HTTP_400_BAD_REQUEST)
+        if chats := ChatModel.objects.filter(
+            Q(sender=user.id) | Q(reciever=user.id)
+        ):
+            return self._extracted_from_post_(chats, user)
         return Response(status=status.HTTP_200_OK)
+
+    # TODO Rename this here and in `post`
+    def _extracted_from_post_(self, chats, user):
+        chat_list = set()
+
+        for chat in chats:
+            sender = NewUser.objects.get(id = chat.sender.id)
+            reciever = NewUser.objects.get(id = chat.reciever.id)
+            chat_list.add(sender)
+            chat_list.add(reciever)
+
+        otherusers = NewUser.objects.exclude(id = user.id)
+        chatted_user = [user for user in otherusers if user in chat_list]
+        serializers = NewUserSerializer(chatted_user, many=True)
+        return (
+            Response(serializers.data, status=status.HTTP_200_OK)
+            if serializers.is_valid
+            else Response(status=status.HTTP_400_BAD_REQUEST)
+        )
 
 
 class ChatData(APIView):
@@ -57,13 +63,8 @@ class ChatData(APIView):
             serializer = ChatModelSerializer(chatmessages,many=True)
             if serializer.is_valid:
                 return Response(serializer.data,status=status.HTTP_200_OK)
-            else:
-                print(serializer.errors)
-                return Response(status=status.HTTP_400_BAD_REQUEST)
+            print(serializer.errors)
+            return Response(status=status.HTTP_400_BAD_REQUEST)
 
-        except:
+        except Exception:
             return Response(status=status.HTTP_404_NOT_FOUND)
-
-
-
-
