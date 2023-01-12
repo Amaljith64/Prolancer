@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 from pathlib import Path
 from datetime import timedelta
 import os
+from pathlib import Path
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,13 +23,26 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
+
+
+
+DEBUG = config('DEBUG', default=False, cast=bool)
+
+ALLOWED_HOSTS = ["64.227.186.27",]
+
+ROOT_URLCONF = f'{config("PROJECT_NAME")}.urls'
+
+WSGI_APPLICATION = f'{config("PROJECT_NAME")}.wsgi.application'
+
+ASGI_APPLICATION = f'{config("PROJECT_NAME")}.asgi.application'
+
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-5o0#9sx1@_+fblm_l#(f!x@q&b4p&l7t=x*36^=s&qj#!cykuk'
+# SECRET_KEY = 'django-insecure-5o0#9sx1@_+fblm_l#(f!x@q&b4p&l7t=x*36^=s&qj#!cykuk'
+SECRET_KEY = config("SECRET_KEY")
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# # SECURITY WARNING: don't run with debug turned on in production!
+# DEBUG = True
 
-ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -105,7 +120,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'backend.urls'
+# ROOT_URLCONF = 'backend.urls'
 
 TEMPLATES = [
     {
@@ -126,7 +141,7 @@ TEMPLATES = [
 ]
 
 # WSGI_APPLICATION = 'backend.wsgi.application'
-ASGI_APPLICATION = 'backend.asgi.application'
+# ASGI_APPLICATION = 'backend.asgi.application'
 
 
 CHANNEL_LAYERS = {
@@ -151,16 +166,7 @@ CHANNEL_LAYERS = {
 # }
 
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'prolancer',
-        'USER' : 'postgres',
-        'PASSWORD' : '11111',
-        'HOST' : 'localhost',
-        'PORT' : '5432'
-    }
-}
+
 
 
 AUTH_USER_MODEL = 'accounts.NewUser'
@@ -195,37 +201,63 @@ USE_I18N = True
 
 USE_TZ = True
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'prolancer',
+#         'USER' : 'postgres',
+#         'PASSWORD' : '11111',
+#         'HOST' : 'localhost',
+#         'PORT' : '5432'
+#     }
+# }
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = 'static/'
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': config("DB_NAME"),
+        'USER': config("DB_USER"),
+        'PASSWORD': config("DB_PASSWORD"),
+        'HOST': 'localhost',
+        'PORT': '',
+    }
+}
 
-MEDIA_URL='/media/'
+AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
+AWS_S3_ENDPOINT_URL = config('AWS_S3_ENDPOINT_URL')
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+}
+AWS_LOCATION = config('AWS_LOCATION')
 
 STATICFILES_DIRS = [
-    BASE_DIR / 'frontend/build/static'
+    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'frontend/build/static'),
 ]
 
 
-MEDIA_ROOT=os.path.join(BASE_DIR,'media')
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
+#STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+STATIC_URL = 'https://%s/%s/' % (AWS_S3_ENDPOINT_URL, AWS_LOCATION)
+TEMP = os.path.join(BASE_DIR, 'temp')
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-CORS_ALLOW_ALL_ORIGINS = True
-
-STRIPE_SECRET_KEY='sk_test_51MGcwNSGGnxwKUV96ZjUZJlwhWsDFhGZZENTvILi4SvzcI7dYKXjGyauZIvrrEESMNRk32SOTP26uFJOPPCYuNKR00mw2GCvq1'
-SITE_URL='http://localhost:3000/'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_USE_TLS = True
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'prolancer2022@gmail.com'
-EMAIL_HOST_PASSWORD = 'zslrjeleljixlasp'
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'CodingWithMitch Team <noreply@codingwithmitch.com>'
+
+
+BASE_URL = "http://64.227.186.27"
+
 
 CACHES = {
     "default": {
@@ -236,3 +268,60 @@ CACHES = {
         }
     }
 }
+
+STRIPE_SECRET_KEY=config('STRIPE_SECRET_KEY')
+
+
+
+SITE_URL='http://localhost:3000/'
+MEDIA_URL='/media/'
+MEDIA_ROOT=os.path.join(BASE_DIR,'media')
+CORS_ALLOW_ALL_ORIGINS = True
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# # Static files (CSS, JavaScript, Images)
+# # https://docs.djangoproject.com/en/4.1/howto/static-files/
+
+# STATIC_URL = 'static/'
+
+# MEDIA_URL='/media/'
+
+# STATICFILES_DIRS = [
+#     BASE_DIR / 'frontend/build/static'
+# ]
+
+
+# MEDIA_ROOT=os.path.join(BASE_DIR,'media')
+
+# # Default primary key field type
+# # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
+
+# DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# CORS_ALLOW_ALL_ORIGINS = True
+
+# SITE_URL='http://localhost:3000/'
+
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_USE_TLS = True
+# EMAIL_PORT = 587
+# EMAIL_HOST_USER = 'prolancer2022@gmail.com'
+# EMAIL_HOST_PASSWORD = 'zslrjeleljixlasp'
+
