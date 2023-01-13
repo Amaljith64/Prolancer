@@ -239,7 +239,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'frontend/build/static'),
 ]
 
-# STATIC_ROOT = os.path.join(BASE_DIR, 'frontend/build/static/')
+STATIC_ROOT = os.path.join(BASE_DIR, 'frontend/build/static/')
 
 
 STATIC_URL = 'https://%s/%s/' % (AWS_S3_ENDPOINT_URL, AWS_LOCATION)
@@ -277,7 +277,7 @@ STRIPE_SECRET_KEY=config('STRIPE_SECRET_KEY')
 SITE_URL='http://localhost:3000/'
 MEDIA_URL='/media/'
 MEDIA_ROOT=os.path.join(BASE_DIR,'media')
-CORS_ALLOW_ALL_ORIGINS = True
+#CORS_ALLOW_ALL_ORIGINS = True
 
 
 
