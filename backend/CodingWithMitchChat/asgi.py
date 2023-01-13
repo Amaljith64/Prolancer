@@ -18,9 +18,10 @@ from channels.routing import ProtocolTypeRouter, URLRouter
 from channels.auth import AuthMiddlewareStack
 
 from chat.consumers import PersonalChatConsumer
+import django
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'CodingWithMitchChat.settings')
-
+django.setup()
 application = get_asgi_application()
 
 
