@@ -19,7 +19,7 @@ from channels.auth import AuthMiddlewareStack
 
 from chat.consumers import PersonalChatConsumer
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'backend.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'CodingWithMitchChat.settings')
 
 application = get_asgi_application()
 
