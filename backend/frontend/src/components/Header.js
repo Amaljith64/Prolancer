@@ -40,7 +40,6 @@ const Header = () => {
       Navigate("/freelancer");
     } else {
       Navigate("/");
-      console.log("else worked");
     }
   }
 
@@ -160,7 +159,7 @@ const Header = () => {
               style={{ marginTop: "4px" }}
             ></i>
             <p>
-              {user.username}, you need to activate your account &ensp;(
+              {user?.username}, you need to activate your account &ensp;(
               {userprofile?.email})
             </p>
             &emsp;
@@ -360,7 +359,7 @@ const Header = () => {
                           <div className="" id="snackbar-user-status">
                             <Link
                             onClick={() => {
-                              {userprofile.is_email_verified === false ? toast.error('Verify your account')
+                              {userprofile?.is_email_verified === false ? toast.error('Verify your account')
                             :
                             sentrequest();
                             }
