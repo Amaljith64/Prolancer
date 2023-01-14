@@ -15,7 +15,7 @@ export const ChatPage = () => {
   
 
   const socket = new WebSocket(
-    "ws://127.0.0.1:8000/ws/" + user.user_id + "/" + receiverId + "/"
+    "ws://64.227.186.27/ws/" + user.user_id + "/" + receiverId + "/"
   );
 
   socket.onopen = function (e) {
