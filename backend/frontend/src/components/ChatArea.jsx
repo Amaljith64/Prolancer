@@ -2,8 +2,9 @@ import React, { useContext, useRef, useEffect } from "react";
 import { useState } from "react";
 import AuthContext from "../context/AuthContext";
 
-const ChatArea = ({ recieverId, messagetoserver, messages }) => {
-  console.log(messages, "to showw");
+const ChatArea = ({ recieverId, sendMessage, messages,selectedUser }) => {
+
+  console.log(messages,'its messssssssssssssssssssss')
 
   const { user, profileid, Setprofileid, authTokens } = useContext(AuthContext);
   const [message, setMessage] = useState("");
@@ -11,25 +12,28 @@ const ChatArea = ({ recieverId, messagetoserver, messages }) => {
   const scrollRef = useRef();
 
   const sentMessage = (message, recieverId) => {
-    messagetoserver(message, recieverId);
+    if(!message) return;
+    sendMessage(message, recieverId);
     setMessage("");
   };
 
   useEffect(() => {
     scrollRef?.current?.scrollIntoView({ behavior: "smooth" });
-  }, [message]);
+  }, [messages]);
 
   return (
     <>
       <div className="message-content">
         <div className="messages-headline">
-          <h4>Sindy Forest</h4>
+        {selectedUser ? 
+          <h4>{selectedUser}</h4>
+          :
+          <h4>No User</h4>
+        }
         </div>
 
         <div className="message-content-inner">
-          <div className="message-time-sign">
-            <span>28 June, 2019</span>
-          </div>
+          
           {messages?.length !== 1 ? (
             <>
               {messages

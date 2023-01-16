@@ -48,8 +48,8 @@ class NewUser(AbstractBaseUser, PermissionsMixin):
     active_membership = models.CharField(max_length=225,null=True, blank=True)
     membership_expiry = models.DateTimeField(null=True, blank=True)
     profile_photo = models.ImageField(upload_to='images/user',blank=True, default= 'images/user/4.png', null=True) 
-    otp = models.CharField(null=True,max_length=100)
-    email_token = models.CharField(max_length=100 ,null=True)
+    otp = models.CharField(null=True,max_length=100, blank=True)
+    email_token = models.CharField(max_length=100 ,null=True, blank=True)
     is_email_verified = models.BooleanField(default=False)
 
     objects = CustomAccountManager()

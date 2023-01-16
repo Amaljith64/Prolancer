@@ -44,6 +44,7 @@ import Restricted from './pages/Restricted'
 import AdminRoute from './utils/AdminRoute';
 
 import { ToastContainer, toast } from "react-toastify";
+import ChangePassword from './pages/ChangePassword';
 
 
 
@@ -77,8 +78,6 @@ function App() {
             <Route element={<Contact/>} path="/contact"  />
             <Route element={<Profile/>} path="/profile/:id"  />
             <Route element={<UserProfile/>} path="/userprofile"  />
-            
-            
 
             {/* <PrivateRoute element={<HomePage/>} path="/" exact/> */}
             <Route element={<RegisterFreelancer/>} path="/seller_register"/> 
@@ -94,11 +93,9 @@ function App() {
             <Route element={<JobListing/>} path="/list_job"/> 
             <Route element={<SIngleJob/>} path="/view_job/:id"/> 
 
-
             <Route element={<FreelancerProfile/>} path="/freelancerprofile"/> 
 
             <Route element={<AdminRoute/>}>
-
 
             <Route element={<AdminHome/>} path="/admin"/> 
             <Route element={<AllPosts/>} path="/allpost"/> 
@@ -106,23 +103,19 @@ function App() {
             <Route element={<FreelanceRequest/>} path="/freelancerrequest"/> 
             </Route>
 
-
-
-
             <Route element={<TestFile/>} path="/testfile"/> 
             <Route element={<Checkout/>} path="/checkout/:price"/>
             <Route element={<Success/>} path="/success"/>
             <Route element={<FailedPage/>} path="/cancelled"/>
             <Route element={<UserPurchase/>} path="/myorders"/>
 
-
             <Route element={<ChatPage/>} path="/chat"/>
+            <Route element={<ChangePassword/>} path="/changepassword"/>
+
+
 
           </Route>
 
-
-
-          
         </Routes>
   
         </ClientProvider>

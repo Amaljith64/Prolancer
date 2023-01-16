@@ -1,29 +1,33 @@
-import React,{useEffect} from 'react'
+import React,{useEffect,useState} from 'react'
 import AdminHeader from '../../components/AdminHeader'
 import AdminSidebar from '../../components/AdminSidebar'
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { FreelancerRequest, listcategory,listjobpost,listservicepost } from "../../actions/postActions";
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const FreelanceRequest = () => {
     
     const dispatch = useDispatch();
+    const [reload, setReload] = useState(false);
 
     const freelancerrequest = useSelector((state) => state.freelancerRequest);
 	const { freelancerRequestloading, freelancerRequest,freelancerRequesterror } = freelancerrequest;
 
-    console.log(freelancerRequest)
+    console.log(freelancerRequest,'reqqqqqqqqqq')
 
     let acceptrequest=(id) =>{
         axios.post(`/client/acceptrequest/${id}/`)
+        toast.success("Request Accepted")
+        setReload(!reload)
     }
 
 
     useEffect(() => {
         dispatch(FreelancerRequest())
 
-    }, [])
+    }, [reload])
     
   return (
     <div>
@@ -82,7 +86,7 @@ const FreelanceRequest = () => {
 
                                             
                                             <ul className="dashboard-task-info bid-info">
-                                                <li><Link onClick={()=>acceptrequest(data.id)}   className="popup-with-zoom-anim button ripple-effect"><i className="icon-material-outline-check"></i> Accept</Link>
+                                                <li><Link onClick={()=>acceptrequest(data.requested_user?.id)}   className="popup-with-zoom-anim button ripple-effect"><i className="icon-material-outline-check"></i> Accept</Link>
                                                 </li>
                                                 <li><Link   className="popup-with-zoom-anim button ripple-effect" style={{backgroundColor : '#e82a2c'}}><i className="icon-line-awesome-close"></i> Reject</Link>
                                                 </li>

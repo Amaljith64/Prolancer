@@ -85,6 +85,32 @@ class Usersignup(APIView):
             return Response({'error':"Username or Email already exists"},status=status.HTTP_406_NOT_ACCEPTABLE)
 
 
+class CheckUsername(APIView):
+    def post(self,request):
+        data = request.data
+        print(data,'itssssssssssssssssssssssss')
+        if NewUser.objects.filter(username=data['username']):
+
+            return Response({'data':"Username exists"},status=status.HTTP_406_NOT_ACCEPTABLE)
+        else:
+            return Response({'data':"Username Available"},status=status.HTTP_200_OK)
+
+
+
+class ChangePassword(APIView):
+    def post(self,request):
+        data = request.data
+        print(data)
+        if data['password1'] == data['password2']:
+            user=NewUser.objects.get(id=data['userid'])
+            user.set_password(data['password2'])
+            user.save()
+            print('matched')
+            return Response({'data':"Password Changed"}, status=status.HTTP_200_OK)
+        else:
+            print('not a match')
+            return Response({'data':"Password Mismatch"}, status=status.HTTP_404_NOT_FOUND)
+
 class GoogleSignup(APIView):
     def post(self,request):
         data = request.data
@@ -94,7 +120,7 @@ class GoogleSignup(APIView):
         username = data['username']
         email = data['email']
         password=data['password']
-        NewUser.objects.create_user(username=username, email=email,password=password
+        NewUser.objects.create_user(username=username, email=email,password=password,is_email_verified = True
         )
         print('created googleeeeeeeeeeeeeeeeeee')
         return Response(200)

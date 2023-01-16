@@ -58,3 +58,8 @@ class FreelancerRequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = FreelancerRequest
         fields = '__all__'
+class PostFreelancerRequestSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = FreelancerRequest
+        fields = '__all__'

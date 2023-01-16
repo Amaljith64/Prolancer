@@ -10,17 +10,14 @@ const ServiceSearch = () => {
     let {servicesearchHandler,searchloading,setSearchLoading} = useContext(ClientContext)
     if (keyword === ''){
         setSearchLoading(false)
-
     }
     const searchQuery = useDebounce(keyword, 2000)
     console.log(searchQuery,'qiwiwiwiwi')
 
 
-    useEffect(() => {
-        
+    useEffect(() => {        
         servicesearchHandler(searchQuery)
         console.log('effect worked')
-
     }, [searchQuery])
 
 
@@ -37,7 +34,6 @@ const ServiceSearch = () => {
                 placeholder="e.g. Service title"
             />
     )
-
 }
 
 export default ServiceSearch

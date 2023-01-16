@@ -1,7 +1,7 @@
 from dateutil.relativedelta import relativedelta
 from accounts.models import NewUser
 from .models import *
-from .serializer import CategorySerializers, ClientJobSerializer, PayJobSerializer, FreelancerRequestSerializer, ViewPayJobSerializer
+from .serializer import CategorySerializers, ClientJobSerializer, PayJobSerializer, FreelancerRequestSerializer, ViewPayJobSerializer,PostFreelancerRequestSerializer
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import viewsets, mixins
@@ -345,9 +345,10 @@ class Freelancer_request(APIView):
         return Response(status=status.HTTP_404_NOT_FOUND)
     def post(self, request):
         data = request.data
-        serializers = FreelancerRequestSerializer(data=data)
+        serializers = PostFreelancerRequestSerializer(data=data)
         if serializers.is_valid():
             serializers.save()
+            print('valid')
             return Response(status=status.HTTP_201_CREATED)
         else:
             print(serializers.errors, 'serializer error')
@@ -355,8 +356,9 @@ class Freelancer_request(APIView):
 
 class AcceptRequest(APIView):
     def post(self, request, id):
-        updateuser = NewUser.objects.filter(id=id)
-        updateuser.update(is_freelancer=True)
+        updateuser = NewUser.objects.get(id=id)
+        updateuser.is_freelancer=True
+        updateuser.save()
         return Response(status=status.HTTP_201_CREATED)
 
 class ViewJobPurchase(APIView):

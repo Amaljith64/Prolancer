@@ -31,13 +31,18 @@ class PersonalChatConsumer(AsyncWebsocketConsumer):
 
 
     async def disconnect(self, code):
-        self.channel_layer.group_discard(
+
+        print('disconnectssssssssss')
+        await self.channel_layer.group_discard(
             self.room_group_name,
-            self.channel_layer
+            self.channel_name
         )
 
     async def receive(self,text_data=None,bytes_data=None):
         data = json.loads(text_data)
+        print('kooiiiiii create')
+        print('dddddddddddddd',data)
+
         messsage = data['message']
         senderId = data['senderId']
         recieverId = data['recieverId']
@@ -64,6 +69,7 @@ class PersonalChatConsumer(AsyncWebsocketConsumer):
 
     @database_sync_to_async
     def save_messages(self,thread_name,messsage,senderId,recieverId):
+        print('kkkkkkkkkkkkkkkkkkkkkkkkkkk')
         msgsender = NewUser.objects.get(id = senderId)
         msgreciever = NewUser.objects.get(id = recieverId)
         ChatModel.objects.create(
@@ -73,6 +79,7 @@ class PersonalChatConsumer(AsyncWebsocketConsumer):
 
     @database_sync_to_async
     def create_thread(self, thread_name, reciever, sender):
+        print('kooiiiiii create')
         if not ChatModel.objects.filter(thread_name = thread_name).first():
             msgsender = NewUser.objects.get(id = sender)
             msgreciever = NewUser.objects.get(id = reciever)

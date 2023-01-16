@@ -28,6 +28,7 @@ export const ClientProvider = ({ children }) => {
   const [query, setQuery] = useState('')
   const [listing, setListing] = useState([])
   const [searchloading, setSearchLoading] = useState(false)
+  const [message, setMessage] = useState('')
 
 
 
@@ -97,6 +98,29 @@ export const ClientProvider = ({ children }) => {
     setSearchLoading(false)
 }
 
+
+const checkUSername = async (username) => {
+  try {
+    const response = await axios.post("/api/checkusername/", { username: username});
+    if (response.status === 200) {
+      console.log(response.data);
+      setMessage('')
+  setSearchLoading(false)
+
+    }
+  } catch (error) {
+
+    setMessage(error.response.data)
+
+  setSearchLoading(false)
+
+  }
+}
+
+
+
+
+
   let contextData = {
 
     jobSubmit: jobSubmit,
@@ -104,7 +128,9 @@ export const ClientProvider = ({ children }) => {
     servicesearchHandler,
     query,setQuery,
     listing,setListing,
-    searchloading,setSearchLoading
+    searchloading,setSearchLoading,
+    checkUSername,
+    message
 
   };
   return (

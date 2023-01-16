@@ -26,6 +26,8 @@ const Header = () => {
   const userdetails = useSelector((state) => state.userProfile);
   const { userprofile, userprofileerror } = userdetails;
 
+  console.log(userprofile,'uuuuuuuuuuuu')
+
   const [otp, setOtp] = useState("");
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
@@ -70,7 +72,6 @@ const Header = () => {
 
     axios.put("api/sentotp/",{
         'userid': user.user_id
-
     })
   };
   const [value, setValue] = useState('');
@@ -160,13 +161,15 @@ const Header = () => {
               style={{ marginTop: "4px" }}
             ></i>
             <p>
-              {user.username}, you need to activate your account &ensp;(
+              {user?.username}, you need to activate your account &ensp;(
               {userprofile?.email})
             </p>
             &emsp;
             <div className="countdown-text">
              
-                <Link onClick={() => {setModalShow(true)
+                <Link onClick={() => {
+                            setModalShow(true)
+                            resendOTP();
                     }}>Click Here</Link>
              
             </div>
@@ -328,10 +331,10 @@ const Header = () => {
                           <div className="user-name">
                             {user && (
                               <h3>
-                                Hello <strong> {user.username}</strong>
+                                Hello <strong> {userprofile?.username}</strong>
                               </h3>
                             )}
-                            {user?.is_freelancer ? (
+                            {userprofile?.is_freelancer === true ? (
                               <span>Freelancer</span>
                             ) : (
                               <span>User</span>

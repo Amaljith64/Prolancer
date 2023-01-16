@@ -50,6 +50,27 @@ def otp_verify(request):
         print(message)
 
         return Response(message, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['PATCH'])
+def otp_verify_for_password(request):
+    try:
+        data = request.data
+        print(data['userid'],'kkkkkkkkkkk')
+        user=NewUser.objects.get(id=data['userid'])
+        print( user.otp,'ooooooooooooooooo')
+        if check_password(data['otp'],user.otp):
+            message = {'detail': "Otp Verified"}
+            print(message)
+            return Response(message, status=status.HTTP_200_OK)
+        else:
+            message = {'detail': "Enter Valid OTP"}
+            print(message)
+            return Response(message, status=status.HTTP_400_BAD_REQUEST)
+    except Exception as e:
+        message = {'detail': "Something went wrong"}
+        print(message)
+        return Response(message, status=status.HTTP_400_BAD_REQUEST)
     
     
 @api_view(['PUT'])
