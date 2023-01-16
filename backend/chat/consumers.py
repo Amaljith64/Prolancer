@@ -31,9 +31,10 @@ class PersonalChatConsumer(AsyncWebsocketConsumer):
 
 
     async def disconnect(self, code):
-        self.channel_layer.group_discard(
+        print('disconnectssssssssss')
+        await self.channel_layer.group_discard(
             self.room_group_name,
-            self.channel_layer
+            self.channel_name
         )
 
     async def receive(self,text_data=None,bytes_data=None):

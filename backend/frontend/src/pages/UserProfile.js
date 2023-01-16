@@ -8,6 +8,7 @@ import { connect } from "react-redux";
 import { toast } from "react-toastify";
 import { produce } from "immer";
 import { UserProfile } from "../actions/postActions";
+import { Navigate } from 'react-router-dom';
 
 class UserProfileComponent extends React.Component {
   constructor(props) {
@@ -16,6 +17,9 @@ class UserProfileComponent extends React.Component {
       openedModal: null,
       value: "",
       details: this.props.userdetails,
+      minutes: 0,
+      seconds: 0,
+      otpvalue: "",
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleEducationSubmit = this.handleEducationSubmit.bind(this);
@@ -81,9 +85,58 @@ class UserProfileComponent extends React.Component {
     });
   };
 
+  sentotp = () => {
+    axios.put("api/sentotp/", {
+      userid: this.props.userdetails.id,
+    });
+  };
+  handleOtp = (event) => {
+    event.preventDefault();
+    axios.post(`api/passwordotpverify/`, {
+      userid: this.props.userdetails.id,
+      otp: event.target.otpvalue.value,
+    });
+  };
+
+  verify_otp = (e) => {
+    console.log('called otp passs')
+    e.preventDefault();
+    axios
+      .patch("api/passwordotpverify/", {
+        userid: this.props.userdetails.id,
+        otp: e.target.otpvalue.value,
+      })
+      .then((response) => {
+        console.log(response, "from then");
+        this.closeModal();
+        toast.success(response.data?.detail);
+        // <Navigate to="/dashboard" replace={true} />
+        // this.props.navigate('changepassword')
+        // this.props.history.push('/changepassword')
+        // this.props.navigation.navigate('/changepassword');
+        // return(
+        // <Navigate to="/changepassword" />
+        // )
+        window.location.replace('/changepassword')
+        // this.navigate("/changepassword")
+
+        
+      })
+      .catch((error) => {
+        console.log(error, "from catch");
+        console.log(error.response?.data, "frommmmmmmmfmmm catch");
+        this.closeModal();
+        toast.error(error.response?.data.detail);
+      });
+  };
+  resendOTP = () => {
+    this.setState({ minutes: 0, seconds: 30 });
+    this.sentotp();
+  };
+
   render() {
     const { userdetails, SetUpdate } = this.props;
-    console.log(userdetails,'its profile')
+    console.log(userdetails, "its profile");
 
     return (
       <div>
@@ -202,6 +255,93 @@ class UserProfileComponent extends React.Component {
                     >
                       <i className="icon-feather-user"></i> User Profile
                     </h3>
+                    <Link
+                      style={{
+                        alignSelf: "center",
+                        padding: "16px",
+                        paddingLeft: "0",
+                      }}
+                      onClick={() => {
+                        this.openModal("changepassword");
+                        // this.resendOTP();
+                      }}
+                    >
+                      <i className="icon-line-awesome-key"></i> Change Password
+                    </Link>
+                    <Modal
+                      show={
+                        this.closeModal &&
+                        this.state.openedModal === "changepassword"
+                      }
+                    >
+                      <div
+                        id="small-dialog"
+                        className="zoom-anim-dialog mfp-hide dialog-with-tabs"
+                      ></div>
+                      <Modal.Header closeButton>
+                        <Modal.Title id="contained-modal-title-vcenter">
+                          <ul className="popup-tabs-nav">
+                            <li>
+                              <Link to="#tab">Add</Link>
+                            </li>
+                            <Button
+                              style={{
+                                float: "right",
+                                padding: "21px",
+                              }}
+                              onClick={this.closeModal}
+                            >
+                              Close
+                            </Button>
+                          </ul>
+                        </Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body>
+                        <div className="popup-tabs-container">
+                          <div className="welcome-text">
+                            <h3>Edit Description</h3>
+                          </div>
+                          <div className="popup-tab-content" id="tab">
+                            <form onSubmit={this.verify_otp}>
+                              <input
+                                name="otpvalue"
+                                onChange={this.handleChange}
+                              />
+                              <label>
+                                {this.seconds > 0 || this.minutes > 0 ? (
+                                  <p>
+                                    Time Remaining:{" "}
+                                    {this.minutes < 10
+                                      ? `0${this.minutes}`
+                                      : this.minutes}
+                                    :
+                                    {this.seconds < 10
+                                      ? `0${this.seconds}`
+                                      : this.seconds}
+                                  </p>
+                                ) : (
+                                  <Link
+                                    onClick={() => {
+                                      
+                                      this.resendOTP();
+                                    }}
+                                  >
+                                    Resent Email
+                                  </Link>
+                                )}{" "}
+                              </label>
+                              <button
+                              type="submit"
+                                className="button big ripple-effect margin-top-20 margin-bottom-20 "
+                                style={{ float: "right" }}
+                              >
+                                Submit
+                              </button>
+                            </form>
+                          </div>
+                        </div>
+                      </Modal.Body>
+                    </Modal>
                   </div>
                   <div className="content">
                     <ul className="dashboard-box-list">
@@ -813,7 +953,6 @@ class UserProfileComponent extends React.Component {
                       <i className="icon-line-awesome-list-ul"></i> Your Posts
                     </h3>
                     {userdetails.is_email_verified === false ? (
-
                       <Link
                         onClick={() =>
                           toast.error("Please verify your account")
@@ -822,19 +961,14 @@ class UserProfileComponent extends React.Component {
                       >
                         <i className="icon-feather-edit"></i> Post a Job
                       </Link>
-                    ) : (
-
-                      userdetails.active_membership === null ?
+                    ) : userdetails.active_membership === null ? (
                       <Link
-                        onClick={() =>
-                          toast.error("You need a membership")
-                        }
+                        onClick={() => toast.error("You need a membership")}
                         className="popup-with-zoom-anim button ripple-effect margin-top-5 margin-bottom-10"
                       >
                         <i className="icon-feather-edit"></i> Post a Job
                       </Link>
-:
-
+                    ) : (
                       <Link
                         to="/post_job"
                         className="popup-with-zoom-anim button ripple-effect margin-top-5 margin-bottom-10"
@@ -856,8 +990,9 @@ class UserProfileComponent extends React.Component {
                                 <div className="job-listing-details">
                                   <div className="job-listing-description">
                                     <h3 className="job-listing-title">
-                                      <Link to={`/view_job/${data.id}`}>{data.job_title} </Link>{" "}
-                                     
+                                      <Link to={`/view_job/${data.id}`}>
+                                        {data.job_title}{" "}
+                                      </Link>{" "}
                                     </h3>
                                     <div className="job-listing-footer">
                                       <ul>
@@ -873,8 +1008,9 @@ class UserProfileComponent extends React.Component {
 
                               <ul className="dashboard-task-info">
                                 <li>
-                                  <strong>₹{data.min_budget} - ₹{data.max_budget}</strong>
-
+                                  <strong>
+                                    ₹{data.min_budget} - ₹{data.max_budget}
+                                  </strong>
                                 </li>
                               </ul>
 
@@ -886,7 +1022,6 @@ class UserProfileComponent extends React.Component {
                                   <i className="icon-material-outline-supervisor-account"></i>{" "}
                                   Manage Bidders{" "}
                                 </Link>
-                                
                               </div>
                             </div>
                           </li>

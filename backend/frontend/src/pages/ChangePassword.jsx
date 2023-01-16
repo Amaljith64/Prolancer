@@ -6,10 +6,10 @@ import { useNavigate } from "react-router-dom";
 
 import { useForm } from "react-hook-form";
 
-const LoginPage = () => {
+const ChangePassword = () => {
   const Navigate = useNavigate();
 
-  let {user, loginUser, googleSignin } = useContext(AuthContext);
+  let { user, loginUser, googleSignin,changePassword } = useContext(AuthContext);
 
   const {
     register,
@@ -17,47 +17,20 @@ const LoginPage = () => {
     formState: { errors },
   } = useForm({
     mode: "onChange",
-  })
+  });
 
-  function handleCallbackResponse(response) {
-    googleSignin(response);
-  }
-
-  useEffect(() => {
-    if (user) {
-      if (user?.is_freelancer === true) {
-        Navigate("/freelancer");
-      } else {
-        Navigate("/");
-        console.log("else worked");
-      }
-    }
-    /* global google */
-    google.accounts.id.initialize({
-      client_id:
-        "343457976454-bvvnulla58ojkknd3l9jtb5kd10aq8ns.apps.googleusercontent.com",
-      callback: handleCallbackResponse,
-    });
-    google.accounts.id.renderButton(document.getElementById("signInDiv"), {
-      theme: "outline",
-      size: "large",
-    });
-  }, []);
 
   const registerOptions = {
-    email: {
-      required: "Email is required.",
-      pattern: {
-        value: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/,
-        message: "Email is not valid.",
-      },
-    },
-    password: {
+    password1: {
       required: "Password is required",
       minLength: {
         value: 5,
         message: "Password must have at least 5 characters",
       },
+    },
+    password2: {
+      required: "Password is required",
+
     },
   };
 
@@ -67,7 +40,7 @@ const LoginPage = () => {
         <div className="container">
           <div className="row">
             <div className="col-md-12">
-              <h2>Log In</h2>
+              <h2>Change Password</h2>
               <nav id="breadcrumbs" className="dark"></nav>
             </div>
           </div>
@@ -78,30 +51,28 @@ const LoginPage = () => {
           <div className="col-xl-5 offset-xl-3">
             <div className="login-register-page">
               <div className="welcome-text">
-                <h3>We're glad to see you again!</h3>
-                <span>
-                  Don't have an account? <Link to="/signup">Sign Up!</Link>
-                </span>
+                <h3>Enter Your New Password</h3>
               </div>
-              <form onSubmit={loginUser} id="login-form">
+              <form onSubmit={handleSubmit(changePassword)} id="login-form">
+                
                 <div className="input-with-icon-left">
-                  <i className="icon-material-baseline-mail-outline"></i>
+                  <i className="icon-material-outline-lock"></i>
                   <input
                     style={{ margin: "0" }}
-                    type="text"
+                    type="password"
                     className="input-text with-border"
-                    name="email"
-                    id="emailaddress"
-                    placeholder="Email Address"
+                    name="password1"
+                    id="password1"
+                    placeholder="Password"
                     required
-                    {...register("email", registerOptions.email)}
+                    {...register("password1", registerOptions.password1)}
                   />
                   <small>
                     <div
                       style={{ height: "27px", color: "red" }}
                       className="text-danger"
                     >
-                      {errors?.email && errors.email.message}
+                      {errors?.password1 && errors.password1.message}
                     </div>
                   </small>
                 </div>
@@ -111,18 +82,18 @@ const LoginPage = () => {
                     style={{ margin: "0" }}
                     type="password"
                     className="input-text with-border"
-                    name="password"
-                    id="password"
-                    placeholder="Password"
+                    name="password2"
+                    id="password2"
+                    placeholder="Confirm Password"
                     required
-                    {...register("password", registerOptions.password)}
+                    {...register("password2", registerOptions.password2)}
                   />
                   <small>
                     <div
                       style={{ height: "27px", color: "red" }}
                       className="text-danger"
                     >
-                      {errors?.password && errors.password.message}
+                      {errors?.password2 && errors.password2.message}
                     </div>
                   </small>
                 </div>
@@ -133,18 +104,9 @@ const LoginPage = () => {
                 type="submit"
                 form="login-form"
               >
-                Log In <i className="icon-material-outline-arrow-right-alt"></i>
+                Change Password <i className="icon-material-outline-arrow-right-alt"></i>
               </button>
 
-              <div className="social-login-separator">
-                <span>or</span>
-              </div>
-              <div
-                className="social-login-buttons"
-                style={{ justifyContent: "center" }}
-              >
-                <div id="signInDiv"></div>
-              </div>
             </div>
           </div>
         </div>
@@ -153,4 +115,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default ChangePassword;

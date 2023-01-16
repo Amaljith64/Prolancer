@@ -44,6 +44,7 @@ import Restricted from './pages/Restricted'
 import AdminRoute from './utils/AdminRoute';
 
 import { ToastContainer, toast } from "react-toastify";
+import ChangePassword from './pages/ChangePassword';
 
 
 
@@ -117,6 +118,7 @@ function App() {
 
 
             <Route element={<ChatPage/>} path="/chat"/>
+            <Route element={<ChangePassword/>} path="/changepassword"/>
 
           </Route>
 

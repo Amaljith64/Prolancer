@@ -54,6 +54,10 @@ class ViewPayJobSerializer(serializers.ModelSerializer):
 
 class FreelancerRequestSerializer(serializers.ModelSerializer):
     requested_user = UserAccountSerializer(read_only=True)
+    class Meta:
+        model = FreelancerRequest
+        fields = '__all__'
+class PostFreelancerRequestSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = FreelancerRequest
