@@ -78,7 +78,6 @@ const AllPosts = () => {
                                 <div className="buttons-to-right always-visible">
                                     <Link to="" className="button ripple-effect"><i className="icon-material-outline-supervisor-account"></i> Manage Candidates <span className="button-info">0</span></Link>
                                     <Link to="#" className="button gray ripple-effect ico" title="Edit" data-tippy-placement="top"><i className="icon-feather-edit"></i></Link>
-                                    <Link to="#" className="button gray ripple-effect ico" title="Remove" data-tippy-placement="top"><i className="icon-feather-trash-2"></i></Link>
                                 </div>
                             </li>
 

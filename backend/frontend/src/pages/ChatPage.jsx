@@ -111,8 +111,8 @@ export const ChatPage = () => {
                   </div>
 
                   <ul>
-                    {chatList.length !== 0 ? (
-                      chatList.map((x) => (
+                    {chatList?.length !== 0 ? (
+                      chatList?.map((x) => (
                         <li key={x.id}>
                           <Link
                             onClick={() => {
@@ -123,15 +123,14 @@ export const ChatPage = () => {
                           >
                             <div className="message-avatar">
                               <i className="status-icon status-online"></i>
-                              <img src="images/user-avatar-small-03.jpg" alt="" />
+                              <img src={x.profile_photo} alt="" />
                             </div>
 
                             <div className="message-by">
                               <div className="message-by-headline">
                                 <h5>{x.username}</h5>
-                                <span>4 hours ago</span>
+                               
                               </div>
-                              <p>Thanks for reaching out. I'm...</p>
                             </div>
                           </Link>
                         </li>

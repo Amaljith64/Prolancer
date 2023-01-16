@@ -47,7 +47,7 @@ function PaypalCheckOutButton(props) {
           axios.post('/client/paypalservicepayment/',{
             'user': user.user_id,
             'price':price,
-            'serviceid': serviceid,
+            'getservice': serviceid,
             'payment_method': 'PayPal'
           })
    

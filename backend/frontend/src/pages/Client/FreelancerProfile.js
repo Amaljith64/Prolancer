@@ -95,19 +95,15 @@ const FreelancerProfile = () => {
 				
 				
 				<div className="freelancer-avatar">
-					<div className="verified-badge"></div>
 					<Link to={`/profile/${data.id}`}><img src={data.profile_photo} alt=""/></Link>
 				</div>
 				
 
 				
 				<div className="freelancer-name">
-					<h4><Link to="#">{data.username} <img className="flag" src={"images/flags/gb.svg"} alt="" title="United Kingdom" data-tippy-placement="top"/></Link></h4>
+					<h4><Link to={`/profile/${data.id}`}>{data.username}  </Link></h4>
 					<span>UI/UX Designer</span>
 					
-					<div className="freelancer-rating">
-						<div className="star-rating" data-rating="4.9"></div>
-					</div>
 				</div>
 			</div>
 		</div>
@@ -117,23 +113,18 @@ const FreelancerProfile = () => {
 			<div className="freelancer-details-list">
 				<ul>
 					<li>Location <strong><i className="icon-material-outline-location-on"></i> London</strong></li>
-					<li>Rate <strong>$60 / hr</strong></li>
 					<li>Job Success <strong>95%</strong></li>
 				</ul>
 			</div>
-			<Link to="" className="button button-sliding-icon ripple-effect">View Profile <i className="icon-material-outline-arrow-right-alt"></i></Link>
+			<Link to={`/profile/${data.id}`} className="button button-sliding-icon ripple-effect">View Profile <i className="icon-material-outline-arrow-right-alt"></i></Link>
 		</div>
 	</div>
 	)})}		
 
 </div>
 
-}
-
-          
-
+} 
             <div className="clearfix"></div>
-
             <div className="clearfix"></div>
             {/* <Paginate pages={servicepost?.pages} page={servicepost?.page} /> */}
           </div>

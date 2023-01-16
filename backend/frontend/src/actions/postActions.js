@@ -208,9 +208,9 @@ export const Singleservicepost = (id) => async (dispatch) => {
 
 export const UserProfile = (id) => async (dispatch) => {
     try{
-        dispatch({
-            type : USERPROFILE_REQUEST
-        })
+        // dispatch({
+        //     type : USERPROFILE_REQUEST
+        // })
         const config = {
             headers : {
                 'Content-type' : 'application/json'

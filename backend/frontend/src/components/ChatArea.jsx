@@ -2,9 +2,8 @@ import React, { useContext, useRef, useEffect } from "react";
 import { useState } from "react";
 import AuthContext from "../context/AuthContext";
 
-const ChatArea = ({ recieverId, sendMessage, messages,selectedUser }) => {
-
-  console.log(messages,'its messssssssssssssssssssss')
+const ChatArea = ({ recieverId, sendMessage, messages, selectedUser }) => {
+  console.log(messages, "its messssssssssssssssssssss");
 
   const { user, profileid, Setprofileid, authTokens } = useContext(AuthContext);
   const [message, setMessage] = useState("");
@@ -12,7 +11,7 @@ const ChatArea = ({ recieverId, sendMessage, messages,selectedUser }) => {
   const scrollRef = useRef();
 
   const sentMessage = (message, recieverId) => {
-    if(!message) return;
+    if (!message) return;
     sendMessage(message, recieverId);
     setMessage("");
   };
@@ -23,31 +22,27 @@ const ChatArea = ({ recieverId, sendMessage, messages,selectedUser }) => {
 
   return (
     <>
+    {selectedUser ? 
       <div className="message-content">
         <div className="messages-headline">
-        {selectedUser ? 
-          <h4>{selectedUser}</h4>
-          :
-          <h4>No User</h4>
-        }
+          {selectedUser ? <h4>{selectedUser}</h4> : <h4>No User</h4>}
         </div>
 
         <div className="message-content-inner">
-          
           {messages?.length !== 1 ? (
             <>
               {messages
                 ?.filter((e) => e.message != null)
                 .map((message) => {
                   return (
-                    <div ref={scrollRef} >
+                    <div ref={scrollRef}>
                       {message?.sender?.id === user.user_id ? (
                         <>
                           <div className="message-bubble me">
                             <div className="message-bubble-inner">
                               <div className="message-avatar">
                                 <img
-                                  src="images/user-avatar-small-01.jpg"
+                                  src={message?.sender?.profile_photo}
                                   alt=""
                                 />
                               </div>
@@ -64,7 +59,7 @@ const ChatArea = ({ recieverId, sendMessage, messages,selectedUser }) => {
                             <div className="message-bubble-inner">
                               <div className="message-avatar">
                                 <img
-                                  src="images/user-avatar-small-02.jpg"
+                                  src={message?.sender?.profile_photo}
                                   alt=""
                                 />
                               </div>
@@ -81,7 +76,7 @@ const ChatArea = ({ recieverId, sendMessage, messages,selectedUser }) => {
                 })}
             </>
           ) : (
-            <h3>No messages</h3>
+            <h3 style={{ textAlign: "center" }}>No messages</h3>
           )}
         </div>
 
@@ -104,6 +99,9 @@ const ChatArea = ({ recieverId, sendMessage, messages,selectedUser }) => {
           </button>
         </div>
       </div>
+      :
+      <h4>click to Chat</h4>
+          }
     </>
   );
 };

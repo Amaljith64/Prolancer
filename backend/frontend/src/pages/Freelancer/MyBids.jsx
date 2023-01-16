@@ -60,14 +60,6 @@ const MyBids = () => {
                           >
                             <i className="icon-feather-edit"></i>
                           </Link>
-                          <Link
-                            to="#"
-                            className="button red ripple-effect ico"
-                            title="Cancel Bid"
-                            data-tippy-placement="top"
-                          >
-                            <i className="icon-feather-trash-2"></i>
-                          </Link>
                         </div>
                       </li>
                     </ul>

@@ -108,7 +108,7 @@ const JobPosting = () => {
 									<div className="submit-field">
 										<h5>Category</h5>
                                         <Form.Select aria-label="Default select example selectpicker with-border" name="category" {...register('category', postJob.category)}>
-										{category.map((data, id) => {
+										{category?.map((data, id) => {
             							return(
                                         <option key={id} value={data.id}>{data.category_name}</option>
 											)})}											

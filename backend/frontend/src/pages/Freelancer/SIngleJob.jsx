@@ -155,8 +155,8 @@ const bids = singlejobpost?.bids
 						
 							<div className="bids-avatar">
 								<div className="freelancer-avatar">
-									<div className="verified-badge"></div>
-									<Link to=""><img src="/images/user-avatar-big-01.jpg" alt=""/></Link>
+					
+									<Link to=""><img src={x.user.profile_photo} alt=""/></Link>
 								</div>
 							</div>
 							
@@ -166,7 +166,7 @@ const bids = singlejobpost?.bids
 								<div className="freelancer-name">
 									<h4><Link to="">{x.user.username} </Link></h4>
 									<div className="item-details margin-top-3">
-										<div className="star-rating" data-rating="5.0"></div><br />
+								
 										<div className="detail-item"><i className="icon-material-outline-date-range"></i> {x.bidtime.slice(0,10)}</div>
 									</div>
 									

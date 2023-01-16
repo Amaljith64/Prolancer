@@ -192,73 +192,91 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 class CreateCheckOutSession(APIView):
     def post(self, request):
         print('stripe payment')
-        price = request.POST.get('price')
-        serviceid = request.POST.get('serviceid')
-        membership = request.POST.get('membership')
-        jobid = request.POST.get('jobid')
-        newprice = int(float(price))
+        print(request.data,'its all the dataaaaaaaaaaaaaaaaaaaaa')
 
         try:
-            if serviceid :
-                print('its service pay')
-                checkout_session = stripe.checkout.Session.create(
-                    line_items=[
-                        {
-                            'price_data': {
-                                'currency': 'usd',
-                                'unit_amount': newprice * 100,
-                                'product_data': {
-                                    'name': "Buy Service",
+            try:
+                if request.POST.get('serviceid'):
+                    serviceid = request.POST.get('serviceid')
+                    price = request.POST.get('price')
+                    print(price,'ppppppppppppppppppp')
+                    print(serviceid,'sssssssssssssssssssssss')
+                    newprice = int(float(price))
+                    print('its service pay')
+                    checkout_session = stripe.checkout.Session.create(
+                        line_items=[
+                            {
+                                'price_data': {
+                                    'currency': 'usd',
+                                    'unit_amount': newprice * 100,
+                                    'product_data': {
+                                        'name': "Buy Service",
+                                    },
                                 },
-                            },
-                            'quantity': 1,
-                        }
-                    ],
-                    mode='payment',
-                    success_url=f'{settings.SITE_URL}freelancer/?success=true&price={price}&type=service&id=serviceid',
-                    cancel_url=f'{settings.SITE_URL}freelancer/?canceled=true',
-                )
-                return redirect(checkout_session.url)
-            if jobid :
-                print('its job pay')
-                checkout_session = stripe.checkout.Session.create(
-                    line_items=[
-                        {
-                            'price_data': {
-                                'currency': 'usd',
-                                'unit_amount': newprice * 100,
-                                'product_data': {
-                                    'name': "Pay Job",
+                                'quantity': 1,
+                            }
+                        ],
+                        mode='payment',
+                        success_url=f'{settings.SITE_URL}freelancer/?success=true&price={price}&type=service&id={serviceid}',
+                        cancel_url=f'{settings.SITE_URL}freelancer/?canceled=true',
+                    )
+                    return redirect(checkout_session.url)
+            except:
+                pass
+
+            try:
+                if request.POST.get('jobid'):
+                    jobid = request.POST.get('jobid')
+                    price = request.POST.get('price')
+                    newprice = int(float(price))
+                    print('its job pay')
+                    checkout_session = stripe.checkout.Session.create(
+                        line_items=[
+                            {
+                                'price_data': {
+                                    'currency': 'usd',
+                                    'unit_amount': newprice * 100,
+                                    'product_data': {
+                                        'name': "Pay Job",
+                                    },
                                 },
-                            },
-                            'quantity': 1,
-                        }
-                    ],
-                    mode='payment',
-                    success_url=f'{settings.SITE_URL}freelancer/?success=true&price={price}&type=job&id=jobid',
-                    cancel_url=f'{settings.SITE_URL}freelancer/?canceled=true',
-                )
-                return redirect(checkout_session.url)
-            if membership :
-                print('its membership pay')
-                checkout_session = stripe.checkout.Session.create(
-                    line_items=[
-                        {
-                            'price_data': {
-                                'currency': 'usd',
-                                'unit_amount': newprice * 100,
-                                'product_data': {
-                                    'name': "Buy Membership",
+                                'quantity': 1,
+                            }
+                        ],
+                        mode='payment',
+                        success_url=f'{settings.SITE_URL}freelancer/?success=true&price={price}&type=job&id={jobid}',
+                        cancel_url=f'{settings.SITE_URL}freelancer/?canceled=true',
+                    )
+                    return redirect(checkout_session.url)
+            except:
+                pass
+
+            try:
+                if request.POST.get('membership'):
+                    print('its membership pay')
+                    price = request.POST.get('price')
+                    newprice = int(float(price))
+                    checkout_session = stripe.checkout.Session.create(
+                        line_items=[
+                            {
+                                'price_data': {
+                                    'currency': 'usd',
+                                    'unit_amount': newprice * 100,
+                                    'product_data': {
+                                        'name': "Buy Membership",
+                                    },
                                 },
-                            },
-                            'quantity': 1,
-                        }
-                    ],
-                    mode='payment',
-                    success_url=f'{settings.SITE_URL}freelancer/?success=true&price={price}&type=membership',
-                    cancel_url=f'{settings.SITE_URL}freelancer/?canceled=true',
-                )
-                return redirect(checkout_session.url)
+                                'quantity': 1,
+                            }
+                        ],
+                        mode='payment',
+                        success_url=f'{settings.SITE_URL}freelancer/?success=true&price={price}&type=membership',
+                        cancel_url=f'{settings.SITE_URL}freelancer/?canceled=true',
+                    )
+                    return redirect(checkout_session.url)
+            except Exception:
+                pass
+
         except Exception as e:
             return Response({'msg': 'something went wrong while creating stripe session', 'error': str(e)}, status=500)
 
@@ -269,12 +287,13 @@ class ServiceStripePayment(APIView):
     def post(self, request):
         print('its service POST')
         data = request.data
+        print(data,'from stripe')
         serializeddata = BuyServiceSerializer(data=data)
         if serializeddata.is_valid():
             serializeddata.save()
             return Response(status=status.HTTP_201_CREATED)
         else:
-            print(serializeddata.errors, 'servicepaypal errorrrrr')
+            print(serializeddata.errors, 'servicestripe errorrrrr')
             return Response(status=status.HTTP_404_NOT_FOUND)
 
 class MembershipStripePayment(APIView):

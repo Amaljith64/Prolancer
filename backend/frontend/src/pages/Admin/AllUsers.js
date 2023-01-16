@@ -68,7 +68,6 @@ const AllUsers = () => {
                                             <div className="buttons-to-right always-visible margin-top-25 margin-bottom-0">
                                                 <Link to="#small-dialog-1"  className="popup-with-zoom-anim button ripple-effect"><i className="icon-material-outline-check"></i> Accept Offer</Link>
                                                 <Link to="#small-dialog-2" className="popup-with-zoom-anim button dark ripple-effect"><i className="icon-feather-mail"></i> Send Message</Link>
-                                                <Link to="#" className="button gray ripple-effect ico" title="Remove Bid" data-tippy-placement="top"><i className="icon-feather-trash-2"></i></Link>
                                             </div>
                                         </div>
                                     </div>

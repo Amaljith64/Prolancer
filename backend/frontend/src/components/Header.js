@@ -247,7 +247,7 @@ const Header = () => {
                     <Link onClick={redirectt}> Home</Link>
                   </li>
 
-                  {user?.is_freelancer ? (
+                  {userprofile?.is_freelancer ? (
                     <li>
                       <Link to="/list_job">View Jobs</Link>
                     </li>
@@ -257,16 +257,27 @@ const Header = () => {
                     </li>
                   )}
 
-                  {user?.is_freelancer ? (
+                  {userprofile?.is_freelancer ? (
+
+                      userdetails?.active_membership === null ? (
+                        <Link
+                          onClick={() => toast.error("You need a membership")}
+                          className="popup-with-zoom-anim button ripple-effect margin-top-5 margin-bottom-10"
+                        >
+                          <i className="icon-feather-edit"></i> Post Service
+                        </Link>
+                      )
+                  :(
                     <li>
                       <Link to="/post_service">Post Service</Link>
                     </li>
+                  )
                   ) : (
                     <li>
                       <Link to="/freelancerprofile">View Freelancers </Link>
                     </li>
                   )}
-                  {user?.is_freelancer ? (
+                  {userprofile?.is_freelancer ? (
                     null
                   ) : (
                     <li>
@@ -349,7 +360,7 @@ const Header = () => {
                           </div>
                         </div>
                         <div className="margin-top-30"></div>
-                        {user?.is_freelancer ? (
+                        {userprofile?.is_freelancer ? (
                           <div className="" id="snackbar-user-status">
                             <Link
                               to="/dashboard"

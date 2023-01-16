@@ -72,11 +72,12 @@ export const ClientProvider = ({ children }) => {
     );
 
     if (response.status === 200) {
+      toast.success("Job Posted")
       Navigate("/");
 
       console.log("Job Posted");
     } else {
-      console.log("Something problem in Posting");
+      console.log(response,"Something problem in Posting");
     }
   };
  

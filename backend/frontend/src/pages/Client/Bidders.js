@@ -5,13 +5,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import {  toast } from 'react-toastify';
-
+import AuthContext from '../../context/AuthContext'
 
 import { Singlejobpost, Singleservicepost } from "../../actions/postActions";
 import axios from 'axios';
 
 
 const Bidders = () => {
+	const { user, profileid,Setprofileid } = useContext(AuthContext)
 	const [reload,setReload] = useState()
     let { id } = useParams()
     const dispatch = useDispatch();
@@ -87,8 +88,7 @@ const Bidders = () => {
 
 											
 											<div className="freelancer-avatar">
-												<div className="verified-badge"></div>
-												<Link to="#"><img src="/images/user-avatar-placeholder.png" alt=""/></Link>
+												<Link to="#"><img src={x.user.profile_photo} alt=""/></Link>
 											</div>
 
 											
@@ -112,7 +112,7 @@ const Bidders = () => {
 													:
 													(<Link onClick={(e)=>submitHandler(x.id)} className="popup-with-zoom-anim button ripple-effect"><i className="icon-material-outline-check"></i> Accepted</Link>)
 													}
-													<Link to="#small-dialog-2" className="popup-with-zoom-anim button dark ripple-effect"><i className="icon-feather-mail"></i> Send Message</Link>
+													<Link onClick={()=> Setprofileid(x.user.id)} to='/chat'  className="popup-with-zoom-anim button dark ripple-effect"><i className="icon-feather-mail"></i> Send Message</Link>
 												</div>
 											</div>
 										</div>
@@ -129,8 +129,7 @@ const Bidders = () => {
 
 											
 											<div className="freelancer-avatar">
-												<div className="verified-badge"></div>
-												<Link to="#"><img src="/images/user-avatar-placeholder.png" alt=""/></Link>
+												<Link to="#"><img src={x.user.profile_photo} alt=""/></Link>
 											</div>
 
 											
@@ -154,8 +153,7 @@ const Bidders = () => {
 													:
 													(<Link oonClick={(e)=>submitHandler(x.id)} className="popup-with-zoom-anim button ripple-effect"><i className="icon-material-outline-check"></i> Accepted</Link>)
 													}
-													<Link to="#small-dialog-2" className="popup-with-zoom-anim button dark ripple-effect"><i className="icon-feather-mail"></i> Send Message</Link>
-													<Link to="#" className="button gray ripple-effect ico" title="Remove Bid" data-tippy-placement="top"><i className="icon-feather-trash-2"></i></Link>
+													<Link onClick={()=> Setprofileid(x.user.id)} to='/chat'  className="popup-with-zoom-anim button dark ripple-effect"><i className="icon-feather-mail"></i> Send Message</Link>
 												</div>
 											</div>
 										</div>
@@ -166,8 +164,7 @@ const Bidders = () => {
 
 											
 											<div className="freelancer-avatar">
-												<div className="verified-badge"></div>
-												<Link to="#"><img src="/images/user-avatar-placeholder.png" alt=""/></Link>
+												<Link to="#"><img src={x.user.profile_photo}alt=""/></Link>
 											</div>
 
 											
@@ -196,8 +193,7 @@ const Bidders = () => {
 													:
 													(<Link onClick={submitHandler} className="popup-with-zoom-anim button ripple-effect"><i className="icon-material-outline-check"></i> Accepted</Link>)
 													}
-													<Link to="#small-dialog-2" className="popup-with-zoom-anim button dark ripple-effect"><i className="icon-feather-mail"></i> Send Message</Link>
-													<Link to="#" className="button gray ripple-effect ico" title="Remove Bid" data-tippy-placement="top"><i className="icon-feather-trash-2"></i></Link>
+													<Link onClick={()=> Setprofileid(x.user.id)} to='/chat'  className="popup-with-zoom-anim button dark ripple-effect"><i className="icon-feather-mail"></i> Send Message</Link>
 												</div>
 											</div>
 										</div>

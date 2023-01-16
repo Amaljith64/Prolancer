@@ -769,7 +769,7 @@ class UserProfileComponent extends React.Component {
                           </div>
                         </div>
                       </li>
-                      <li>
+                      {/* <li>
                         <div className="boxed-list-item">
                           <div
                             className="item-content"
@@ -935,7 +935,7 @@ class UserProfileComponent extends React.Component {
                             )}
                           </div>
                         </div>
-                      </li>
+                      </li> */}
                     </ul>
                   </div>
                 </div>

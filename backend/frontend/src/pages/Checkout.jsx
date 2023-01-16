@@ -50,8 +50,8 @@ const Checkout = () => {
 			api.post('/client/stripejobpayment/',{
 				'user': user.user_id,
 				'price':price,
-				'jobid': id,
-				'payment_method': 'PayPal'
+				'jobid': parseInt(id),
+				'payment_method': 'Stripe'
 			  }).then((response)=>{
 				Navigate('/success')
 			  })
@@ -63,8 +63,8 @@ const Checkout = () => {
 			api.post('/client/stripeservicepayment/',{
 				'user': user.user_id,
 				'price':price,
-				'serviceid': id,
-				'payment_method': 'PayPal'
+				'getservice': parseInt(id),
+				'payment_method': 'Stripe'
 			  }).then((response)=>{
 				Navigate('/success')
 			  })

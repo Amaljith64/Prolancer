@@ -46,7 +46,7 @@ const UserPurchase = () => {
                       {servicehistoryloading === true ? (
                         <div className="loadingspinner"></div>
                       ) : (
-                        servicehistory.map((data) => {
+                        servicehistory?.map((data) => {
                           return (
                             <li>
                               <div class="job-listing">

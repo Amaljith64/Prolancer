@@ -3,6 +3,7 @@ import { Link,useNavigate } from "react-router-dom";
 
 function Service({data}) {
   const Navigate = useNavigate();
+  console.log(data,'its ddddddddddddddddd')
   return (
     <>
     <div  className="listings-container grid-layout margin-top-35" style={{ width: "100%"}}>

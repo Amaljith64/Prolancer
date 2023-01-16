@@ -29,6 +29,7 @@ const HomePage = () => {
 
 
   console.log(price,'its priceeeeeeeeeeeeeee')
+  console.log(id,'its isddddddddddddddddddddddddddd')
 
   const dispatch = useDispatch();
   const Navigate = useNavigate();
@@ -86,8 +87,8 @@ const HomePage = () => {
         api.post('/client/stripejobpayment/',{
           'user': user.user_id,
           'price':price,
-          'jobid': id,
-          'payment_method': 'PayPal'
+          'jobid': parseInt(id),
+          'payment_method': 'Stripe'
           }).then((response)=>{
           Navigate('/success')
           })
@@ -99,10 +100,10 @@ const HomePage = () => {
         api.post('/client/stripeservicepayment/',{
           'user': user.user_id,
           'price':price,
-          'serviceid': id,
-          'payment_method': 'PayPal'
+          'getservice': parseInt(id),
+          'payment_method': 'Stripe'
           }).then((response)=>{
-          Navigate('/success')
+          Navigate('/success')  
           })
       }
       
@@ -283,109 +284,144 @@ const HomePage = () => {
           </div>
         </div>
         <div className="section padding-top-60 padding-bottom-75">
-          <div className="container">
-            <div className="row">
-              <div className="col-xl-12">
-                <div className="section-headline centered margin-top-0 margin-bottom-35">
-                  <h3>Membership Plans</h3>
-                </div>
+        <div className="container">
+          <div className="row">
+            <div className="col-xl-12">
+              <div className="section-headline centered margin-top-0 margin-bottom-35">
+                <h3>Membership Plans</h3>
               </div>
+            </div>
 
-              <div className="col-xl-12">
-                <div className="billing-cycle-radios margin-bottom-50">
-                  
+            <div className="col-xl-12">
+              <div className="billing-cycle-radios margin-bottom-70"></div>
+
+              <div className="pricing-plans-container">
+                <div className="pricing-plan">
+                  <h3>Basic Plan</h3>
+                  <p className="margin-top-10">
+                    {" "}
+                    One time fee you need to pay for this membership.
+                  </p>
+                  <div className="pricing-plan-label billed-monthly-label">
+                    <strong>₹{plan1}</strong>/ monthly
+                  </div>
+                  <div className="pricing-plan-features">
+                    <strong>Features of Basic Plan</strong>
+                    <ul>
+                      <li>1 Listings</li>
+                      <li>3 Days Visibility</li>
+                      <li>Highlighted in Search Results</li>
+                    </ul>
+                  </div>
+                  {userprofile?.active_membership == 'Basic'
+                                  ? <button style={{ width: '100%'}}
+                                  className="pricing-plan-label full-width margin-top-20"
+                                 
+                                >
+                                  <h3 > Purchased</h3>
+                                 
+                                </button>
+                                  : <button
+                                  className="button full-width margin-top-20"
+                                  onClick={() => {
+                                    {userprofile?.is_email_verified === false ? toast.error('Verify your account')
+                                  :
+                                    Navigate(`/checkout/${plan1}`);
+                                  }
+                                  }}
+                                >
+                                  Buy Now
+                                </button>}
+                  {" "}
                 </div>
 
-                <div className="pricing-plans-container">
-                  <div className="pricing-plan">
-                    <h3>Basic Plan</h3>
-                    <p className="margin-top-10">
-                      One time fee you need to pay for this membership.
-                    </p>
-                    <div className="pricing-plan-label billed-monthly-label">
-                      <strong>₹{plan1}</strong>/ monthly
-                    </div>
-                    <div className="pricing-plan-features">
-                      <strong>Features of Basic Plan</strong>
-                      <ul>
-                        <li>1 Listing</li>
-                        <li>3  Days Visibility</li>
-                        <li>Highlighted in Search Results</li>
-                      </ul>
-                    </div>
-                    <button
-                     
-                      className="button full-width margin-top-20"
-                      onClick={() => {
-                        Navigate(`/checkout/${plan1}`);
-                      }}
-                    >
-                      Buy Now
-                    </button>
+                <div className="pricing-plan recommended">
+                  <div className="recommended-badge">Recommended</div>
+                  <h3>Standard Plan</h3>
+                  <p className="margin-top-10">
+                    {" "}
+                    One time fee you need to pay for this membership.
+                  </p>
+                  <div className="pricing-plan-label billed-monthly-label">
+                    <strong>₹{plan2}</strong>/ monthly
                   </div>
-
-                  <div className="pricing-plan recommended">
-                    <div className="recommended-badge">Recommended</div>
-                    <h3>Standard Plan</h3>
-                    <p className="margin-top-10">
-                      One time fee you need to pay for this membership.
-                    </p>
-                    <div className="pricing-plan-label billed-monthly-label">
-                      <strong>₹{plan2}</strong>/ monthly
-                    </div>
-                    <div className="pricing-plan-features">
-                      <strong>Features of Standard Plan</strong>
-                      <ul>
-                        <li>5 Listings</li>
-                        <li>6 Days Visibility</li>
-                        <li>Highlighted in Search Results</li>
-                      </ul>
-                    </div>
-                    <button
-                     
-                      className="button full-width margin-top-20"
-                      onClick={() => {
-                        Navigate(`/checkout/${plan2}`);
-                      }}
-                    >
-                      Buy Now
-                    </button>
+                  <div className="pricing-plan-features">
+                    <strong>Features of Standard Plan</strong>
+                    <ul>
+                      <li>5 Listings</li>
+                      <li>6 Days Visibility</li>
+                      <li>Highlighted in Search Results</li>
+                    </ul>
                   </div>
+                  
 
-                  <div className="pricing-plan">
-                    <h3>Extended Plan</h3>
-                    <p className="margin-top-10">
-                      One time fee you need to pay for this membership.
-                    </p>
-                    <div className="pricing-plan-label billed-monthly-label">
-                      <strong>₹{plan3}</strong>/ monthly
-                    </div>
-                    <div className="pricing-plan-label billed-yearly-label">
-                      <strong>$1069</strong>/ yearly
-                    </div>
-                    <div className="pricing-plan-features">
-                      <strong>Features of Extended Plan</strong>
-                      <ul>
-                        <li>10 Listings</li>
-                        <li>10 Days Visibility</li>
-                        <li>Highlighted in Search Results</li>
-                      </ul>
-                    </div>
-                    <button
-                     
+
+                  {userprofile?.active_membership == 'Standard'
+                                  ? <button style={{ width: '100%'}}
+                                  className="pricing-plan-label full-width margin-top-20"
+                                 
+                                >
+                                  <h3 > Purchased</h3>
+                                 
+                                </button>
+                                  : <button
+                                  className="button full-width margin-top-20"
+                                  onClick={() => {
+                                    {userprofile?.is_email_verified === false ? toast.error('Verify your account')
+                                  :
+                                    Navigate(`/checkout/${plan2}`);
+                                  }
+                                  }}
+                                >
+                                  Buy Now
+                                </button> }
+                                
+
+
+                            
+                </div>
+                <div className="pricing-plan">
+                  <h3>Extended Plan</h3>
+                  <p className="margin-top-10">
+                    {" "}
+                    One time fee you need to pay for this membership.
+                  </p>
+                  <div className="pricing-plan-label billed-monthly-label">
+                    <strong>₹{plan3}</strong>/ monthly
+                  </div>
+                  <div className="pricing-plan-features">
+                    <strong>Features of Extended Plan</strong>
+                    <ul>
+                      <li>10 Listings</li>
+                      <li>10 Days Visibility</li>
+                      <li>Highlighted in Search Results</li>
+                    </ul>
+                  </div>
+                  {userprofile?.active_membership == 'Extended'
+                      ? <button style={{ width: '100%'}}
+                      className="pricing-plan-label full-width margin-top-20"
+                      
+                    >
+                      <h3 > Purchased</h3>
+                      
+                    </button>
+                      : <button
                       className="button full-width margin-top-20"
                       onClick={() => {
+                        {userprofile?.is_email_verified === false ? toast.error('Verify your account')
+                      :
                         Navigate(`/checkout/${plan3}`);
+                      }
                       }}
                     >
                       Buy Now
-                    </button>
-                  </div>
+                    </button> }
                 </div>
               </div>
             </div>
           </div>
         </div>
+      </div>
       </div>
       <Footer />
     </div>
