@@ -34,7 +34,7 @@ Clone the repository and install the dependencies:
 
 git clone https://github.com/Amaljith64/Prolancer.git
 cd backend
-pip install -r requirements.txt
+- `pip install -r requirements.txt`
 
 
 Create a new database and update the settings in the `settings.py` file.
