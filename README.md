@@ -32,8 +32,8 @@ Prolancer is a full-featured freelancer website clone built with Django RestAPI 
 
 Clone the repository and install the dependencies:
 
-git clone https://github.com/Amaljith64/Prolancer.git
-cd backend
+- `git clone https://github.com/Amaljith64/Prolancer.git`
+- `cd backend`
 - `pip install -r requirements.txt`
 
 
