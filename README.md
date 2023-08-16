@@ -25,7 +25,7 @@ Prolancer is a full-featured freelancer website clone built with Django RestAPI 
 ## Screenshots
 
 
-![Prolancer Screenshot](https://amaljith64.github.io/Amaljithportfolio/assets/img/Project%202.png)
+![Prolancer Screenshot](https://amaljith64.github.io/myportfolio/assets/img/Project%202.png)
 
 
 ## Installation
